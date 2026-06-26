@@ -1,125 +1,533 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Esha's Salon & Makeup Studio — Jhansi's Trusted Beauty Parlour</title>
-  <meta name="description" content="Esha's Salon & Makeup Studio, Civil Lines, Jhansi. Hair styling, bridal makeup, and skin care. Rated 4.5★ on Justdial with 1,774 reviews. One of Jhansi's top 3 beauty parlours." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esha's Salon & Makeup Studio | Jhansi's Premier Beauty Destination</title>
+  <meta name="description" content="Esha's Salon & Makeup Studio in Jhansi. 4.5-star rated with 1774+ reviews. Professional hair styling, bridal makeup, skin care & more in Civil Lines, Jhansi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
 
-    <header class="top">
-      <span>Jhansi &middot; Civil Lines</span>
-      <span class="dot">&middot;</span>
-      <span>Beauty &middot; Makeup &middot; Hair</span>
-    </header>
+<!-- ==================== NAVIGATION ==================== -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <span class="logo-icon">✦</span>
+      Esha's Salon
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
 
-    <section class="hero">
-      <h1>Esha's Salon</h1>
-      <p class="tagline">A quiet place in Jhansi where every woman leaves feeling her most beautiful self.</p>
-      <div class="rating">
-        <span class="star">&#9733;</span>
-        <span class="num">4.5</span>
-        <span class="src">on Justdial &middot; 1,774 reviews</span>
-      </div>
-    </section>
-
-    <section class="about">
-      <p><em>Esha's Salon & Makeup Studio</em> is an independent beauty studio in the heart of Civil Lines, Jhansi &mdash; a place where artistry meets care. We specialise in hair styling, bridal transformation, and skin treatments that are gentle, effective, and personal. Every appointment begins with a conversation, not a checklist.</p>
-      <p>Recognised as one of Jhansi's top 3 beauty parlours by ThreeBestRated, with a 94% recommendation rate on Facebook from 388 reviews. No gimmicks &mdash; just skill, trust, and years of experience.</p>
-    </section>
-
-    <hr class="rule" />
-
-    <section class="dishes">
-      <p class="kicker">Our expertise</p>
-      <h2 class="section-title">Three services our clients return for, season after season.</h2>
-
-      <div class="dish-grid">
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80" alt="Hair styling session at a beauty salon" loading="lazy" />
-          </div>
-          <p class="dish-no">No. 01</p>
-          <h3 class="dish-name">Hair Styling</h3>
-          <p class="dish-desc"><em>Cuts, colour, blow-dry, and treatments &mdash; tailored to your face, your hair, your mood.</em></p>
-        </article>
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=1200&q=80" alt="Bridal makeup preparation" loading="lazy" />
-          </div>
-          <p class="dish-no">No. 02</p>
-          <h3 class="dish-name">Bridal Makeup</h3>
-          <p class="dish-desc"><em>Your wedding day, perfected. Airbrush, HD, or traditional &mdash; we know how to make a bride glow.</em></p>
-        </article>
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=80" alt="Facial and skin care treatment" loading="lazy" />
-          </div>
-          <p class="dish-no">No. 03</p>
-          <h3 class="dish-name">Skin Care</h3>
-          <p class="dish-desc"><em>Facials, clean-ups, and acne treatments using products we'd put on our own skin.</em></p>
-        </article>
-      </div>
-    </section>
-
-    <hr class="rule" />
-
-    <section class="voices">
-      <p class="kicker">What clients say</p>
-
-      <blockquote>
-        <p>Best salon in Jhansi! The staff is very professional and the results are always stunning. I've been coming here for over two years and would never go anywhere else.</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> &mdash; Verified Client, on Facebook</footer>
-      </blockquote>
-
-      <blockquote>
-        <p>Esha's did my bridal makeup and it was absolutely perfect. Everyone at the wedding complimented my look. The team is warm, skilled, and genuinely cares about making you feel special.</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> &mdash; Happy Bride, on Justdial</footer>
-      </blockquote>
-    </section>
-
-    <hr class="rule" />
-
-    <section class="visit">
-      <p class="kicker">Reach us</p>
-      <div class="visit-grid">
-        <div>
-          <p class="visit-label">Location</p>
-          <p>Civil Lines, Opp. Telephone Exchange<br />Below Reliance Trends<br />Jhansi Ho &mdash; 284001</p>
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Jhansi's #1 Rated Salon
         </div>
-        <div>
-          <p class="visit-label">Phone</p>
-          <p>
-            <a href="tel:+919919022555">+91-99190-22555</a><br />
-            <a href="tel:+918318757300">+91-83187-57300</a>
-          </p>
+        <h1>
+          Where Beauty Meets<br>
+          <span class="gradient-text typing-text" id="typingTarget"></span><span class="cursor">|</span>
+        </h1>
+        <p class="hero-description">
+          Experience world-class hair styling, bridal makeup, and skin care at Esha's Salon & Makeup Studio. Trusted by thousands in Jhansi for over a decade.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">4.5</div>
+            <div class="stat-label">★ Rating</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">1,774+</div>
+            <div class="stat-label">Reviews</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Years</div>
+          </div>
         </div>
-        <div>
-          <p class="visit-label">Email</p>
-          <p>
-            <a href="mailto:eshassalon@gmail.com">eshassalon@gmail.com</a>
-          </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Book Appointment →</a>
+          <a href="#services" class="btn-secondary">Explore Services</a>
         </div>
       </div>
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=500&fit=crop&auto=format&q=80" alt="Esha's Salon interior" loading="eager">
+        </div>
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&auto=format&q=80" alt="Happy client" class="hero-card-avatar">
+          <div class="hero-card-info">
+            <h4>Priya Sharma</h4>
+            <p>Bridal Makeup Client</p>
+            <div class="hero-card-rating">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <p class="directions">
-        <a href="https://www.google.com/maps/search/Esha's+Salon+Makeup+Studio+Civil+Lines+Jhansi" target="_blank" rel="noopener">&rarr; Get directions on Google Maps</a>
-      </p>
-    </section>
+<!-- ==================== TRUST BAR ==================== -->
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-items stagger-children">
+      <div class="trust-item animate-on-scroll">
+        <span class="icon">🏆</span>
+        Award-Winning Salon
+      </div>
+      <div class="trust-item animate-on-scroll">
+        <span class="icon">🌿</span>
+        100% Organic Products
+      </div>
+      <div class="trust-item animate-on-scroll">
+        <span class="icon">✅</span>
+        Certified Professionals
+      </div>
+      <div class="trust-item animate-on-scroll">
+        <span class="icon">💳</span>
+        Easy Payment Options
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer class="bottom">
-      <p>Demo site built by <a href="mailto:hi.apexagent@gmail.com">Alok Web Services</a>.</p>
-      <p>Want this on your own domain? <a href="mailto:hi.apexagent@gmail.com">hi.apexagent@gmail.com</a></p>
-    </footer>
+<!-- ==================== SERVICES ==================== -->
+<section class="services section" id="services">
+  <div class="container">
+    <div class="services-header text-center animate-on-scroll">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Premium Beauty Services</h2>
+      <p class="section-subtitle mx-auto">From everyday styling to grand bridal makeovers, we deliver excellence in every service we offer.</p>
+    </div>
+    <div class="services-grid stagger-children">
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon"><span>✂️</span></div>
+        <h3>Hair Styling & Cuts</h3>
+        <p>Expert haircuts, blow-drying, conditioning treatments, and trend-setting styles by certified stylists.</p>
+        <div class="service-price">From ₹399 <span>onwards</span></div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon"><span>💄</span></div>
+        <h3>Bridal Makeup</h3>
+        <p>Flawless bridal makeovers that make your special day truly unforgettable. HD, Airbrush & traditional styles.</p>
+        <div class="service-price">From ₹8,999 <span>onwards</span></div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon"><span>🎨</span></div>
+        <h3>Hair Coloring</h3>
+        <p>Vibrant global color, highlights, balayage, and ombre using premium ammonia-free products.</p>
+        <div class="service-price">From ₹999 <span>onwards</span></div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon"><span>🧖</span></div>
+        <h3>Skin Care & Facials</h3>
+        <p>Rejuvenating facials, clean-ups, anti-aging treatments and skin brightening for radiant skin.</p>
+        <div class="service-price">From ₹699 <span>onwards</span></div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon"><span>💅</span></div>
+        <h3>Nail Art & Extensions</h3>
+        <p>Gel nails, acrylic extensions, nail art, manicures and pedicures with long-lasting finishes.</p>
+        <div class="service-price">From ₹499 <span>onwards</span></div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon"><span>👁️</span></div>
+        <h3>Threading & Waxing</h3>
+        <p>Precision eyebrow shaping, full body waxing, and hair removal with gentle hypoallergenic products.</p>
+        <div class="service-price">From ₹149 <span>onwards</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  </main>
+<!-- ==================== BEFORE / AFTER GALLERY ==================== -->
+<section class="gallery section" id="gallery">
+  <div class="container">
+    <div class="gallery-header text-center animate-on-scroll">
+      <div class="section-label">Our Transformations</div>
+      <h2 class="section-title">Before & After Gallery</h2>
+      <p class="section-subtitle mx-auto">See the real transformations our clients experience. Hover to reveal the after look.</p>
+    </div>
+    <div class="gallery-grid stagger-children">
+      <div class="gallery-card animate-on-scroll">
+        <div class="gallery-before-after">
+          <img class="before" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=480&h=320&fit=crop&auto=format&q=80" alt="Before transformation">
+          <img class="after gallery-card-after" src="https://images.unsplash.com/photo-1595959183082-7b570b7e1e6b?w=480&h=320&fit=crop&auto=format&q=80" alt="After transformation">
+          <span class="gallery-divider"></span>
+          <span class="gallery-label before-label">Before</span>
+          <span class="gallery-label after-label">After</span>
+        </div>
+        <div class="gallery-card-info">
+          <h4>Bridal Hair Styling</h4>
+          <p>Elegant updo with fresh flowers</p>
+        </div>
+      </div>
+      <div class="gallery-card animate-on-scroll">
+        <div class="gallery-before-after">
+          <img class="before" src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=480&h=320&fit=crop&auto=format&q=80" alt="Before transformation">
+          <img class="after gallery-card-after" src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=480&h=320&fit=crop&auto=format&q=80" alt="After transformation">
+          <span class="gallery-divider"></span>
+          <span class="gallery-label before-label">Before</span>
+          <span class="gallery-label after-label">After</span>
+        </div>
+        <div class="gallery-card-info">
+          <h4>Hair Color Transformation</h4>
+          <p>Rich caramel highlights on dark hair</p>
+        </div>
+      </div>
+      <div class="gallery-card animate-on-scroll">
+        <div class="gallery-before-after">
+          <img class="before" src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=480&h=320&fit=crop&auto=format&q=80" alt="Before transformation">
+          <img class="after gallery-card-after" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=480&h=320&fit=crop&auto=format&q=80" alt="After transformation">
+          <span class="gallery-divider"></span>
+          <span class="gallery-label before-label">Before</span>
+          <span class="gallery-label after-label">After</span>
+        </div>
+        <div class="gallery-card-info">
+          <h4>Glow-Up Facial</h4>
+          <p>Deep cleansing with skin brightening</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+    <div class="testimonials-header text-center animate-on-scroll">
+      <div class="section-label">Client Love</div>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-subtitle mx-auto">Join thousands of happy clients who trust Esha's Salon for their beauty needs.</p>
+    </div>
+    <div class="testimonials-grid stagger-children">
+      <div class="testimonial-card animate-on-scroll">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"Absolutely loved my bridal makeup experience! Esha and her team made me look like a dream. The airbrush technique was flawless and lasted all day long."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=88&h=88&fit=crop&auto=format&q=80" alt="Ananya" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Ananya Gupta</div>
+            <div class="testimonial-role">Bridal Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"Best hair salon in Jhansi, hands down! My hair color turned out amazing and the staff is incredibly professional. I've been coming here for 3 years now."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=88&h=88&fit=crop&auto=format&q=80" alt="Neha" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Neha Verma</div>
+            <div class="testimonial-role">Regular Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"Got my pre-wedding shoot makeup done here. The team understood exactly what I wanted and executed it perfectly. Highly recommend for any special occasion!"</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=88&h=88&fit=crop&auto=format&q=80" alt="Kriti" class="testimonial-avatar">
+          <div>
+            <div class="testimonial-name">Kriti Singh</div>
+            <div class="testimonial-role">Party Makeup Client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MAP ==================== -->
+<div class="map-section">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.0!2d78.56!3d25.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sCivil+Lines%2C+Jhansi!5e0!3m2!1sen!2sin" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Esha's Salon Location"
+  ></iframe>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="contact section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info animate-on-scroll">
+        <div class="section-label" style="color: var(--purple-light);">Get in Touch</div>
+        <h2>Ready to Transform<br>Your Look?</h2>
+        <p>Visit us at our salon in Civil Lines, Jhansi or book an appointment today. Walk-ins welcome!</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <h4>Visit Us</h4>
+              <p>Civil Lines (Opp. Telephone Exchange),<br>Below Reliance Trends, Jhansi Ho,<br>Uttar Pradesh</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-text">
+              <h4>Call Us</h4>
+              <p><a href="tel:+919919022555">+91-99190-22555</a><br><a href="tel:+918318757300">+91-83187-57300</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-text">
+              <h4>Email Us</h4>
+              <p><a href="mailto:eshassalon@gmail.com">eshassalon@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div class="contact-item-text">
+              <h4>Working Hours</h4>
+              <p>Mon – Sun: 10:00 AM – 9:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrapper animate-on-scroll">
+        <h3>Book an Appointment</h3>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="service">Service Interested In</label>
+            <select id="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Hair Styling & Cuts</option>
+              <option>Bridal Makeup</option>
+              <option>Hair Coloring</option>
+              <option>Skin Care & Facials</option>
+              <option>Nail Art & Extensions</option>
+              <option>Threading & Waxing</option>
+              <option>Complete Makeover</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message (Optional)</label>
+            <textarea id="message" placeholder="Any specific requirements or preferred date/time..." rows="3"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Book Appointment →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="color: var(--white); margin-bottom: 4px;">
+          <span class="logo-icon">✦</span>
+          Esha's Salon
+        </a>
+        <p>Jhansi's most trusted salon & makeup studio. Delivering beauty with passion and precision since 2014.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Hair Styling</a></li>
+          <li><a href="#services">Bridal Makeup</a></li>
+          <li><a href="#services">Hair Coloring</a></li>
+          <li><a href="#services">Skin Care</a></li>
+          <li><a href="#services">Nail Art</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+919919022555">+91-99190-22555</a></li>
+          <li><a href="tel:+918318757300">+91-83187-57300</a></li>
+          <li><a href="mailto:eshassalon@gmail.com">eshassalon@gmail.com</a></li>
+          <li><a href="#">Civil Lines, Jhansi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Esha's Salon & Makeup Studio. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="YouTube">🎬</a>
+        <a href="#" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+(function() {
+  'use strict';
+
+  // ——— Navbar scroll effect ———
+  const navbar = document.getElementById('navbar');
+  function handleNavScroll() {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+  handleNavScroll();
+
+  // ——— Mobile nav toggle ———
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('active');
+  });
+  navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // ——— Typing effect ———
+  const phrases = [
+    'Artistry',
+    'Elegance',
+    'Confidence',
+    'Your Style',
+    'Timeless Beauty'
+  ];
+  const typingTarget = document.getElementById('typingTarget');
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingDelay = 100;
+
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+    if (isDeleting) {
+      typingTarget.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typingDelay = 50;
+    } else {
+      typingTarget.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typingDelay = 110;
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      typingDelay = 2200;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typingDelay = 400;
+    }
+
+    setTimeout(typeEffect, typingDelay);
+  }
+  typeEffect();
+
+  // ——— Scroll-triggered animations (staggered) ———
+  const observerOptions = {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // ——— Smooth anchor scroll ———
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        const offset = navbar.offsetHeight + 20;
+        const targetPos = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ——— Form submission handler ———
+  window.handleSubmit = function(e) {
+    e.preventDefault();
+    var btn = e.target.querySelector('.form-submit');
+    var origText = btn.textContent;
+    btn.textContent = '✓ Appointment Requested!';
+    btn.style.background = '#10b981';
+    btn.style.pointerEvents = 'none';
+    setTimeout(function() {
+      btn.textContent = origText;
+      btn.style.background = '';
+      btn.style.pointerEvents = '';
+      e.target.reset();
+    }, 3000);
+  };
+
+})();
+</script>
+
 </body>
 </html>
