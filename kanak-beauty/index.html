@@ -1,131 +1,400 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Kanak Beauty Parlour (K2 Makeover) — Jhansi</title>
-  <meta name="description" content="The Kanak Beauty Parlour (K2 Makeover) in Jhansi. Bridal makeup, hair styling, skin treatments. Rating 4.9 stars. Multiple branches in Jhansi." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Kanak Beauty Parlour — K2 Makeover | Jhansi</title>
+<meta name="description" content="The Kanak Beauty Parlour (K2 Makeover) — Jhansi's top-rated beauty salon. 4.9★ rated. Hair, skin, bridal & makeup services across 3 branches.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💅</text></svg>">
 </head>
 <body>
-  <main>
 
-    <header class="top">
-      <span>Jhansi &middot; Established &mdash;</span>
-      <span class="dot">&middot;</span>
-      <span>Bridal &middot; Hair &middot; Skin</span>
-    </header>
+<!-- ── Navbar ── -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="nav-brand">K<span>2</span> Makeover</a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:+919918181536" class="nav-cta">📞 Book Now</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <section class="hero">
-      <h1>The Kanak<br/>Beauty Parlour</h1>
-      <p class="tagline">Where every woman walks out feeling like the best version of herself.</p>
-      <div class="rating">
-        <span class="star">&#9733;</span>
-        <span class="num">4.9</span>
-        <span class="src">Google &middot; 500+ reviews</span>
+<!-- ── Hero ── -->
+<section class="hero" id="hero">
+  <div class="container" style="display:flex;align-items:center;width:100%">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="star">★</span> 4.9 Rated Beauty Parlour in Jhansi</div>
+      <h1><span class="gradient-text">Where Beauty</span><br>Meets Elegance</h1>
+      <p>Experience premium beauty services at The Kanak Beauty Parlour (K2 Makeover). From stunning bridal makeovers to everyday glamour — 3 locations across Jhansi to serve you.</p>
+      <div class="hero-actions">
+        <a href="tel:+919918181536" class="btn btn-primary">📞 Book Appointment</a>
+        <a href="#services" class="btn btn-outline">Explore Services ↓</a>
       </div>
-    </section>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Beauty salon interior">
+    </div>
+  </div>
+  <div class="hero-float hero-float-1">💄 Bridal Specialist</div>
+  <div class="hero-float hero-float-2">✨ 5000+ Happy Clients</div>
+</section>
 
-    <section class="about">
-      <p><em>The Kanak Beauty Parlour</em>, known as <em>K2 Makeover</em>, is one of Jhansi's most trusted beauty destinations. From bridal looks that photographs adore to everyday hair and skin care that keeps you coming back, we bring skill, patience, and genuine care to every appointment. Our artists use premium products and stay current with techniques &mdash; without ever losing the personal touch.</p>
-      <p>We have branches in Loha Mandi, Shivaji Nagar, and on BKD Gwalior Road, so there is always a K2 near you.</p>
-    </section>
-
-    <hr class="rule" />
-
-    <section class="dishes">
-      <p class="kicker">Our specialities</p>
-      <h2 class="section-title">Three services our brides and regulars never stop talking about.</h2>
-
-      <div class="dish-grid">
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1200&q=80" alt="Bridal makeup artist at work" loading="lazy" />
-          </div>
-          <p class="dish-no">Service 01</p>
-          <h3 class="dish-name">Bridal Makeup</h3>
-          <p class="dish-desc"><em>Full-day bridal packages with trial, airbrush finish, and last-looks touch-ups for the wedding.</em></p>
-          <p class="dish-price">&nbsp;&nbsp;Packages from &#8377;5,999</p>
-        </article>
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=1200&q=80" alt="Hair styling at a salon" loading="lazy" />
-          </div>
-          <p class="dish-no">Service 02</p>
-          <h3 class="dish-name">Hair Styling</h3>
-          <p class="dish-desc"><em>Cuts, colour, blow-dry, keratin treatments, and updos that hold from ceremony to reception.</em></p>
-          <p class="dish-price">&nbsp;&nbsp;From &#8377;299</p>
-        </article>
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=80" alt="Facial and skin treatment" loading="lazy" />
-          </div>
-          <p class="dish-no">Service 03</p>
-          <h3 class="dish-name">Skin Treatments</h3>
-          <p class="dish-desc"><em>Facials, de-tan, acne care, and brightening treatments using dermatologically tested products.</em></p>
-          <p class="dish-price">&nbsp;&nbsp;From &#8377;499</p>
-        </article>
-
+<!-- ── Services ── -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-title">Our Services</div>
+      <p class="section-sub">Premium beauty treatments tailored to enhance your natural glow</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card" data-delay="0">
+        <div class="service-icon">💄</div>
+        <h3>Bridal Makeup</h3>
+        <p>Complete bridal packages including HD & airbrush makeup, draping, and artist touch-ups for your special day.</p>
+        <div class="service-price">From ₹5,000</div>
       </div>
-    </section>
+      <div class="service-card" data-delay="100">
+        <div class="service-icon">✂️</div>
+        <h3>Hair Styling</h3>
+        <p>From trendy cuts to keratin treatments, hair spas, smoothing, and coloring — transform your look.</p>
+        <div class="service-price">From ₹500</div>
+      </div>
+      <div class="service-card" data-delay="200">
+        <div class="service-icon">🧖‍♀️</div>
+        <h3>Skin Treatments</h3>
+        <p>Advanced facials, skin brightening, acne treatment, detan, and professional skin care routines.</p>
+        <div class="service-price">From ₹800</div>
+      </div>
+      <div class="service-card" data-delay="300">
+        <div class="service-icon">💅</div>
+        <h3>Nail Art</h3>
+        <p>Gel nails, extensions, nail art, spa manicures and pedicures with premium products.</p>
+        <div class="service-price">From ₹300</div>
+      </div>
+      <div class="service-card" data-delay="400">
+        <div class="service-icon">🪒</div>
+        <h3>Threading & Waxing</h3>
+        <p>Flawless threading and waxing services using premium quality wax for silky smooth skin.</p>
+        <div class="service-price">From ₹100</div>
+      </div>
+      <div class="service-card" data-delay="500">
+        <div class="service-icon">💆‍♀️</div>
+        <h3>Massage & Spa</h3>
+        <p>Relaxing head, body, and foot massages. Aromatherapy and deep tissue treatments available.</p>
+        <div class="service-price">From ₹600</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <hr class="rule" />
+<!-- ── Pricing ── -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-title">Pricing</div>
+      <p class="section-sub">Transparent pricing — no hidden charges, only beautiful results</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card standard reveal">
+        <div class="pricing-label">Essential</div>
+        <h3>Grooming Package</h3>
+        <p class="pricing-desc">Perfect for regular maintenance</p>
+        <div class="price">₹1,500 <span>/ session</span></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Threading & Shaping</li>
+          <li><span class="check">✓</span> Basic Facial</li>
+          <li><span class="check">✓</span> Hair Wash & Blow Dry</li>
+          <li><span class="check">✓</span> Manicure OR Pedicure</li>
+        </ul>
+        <a href="tel:+919918181536" class="btn btn-outline" style="width:100%;justify-content:center">Book Now</a>
+      </div>
+      <div class="pricing-card featured reveal">
+        <div class="pricing-label">Most Popular</div>
+        <h3>Bridal Makeover</h3>
+        <p class="pricing-desc">Complete bridal beauty package</p>
+        <div class="price">₹8,000 <span>/ session</span></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> HD / Airbrush Makeup</li>
+          <li><span class="check">✓</span> Hair Styling & Draping</li>
+          <li><span class="check">✓</span> Full Body Wax</li>
+          <li><span class="check">✓</span> Manicure & Pedicure</li>
+          <li><span class="check">✓</span> Facial & Clean-Up</li>
+          <li><span class="check">✓</span> Artist Touch-up</li>
+        </ul>
+        <a href="tel:+919918181536" class="btn btn-primary" style="width:100%;justify-content:center;background:#fff;color:var(--purple)">Book Bridal</a>
+      </div>
+      <div class="pricing-card standard reveal">
+        <div class="pricing-label">Party Ready</div>
+        <h3>Party Makeup</h3>
+        <p class="pricing-desc">Look stunning for any occasion</p>
+        <div class="price">₹3,000 <span>/ session</span></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Party / Engagement Makeup</li>
+          <li><span class="check">✓</span> Hair Styling</li>
+          <li><span class="check">✓</span> Express Facial</li>
+          <li><span class="check">✓</span> Nail Art</li>
+        </ul>
+        <a href="tel:+919918181536" class="btn btn-outline" style="width:100%;justify-content:center">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="voices">
-      <p class="kicker">What our clients say</p>
-      <blockquote>
-        <p>&ldquo;Best parlour in Jhansi for bridal makeup. My entire bridal look was perfect &mdash; the makeup lasted the whole day and everyone asked who did it. Highly recommend K2 Makeover!&rdquo;</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> &mdash; Priya S., on Google</footer>
-      </blockquote>
+<!-- ── Gallery ── -->
+<section class="section gallery" id="gallery">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-title">Our Work</div>
+      <p class="section-sub">See the transformations that speak for themselves</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt="Bridal makeover">
+        <div class="gallery-overlay"><h4>Bridal Glow</h4><p>Complete bridal makeover — HD Makeup</p></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&q=80" alt="Hair styling">
+        <div class="gallery-overlay"><h4>Hair Transformation</h4><p>Keratin treatment & style</p></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80" alt="Party makeup">
+        <div class="gallery-overlay"><h4>Party Ready</h4><p>Glam party makeup look</p></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80" alt="Nail art">
+        <div class="gallery-overlay"><h4>Nail Art Studio</h4><p>Premium gel nail extensions</p></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&q=80" alt="Skin treatment">
+        <div class="gallery-overlay"><h4>Skin Radiance</h4><p>Advanced facial treatment</p></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80" alt="Makeup products">
+        <div class="gallery-overlay"><h4>Premium Products</h4><p>Professional-grade cosmetics</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <blockquote>
-        <p>&ldquo;I've been visiting Kanak Beauty Parlour for over a year now for facials and hair treatments. The staff is very professional and the results are always amazing. My skin has never looked better.&rdquo;</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> &mdash; Neha K., on Google</footer>
-      </blockquote>
-    </section>
-
-    <hr class="rule" />
-
-    <section class="visit">
-      <p class="kicker">Visit us</p>
-      <div class="visit-grid">
-        <div>
-          <p class="visit-label">Main Branch</p>
-          <p>Near Burger Singh<br />BKD Gwalior Road<br />Jhansi &mdash; 284001</p>
+<!-- ── Testimonials ── -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-title">What Clients Say</div>
+      <p class="section-sub">Join thousands of happy customers who trust K2 Makeover</p>
+    </div>
+    <div class="testimonials-wrap">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <div class="testimonial-card slide-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Best beauty parlour in Jhansi! The bridal makeup was absolutely stunning. Everyone at my wedding couldn't stop complimenting. Thank you K2 Makeover!"</blockquote>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&q=80" alt="Priya S.">
+            <div><div class="name">Priya Sharma</div><div class="role">Bridal Client</div></div>
+          </div>
         </div>
-        <div>
-          <p class="visit-label">Branches</p>
-          <p>Loha Mandi, Jhansi<br />Shivaji Nagar, Jhansi</p>
+        <div class="testimonial-card slide-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"I've been coming here for 2 years. The skin treatments have completely transformed my complexion. Highly professional staff and amazing results!"</blockquote>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&q=80" alt="Neha R.">
+            <div><div class="name">Neha Gupta</div><div class="role">Regular Client</div></div>
+          </div>
         </div>
-        <div>
-          <p class="visit-label">Phone</p>
-          <p>
-            <a href="tel:+919918181536">+91-99181-81536</a><br />
-            <a href="tel:+918369687787">+91-83696-87787</a>
-          </p>
+        <div class="testimonial-card slide-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Amazing hair styling! The keratin treatment gave my hair a completely new life. The ambiance is so relaxing and the staff is incredibly skilled."</blockquote>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&q=80" alt="Anita M.">
+            <div><div class="name">Anita Mehta</div><div class="role">Hair Treatment Client</div></div>
+          </div>
         </div>
-        <div>
-          <p class="visit-label">Email</p>
-          <p><a href="mailto:kanakbeautyzone@gmail.com">kanakbeautyzone@gmail.com</a></p>
+        <div class="testimonial-card slide-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Got my engagement makeup done here and it was perfect! They understood exactly what I wanted. The photos turned out beautiful. 10/10 recommend!"</blockquote>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&q=80" alt="Shreya K.">
+            <div><div class="name">Shreya Kumari</div><div class="role">Engagement Client</div></div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <p class="directions">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Kanak+Beauty+Parlour+BKD+Gwalior+Road+Jhansi" target="_blank" rel="noopener">&rarr; Get directions on Google Maps</a>
-      </p>
-    </section>
+<!-- ── Contact & Branches ── -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-title">Visit Us</div>
+      <p class="section-sub">Three convenient locations across Jhansi — find the one nearest to you</p>
+    </div>
+    <div class="branches-grid">
+      <div class="branch-card reveal">
+        <div class="branch-label">📍 Main Branch</div>
+        <h3>K2 Makeover — BKD Gwalior Road</h3>
+        <div class="branch-info">
+          <div><span class="icon">🏠</span><span>Near Burger Singh, BKD Gwalior Road, Jhansi</span></div>
+          <div><span class="icon">🕐</span><span>Mon–Sat: 10 AM – 8 PM | Sun: 11 AM – 6 PM</span></div>
+          <div><span class="icon">📞</span><span>+91-99181-81536</span></div>
+        </div>
+      </div>
+      <div class="branch-card reveal">
+        <div class="branch-label">📍 Branch 2</div>
+        <h3>K2 Makeover — Loha Mandi</h3>
+        <div class="branch-info">
+          <div><span class="icon">🏠</span><span>Loha Mandi, Jhansi</span></div>
+          <div><span class="icon">🕐</span><span>Mon–Sat: 10 AM – 8 PM | Sun: 11 AM – 6 PM</span></div>
+          <div><span class="icon">📞</span><span>+91-83696-87787</span></div>
+        </div>
+      </div>
+      <div class="branch-card reveal">
+        <div class="branch-label">📍 Branch 3</div>
+        <h3>K2 Makeover — Shivaji Nagar</h3>
+        <div class="branch-info">
+          <div><span class="icon">🏠</span><span>Shivaji Nagar, Jhansi</span></div>
+          <div><span class="icon">🕐</span><span>Mon–Sat: 10 AM – 8 PM | Sun: 11 AM – 6 PM</span></div>
+          <div><span class="icon">📞</span><span>+91-99181-81536</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-main reveal">
+      <div>
+        <h3>Ready to Transform?</h3>
+        <p>Book your appointment today and let our expert artists create the look you've always dreamed of.</p>
+      </div>
+      <div class="contact-methods">
+        <a href="tel:+919918181536" class="contact-method">
+          <span class="icon">📞</span>
+          <div><div class="label">Call Us</div><div class="value">+91-99181-81536</div></div>
+        </a>
+        <a href="tel:+918369687787" class="contact-method">
+          <span class="icon">📱</span>
+          <div><div class="label">WhatsApp</div><div class="value">+91-83696-87787</div></div>
+        </a>
+        <a href="mailto:kanakbeautyzone@gmail.com" class="contact-method">
+          <span class="icon">✉️</span>
+          <div><div class="label">Email</div><div class="value">kanakbeautyzone@gmail.com</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer class="bottom">
-      <p>Demo site built by <a href="mailto:hi.apexagent@gmail.com">Alok Web Services</a>.</p>
-      <p>Want this on your own domain? <a href="mailto:hi.apexagent@gmail.com">hi.apexagent@gmail.com</a></p>
-    </footer>
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">K<span>2</span> Makeover</div>
+        <p>The Kanak Beauty Parlour — Jhansi's most trusted beauty destination since day one. 3 branches, 5000+ happy clients, and counting.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Bridal Makeup</a></li>
+          <li><a href="#services">Hair Styling</a></li>
+          <li><a href="#services">Skin Treatments</a></li>
+          <li><a href="#services">Nail Art</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+919918181536">+91-99181-81536</a></li>
+          <li><a href="tel:+918369687787">+91-83696-87787</a></li>
+          <li><a href="mailto:kanakbeautyzone@gmail.com">kanakbeautyzone@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 The Kanak Beauty Parlour (K2 Makeover). All rights reserved.</span>
+      <span>Made with 💜 in Jhansi</span>
+    </div>
+  </div>
+</footer>
 
-  </main>
+<script>
+/* ── Navbar scroll ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ── Mobile menu ── */
+document.getElementById('hamburger').addEventListener('click', function() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  if (links.style.display === 'flex') {
+    links.style.position = 'fixed';
+    links.style.top = '70px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = '#fff';
+    links.style.flexDirection = 'column';
+    links.style.padding = '20px';
+    links.style.boxShadow = '0 8px 32px rgba(0,0,0,.1)';
+    links.style.zIndex = '999';
+  }
+});
+
+/* ── Scroll Reveal ── */
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObserver.unobserve(e.target); }});
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+/* ── Staggered Service Cards ── */
+const cards = document.querySelectorAll('.service-card');
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const delay = parseInt(e.target.dataset.delay) || 0;
+      setTimeout(() => e.target.classList.add('revealed'), delay);
+      cardObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+cards.forEach(c => cardObserver.observe(c));
+
+/* ── Testimonial slide-in ── */
+const tCards = document.querySelectorAll('.testimonial-card');
+const tObserver = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('slide-in'), i * 150);
+      tObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+tCards.forEach(c => tObserver.observe(c));
+
+/* ── Smooth anchor scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
 </body>
 </html>
