@@ -3,122 +3,555 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prema Kunj Resort — Marriage Lawn & Resort in Jhansi</title>
+  <title>Prema Kunj Resort — Premium Marriage Lawn & Resort in Jhansi</title>
   <meta name="description" content="Prema Kunj Resort, Unnao Balaji Road, Jhansi. A premium marriage lawn and resort venue for weddings, receptions, and celebrations. Book your event today." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main>
 
-    <header class="top">
-      <span>Jhansi &middot; Established &mdash;</span>
-      <span class="dot">&middot;</span>
-      <span>Marriage Lawn &middot; Resort</span>
-    </header>
-
-    <section class="hero">
-      <h1>Prema Kunj</h1>
-      <p class="tagline">Where celebrations find their perfect setting &mdash; lawns, halls, and quiet rooms under the Jhansi sky.</p>
-      <div class="rating">
-        <span class="star">&#9733;</span>
-        <span class="num">3.8</span>
-        <span class="src">on Justdial &middot; 636 reviews</span>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Prema Kunj</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#amenities">Amenities</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
       </div>
-    </section>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-    <section class="about">
-      <p><em>Prema Kunj Resort</em> is a marriage lawn and resort on Unnao Balaji Road in Goramachhiya, Jhansi &mdash; a venue designed for the kind of weddings that stay in memory. Expansive lawns for open-air ceremonies, banquet halls for intimate gatherings, and comfortable resort rooms for guests travelling from out of town. The space is shaped by years of hosting celebrations &mdash; every corner considered, every detail in place.</p>
-      <p>We host weddings, receptions, mehendi nights, and family gatherings. Call ahead for availability on weekends and during the wedding season.</p>
-    </section>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
 
-    <hr class="rule" />
-
-    <section class="offerings">
-      <p class="kicker">What we offer</p>
-      <h2 class="section-title">Three spaces, each designed for a different kind of gathering.</h2>
-
-      <div class="offering-grid">
-        <article class="offering">
-          <div class="offering-photo">
-            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80" alt="Open-air wedding lawn decorated with flowers and fairy lights" loading="lazy" />
-          </div>
-          <p class="offering-no">No. 01</p>
-          <h3 class="offering-name">Wedding Lawns</h3>
-          <p class="offering-desc"><em>Expansive open-air lawns for ceremonies and receptions under the sky. Accommodates large guest lists with ease.</em></p>
-        </article>
-
-        <article class="offering">
-          <div class="offering-photo">
-            <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80" alt="Elegant banquet hall set up for a wedding reception" loading="lazy" />
-          </div>
-          <p class="offering-no">No. 02</p>
-          <h3 class="offering-name">Banquet Halls</h3>
-          <p class="offering-desc"><em>Enclosed, air-conditioned halls for intimate celebrations and evening functions. Fully equipped for dining and décor.</em></p>
-        </article>
-
-        <article class="offering">
-          <div class="offering-photo">
-            <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80" alt="Comfortable resort room with clean linens and warm lighting" loading="lazy" />
-          </div>
-          <p class="offering-no">No. 03</p>
-          <h3 class="offering-name">Resort Stay</h3>
-          <p class="offering-desc"><em>Comfortable rooms for guests travelling from out of town. A quiet retreat after the celebrations end.</em></p>
-        </article>
+  <!-- Hero Section with Parallax -->
+  <section class="hero" id="hero">
+    <div class="hero-parallax" data-parallax="0.5">
+      <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=80" alt="Wedding venue" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-badge">Jhansi &middot; Marriage Lawn &middot; Resort</p>
+      <h1 class="hero-title">
+        <span class="typing-text" data-text="Prema Kunj">Prema Kunj</span>
+      </h1>
+      <p class="hero-subtitle">Where celebrations find their perfect setting</p>
+      <div class="hero-rating">
+        <span class="hero-star">&#9733;</span>
+        <span class="hero-rating-num">3.8</span>
+        <span class="hero-rating-src">on Justdial &middot; 636 reviews</span>
       </div>
-    </section>
+      <a href="#contact" class="hero-cta">Book Your Event</a>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
 
-    <hr class="rule" />
-
-    <section class="voices">
-      <p class="kicker">What guests say</p>
-      <blockquote>
-        <p>&ldquo;Beautiful lawn and well-maintained rooms. We hosted our wedding here and everything was taken care of. The staff was very cooperative throughout.&rdquo;</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;</span> &mdash; A guest, on Justdial</footer>
-      </blockquote>
-      <blockquote>
-        <p>&ldquo;Good venue for family functions. The banquet hall is spacious and the food was appreciated by all our guests. Would recommend for weddings in Jhansi.&rdquo;</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;</span> &mdash; A guest, on Justdial</footer>
-      </blockquote>
-    </section>
-
-    <hr class="rule" />
-
-    <section class="visit">
-      <p class="kicker">Get in touch</p>
-      <div class="visit-grid">
-        <div>
-          <p class="visit-label">Address</p>
-          <p>Unnao Balaji Road, Goramachhiya<br />Jhansi, UP &mdash; 284003</p>
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <p class="kicker">About Us</p>
+          <h2 class="section-title">A Legacy of Celebrations</h2>
+          <p class="about-desc"><em>Prema Kunj Resort</em> is a marriage lawn and resort on Unnao Balaji Road in Goramachhiya, Jhansi — a venue designed for the kind of weddings that stay in memory. Expansive lawns for open-air ceremonies, banquet halls for intimate gatherings, and comfortable resort rooms for guests travelling from out of town.</p>
+          <p class="about-desc">The space is shaped by years of hosting celebrations — every corner considered, every detail in place. We host weddings, receptions, mehendi nights, and family gatherings.</p>
         </div>
-        <div>
-          <p class="visit-label">Phone</p>
-          <p>
-            <a href="tel:+917510005203">+91-7510005203</a><br />
-            <a href="tel:+918115035555">+91-8115035555</a>
-          </p>
-        </div>
-        <div>
-          <p class="visit-label">Email &amp; Social</p>
-          <p>
-            <a href="mailto:premakunjresorts@gmail.com">premakunjresorts@gmail.com</a><br />
-            <a href="https://www.instagram.com/premakunjresort" target="_blank" rel="noopener">@premakunjresort</a>
-          </p>
+        <div class="about-image fade-in">
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Elegant banquet hall" loading="lazy" />
         </div>
       </div>
+    </div>
+  </section>
 
-      <p class="directions">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Prema+Kunj+Resort+Jhansi" target="_blank" rel="noopener">&rarr; Get directions on Google Maps</a>
-      </p>
-    </section>
+  <!-- Parallax Divider 1 -->
+  <div class="parallax-divider">
+    <div class="parallax-bg" data-parallax="0.3">
+      <img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?w=1920&q=80" alt="Wedding decorations" />
+    </div>
+    <div class="parallax-divider-overlay"></div>
+    <div class="parallax-divider-text fade-in">
+      <span class="kicker">Crafted Moments</span>
+      <h2>Every Detail Considered</h2>
+    </div>
+  </div>
 
-    <footer class="bottom">
-      <p>Demo site built by <a href="mailto:hi.apexagent@gmail.com">Alok Web Services</a>.</p>
-      <p>Want this on your own domain? <a href="mailto:hi.apexagent@gmail.com">hi.apexagent@gmail.com</a></p>
-    </footer>
+  <!-- Gallery Section -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <p class="kicker fade-in">Our Spaces</p>
+      <h2 class="section-title fade-in">Wedding Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in" data-index="0">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&q=80" alt="Open-air wedding lawn" loading="lazy" />
+          <div class="gallery-overlay">
+            <span>Wedding Lawn</span>
+          </div>
+        </div>
+        <div class="gallery-item fade-in" data-index="1">
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&q=80" alt="Banquet hall reception" loading="lazy" />
+          <div class="gallery-overlay">
+            <span>Banquet Hall</span>
+          </div>
+        </div>
+        <div class="gallery-item fade-in" data-index="2">
+          <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Resort rooms" loading="lazy" />
+          <div class="gallery-overlay">
+            <span>Resort Rooms</span>
+          </div>
+        </div>
+        <div class="gallery-item fade-in" data-index="3">
+          <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600&q=80" alt="Wedding stage decor" loading="lazy" />
+          <div class="gallery-overlay">
+            <span>Stage Decor</span>
+          </div>
+        </div>
+        <div class="gallery-item fade-in" data-index="4">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Floral arrangements" loading="lazy" />
+          <div class="gallery-overlay">
+            <span>Floral Setup</span>
+          </div>
+        </div>
+        <div class="gallery-item fade-in" data-index="5">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80" alt="Outdoor seating area" loading="lazy" />
+          <div class="gallery-overlay">
+            <span>Outdoor Area</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </main>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <button class="lightbox-prev" id="lightboxPrev">&#10094;</button>
+    <button class="lightbox-next" id="lightboxNext">&#10095;</button>
+    <img src="" alt="" id="lightboxImg" />
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- Parallax Divider 2 -->
+  <div class="parallax-divider">
+    <div class="parallax-bg" data-parallax="0.4">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&q=80" alt="Wedding floral arrangements" />
+    </div>
+    <div class="parallax-divider-overlay"></div>
+    <div class="parallax-divider-text fade-in">
+      <span class="kicker">Amenities</span>
+      <h2>Beyond Expectations</h2>
+    </div>
+  </div>
+
+  <!-- Amenities Section -->
+  <section class="amenities" id="amenities">
+    <div class="container">
+      <p class="kicker fade-in">What We Offer</p>
+      <h2 class="section-title fade-in">Resort Amenities</h2>
+      <div class="amenities-grid">
+        <div class="amenity-card fade-in">
+          <div class="amenity-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/></svg>
+          </div>
+          <h3>Wedding Lawns</h3>
+          <p>Expansive open-air lawns for ceremonies and receptions under the sky.</p>
+        </div>
+        <div class="amenity-card fade-in">
+          <div class="amenity-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Banquet Halls</h3>
+          <p>Enclosed, air-conditioned halls for intimate celebrations and evening functions.</p>
+        </div>
+        <div class="amenity-card fade-in">
+          <div class="amenity-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 7v14M21 7v14M6 11h.01M6 15h.01M6 19h.01M10 11h.01M10 15h.01M10 19h.01M14 11h.01M14 15h.01M14 19h.01M18 11h.01M18 15h.01M18 19h.01M12 2l9 5M12 2L3 7"/></svg>
+          </div>
+          <h3>Resort Rooms</h3>
+          <p>Comfortable rooms for guests travelling from out of town.</p>
+        </div>
+        <div class="amenity-card fade-in">
+          <div class="amenity-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2"/></svg>
+          </div>
+          <h3>24/7 Service</h3>
+          <p>Dedicated staff available round the clock for all your event needs.</p>
+        </div>
+        <div class="amenity-card fade-in">
+          <div class="amenity-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+          </div>
+          <h3>Catering</h3>
+          <p>In-house catering with customizable menus for every occasion.</p>
+        </div>
+        <div class="amenity-card fade-in">
+          <div class="amenity-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 7a3 3 0 100 6 3 3 0 000-6z"/></svg>
+          </div>
+          <h3>Prime Location</h3>
+          <p>Conveniently located on Unnao Balaji Road, Goramachhiya, Jhansi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parallax Divider 3 -->
+  <div class="parallax-divider">
+    <div class="parallax-bg" data-parallax="0.35">
+      <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=1920&q=80" alt="Wedding stage" />
+    </div>
+    <div class="parallax-divider-overlay"></div>
+    <div class="parallax-divider-text fade-in">
+      <span class="kicker">Testimonials</span>
+      <h2>What Our Guests Say</h2>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="carousel" id="carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>"Beautiful lawn and well-maintained rooms. We hosted our wedding here and everything was taken care of. The staff was very cooperative throughout."</blockquote>
+            <p class="testimonial-author">— A guest, on Justdial</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>"Good venue for family functions. The banquet hall is spacious and the food was appreciated by all our guests. Would recommend for weddings in Jhansi."</blockquote>
+            <p class="testimonial-author">— A guest, on Justdial</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>"Excellent hospitality and great ambiance. The decor team did an amazing job. Our guests couldn't stop praising the venue and the arrangements."</blockquote>
+            <p class="testimonial-author">— A satisfied customer</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>"We booked Prema Kunj for our reception and it was the best decision. The lawn is huge, well-lit, and the parking space is ample."</blockquote>
+            <p class="testimonial-author">— A happy family</p>
+          </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <div class="carousel-nav">
+          <button class="carousel-btn" id="carouselPrev">&#10094;</button>
+          <button class="carousel-btn" id="carouselNext">&#10095;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <p class="kicker fade-in">Get in Touch</p>
+      <h2 class="section-title fade-in">Book Your Celebration</h2>
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 7a3 3 0 100 6 3 3 0 000-6z"/></svg>
+            </div>
+            <div>
+              <h4>Address</h4>
+              <p>Unnao Balaji Road, Goramachhiya<br/>Jhansi, UP — 284003</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:+917510005203">+91-7510005203</a><br/><a href="tel:+918115035555">+91-8115035555</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zM22 6l-10 7L2 6"/></svg>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:premakunjresorts@gmail.com">premakunjresorts@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg>
+            </div>
+            <div>
+              <h4>Instagram</h4>
+              <p><a href="https://www.instagram.com/premakunjresort" target="_blank" rel="noopener">@premakunjresort</a></p>
+            </div>
+          </div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Prema+Kunj+Resort+Jhansi" target="_blank" rel="noopener" class="contact-cta">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 7a3 3 0 100 6 3 3 0 000-6z"/></svg>
+            Get Directions on Google Maps
+          </a>
+        </div>
+        <div class="contact-map fade-in">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14435.2847!2d79.0!3d25.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI3JzAwLjAiTiA3OcKwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="450" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h3>Prema Kunj Resort</h3>
+          <p>A premium marriage lawn and resort venue in Jhansi, UP. Crafting unforgettable celebrations since years.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#about">About</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#amenities">Amenities</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>Unnao Balaji Road, Goramachhiya</p>
+          <p>Jhansi, UP — 284003</p>
+          <p><a href="tel:+917510005203">+91-7510005203</a></p>
+          <p><a href="mailto:premakunjresorts@gmail.com">premakunjresorts@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Prema Kunj Resort. All rights reserved.</p>
+        <p>Demo site built by <a href="mailto:hi.apexagent@gmail.com">Alok Web Services</a>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#9650;</button>
+
+  <script>
+    // ========== NAVIGATION ==========
+    const nav = document.getElementById('nav');
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > 80) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
+    });
+
+    navToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-menu a, .nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ========== PARALLAX ==========
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      parallaxElements.forEach(el => {
+        const speed = parseFloat(el.dataset.parallax);
+        const rect = el.parentElement.getBoundingClientRect();
+        const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+        if (visible) {
+          const yPos = -(scrollY - el.parentElement.offsetTop) * speed;
+          el.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        }
+      });
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+
+    // ========== SCROLL ANIMATIONS ==========
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // ========== TYPING EFFECT ==========
+    const typingEl = document.querySelector('.typing-text');
+    if (typingEl) {
+      const text = typingEl.dataset.text;
+      typingEl.textContent = '';
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          typingEl.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 100);
+        }
+      }
+      // Start typing when hero is visible
+      const heroObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setTimeout(typeWriter, 500);
+          heroObserver.disconnect();
+        }
+      });
+      heroObserver.observe(document.querySelector('.hero'));
+    }
+
+    // ========== LIGHTBOX ==========
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    let currentIndex = 0;
+    const galleryData = [];
+
+    galleryItems.forEach((item, index) => {
+      const img = item.querySelector('img');
+      const label = item.querySelector('.gallery-overlay span');
+      galleryData.push({ src: img.src.replace('w=600', 'w=1200'), alt: img.alt, label: label.textContent });
+      item.addEventListener('click', () => {
+        currentIndex = index;
+        openLightbox();
+      });
+    });
+
+    function openLightbox() {
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      updateLightbox();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightbox() {
+      lightboxImg.src = galleryData[currentIndex].src;
+      lightboxImg.alt = galleryData[currentIndex].alt;
+      lightboxCaption.textContent = galleryData[currentIndex].label;
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    lightboxPrev.addEventListener('click', () => { currentIndex = (currentIndex - 1 + galleryData.length) % galleryData.length; updateLightbox(); });
+    lightboxNext.addEventListener('click', () => { currentIndex = (currentIndex + 1) % galleryData.length; updateLightbox(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryData.length) % galleryData.length; updateLightbox(); }
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryData.length; updateLightbox(); }
+    });
+
+    // ========== TESTIMONIALS CAROUSEL ==========
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselDots = document.getElementById('carouselDots');
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    const cards = document.querySelectorAll('.testimonial-card');
+    let currentSlide = 0;
+    let autoSlideInterval;
+
+    // Create dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      carouselDots.appendChild(dot);
+    });
+
+    function goToSlide(index) {
+      currentSlide = index;
+      carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    carouselPrev.addEventListener('click', () => {
+      goToSlide((currentSlide - 1 + cards.length) % cards.length);
+      resetAutoSlide();
+    });
+
+    carouselNext.addEventListener('click', () => {
+      goToSlide((currentSlide + 1) % cards.length);
+      resetAutoSlide();
+    });
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(() => {
+        goToSlide((currentSlide + 1) % cards.length);
+      }, 5000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    startAutoSlide();
+
+    // ========== BACK TO TOP ==========
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
 </body>
 </html>
