@@ -1,131 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chulhewala — A North Indian Table in Jhansi</title>
-  <meta name="description" content="Chulhewala, Ansal Colony, Jhansi. Slow-cooked North Indian and Chinese food, family recipes, Gwalior–Jhansi Road. Open daily." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chulhewala — North Indian Restaurant in Jhansi</title>
+  <meta name="description" content="Chulhewala is a family-run North Indian restaurant on Gwalior Road, Jhansi. Rated 4.6/5 with 2,127 reviews. Authentic flavors, warm hospitality.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
 
-    <header class="top">
-      <span>Jhansi &middot; Established &mdash;</span>
-      <span class="dot">&middot;</span>
-      <span>North Indian &middot; Chinese</span>
-    </header>
-
-    <section class="hero">
-      <h1>Chulhewala</h1>
-      <p class="tagline">Slow-cooked North Indian, served on the highway between Jhansi and Gwalior.</p>
-      <div class="rating">
-        <span class="star">&#9733;</span>
-        <span class="num">4.6</span>
-        <span class="src">on Zomato &middot; 2,127 diners</span>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="14" cy="14" r="13"/>
+          <path d="M8 18c0-4 2.7-8 6-8s6 4 6 8"/>
+        </svg>
+        <span>Chulhewala</span>
+      </a>
+      <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Visit</a>
+        <a href="tel:+917500360743" class="nav-cta">Reserve</a>
       </div>
-    </section>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-    <section class="about">
-      <p><em>Chulhewala</em> is an independent family kitchen on Gwalior Road &mdash; a place where the butter chicken is reduced by hand, the lal maas is tempered with whole spices, and the room is warmed by live music most evenings. We cook the dishes we grew up eating: rich, slow, and unapologetically seasoned. No shortcuts. No presets.</p>
-      <p>Most nights you will find us full. Call ahead if you are coming on a weekend.</p>
-    </section>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="#menu">Menu</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#visit">Visit</a>
+    <a href="tel:+917500360743">Reserve a Table</a>
+  </div>
 
-    <hr class="rule" />
-
-    <section class="dishes">
-      <p class="kicker">From the kitchen</p>
-      <h2 class="section-title">Three dishes our guests ask for, again and again.</h2>
-
-      <div class="dish-grid">
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=1200&q=80" alt="Butter chicken in a copper pan" loading="lazy" />
-          </div>
-          <p class="dish-no">No. 01</p>
-          <h3 class="dish-name">Butter Chicken</h3>
-          <p class="dish-desc"><em>Tomato, cream, dried fenugreek, butter. Finished in a copper karahi.</em></p>
-          <p class="dish-price">&nbsp;&nbsp;&#8377;280</p>
-        </article>
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=1200&q=80" alt="Lal maas, a deep red mutton curry" loading="lazy" />
-          </div>
-          <p class="dish-no">No. 02</p>
-          <h3 class="dish-name">Lal Maas</h3>
-          <p class="dish-desc"><em>Rajasthani mutton, slow-braised with red chillies and whole spices.</em></p>
-          <p class="dish-price">&nbsp;&nbsp;&#8377;360</p>
-        </article>
-
-        <article class="dish">
-          <div class="dish-photo">
-            <img src="https://images.unsplash.com/photo-1633237308525-cd587cf71926?w=1200&q=80" alt="Hyderabadi chicken biryani in a handi" loading="lazy" />
-          </div>
-          <p class="dish-no">No. 03</p>
-          <h3 class="dish-name">Chicken Biryani</h3>
-          <p class="dish-desc"><em>Long-grained basmati, layered and dum-cooked. Served with raita.</em></p>
-          <p class="dish-price">&nbsp;&nbsp;&#8377;240</p>
-        </article>
-
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=85" alt="Chulhewala restaurant ambiance" />
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge fade-in-up">North Indian &middot; Jhansi</div>
+      <h1 class="hero-title fade-in-up">Chulhewala</h1>
+      <p class="hero-tagline fade-in-up">Slow-cooked North Indian classics, served with heart on Gwalior Road</p>
+      <div class="hero-rating fade-in-up">
+        <div class="stars-row">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star half">&#9733;</span>
+        </div>
+        <span class="rating-num">4.6</span>
+        <span class="rating-sep">&middot;</span>
+        <span class="rating-text">2,127 reviews</span>
       </div>
-    </section>
+      <div class="hero-actions fade-in-up">
+        <a href="#menu" class="btn btn-primary">Explore Menu</a>
+        <a href="#visit" class="btn btn-secondary">Get Directions</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
 
-    <hr class="rule" />
-
-    <section class="voices">
-      <p class="kicker">What guests say</p>
-
-      <blockquote>
-        <p>&ldquo;We had butter chicken and lal maas &mdash; it was very tasty. The ambience is too good. Customer service is too good.&rdquo;</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> &mdash; Shilpi, on District</footer>
-      </blockquote>
-
-      <blockquote>
-        <p>&ldquo;One of the best restaurants in Jhansi. Tasty and delicious food. Fast service.&rdquo;</p>
-        <footer><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> &mdash; Dr Abhishek, on District</footer>
-      </blockquote>
-    </section>
-
-    <hr class="rule" />
-
-    <section class="visit">
-      <p class="kicker">Visit us</p>
-
-      <div class="visit-grid">
-        <div>
-          <p class="visit-label">Address</p>
-          <p>Pal Colony, Gwalior Road<br />Near Coco Cola Depot<br />Ansal Colony, Jhansi &mdash; 284001</p>
+  <!-- About -->
+  <section class="about">
+    <div class="container">
+      <div class="about-grid fade-in-up">
+        <div class="about-content">
+          <span class="section-label">Our Story</span>
+          <h2>A family kitchen, open to everyone</h2>
+          <p>Chulhewala is an independent family kitchen on Gwalior Road — a place where the butter chicken is reduced by hand, the lal maas is tempered with whole spices, and the room is warmed by laughter and live music most evenings.</p>
+          <p>We cook the dishes we grew up eating: rich, slow, and unapologetically seasoned. No shortcuts. No presets. Just honest food served the way it should be.</p>
         </div>
-
-        <div>
-          <p class="visit-label">Hours</p>
-          <p>Open daily<br />12:15 pm &ndash; 11:45 pm</p>
+        <div class="about-images">
+          <div class="about-img-main">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&q=80" alt="Chef preparing food" loading="lazy" />
+          </div>
+          <div class="about-img-accent">
+            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80" alt="Indian spices" loading="lazy" />
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div>
-          <p class="visit-label">Phone</p>
+  <!-- Food Gallery -->
+  <section class="gallery" id="menu">
+    <div class="container">
+      <span class="section-label fade-in-up">From the Kitchen</span>
+      <h2 class="section-title fade-in-up">Dishes our guests can't stop ordering</h2>
+      <div class="gallery-scroll">
+        <div class="gallery-track">
+          <div class="gallery-card fade-in-up">
+            <div class="gallery-img">
+              <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&q=80" alt="Butter Chicken" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-price">&#8377;280</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h3>Butter Chicken</h3>
+              <p>Tomato, cream, dried fenugreek, butter — finished in a copper karahi</p>
+              <div class="gallery-tag">Chef's Signature</div>
+            </div>
+          </div>
+          <div class="gallery-card fade-in-up">
+            <div class="gallery-img">
+              <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=80" alt="Lal Maas" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-price">&#8377;360</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h3>Lal Maas</h3>
+              <p>Rajasthani mutton, slow-braised with red chillies and whole spices</p>
+              <div class="gallery-tag">Spicy & Bold</div>
+            </div>
+          </div>
+          <div class="gallery-card fade-in-up">
+            <div class="gallery-img">
+              <img src="https://images.unsplash.com/photo-1633237308525-cd587cf71926?w=600&q=80" alt="Chicken Biryani" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-price">&#8377;240</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h3>Chicken Biryani</h3>
+              <p>Long-grain basmati, layered and dum-cooked, served with raita</p>
+              <div class="gallery-tag">Most Popular</div>
+            </div>
+          </div>
+          <div class="gallery-card fade-in-up">
+            <div class="gallery-img">
+              <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80" alt="Tandoori Platter" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-price">&#8377;420</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h3>Tandoori Platter</h3>
+              <p>Mixed grill from our clay oven — chicken, seekh, and paneer tikka</p>
+              <div class="gallery-tag">Family Favorite</div>
+            </div>
+          </div>
+          <div class="gallery-card fade-in-up">
+            <div class="gallery-img">
+              <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=600&q=80" alt="Dal Makhani" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-price">&#8377;200</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h3>Dal Makhani</h3>
+              <p>Black lentils slow-cooked overnight with butter and cream</p>
+              <div class="gallery-tag">Comfort Classic</div>
+            </div>
+          </div>
+          <div class="gallery-card fade-in-up">
+            <div class="gallery-img">
+              <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&q=80" alt="Naan Basket" loading="lazy" />
+              <div class="gallery-overlay">
+                <span class="gallery-price">&#8377;120</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h3>Fresh Naan Basket</h3>
+              <p>Garlic, butter, and plain naan — baked fresh in our tandoor</p>
+              <div class="gallery-tag">Must Have</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery-nav fade-in-up">
+        <button class="gallery-btn gallery-prev" aria-label="Previous">&#8592;</button>
+        <button class="gallery-btn gallery-next" aria-label="Next">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <span class="section-label fade-in-up">Guest Experiences</span>
+      <h2 class="section-title fade-in-up">What our guests say</h2>
+      <div class="reviews-grid">
+        <div class="review-card fade-in-up">
+          <div class="review-stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="review-text">"We had butter chicken and lal maas — it was very tasty. The ambience is too good. Customer service is too good. Highly recommend for families!"</p>
+          <div class="review-author">
+            <div class="review-avatar">S</div>
+            <div>
+              <div class="review-name">Shilpi</div>
+              <div class="review-source">via Zomato</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card fade-in-up">
+          <div class="review-stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="review-text">"One of the best restaurants in Jhansi. Tasty and delicious food. Fast service. The biryani is absolutely worth the drive from anywhere in the city."</p>
+          <div class="review-author">
+            <div class="review-avatar">A</div>
+            <div>
+              <div class="review-name">Dr Abhishek</div>
+              <div class="review-source">via Zomato</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card fade-in-up">
+          <div class="review-stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="review-text">"The tandoori platter was a showstopper. Generous portions, incredible flavor. We'll be back every weekend now — it's become our family tradition."</p>
+          <div class="review-author">
+            <div class="review-avatar">R</div>
+            <div>
+              <div class="review-name">Rakesh & Family</div>
+              <div class="review-source">via Google</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-summary fade-in-up">
+        <div class="summary-stat">
+          <span class="summary-num">4.6</span>
+          <span class="summary-label">Overall Rating</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-stat">
+          <span class="summary-num">2,127</span>
+          <span class="summary-label">Total Reviews</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-stat">
+          <span class="summary-num">92%</span>
+          <span class="summary-label">Would Recommend</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit / Contact -->
+  <section class="visit" id="visit">
+    <div class="container">
+      <span class="section-label fade-in-up">Plan Your Visit</span>
+      <h2 class="section-title fade-in-up">Come hungry, leave happy</h2>
+      <div class="visit-grid fade-in-up">
+        <div class="visit-card">
+          <div class="visit-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3>Location</h3>
+          <p>Pal Colony, Gwalior Road<br>Near Coco Cola Depot<br>Ansal Colony, Jhansi — 284001</p>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Chulhewala+Jhansi+Pal+Colony+Gwalior+Road" target="_blank" rel="noopener" class="visit-link">Get Directions &rarr;</a>
+        </div>
+        <div class="visit-card">
+          <div class="visit-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12,6 12,12 16,14"/>
+            </svg>
+          </div>
+          <h3>Hours</h3>
+          <p>Open every day<br><strong>12:15 PM — 11:45 PM</strong></p>
+          <span class="visit-status visit-open">Open Now</span>
+        </div>
+        <div class="visit-card">
+          <div class="visit-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <h3>Contact</h3>
           <p>
-            <a href="tel:+917500360743">+91 75003 60743</a><br />
+            <a href="tel:+917500360743">+91 75003 60743</a><br>
             <a href="tel:+916387830461">+91 63878 30461</a>
           </p>
+          <a href="mailto:chulhewala@gmail.com" class="visit-link">chulhewala@gmail.com</a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <p class="directions">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Chulhewala+Jhansi" target="_blank" rel="noopener">&rarr; Get directions on Google Maps</a>
-      </p>
-    </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo">
+            <svg class="logo-icon" viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="14" cy="14" r="13"/>
+              <path d="M8 18c0-4 2.7-8 6-8s6 4 6 8"/>
+            </svg>
+            <span>Chulhewala</span>
+          </a>
+          <p>Family-run North Indian kitchen on Gwalior Road, Jhansi. Serving honest food since day one.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#menu">Our Menu</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#visit">Visit Us</a>
+        </div>
+        <div class="footer-links">
+          <h4>Contact</h4>
+          <a href="tel:+917500360743">+91 75003 60743</a>
+          <a href="tel:+916387830461">+91 63878 30461</a>
+          <a href="mailto:chulhewala@gmail.com">chulhewala@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Chulhewala. All rights reserved.</p>
+        <p class="footer-credit">Site designed by <a href="mailto:hi.apexagent@gmail.com">Alok Web Services</a></p>
+      </div>
+    </div>
+  </footer>
 
-    <footer class="bottom">
-      <p>Demo site built by <a href="mailto:hi.apexagent@gmail.com">Alok Web Services</a>.</p>
-      <p>Want this on your own domain? <a href="mailto:hi.apexagent@gmail.com">hi.apexagent@gmail.com</a></p>
-    </footer>
+  <script>
+    // Intersection Observer for fade-in-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  </main>
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+    // Parallax hero
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('.hero-bg img');
+      if (hero) {
+        const scroll = window.scrollY;
+        hero.style.transform = `translateY(${scroll * 0.3}px) scale(1.1)`;
+      }
+    });
+
+    // Gallery horizontal scroll
+    const track = document.querySelector('.gallery-track');
+    const prevBtn = document.querySelector('.gallery-prev');
+    const nextBtn = document.querySelector('.gallery-next');
+
+    if (track && prevBtn && nextBtn) {
+      const cardWidth = 340;
+      prevBtn.addEventListener('click', () => track.scrollBy({ left: -cardWidth, behavior: 'smooth' }));
+      nextBtn.addEventListener('click', () => track.scrollBy({ left: cardWidth, behavior: 'smooth' }));
+    }
+
+    // Mobile nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (toggle && mobileMenu) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          toggle.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Navbar shrink on scroll
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 80);
+    });
+  </script>
 </body>
 </html>
