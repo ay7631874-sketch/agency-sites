@@ -3,17 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compass | Premium Real Estate</title>
+    <title>Compass | Tech Minimal Real Estate</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --primary: #000000;
+        --secondary: #4A4A4A;
+        --accent: #1A1A1A;
+        --bg: #FFFFFF;
+        --fg: #333333;
+        --card-bg: #F7F7F7;
+        --heading-font: 'Plus Jakarta Sans', sans-serif;
+        --body-font: 'Inter', sans-serif;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+        --radius: 12px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    img { max-width: 100%; height: auto; }
+    a { text-decoration: none; color: inherit; }
+    
+    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
+    
+    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    
+    /* Nav */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
+    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
+    .navbar.scrolled .nav-logo { color: var(--fg); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
+    .navbar.scrolled .nav-links a { color: var(--fg); }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
+    .navbar.scrolled .nav-toggle span { background: var(--fg); }
+    
+    /* Hero variants */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #000000dd, #4A4A4Acc); }
+    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
+    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
+    .hero-right { flex: 1; position: relative; }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
+    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
+    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
+    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
+    .stat { text-align: center; }
+    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
+    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
+    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
+    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
+    
+    /* Buttons */
+    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
+    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
+    .btn-outline-white:hover { background: white; color: var(--fg); }
+    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
+    .btn-glass:hover { background: rgba(255,255,255,0.25); }
+    .btn-gold { background: var(--accent); color: var(--fg); }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
+    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
+    
+    /* About */
+    .about { padding: 120px 0; background: var(--bg); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .about-img img { width: 100%; height: 400px; object-fit: cover; }
+    .about-content .section-label { margin-bottom: 12px; }
+    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
+    .about-features { display: flex; flex-direction: column; gap: 16px; }
+    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
+    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    
+    /* Services */
+    .services { padding: 120px 0; background: var(--card-bg); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
+    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
+    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
+    
+    /* Properties */
+    .properties { padding: 120px 0; background: var(--bg); }
+    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
+    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .property-img { position: relative; height: 220px; overflow: hidden; }
+    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .property-card:hover .property-img img { transform: scale(1.05); }
+    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+    .property-info { padding: 20px; }
+    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
+    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
+    
+    /* Stats Bar */
+    .stats-bar { padding: 80px 0; background: var(--primary); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
+    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    /* Testimonials */
+    .testimonials { padding: 120px 0; background: var(--card-bg); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
+    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
+    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+    .testimonial-author strong { display: block; font-size: 0.9rem; }
+    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
+    
+    /* Process */
+    .process { padding: 120px 0; background: var(--bg); }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .process-step { text-align: center; padding: 24px; }
+    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
+    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
+    .process-step p { font-size: 0.9rem; opacity: 0.7; }
+    
+    /* Awards */
+    .awards { padding: 120px 0; background: var(--card-bg); }
+    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
+    .award-card p { font-size: 0.85rem; opacity: 0.7; }
+    
+    /* Team */
+    .team { padding: 120px 0; background: var(--bg); }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .team-card { text-align: center; }
+    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
+    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
+    .team-card p { font-size: 0.85rem; opacity: 0.6; }
+    
+    /* Legacy */
+    .legacy { padding: 120px 0; background: var(--card-bg); }
+    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
+    .legacy-content .section-title { margin-bottom: 20px; }
+    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
+    .legacy-stats { display: flex; gap: 40px; }
+    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
+    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
+    
+    /* Tech Features */
+    .tech-features { padding: 120px 0; background: var(--card-bg); }
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
+    
+    /* Community */
+    .community { padding: 120px 0; background: var(--bg); }
+    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
+    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
+    .community-stats { display: flex; justify-content: center; gap: 60px; }
+    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
+    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
+    
+    /* Gallery */
+    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
+    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
+    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
+    .gallery-item.large { grid-row: 1 / -1; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
+    
+    /* Luxury Features */
+    .luxury-features { padding: 120px 0; background: var(--bg); }
+    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
+    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
+    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
+    
+    /* Concierge */
+    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
+    .concierge-content { max-width: 600px; margin: 0 auto; }
+    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
+    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
+    .concierge .btn-primary { background: white; color: var(--primary); }
+    
+    /* Virtual Tour */
+    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
+    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
+    
+    /* Savings */
+    .savings { padding: 120px 0; background: var(--bg); }
+    .savings-content { max-width: 500px; margin: 0 auto; }
+    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+    .savings-label { font-weight: 500; }
+    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
+    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
+    .savings-amount { color: var(--primary); font-size: 1.5rem; }
+    
+    /* Agent Spotlight */
+    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
+    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
+    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
+    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
+    
+    /* CTA */
+    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
+    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
+    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
+    .cta .btn-primary { background: white; color: var(--primary); }
+    
+    /* Contact */
+    .contact { padding: 120px 0; background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .contact-details { display: flex; flex-direction: column; gap: 24px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
+    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
+    .contact-item a:hover { color: var(--primary); opacity: 1; }
+    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .form-group { margin-bottom: 16px; }
+    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
+    
+    /* Footer */
+    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
+    .footer-brand p { opacity: 0.7; }
+    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
+    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
+    .footer-links a:hover { color: white; }
+    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
+    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
+    .credit { color: var(--accent); }
+    
+    /* Animations */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
+        .nav-links.active { display: flex; }
+        .nav-links a { color: var(--fg) !important; }
+        .nav-cta { display: none; }
+        .nav-toggle { display: flex; }
+        .hero { flex-direction: column; min-height: auto; }
+        .hero-left { padding: 120px 24px 60px; }
+        .hero-right { height: 300px; }
+        .hero-image { padding: 60px 24px; }
+        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
+        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
+        .hero-stats { flex-wrap: wrap; gap: 20px; }
+        .community-stats { flex-direction: column; gap: 24px; }
+        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
+        .gallery-item.large { grid-row: auto; }
+        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .fade-in { opacity: 1; transform: none; transition: none; }
+    }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-logo">Compass<span class="accent">.</span></a>
+            <a href="#" class="nav-logo">Compass</a>
             <div class="nav-links" id="navLinks">
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
@@ -26,303 +323,246 @@
             </button>
         </div>
     </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Compass" loading="eager">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-badge fade-in">Est. 2012</div>
-            <h1 class="hero-title fade-in" style="animation-delay: 0.2s">Compass</h1>
-            <p class="hero-tagline fade-in" style="animation-delay: 0.4s">The Future of Real Estate</p>
-            <div class="hero-stats fade-in" style="animation-delay: 0.6s">
-                <div class="stat">
-                    <span class="stat-number" data-target="30000">30,000+</span>
-                    <span class="stat-label">Agents</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number" data-target="700">700+</span>
-                    <span class="stat-label">Offices</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">4.4★</span>
-                    <span class="stat-label">10,000 Reviews</span>
+    
+    
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">Tech Minimal</div>
+                <h1 class="hero-title">Compass</h1>
+                <p class="hero-tagline">The Future of Real Estate</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Start Searching</a>
+                    <a href="#properties" class="btn btn-outline">Browse Homes</a>
                 </div>
             </div>
-            <div class="hero-actions fade-in" style="animation-delay: 0.8s">
-                <a href="#properties" class="btn btn-primary">View Properties</a>
-                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&q=80" alt="Compass">
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
+        </section>
+    
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
-                <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Compass Office" loading="lazy">
-                    <div class="about-badge">
-                        <span class="badge-number">2012</span>
-                        <span class="badge-text">Founded</span>
-                    </div>
-                </div>
+                <div class="about-img"><img src="https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=800&q=80" alt="Compass" loading="lazy"></div>
                 <div class="about-content">
-                    <div class="section-label fade-in">About Us</div>
-                    <h2 class="section-title fade-in">Trusted Since 2012</h2>
-                    <p class="about-text fade-in">Compass is a technology-driven real estate brokerage that combines innovative tools with expert agents to deliver a seamless home buying and selling experience.</p>
-                    <div class="about-features fade-in">
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                    <polyline points="22 4 12 14.01 9 11.01"/>
-                                </svg>
-                            </div>
-                            <span>Licensed & Certified</span>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                    <polyline points="22 4 12 14.01 9 11.01"/>
-                                </svg>
-                            </div>
-                            <span>Nationwide Coverage</span>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                    <polyline points="22 4 12 14.01 9 11.01"/>
-                                </svg>
-                            </div>
-                            <span>5-Star Rated</span>
-                        </div>
+                    <div class="section-label">About Us</div>
+                    <h2 class="section-title">Trusted Since 2012</h2>
+                    <p class="about-text">Compass is a technology-driven real estate brokerage that combines innovative tools with expert agents to deliver a seamless home buying and selling experience.</p>
+                    <div class="about-features">
+                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
+                        <div class="feature"><div class="feature-icon">✓</div><span>30,000+ Experienced Agents Nationwide</span></div>
+                        <div class="feature"><div class="feature-icon">✓</div><span>4.4★ Customer Satisfaction Rating</span></div>
+                        <div class="feature"><div class="feature-icon">✓</div><span>12+ Years of Trusted Service</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Services Section -->
+    
     <section class="services" id="services">
         <div class="container">
             <div class="section-header">
-                <div class="section-label fade-in">What We Do</div>
-                <h2 class="section-title fade-in">Our Services</h2>
+                <div class="section-label">What We Offer</div>
+                <h2 class="section-title">Our Services</h2>
             </div>
             <div class="services-grid">
-                
-        <div class="service-card fade-in" style="animation-delay: 0.0s">
+        <div class="service-card" style="animation-delay: 0.0s">
             <div class="service-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="1.5">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
             </div>
             <h3>Residential Sales</h3>
-            <p>Professional residential sales services with dedicated expertise.</p>
+            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
+            <a href="#contact" class="service-link">Learn More →</a>
         </div>
-        <div class="service-card fade-in" style="animation-delay: 0.1s">
+        <div class="service-card" style="animation-delay: 0.1s">
             <div class="service-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="1.5">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
             </div>
             <h3>Commercial Real Estate</h3>
-            <p>Professional commercial real estate services with dedicated expertise.</p>
+            <p>Expert commercial real estate services backed by decades of experience and market knowledge.</p>
+            <a href="#contact" class="service-link">Learn More →</a>
         </div>
-        <div class="service-card fade-in" style="animation-delay: 0.2s">
+        <div class="service-card" style="animation-delay: 0.2s">
             <div class="service-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="1.5">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
             </div>
             <h3>Luxury Properties</h3>
-            <p>Professional luxury properties services with dedicated expertise.</p>
+            <p>Expert luxury properties services backed by decades of experience and market knowledge.</p>
+            <a href="#contact" class="service-link">Learn More →</a>
         </div>
-        <div class="service-card fade-in" style="animation-delay: 0.30000000000000004s">
+        <div class="service-card" style="animation-delay: 0.30000000000000004s">
             <div class="service-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="1.5">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
             </div>
             <h3>Property Management</h3>
-            <p>Professional property management services with dedicated expertise.</p>
-        </div>
-            </div>
+            <p>Expert property management services backed by decades of experience and market knowledge.</p>
+            <a href="#contact" class="service-link">Learn More →</a>
+        </div></div>
         </div>
     </section>
-
-    <!-- Properties Section -->
+    
     <section class="properties" id="properties">
         <div class="container">
             <div class="section-header">
-                <div class="section-label fade-in">Featured Listings</div>
-                <h2 class="section-title fade-in">Premium Properties</h2>
+                <div class="section-label">Featured Listings</div>
+                <h2 class="section-title">Premium Properties</h2>
             </div>
             <div class="properties-grid">
-                
-        <div class="property-card fade-in" style="animation-delay: 0.0s">
-            <div class="property-image">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Property 1" loading="lazy">
+        <div class="property-card" style="animation-delay: 0.0s">
+            <div class="property-img">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80" alt="Property 1" loading="lazy">
                 <div class="property-badge">Featured</div>
             </div>
             <div class="property-info">
+                <div class="property-price">$1.2M</div>
                 <h3>Luxury Property 1</h3>
                 <p class="property-location">New York, New York</p>
-                <div class="property-price">$750,000</div>
+                <div class="property-features">
+                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
+                </div>
             </div>
         </div>
-        <div class="property-card fade-in" style="animation-delay: 0.15s">
-            <div class="property-image">
-                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80" alt="Property 2" loading="lazy">
+        <div class="property-card" style="animation-delay: 0.15s">
+            <div class="property-img">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Property 2" loading="lazy">
                 <div class="property-badge">Featured</div>
             </div>
             <div class="property-info">
+                <div class="property-price">$895K</div>
                 <h3>Luxury Property 2</h3>
                 <p class="property-location">New York, New York</p>
-                <div class="property-price">$1,250,000</div>
+                <div class="property-features">
+                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
+                </div>
             </div>
         </div>
-        <div class="property-card fade-in" style="animation-delay: 0.3s">
-            <div class="property-image">
-                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Property 3" loading="lazy">
+        <div class="property-card" style="animation-delay: 0.3s">
+            <div class="property-img">
+                <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600&q=80" alt="Property 3" loading="lazy">
                 <div class="property-badge">Featured</div>
             </div>
             <div class="property-info">
+                <div class="property-price">$2.1M</div>
                 <h3>Luxury Property 3</h3>
                 <p class="property-location">New York, New York</p>
-                <div class="property-price">$1,750,000</div>
+                <div class="property-features">
+                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
+                </div>
             </div>
-        </div>
-        <div class="property-card fade-in" style="animation-delay: 0.44999999999999996s">
-            <div class="property-image">
-                <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=80" alt="Property 4" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <h3>Luxury Property 4</h3>
-                <p class="property-location">New York, New York</p>
-                <div class="property-price">$2,250,000</div>
-            </div>
-        </div>
-            </div>
+        </div></div>
         </div>
     </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title fade-in">Ready to Find Your Dream Home?</h2>
-                <p class="cta-text fade-in">Let our expert agents help you navigate the real estate market.</p>
-                <a href="#contact" class="btn btn-primary btn-large fade-in">Get Started Today</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="section-label fade-in">Get In Touch</div>
-                    <h2 class="section-title fade-in">Contact Us</h2>
-                    <div class="contact-details">
-                        <div class="contact-item fade-in">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                            </svg>
-                            <div>
-                                <h4>Phone</h4>
-                                <a href="tel:+1-917-526-4760">+1-917-526-4760</a>
-                            </div>
-                        </div>
-                        <div class="contact-item fade-in">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                            <div>
-                                <h4>Email</h4>
-                                <a href="mailto:support@compass.com">support@compass.com</a>
-                            </div>
-                        </div>
-                        <div class="contact-item fade-in">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <div>
-                                <h4>Headquarters</h4>
-                                <p>New York, New York</p>
-                            </div>
-                        </div>
-                        <div class="contact-item fade-in">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="2" y1="12" x2="22" y2="12"/>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <div>
-                                <h4>Website</h4>
-                                <a href="https://www.compass.com" target="_blank">www.compass.com</a>
-                            </div>
-                        </div>
+    
+    
+            <section class="tech-features">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-label">Technology</div>
+                        <h2 class="section-title">Powered by Innovation</h2>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card"><div class="feature-icon">📱</div><h4>Mobile App</h4><p>Search homes on the go with our award-winning app.</p></div>
+                        <div class="feature-card"><div class="feature-icon">🤖</div><h4>AI Matching</h4><p>Smart algorithms find properties that match your lifestyle.</p></div>
+                        <div class="feature-card"><div class="feature-icon">📊</div><h4>Market Insights</h4><p>Real-time data and analytics to make informed decisions.</p></div>
+                        <div class="feature-card"><div class="feature-icon">🏠</div><h4>Virtual Tours</h4><p>Explore homes from anywhere with immersive 3D tours.</p></div>
                     </div>
                 </div>
-                <div class="contact-form-wrapper fade-in">
+            </section>
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item"><span class="stat-number">30,000+</span><span class="stat-text">Expert Agents</span></div>
+                <div class="stat-item"><span class="stat-number">700+</span><span class="stat-text">Offices Nationwide</span></div>
+                <div class="stat-item"><span class="stat-number">4.4★</span><span class="stat-text">Average Rating</span></div>
+                <div class="stat-item"><span class="stat-number">12+</span><span class="stat-text">Years of Trust</span></div>
+            </div>
+        </div>
+    </section>
+    <section class="process">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">How It Works</div>
+                <h2 class="section-title">Our Process</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h3>Consultation</h3>
+                    <p>We understand your needs, budget, and timeline to find the perfect property match.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h3>Property Search</h3>
+                    <p>Access exclusive listings and curated properties tailored to your specific requirements.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h3>Negotiation</h3>
+                    <p>Our expert agents negotiate the best terms and price on your behalf.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h3>Closing</h3>
+                    <p>Smooth, hassle-free closing with dedicated support from start to finish.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Find Your Dream Home?</h2>
+            <p>Let Compass's expert agents guide you every step of the way.</p>
+            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Get In Touch</div>
+                <h2 class="section-title">Contact Us</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-details">
+                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-917-526-4760">+1-917-526-4760</a></div></div>
+                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:support@compass.com">support@compass.com</a></div></div>
+                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>New York, New York</p></div></div>
+                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.compass.com" target="_blank">www.compass.com</a></div></div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
                     <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Your Phone">
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
+                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
+                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
+                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Compass</h3>
-                    <p>The Future of Real Estate</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="#about">About</a>
-                    <a href="#services">Services</a>
-                    <a href="#properties">Properties</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-contact">
-                    <h4>Contact</h4>
-                    <p>+1-917-526-4760</p>
-                    <p>support@compass.com</p>
-                    <p>New York, New York</p>
-                </div>
+            <div class="footer-grid">
+                <div class="footer-brand"><h3>Compass</h3><p>The Future of Real Estate</p></div>
+                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
+                <div class="footer-contact"><h4>Contact</h4><p>+1-917-526-4760</p><p>support@compass.com</p><p>New York, New York</p></div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Compass. All rights reserved.</p>
@@ -330,52 +570,27 @@
             </div>
         </div>
     </footer>
-
+    
     <script>
-        // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
-
-        // Navbar scroll effect
+        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
         window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
+            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
         });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    navLinks.classList.remove('active');
-                    navToggle.classList.remove('active');
-                }
+                const t = document.querySelector(this.getAttribute('href'));
+                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
             });
         });
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
+        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
         });
     </script>
 </body>
