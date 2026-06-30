@@ -1,606 +1,1137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harry Norman Realtors | Southern Elegance Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #722F37;
-        --secondary: #1A1A1A;
-        --accent: #C9A96E;
-        --bg: #FAFAF8;
-        --fg: #2D1B1B;
-        --card-bg: #FFFFFF;
-        --heading-font: 'Cormorant Garamond', serif;
-        --body-font: 'Lato', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #722F37dd, #1A1A1Acc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harry Norman, Realtors | Atlanta's Premier Luxury Real Estate Since 1930</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --burgundy:#722F37;
+  --burgundy-dark:#5a252c;
+  --burgundy-light:#8a3a44;
+  --cream:#FFF8E7;
+  --cream-dark:#f5ede0;
+  --gold:#B8860B;
+  --gold-light:#d4a843;
+  --gold-dark:#956f08;
+  --dark:#1a1a1a;
+  --white:#fff;
+  --text-dark:#2a2020;
+  --text-muted:#6b5555;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;color:var(--text-dark);background:var(--cream);line-height:1.7;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.2}
+a{text-decoration:none;color:inherit;transition:all .3s ease}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* Scroll Reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.active{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity .8s ease,transform .8s ease}
+.reveal-left.active{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .8s ease,transform .8s ease}
+.reveal-right.active{opacity:1;transform:translateX(0)}
+
+/* 3D Column Decoration */
+.column-3d{
+  width:40px;height:180px;
+  background:linear-gradient(135deg,#e8e0d0 0%,#d4c8b8 30%,#c0b0a0 60%,#b0a090 100%);
+  border-radius:4px 4px 0 0;
+  position:relative;
+  box-shadow:8px 0 20px rgba(0,0,0,.15),-2px 0 8px rgba(0,0,0,.08),inset 2px 0 4px rgba(255,255,255,.4);
+  transform:perspective(600px) rotateY(-5deg);
+}
+.column-3d::before{
+  content:'';position:absolute;top:-15px;left:-8px;right:-8px;height:15px;
+  background:linear-gradient(135deg,#e8e0d0,#d0c4b4);
+  border-radius:3px;
+  box-shadow:4px 0 10px rgba(0,0,0,.12);
+}
+.column-3d::after{
+  content:'';position:absolute;bottom:0;left:-8px;right:-8px;height:20px;
+  background:linear-gradient(135deg,#e0d8c8,#ccc0b0);
+  border-radius:0 0 3px 3px;
+  box-shadow:4px 4px 12px rgba(0,0,0,.15);
+}
+
+/* Floating Magnolia Shape */
+.magnolia{
+  position:absolute;
+  width:120px;height:120px;
+  pointer-events:none;
+  opacity:.12;
+}
+.magnolia-petal{
+  position:absolute;
+  width:40px;height:60px;
+  background:var(--cream);
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  top:50%;left:50%;
+  transform-origin:bottom center;
+}
+.magnolia-petal:nth-child(1){transform:translate(-50%,-100%) rotate(0deg)}
+.magnolia-petal:nth-child(2){transform:translate(-50%,-100%) rotate(60deg)}
+.magnolia-petal:nth-child(3){transform:translate(-50%,-100%) rotate(120deg)}
+.magnolia-petal:nth-child(4){transform:translate(-50%,-100%) rotate(180deg)}
+.magnolia-petal:nth-child(5){transform:translate(-50%,-100%) rotate(240deg)}
+.magnolia-petal:nth-child(6){transform:translate(-50%,-100%) rotate(300deg)}
+.magnolia-center{
+  position:absolute;top:50%;left:50%;
+  width:16px;height:16px;
+  background:var(--gold);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  z-index:2;
+}
+
+/* ===== NAVIGATION ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:18px 0;
+  transition:all .4s ease;
+}
+nav.scrolled{
+  background:rgba(114,47,55,.97);
+  backdrop-filter:blur(12px);
+  padding:12px 0;
+  box-shadow:0 2px 30px rgba(0,0,0,.25);
+}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:600;
+  color:var(--white);
+  letter-spacing:1px;
+}
+.nav-logo span{color:var(--gold);font-weight:700}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,.9);
+  font-size:.85rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  font-weight:400;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:var(--gold);transition:width .3s ease;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-video{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+.hero-overlay{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(135deg,rgba(114,47,55,.82) 0%,rgba(90,37,44,.75) 40%,rgba(26,26,26,.6) 100%);
+  z-index:1;
+}
+.hero-content{
+  position:relative;z-index:2;
+  text-align:center;
+  color:var(--white);
+  max-width:800px;
+  padding:0 24px;
+}
+.hero-badge{
+  display:inline-block;
+  border:1px solid var(--gold);
+  padding:8px 24px;
+  font-size:.75rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:28px;
+  font-weight:400;
+}
+.hero h1{
+  font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:300;
+  line-height:1.1;
+  margin-bottom:24px;
+  color:var(--white);
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--gold);
+  font-weight:500;
+}
+.hero-tagline{
+  font-size:1.15rem;
+  font-weight:300;
+  color:rgba(255,255,255,.85);
+  margin-bottom:40px;
+  line-height:1.6;
+}
+.hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-block;
+  padding:16px 36px;
+  font-family:'Lato',sans-serif;
+  font-size:.85rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  border:none;cursor:pointer;
+  transition:all .4s ease;
+  font-weight:700;
+}
+.btn-primary{
+  background:var(--gold);color:var(--dark);
+}
+.btn-primary:hover{
+  background:var(--gold-light);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(184,134,11,.4);
+}
+.btn-outline{
+  background:transparent;color:var(--white);
+  border:1px solid rgba(255,255,255,.5);
+}
+.btn-outline:hover{
+  border-color:var(--gold);color:var(--gold);
+  transform:translateY(-2px);
+}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;color:var(--gold);text-align:center;
+  animation:float 2s ease-in-out infinite;
+}
+.hero-scroll span{display:block;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.hero-scroll .arrow{font-size:1.5rem}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+
+/* ===== HERITAGE SECTION ===== */
+.heritage{
+  padding:120px 0;
+  background:var(--cream);
+  position:relative;
+  overflow:hidden;
+}
+.heritage-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.heritage-text .section-label{
+  font-family:'Lato',sans-serif;
+  font-size:11px;letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+  font-weight:700;
+}
+.heritage-text h2{
+  font-size:clamp(2rem,4vw,3.2rem);
+  color:var(--burgundy);
+  margin-bottom:24px;
+  line-height:1.15;
+}
+.heritage-text p{
+  color:var(--text-muted);
+  font-size:1.05rem;
+  line-height:1.8;
+  margin-bottom:20px;
+}
+.heritage-visual{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:400px;
+}
+.heritage-image-frame{
+  width:100%;max-width:420px;
+  aspect-ratio:3/4;
+  background:linear-gradient(145deg,var(--burgundy),var(--burgundy-dark));
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  box-shadow:20px 20px 60px rgba(114,47,55,.3),-10px -10px 40px rgba(255,255,255,.1);
+  transform:perspective(800px) rotateY(-3deg) rotateX(2deg);
+  transition:transform .6s ease;
+}
+.heritage-image-frame:hover{transform:perspective(800px) rotateY(0deg) rotateX(0deg)}
+.heritage-image-frame .year{
+  font-family:'Cormorant Garamond',serif;
+  font-size:8rem;color:var(--gold);opacity:.15;
+  position:absolute;font-weight:700;
+}
+.heritage-image-frame .content-inner{
+  text-align:center;color:var(--white);z-index:1;padding:40px;
+}
+.heritage-image-frame .content-inner h3{
+  font-size:2rem;margin-bottom:12px;color:var(--gold);
+}
+.heritage-image-frame .content-inner p{
+  font-size:.95rem;color:rgba(255,255,255,.8);line-height:1.6;
+}
+.heritage-stat{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--gold);
+  color:var(--dark);
+  padding:20px 28px;
+  border-radius:8px;
+  text-align:center;
+  box-shadow:0 10px 40px rgba(184,134,11,.3);
+  z-index:3;
+}
+.heritage-stat .num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;font-weight:700;line-height:1;
+}
+.heritage-stat .label{
+  font-size:.7rem;letter-spacing:2px;text-transform:uppercase;margin-top:4px;
+}
+.heritage-stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;
+}
+.heritage-stat-sm{
+  text-align:center;padding:24px 16px;
+  border:1px solid rgba(184,134,11,.2);
+  border-radius:6px;
+  background:var(--white);
+}
+.heritage-stat-sm .num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;color:var(--burgundy);font-weight:700;
+}
+.heritage-stat-sm .label{
+  font-size:.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-muted);margin-top:4px;
+}
+
+/* ===== PROPERTY GRID ===== */
+.properties{
+  padding:120px 0;
+  background:var(--dark);
+  position:relative;
+}
+.properties .section-label{color:var(--gold)}
+.properties h2{
+  font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:16px;
+}
+.properties .section-desc{
+  color:rgba(255,255,255,.6);font-size:1.05rem;max-width:600px;margin-bottom:60px;
+}
+.property-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+}
+.property-card{
+  background:var(--white);
+  border-radius:8px;
+  overflow:hidden;
+  transform:perspective(1000px) rotateX(2deg);
+  transition:all .5s cubic-bezier(.25,.46,.45,.94);
+  box-shadow:0 8px 32px rgba(184,134,11,.15),0 2px 8px rgba(0,0,0,.1);
+  position:relative;
+}
+.property-card:hover{
+  transform:perspective(1000px) rotateX(0deg) translateY(-12px);
+  box-shadow:0 20px 60px rgba(184,134,11,.25),0 4px 16px rgba(0,0,0,.15);
+}
+.property-card-image{
+  height:240px;
+  position:relative;
+  overflow:hidden;
+}
+.property-card-image .img-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;color:var(--white);
+  position:relative;
+}
+.property-card-image .img-placeholder::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:50%;
+  background:linear-gradient(transparent,rgba(0,0,0,.3));
+}
+.property-badge{
+  position:absolute;top:16px;left:16px;
+  background:var(--burgundy);
+  color:var(--white);
+  padding:6px 14px;
+  font-size:.7rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  font-weight:700;
+  z-index:2;
+  border-radius:3px;
+}
+.property-price{
+  position:absolute;bottom:16px;left:16px;
+  background:var(--gold);
+  color:var(--dark);
+  padding:8px 16px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:700;
+  z-index:2;
+  border-radius:3px;
+}
+.property-card-body{padding:24px}
+.property-card-body h3{
+  font-size:1.3rem;color:var(--burgundy);margin-bottom:6px;
+}
+.property-card-body .location{
+  font-size:.85rem;color:var(--text-muted);margin-bottom:16px;
+  display:flex;align-items:center;gap:6px;
+}
+.property-features{
+  display:flex;gap:20px;
+  padding-top:16px;
+  border-top:1px solid #eee;
+}
+.property-features span{
+  font-size:.8rem;color:var(--text-muted);
+  display:flex;align-items:center;gap:4px;
+}
+
+/* ===== COMMUNITY SECTION ===== */
+.community{
+  padding:120px 0;
+  background:linear-gradient(180deg,var(--cream) 0%,var(--cream-dark) 100%);
+  position:relative;
+  overflow:hidden;
+}
+.community .section-label{color:var(--gold);font-family:'Lato',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.community h2{
+  font-size:clamp(2rem,4vw,3rem);color:var(--burgundy);margin-bottom:16px;
+}
+.community .section-desc{
+  color:var(--text-muted);font-size:1.05rem;max-width:600px;margin-bottom:60px;
+}
+.community-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+}
+.community-card{
+  background:var(--white);
+  border-radius:8px;
+  padding:40px 32px;
+  text-align:center;
+  border:1px solid rgba(184,134,11,.1);
+  transition:all .4s ease;
+  position:relative;
+  overflow:hidden;
+}
+.community-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--burgundy),var(--gold));
+  transform:scaleX(0);transition:transform .4s ease;
+  transform-origin:left;
+}
+.community-card:hover::before{transform:scaleX(1)}
+.community-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 16px 48px rgba(114,47,55,.12);
+}
+.community-card-icon{
+  width:64px;height:64px;
+  margin:0 auto 24px;
+  background:linear-gradient(135deg,var(--burgundy),var(--burgundy-dark));
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;color:var(--gold);
+}
+.community-card h3{
+  font-size:1.4rem;color:var(--burgundy);margin-bottom:12px;
+}
+.community-card p{
+  color:var(--text-muted);font-size:.95rem;line-height:1.7;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{
+  padding:120px 0;
+  background:var(--burgundy);
+  position:relative;
+  overflow:hidden;
+}
+.testimonials::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity:1;
+}
+.testimonials .section-label{color:var(--gold);font-family:'Lato',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:700;margin-bottom:12px;position:relative;z-index:1}
+.testimonials h2{
+  font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:16px;position:relative;z-index:1;
+}
+.testimonials .section-desc{
+  color:rgba(255,255,255,.7);font-size:1.05rem;max-width:600px;margin-bottom:60px;position:relative;z-index:1;
+}
+.testimonial-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:32px;
+  position:relative;z-index:1;
+}
+.testimonial-card{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;
+  padding:40px;
+  transition:all .4s ease;
+}
+.testimonial-card:hover{
+  background:rgba(255,255,255,.12);
+  transform:translateY(-4px);
+}
+.testimonial-stars{
+  color:var(--gold);
+  font-size:1rem;
+  margin-bottom:20px;
+  letter-spacing:2px;
+}
+.testimonial-card blockquote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;
+  color:var(--white);
+  font-style:italic;
+  line-height:1.7;
+  margin-bottom:24px;
+  position:relative;
+}
+.testimonial-card blockquote::before{
+  content:'\201C';
+  font-size:4rem;
+  color:var(--gold);
+  opacity:.3;
+  position:absolute;
+  top:-20px;left:-10px;
+  line-height:1;
+}
+.testimonial-author{
+  display:flex;align-items:center;gap:16px;
+}
+.testimonial-avatar{
+  width:52px;height:52px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:700;color:var(--dark);
+}
+.testimonial-info .name{
+  font-size:.95rem;font-weight:700;color:var(--white);
+}
+.testimonial-info .role{
+  font-size:.8rem;color:rgba(255,255,255,.5);
+}
+
+/* ===== CTA SECTION ===== */
+.cta{
+  padding:120px 0;
+  background:var(--cream);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.cta h2{
+  font-size:clamp(2rem,4vw,3.2rem);color:var(--burgundy);margin-bottom:20px;
+}
+.cta p{
+  color:var(--text-muted);font-size:1.1rem;max-width:600px;margin:0 auto 40px;
+  line-height:1.8;
+}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--dark);
+  color:rgba(255,255,255,.7);
+  padding:80px 0 0;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+  padding-bottom:60px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.footer-brand .nav-logo{
+  font-size:1.8rem;margin-bottom:16px;display:block;
+}
+.footer-brand p{
+  font-size:.95rem;line-height:1.7;color:rgba(255,255,255,.5);
+  margin-bottom:24px;
+}
+.footer-social{display:flex;gap:12px}
+.footer-social a{
+  width:40px;height:40px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.5);
+  transition:all .3s ease;
+}
+.footer-social a:hover{
+  background:var(--gold);border-color:var(--gold);color:var(--dark);
+}
+.footer-col h4{
+  font-size:1rem;color:var(--white);margin-bottom:20px;
+  font-family:'Cormorant Garamond',serif;font-weight:600;
+}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{
+  font-size:.9rem;color:rgba(255,255,255,.5);
+  transition:color .3s ease;
+}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{
+  padding:28px 0;
+  text-align:center;
+  font-size:.8rem;
+  color:rgba(255,255,255,.35);
+}
+.footer-bottom .credit{color:var(--gold)}
+
+/* ===== PARALLAX SECTION ===== */
+.parallax-section{
+  height:400px;
+  background:var(--burgundy-dark);
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.parallax-section::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(135deg,rgba(114,47,55,.9),rgba(90,37,44,.95));
+}
+.parallax-content{
+  position:relative;z-index:1;text-align:center;color:var(--white);
+}
+.parallax-content h2{
+  font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:16px;
+}
+.parallax-content p{
+  font-size:1.1rem;color:rgba(255,255,255,.7);max-width:500px;
+}
+
+/* ===== FLOATING MAGNOLIAS ===== */
+.floating-magnolia{
+  position:absolute;
+  animation:floatMagnolia 8s ease-in-out infinite;
+}
+@keyframes floatMagnolia{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-15px) rotate(5deg)}
+  50%{transform:translateY(-8px) rotate(-3deg)}
+  75%{transform:translateY(-20px) rotate(2deg)}
+}
+
+/* ===== MOBILE MENU ===== */
+.menu-toggle{
+  display:none;
+  background:none;border:none;
+  color:var(--white);font-size:1.5rem;
+  cursor:pointer;padding:8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .heritage-grid{grid-template-columns:1fr;gap:60px}
+  .property-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .menu-toggle{display:block}
+  .property-grid{grid-template-columns:1fr}
+  .community-grid{grid-template-columns:1fr}
+  .testimonial-grid{grid-template-columns:1fr}
+  .heritage-stats-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .hero h1{font-size:2.5rem}
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Harry</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">Harry <span>Norman</span>, Realtors</a>
+    <ul class="nav-links">
+      <li><a href="#heritage">Heritage</a></li>
+      <li><a href="#properties">Properties</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/30995/30995-360.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Est. 1930 &bull; Atlanta, Georgia</div>
+    <h1>Where <em>Southern Heritage</em><br>Meets Luxury Living</h1>
+    <p class="hero-tagline">For over nine decades, Harry Norman, Realtors has been Atlanta's most trusted name in luxury real estate. Discover homes that tell a story of elegance, tradition, and timeless Southern charm.</p>
+    <div class="hero-buttons">
+      <a href="#properties" class="btn btn-primary">Explore Properties</a>
+      <a href="#heritage" class="btn btn-outline">Our Heritage</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Discover</span>
+    <div class="arrow">&#8595;</div>
+  </div>
+  <!-- Floating Magnolia -->
+  <div class="magnolia floating-magnolia" style="top:15%;right:10%">
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-center"></div>
+  </div>
+  <div class="magnolia floating-magnolia" style="bottom:20%;left:8%;animation-delay:-3s">
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-center"></div>
+  </div>
+</section>
+
+<!-- HERITAGE -->
+<section class="heritage" id="heritage">
+  <div class="container">
+    <div class="heritage-grid">
+      <div class="heritage-text reveal-left">
+        <div class="section-label">Our Heritage</div>
+        <h2>A Legacy of Southern Elegance Since 1930</h2>
+        <p>Harry Norman, Realtors was founded in 1930 by Harry Norman Sr., one of Atlanta's most respected business leaders. From our earliest days in the heart of Buckhead, we have been synonymous with integrity, discretion, and an unwavering commitment to our clients.</p>
+        <p>As Atlanta's oldest residential real estate company, we have witnessed the city's remarkable transformation while remaining rooted in the values that have defined us for generations. Our agents are not just professionals — they are stewards of Atlanta's finest neighborhoods.</p>
+        <div class="heritage-stats-row">
+          <div class="heritage-stat-sm reveal">
+            <div class="num">95+</div>
+            <div class="label">Years of Service</div>
+          </div>
+          <div class="heritage-stat-sm reveal">
+            <div class="num">$2B+</div>
+            <div class="label">Annual Volume</div>
+          </div>
+          <div class="heritage-stat-sm reveal">
+            <div class="num">400+</div>
+            <div class="label">Expert Agents</div>
+          </div>
         </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-bg"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&q=80" alt="Harry Norman Realtors"><div class="hero-overlay"></div></div>
-            <div class="hero-content">
-                <div class="hero-badge">Est. 1930</div>
-                <h1 class="hero-title">Harry Norman Realtors</h1>
-                <p class="hero-tagline">Atlanta's Premier Real Estate Company</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Contact Us</a>
-                    <a href="#properties" class="btn btn-outline">View Properties</a>
-                </div>
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600566752712-3d168f5bfac0?w=800&q=80" alt="Harry Norman Realtors" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 1930</h2>
-                    <p class="about-text">Harry Norman Realtors is Atlanta's oldest and most respected residential real estate company, known for its exceptional service and deep knowledge of the Atlanta market.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>1,200+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.6★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>94+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="heritage-visual reveal-right">
+        <div class="column-3d" style="position:absolute;left:0;top:50px"></div>
+        <div class="heritage-image-frame">
+          <span class="year">1930</span>
+          <div class="content-inner">
+            <h3>Southern Tradition</h3>
+            <p>Nearly a century of serving Atlanta's most distinguished families with unparalleled expertise in luxury residential real estate.</p>
+          </div>
         </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#722F37" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Luxury Real Estate</h3>
-            <p>Expert luxury real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="heritage-stat">
+          <div class="num">2024</div>
+          <div class="label">Ranked #1 in Atlanta</div>
         </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#722F37" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Residential Sales</h3>
-            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="column-3d" style="position:absolute;right:0;bottom:40px"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Floating Magnolia -->
+  <div class="magnolia floating-magnolia" style="top:10%;left:5%;opacity:.06">
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-center"></div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="properties" id="properties">
+  <div class="container">
+    <div class="section-label reveal">Featured Listings</div>
+    <h2 class="reveal">Exceptional Southern Properties</h2>
+    <p class="section-desc reveal">Each property we represent reflects the finest in Southern living — from historic estates to contemporary masterpieces in Atlanta's most coveted neighborhoods.</p>
+    <div class="property-grid">
+      <!-- Property 1 -->
+      <div class="property-card reveal">
+        <div class="property-card-image">
+          <div class="img-placeholder" style="background:linear-gradient(135deg,#8a3a44,#5a252c)">
+            <span style="z-index:1;position:relative">Buckhead Estate</span>
+          </div>
+          <span class="property-badge">Featured</span>
+          <span class="property-price">$4,250,000</span>
         </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#722F37" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Commercial Properties</h3>
-            <p>Expert commercial properties services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="property-card-body">
+          <h3>The Normandy Manor</h3>
+          <div class="location">&#9679; 3200 Peachtree Road NW, Buckhead</div>
+          <div class="property-features">
+            <span>&#9632; 6 Bed</span>
+            <span>&#9632; 7 Bath</span>
+            <span>&#9632; 8,500 sqft</span>
+          </div>
         </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#722F37" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Relocation Services</h3>
-            <p>Expert relocation services services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
+      </div>
+      <!-- Property 2 -->
+      <div class="property-card reveal">
+        <div class="property-card-image">
+          <div class="img-placeholder" style="background:linear-gradient(135deg,#722F37,#3d1820)">
+            <span style="z-index:1;position:relative">Ansley Park</span>
+          </div>
+          <span class="property-badge">New Listing</span>
+          <span class="property-price">$2,875,000</span>
         </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">Atlanta, Georgia</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+        <div class="property-card-body">
+          <h3>The Ansley Residence</h3>
+          <div class="location">&#9679; 145 Park Lane NE, Ansley Park</div>
+          <div class="property-features">
+            <span>&#9632; 5 Bed</span>
+            <span>&#9632; 5 Bath</span>
+            <span>&#9632; 6,200 sqft</span>
+          </div>
         </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">Atlanta, Georgia</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+      </div>
+      <!-- Property 3 -->
+      <div class="property-card reveal">
+        <div class="property-card-image">
+          <div class="img-placeholder" style="background:linear-gradient(135deg,#B8860B,#8a6608)">
+            <span style="z-index:1;position:relative">Virginia-Highland</span>
+          </div>
+          <span class="property-badge">Open House</span>
+          <span class="property-price">$1,950,000</span>
         </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">Atlanta, Georgia</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div></div>
+        <div class="property-card-body">
+          <h3>The Highland Cottage</h3>
+          <div class="location">&#9679; 821 Virginia Avenue NE, Virginia-Highland</div>
+          <div class="property-features">
+            <span>&#9632; 4 Bed</span>
+            <span>&#9632; 4 Bath</span>
+            <span>&#9632; 4,800 sqft</span>
+          </div>
         </div>
-    </section>
-    
-    
-            <section class="legacy">
-                <div class="container">
-                    <div class="legacy-grid">
-                        <div class="legacy-content">
-                            <div class="section-label">Our Legacy</div>
-                            <h2 class="section-title">A Tradition of Excellence</h2>
-                            <p>Since 1930, Harry Norman Realtors has been a cornerstone of trust in real estate. With 1,200+ agents across 25+ offices, we've helped millions find their dream homes.</p>
-                            <div class="legacy-stats">
-                                <div><strong>94+</strong><span>Years</span></div>
-                                <div><strong>1,200+</strong><span>Agents</span></div>
-                                <div><strong>25+</strong><span>Offices</span></div>
-                            </div>
-                        </div>
-                        <div class="legacy-image"><img src="https://images.unsplash.com/photo-1600566752712-3d168f5bfac0?w=800&q=80" alt="Heritage"></div>
-                    </div>
-                </div>
-            </section>
-            <section class="awards">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Recognition</div>
-                        <h2 class="section-title">Awards & Achievements</h2>
-                    </div>
-                    <div class="awards-grid">
-                        <div class="award-card"><div class="award-icon">🏆</div><h4>#1 Brokerage</h4><p>Ranked #1 by NAR for agent count</p></div>
-                        <div class="award-card"><div class="award-icon">⭐</div><h4>5-Star Service</h4><p>Consistently rated top in customer satisfaction</p></div>
-                        <div class="award-card"><div class="award-icon">🌍</div><h4>Global Reach</h4><p>Presence in 25+ offices worldwide</p></div>
-                        <div class="award-card"><div class="award-icon">📈</div><h4>Market Leader</h4><p>Top market share for 94+ years</p></div>
-                    </div>
-                </div>
-            </section>
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Testimonials</div>
-                <h2 class="section-title">What Our Clients Say</h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Harry Norman Realtors made our home buying experience seamless. Their expertise and dedication are unmatched in the industry."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div><strong>John D.</strong><span>Home Buyer</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Professional, responsive, and truly caring. They found us the perfect home within our budget. Highly recommended!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div><strong>Sarah M.</strong><span>Home Seller</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"The best real estate experience we've ever had. Their market knowledge helped us make an informed decision."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RK</div>
-                        <div><strong>Robert K.</strong><span>Property Investor</span></div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <!-- Property 4 -->
+      <div class="property-card reveal">
+        <div class="property-card-image">
+          <div class="img-placeholder" style="background:linear-gradient(135deg,#5a252c,#2a1015)">
+            <span style="z-index:1;position:relative">Tuxedo Park</span>
+          </div>
+          <span class="property-badge">Under Contract</span>
+          <span class="property-price">$5,750,000</span>
         </div>
-    </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let Harry Norman Realtors's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
+        <div class="property-card-body">
+          <h3>The Tuxedo Estate</h3>
+          <div class="location">&#9679; 4100 Tuxedo Park Drive NW, Buckhead</div>
+          <div class="property-features">
+            <span>&#9632; 7 Bed</span>
+            <span>&#9632; 9 Bath</span>
+            <span>&#9632; 12,000 sqft</span>
+          </div>
         </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-404-233-4142">+1-404-233-4142</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:info@harrynorman.com">info@harrynorman.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>Atlanta, Georgia</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.harrynorman.com" target="_blank">www.harrynorman.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
+      </div>
+      <!-- Property 5 -->
+      <div class="property-card reveal">
+        <div class="property-card-image">
+          <div class="img-placeholder" style="background:linear-gradient(135deg,#8a3a44,#722F37)">
+            <span style="z-index:1;position:relative">Inman Park</span>
+          </div>
+          <span class="property-badge">Price Reduced</span>
+          <span class="property-price">$1,425,000</span>
         </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>Harry Norman Realtors</h3><p>Atlanta's Premier Real Estate Company</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-404-233-4142</p><p>info@harrynorman.com</p><p>Atlanta, Georgia</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Harry Norman Realtors. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
+        <div class="property-card-body">
+          <h3>The Inman Victorian</h3>
+          <div class="location">&#9679; 250 Lake Avenue NE, Inman Park</div>
+          <div class="property-features">
+            <span>&#9632; 4 Bed</span>
+            <span>&#9632; 3 Bath</span>
+            <span>&#9632; 3,600 sqft</span>
+          </div>
         </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+      </div>
+      <!-- Property 6 -->
+      <div class="property-card reveal">
+        <div class="property-card-image">
+          <div class="img-placeholder" style="background:linear-gradient(135deg,#B8860B,#956f08)">
+            <span style="z-index:1;position:relative">Garden Hills</span>
+          </div>
+          <span class="property-badge">Just Listed</span>
+          <span class="property-price">$3,100,000</span>
+        </div>
+        <div class="property-card-body">
+          <h3>The Garden Hills Manor</h3>
+          <div class="location">&#9679; 2150 Garden Hills Drive NW, Buckhead</div>
+          <div class="property-features">
+            <span>&#9632; 5 Bed</span>
+            <span>&#9632; 6 Bath</span>
+            <span>&#9632; 7,200 sqft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX DIVIDER -->
+<section class="parallax-section">
+  <div class="parallax-content reveal">
+    <h2>Discover Atlanta's Finest Neighborhoods</h2>
+    <p>From the historic streets of Inman Park to the stately homes of Buckhead, we know Atlanta's most prestigious addresses.</p>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community" id="community">
+  <div class="container">
+    <div class="section-label reveal">Why Harry Norman</div>
+    <h2 class="reveal">Unmatched Expertise &amp; Community Commitment</h2>
+    <p class="section-desc reveal">For nearly a century, we've been more than real estate professionals — we've been Atlanta neighbors, philanthropists, and community builders.</p>
+    <div class="community-grid">
+      <div class="community-card reveal">
+        <div class="community-card-icon">&#9734;</div>
+        <h3>Legacy of Excellence</h3>
+        <p>Founded in 1930, Harry Norman, Realtors is Atlanta's oldest and most trusted residential brokerage, setting the standard for luxury real estate in the Southeast.</p>
+      </div>
+      <div class="community-card reveal">
+        <div class="community-card-icon">&#9878;</div>
+        <h3>Community Roots</h3>
+        <p>We are deeply embedded in Atlanta's philanthropic and cultural landscape, supporting organizations like the High Museum, Atlanta Symphony, and Atlanta History Center.</p>
+      </div>
+      <div class="community-card reveal">
+        <div class="community-card-icon">&#9825;</div>
+        <h3>Southern Hospitality</h3>
+        <p>Our agents embody the warmth and graciousness of the South. Every interaction is guided by respect, integrity, and a genuine desire to serve our clients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-label reveal">Client Testimonials</div>
+    <h2 class="reveal">Stories from Our Distinguished Clients</h2>
+    <p class="section-desc reveal">The trust our clients place in us is our greatest honor. Here's what they have to say about the Harry Norman experience.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>The Harry Norman team made our move from New York seamless. Their knowledge of Atlanta's neighborhoods was extraordinary, and their Southern hospitality made us feel at home from the very first meeting.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">CM</div>
+          <div class="testimonial-info">
+            <div class="name">Catherine &amp; Michael Whitfield</div>
+            <div class="role">Buckhead Homeowners</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>Having worked with several luxury brokerages, none compare to Harry Norman. Their attention to detail, discretion, and deep connections in the Atlanta market are truly unparalleled. They found us our dream home.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JR</div>
+          <div class="testimonial-info">
+            <div class="name">James &amp; Rebecca Thornton</div>
+            <div class="role">Tuxedo Park Residents</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>When we decided to sell our Ansley Park estate, Harry Norman's marketing and staging were exceptional. Our home sold above asking price in just two weeks. The entire process was handled with the utmost professionalism.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">EP</div>
+          <div class="testimonial-info">
+            <div class="name">Elizabeth Pennington</div>
+            <div class="role">Former Ansley Park Resident</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>As a first-time luxury buyer, I was nervous about the process. My Harry Norman agent walked me through every step with patience and expertise. I now own a beautiful home in Virginia-Highland that I absolutely love.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DK</div>
+          <div class="testimonial-info">
+            <div class="name">Dr. David Kim</div>
+            <div class="role">Virginia-Highland Homeowner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="container">
+    <h2 class="reveal">Begin Your Southern Living Story</h2>
+    <p class="reveal">Whether you're seeking a historic Buckhead estate or a modern masterpiece, our distinguished team of agents is ready to guide you home. Experience the Harry Norman difference.</p>
+    <div class="cta-buttons reveal">
+      <a href="#" class="btn btn-primary">Schedule a Consultation</a>
+      <a href="#" class="btn btn-outline" style="color:var(--burgundy);border-color:var(--burgundy)">View All Properties</a>
+    </div>
+  </div>
+  <!-- Floating Magnolia -->
+  <div class="magnolia floating-magnolia" style="top:20%;right:5%;opacity:.05">
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-petal"></div>
+    <div class="magnolia-center"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Harry <span>Norman</span>, Realtors</a>
+        <p>Atlanta's premier luxury real estate firm since 1930. Dedicated to excellence, integrity, and the art of Southern living.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">&#9737;</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Twitter">&#120143;</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Properties</h4>
+        <ul>
+          <li><a href="#">Buckhead</a></li>
+          <li><a href="#">Ansley Park</a></li>
+          <li><a href="#">Virginia-Highland</a></li>
+          <li><a href="#">Inman Park</a></li>
+          <li><a href="#">Tuxedo Park</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Heritage</a></li>
+          <li><a href="#">Our Agents</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Buy a Home</a></li>
+          <li><a href="#">Sell Your Home</a></li>
+          <li><a href="#">Market Analysis</a></li>
+          <li><a href="#">Relocation</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Harry Norman, Realtors. All rights reserved. | Demo site built by <span class="credit">Alok Web Services</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Scroll reveal animation
+const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      // Add staggered delay
+      const delay = entry.target.closest('.property-grid, .community-grid, .testimonial-grid, .heritage-stats-row')
+        ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 150
+        : 0;
+      setTimeout(() => {
+        entry.target.classList.add('active');
+      }, delay);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15,
+  rootMargin: '0px 0px -50px 0px'
+});
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Parallax effect on scroll
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const hero = document.querySelector('.hero-content');
+  if (hero) {
+    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+    hero.style.opacity = 1 - (scrolled * 0.002);
+  }
+});
+
+// Mobile menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '100%';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.background = 'rgba(114,47,55,.98)';
+    navLinks.style.padding = '20px';
+    navLinks.style.gap = '16px';
+  });
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
 </body>
 </html>
