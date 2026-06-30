@@ -3,662 +3,492 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomeSmart — Technology-Driven Real Estate Brokerage</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<title>HomeSmart — Smart Real Estate Solutions</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--primary:#00A651;--secondary:#1A1A1A;--accent:#4CD964;--light-green:#F0FFF4;--white:#fff;--gray:#f7f9f8;--text:#444}
-body{font-family:'Nunito Sans',sans-serif;color:var(--secondary);line-height:1.6;overflow-x:hidden}
-h1,h2,h3,h4,h5{font-family:'Sora',sans-serif;color:var(--secondary)}
+:root{--green:#2D6A4F;--dark-green:#1B4332;--white:#fff;--cream:#F0EDE5;--accent:#52B788}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:#1B4332;background:var(--white);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-.btn{display:inline-block;background:var(--primary);color:#fff;padding:14px 32px;border-radius:50px;font-family:'Sora',sans-serif;font-weight:600;font-size:1rem;border:none;cursor:pointer;transition:all .3s ease}
-.btn:hover{background:#008c44;transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,166,81,.3)}
-.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
-.btn-outline:hover{background:var(--primary);color:#fff}
-section{padding:80px 0}
-.section-tag{display:inline-block;background:rgba(0,166,81,.1);color:var(--primary);padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:12px}
-.section-title{font-size:2.4rem;font-weight:800;margin-bottom:16px;line-height:1.2}
-.section-sub{color:var(--text);font-size:1.05rem;max-width:560px}
+ul{list-style:none}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,166,81,.08);transition:box-shadow .3s}
-nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1200px;margin:0 auto}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem;color:var(--secondary)}
-.logo svg{width:36px;height:36px}
-.logo span{color:var(--primary)}
-.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
-.nav-links a{font-weight:600;font-size:.95rem;color:var(--secondary);transition:color .2s}
-.nav-links a:hover{color:var(--primary)}
-.nav-cta{padding:10px 24px !important;font-size:.9rem !important}
-.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
-.nav-toggle span{display:block;width:24px;height:3px;background:var(--secondary);margin:5px 0;border-radius:2px;transition:.3s}
+/* ===== FLOATING 3D LEAVES ===== */
+.leaf-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}
+.leaf{position:absolute;opacity:0.18;font-size:2rem;animation:leafFloat 12s infinite ease-in-out;color:var(--accent)}
+.leaf:nth-child(1){left:8%;top:-10%;animation-duration:14s;animation-delay:0s;font-size:2.8rem}
+.leaf:nth-child(2){left:22%;top:-5%;animation-duration:11s;animation-delay:2s;font-size:1.6rem}
+.leaf:nth-child(3){left:40%;top:-8%;animation-duration:16s;animation-delay:4s;font-size:2.2rem}
+.leaf:nth-child(4){left:60%;top:-3%;animation-duration:13s;animation-delay:1s;font-size:1.8rem}
+.leaf:nth-child(5){left:78%;top:-12%;animation-duration:15s;animation-delay:3s;font-size:2.5rem}
+.leaf:nth-child(6){left:92%;top:-7%;animation-duration:12s;animation-delay:5s;font-size:1.4rem}
+.leaf:nth-child(7){left:35%;top:-15%;animation-duration:17s;animation-delay:6s;font-size:3rem}
+.leaf:nth-child(8){left:85%;top:-2%;animation-duration:10s;animation-delay:1.5s;font-size:2rem}
+@keyframes leafFloat{0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:0}8%{opacity:0.18}50%{transform:translateY(110vh) rotate(180deg) scale(1.15)}92%{opacity:0.18}100%{transform:translateY(115vh) rotate(360deg) scale(0.9);opacity:0}}
 
-/* HERO */
-.hero{padding:160px 0 100px;background:var(--light-green);position:relative;overflow:hidden;min-height:90vh;display:flex;align-items:center}
-.hero-content{position:relative;z-index:2;max-width:600px}
-.hero h1{font-size:3.4rem;font-weight:800;line-height:1.12;margin-bottom:20px}
-.hero h1 .green{color:var(--primary)}
-.hero p{font-size:1.15rem;color:var(--text);margin-bottom:32px;line-height:1.7}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:40px;margin-top:48px}
-.hero-stat h3{font-size:2rem;color:var(--primary)}
-.hero-stat p{font-size:.9rem;color:var(--text);font-weight:600}
-.hero-visual{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;height:520px;z-index:1}
-.leaf-deco{position:absolute;opacity:.12;fill:var(--primary)}
-.leaf1{top:10%;left:5%;width:120px;animation:float 6s ease-in-out infinite}
-.leaf2{top:60%;right:10%;width:90px;animation:float 8s ease-in-out infinite 1s}
-.leaf3{bottom:15%;left:20%;width:70px;animation:float 7s ease-in-out infinite 2s}
-.leaf4{top:30%;right:25%;width:60px;animation:float 5s ease-in-out infinite .5s}
-@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(5deg)}}
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;width:100%;padding:1rem 5%;display:flex;align-items:center;justify-content:space-between;z-index:100;transition:all 0.4s}
+nav.scrolled{background:rgba(27,67,50,0.95);backdrop-filter:blur(12px);box-shadow:0 4px 30px rgba(0,0,0,0.15);padding:0.7rem 5%}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;font-size:1.5rem;font-weight:700;color:var(--white)}
+.nav-logo .eco-icon{display:inline-block;font-size:2rem;animation:spinEco 8s linear infinite;color:var(--accent)}
+@keyframes spinEco{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:rgba(255,255,255,0.85);font-weight:500;position:relative;transition:color 0.3s}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:width 0.3s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--accent);color:var(--dark-green)!important;padding:0.5rem 1.4rem;border-radius:50px;font-weight:600;transition:all 0.3s}
+.nav-cta:hover{background:var(--white);transform:translateY(-2px);box-shadow:0 8px 25px rgba(82,183,136,0.4)}
+.nav-cta::after{display:none!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:110}
+.hamburger span{width:26px;height:2px;background:var(--white);transition:all 0.3s}
 
-/* ABOUT */
-.about{background:var(--white)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.about-img{border-radius:30px;overflow:hidden;position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--light-green),rgba(0,166,81,.15))}
-.about-img-inner{width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23E8F5E9' width='400' height='300'/%3E%3Cpath d='M100 200 Q200 80 300 200' fill='none' stroke='%2300A651' stroke-width='3' opacity='.3'/%3E%3Ccircle cx='200' cy='130' r='40' fill='%2300A651' opacity='.15'/%3E%3Cpath d='M180 130 Q200 60 220 130 Q200 100 180 130Z' fill='%2300A651' opacity='.25'/%3E%3Crect x='160' y='160' width='80' height='60' rx='6' fill='%2300A651' opacity='.2'/%3E%3Crect x='175' y='175' width='20' height='20' rx='3' fill='%2300A651' opacity='.3'/%3E%3Crect x='205' y='175' width='20' height='20' rx='3' fill='%2300A651' opacity='.3'/%3E%3Crect x='190' y='200' width='20' height='20' rx='3' fill='%2300A651' opacity='.3'/%3E%3Ccircle cx='100' cy='80' r='15' fill='%234CD964' opacity='.2'/%3E%3Ccircle cx='320' cy='100' r='10' fill='%234CD964' opacity='.2'/%3E%3Ctext x='200' y='280' text-anchor='middle' font-family='Sora' font-size='14' fill='%2300A651' opacity='.4'%3EHomeSmart%3C/text%3E%3C/svg%3E") center/cover}
-.about-text h2{margin-bottom:16px}
-.about-text p{color:var(--text);margin-bottom:20px}
-.about-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-.about-feat{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem}
-.about-feat svg{flex-shrink:0;color:var(--primary)}
+/* ===== HERO ===== */
+.hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(27,67,50,0.82) 0%,rgba(45,106,79,0.72) 50%,rgba(27,67,50,0.78) 100%);display:flex;align-items:center;justify-content:center}
+.hero-content{text-align:center;color:var(--white);padding:2rem;max-width:850px;position:relative;z-index:2}
+.hero-content h1{font-size:3.8rem;font-weight:800;line-height:1.15;margin-bottom:1.2rem;text-shadow:3px 4px 0px rgba(27,67,50,0.6),6px 7px 0px rgba(82,183,136,0.3);transform:perspective(600px) rotateX(2deg)}
+.hero-content h1 span{color:var(--accent);display:inline-block;text-shadow:3px 4px 0px rgba(27,67,50,0.5)}
+.hero-content p{font-size:1.2rem;font-weight:300;opacity:0.92;margin-bottom:2.5rem;line-height:1.7;max-width:620px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{padding:0.9rem 2.4rem;border-radius:50px;font-weight:600;font-size:1rem;cursor:pointer;transition:all 0.35s;border:none;font-family:inherit}
+.btn-primary{background:var(--accent);color:var(--dark-green)}
+.btn-primary:hover{background:var(--white);transform:translateY(-3px);box-shadow:0 12px 35px rgba(82,183,136,0.5)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,0.5)}
+.btn-outline:hover{background:var(--white);color:var(--dark-green);border-color:var(--white);transform:translateY(-3px)}
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);color:var(--white);animation:bounce 2s infinite;font-size:1.8rem;opacity:0.7}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(12px)}}
 
-/* FEATURES */
-.features{background:var(--gray)}
-.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
-.feature-card{background:var(--white);border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s}
-.feature-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
-.feature-top{padding:32px 28px 24px;background:linear-gradient(135deg,rgba(0,166,81,.1),rgba(76,217,100,.08));position:relative}
-.feature-top svg{width:48px;height:48px;color:var(--primary);margin-bottom:12px}
-.feature-top h3{font-size:1.2rem;font-weight:700}
-.feature-body{padding:20px 28px 28px}
-.feature-body p{color:var(--text);font-size:.95rem}
+/* ===== SECTIONS GENERAL ===== */
+section{padding:6rem 5%}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-header h2{font-size:2.6rem;font-weight:700;color:var(--dark-green);text-shadow:2px 3px 0px rgba(82,183,136,0.2);margin-bottom:0.8rem}
+.section-header p{color:#5a7a6a;font-size:1.1rem;max-width:600px;margin:0 auto;line-height:1.7}
+.section-header .accent-line{width:60px;height:4px;background:var(--accent);border-radius:2px;margin:1rem auto 0}
 
-/* PROPERTIES */
+/* ===== SMART FEATURES ===== */
+.features{background:var(--cream)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+.feature-card{background:var(--white);border-radius:20px;padding:2.5rem 2rem;text-align:center;transition:all 0.4s;box-shadow:0 4px 20px rgba(45,106,79,0.06);transform:perspective(800px) rotateX(0deg) rotateY(0deg);position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent),var(--green));transform:scaleX(0);transition:transform 0.4s;transform-origin:left}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-card:hover{transform:perspective(800px) rotateX(2deg) translateY(-10px);box-shadow:0 20px 50px rgba(45,106,79,0.15);border-color:var(--accent)}
+.feature-icon{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.8rem;color:var(--white);transition:all 0.4s;box-shadow:0 8px 25px rgba(82,183,136,0.3)}
+.feature-card:hover .feature-icon{transform:rotateY(360deg) scale(1.1);box-shadow:0 12px 35px rgba(82,183,136,0.5)}
+.feature-card h3{font-size:1.3rem;font-weight:600;margin-bottom:0.8rem;color:var(--dark-green)}
+.feature-card p{color:#5a7a6a;font-size:0.95rem;line-height:1.7}
+
+/* ===== PROPERTY GRID ===== */
 .properties{background:var(--white)}
-.properties-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
-.prop-card{border:2px solid transparent;border-radius:20px;overflow:hidden;transition:all .3s;background:var(--white);box-shadow:0 4px 20px rgba(0,0,0,.04)}
-.prop-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,166,81,.1)}
-.prop-img{height:200px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);position:relative;display:flex;align-items:center;justify-content:center}
-.prop-img svg{width:60px;height:60px;color:var(--primary);opacity:.3}
-.prop-badge{position:absolute;top:14px;left:14px;background:var(--primary);color:#fff;padding:4px 14px;border-radius:20px;font-size:.8rem;font-weight:700}
-.prop-info{padding:20px}
-.prop-info h3{font-size:1.1rem;margin-bottom:6px}
-.prop-info .price{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:800;color:var(--primary);margin-bottom:10px}
-.prop-info p{font-size:.9rem;color:var(--text)}
-.prop-meta{display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid #eee;font-size:.85rem;color:var(--text)}
+.prop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;max-width:1250px;margin:0 auto}
+.prop-card{border-radius:20px;overflow:hidden;background:var(--white);box-shadow:0 8px 30px rgba(45,106,79,0.1);transition:all 0.4s;transform:perspective(900px) rotateX(0deg)}
+.prop-card:hover{transform:perspective(900px) rotateX(3deg) translateY(-8px);box-shadow:0 20px 50px rgba(45,106,79,0.2)}
+.prop-img{position:relative;height:240px;overflow:hidden}
+.prop-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.prop-card:hover .prop-img img{transform:scale(1.08)}
+.prop-badge{position:absolute;top:1rem;left:1rem;background:var(--accent);color:var(--dark-green);padding:0.3rem 1rem;border-radius:20px;font-size:0.8rem;font-weight:600}
+.prop-price{position:absolute;bottom:1rem;right:1rem;background:rgba(27,67,50,0.9);color:var(--white);padding:0.4rem 1.2rem;border-radius:12px;font-weight:700;font-size:1.1rem;backdrop-filter:blur(8px)}
+.prop-info{padding:1.5rem}
+.prop-info h3{font-size:1.15rem;font-weight:600;color:var(--dark-green);margin-bottom:0.5rem}
+.prop-info .location{color:#5a7a6a;font-size:0.9rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.4rem}
+.prop-stats{display:flex;gap:1.2rem;padding-top:1rem;border-top:1px solid #e8ede9}
+.prop-stats span{font-size:0.85rem;color:#5a7a6a;display:flex;align-items:center;gap:0.3rem}
+.prop-stats span b{color:var(--dark-green)}
 
-/* TECH */
-.tech{background:var(--light-green)}
-.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:40px}
-.tech-list{list-style:none;display:flex;flex-direction:column;gap:20px}
-.tech-list li{display:flex;align-items:flex-start;gap:14px;font-size:1.05rem}
-.tech-list svg{flex-shrink:0;margin-top:2px;color:var(--primary)}
-.tech-visual{display:flex;justify-content:center;align-items:center}
-.tech-circle{width:280px;height:280px;border-radius:50%;background:linear-gradient(135deg,rgba(0,166,81,.1),rgba(76,217,100,.08));display:flex;align-items:center;justify-content:center;position:relative}
-.tech-circle svg{width:100px;height:100px;color:var(--primary);opacity:.5}
-.tech-dot{position:absolute;width:14px;height:14px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
-.tech-dot:nth-child(2){top:10px;left:50%;animation-delay:.3s}
-.tech-dot:nth-child(3){bottom:20px;right:10px;animation-delay:.7s}
-.tech-dot:nth-child(4){top:50%;left:5px;animation-delay:1s}
-@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+/* ===== TECHNOLOGY ===== */
+.tech{background:var(--dark-green);color:var(--white);position:relative;overflow:hidden}
+.tech::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;border-radius:50%;background:rgba(82,183,136,0.08)}
+.tech .section-header h2{color:var(--white);text-shadow:2px 3px 0px rgba(82,183,136,0.3)}
+.tech .section-header p{color:rgba(255,255,255,0.7)}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.tech-item{text-align:center;padding:2rem 1.5rem;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);transition:all 0.4s;backdrop-filter:blur(4px)}
+.tech-item:hover{background:rgba(82,183,136,0.15);transform:translateY(-6px);border-color:var(--accent)}
+.tech-item .tech-num{font-size:2.8rem;font-weight:800;color:var(--accent);margin-bottom:0.5rem;display:block;text-shadow:2px 3px 0px rgba(27,67,50,0.5)}
+.tech-item h4{font-size:1.1rem;font-weight:600;margin-bottom:0.5rem}
+.tech-item p{font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.6}
 
-/* PROCESS */
-.process{background:var(--white)}
-.process-steps{display:flex;justify-content:center;gap:0;margin-top:60px;position:relative;flex-wrap:wrap}
-.process-step{text-align:center;position:relative;flex:1;min-width:180px;max-width:220px;padding:0 20px}
-.process-circle{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#fff;font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;position:relative;z-index:2;box-shadow:0 8px 25px rgba(0,166,81,.25)}
-.process-step h3{font-size:1.05rem;margin-bottom:8px}
-.process-step p{font-size:.9rem;color:var(--text)}
-.process-connector{position:absolute;top:50px;left:calc(50% + 55px);width:calc(100% - 110px);border-top:3px dashed var(--accent);opacity:.4;z-index:1}
+/* ===== TESTIMONIALS ===== */
+.testimonials{background:var(--cream)}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem;max-width:1150px;margin:0 auto}
+.test-card{background:var(--white);border-radius:20px;padding:2.5rem;position:relative;transition:all 0.4s;box-shadow:0 4px 20px rgba(45,106,79,0.06)}
+.test-card:hover{transform:translateY(-6px);box-shadow:0 15px 40px rgba(45,106,79,0.12)}
+.test-card::before{content:'"';position:absolute;top:1rem;right:1.5rem;font-size:5rem;color:var(--accent);opacity:0.15;font-family:serif;line-height:1}
+.test-stars{color:#f4b400;margin-bottom:1rem;font-size:1.1rem}
+.test-card p{font-style:italic;color:#4a6a5a;line-height:1.8;margin-bottom:1.5rem;font-size:0.95rem}
+.test-author{display:flex;align-items:center;gap:1rem}
+.test-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:1.1rem}
+.test-author div{font-weight:600;color:var(--dark-green);font-size:0.95rem}
+.test-author span{display:block;font-size:0.8rem;color:#7a9a8a;font-weight:400}
 
-/* TESTIMONIALS */
-.testimonials{background:var(--gray)}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
-.test-card{background:var(--white);border-radius:20px;padding:32px 28px;position:relative;box-shadow:0 4px 16px rgba(0,0,0,.03)}
-.test-card:hover{box-shadow:0 10px 30px rgba(0,0,0,.06)}
-.test-quote{font-size:3rem;color:var(--primary);opacity:.2;font-family:serif;line-height:1;margin-bottom:-10px}
-.test-card p{color:var(--text);font-style:italic;margin-bottom:20px;line-height:1.7}
-.test-author{display:flex;align-items:center;gap:12px}
-.test-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem}
-.test-name{font-weight:700;font-size:.95rem}
-.test-role{font-size:.85rem;color:var(--text)}
+/* ===== CTA ===== */
+.cta{background:linear-gradient(135deg,var(--green),var(--dark-green));text-align:center;padding:5rem 5%;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:-100px;left:-100px;width:300px;height:300px;border-radius:50%;background:rgba(82,183,136,0.1)}
+.cta::after{content:'';position:absolute;bottom:-80px;right:-80px;width:250px;height:250px;border-radius:50%;background:rgba(82,183,136,0.08)}
+.cta h2{font-size:2.6rem;color:var(--white);margin-bottom:1rem;text-shadow:2px 3px 0px rgba(0,0,0,0.2)}
+.cta p{color:rgba(255,255,255,0.8);margin-bottom:2rem;font-size:1.1rem;max-width:600px;margin-left:auto;margin-right:auto}
+.cta .btn-primary{font-size:1.05rem;padding:1rem 3rem;background:var(--white);color:var(--dark-green)}
+.cta .btn-primary:hover{background:var(--accent);color:var(--white);box-shadow:0 12px 35px rgba(82,183,136,0.5)}
 
-/* CONTACT */
-.contact{background:var(--light-green)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px}
-.contact-form{background:var(--white);border-radius:24px;padding:40px;box-shadow:0 8px 30px rgba(0,0,0,.04)}
-.form-group{margin-bottom:20px}
-.form-group label{display:block;font-weight:600;margin-bottom:6px;font-size:.9rem}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:14px 18px;border:2px solid #e8ede9;border-radius:14px;font-family:'Nunito Sans',sans-serif;font-size:1rem;transition:border-color .2s;background:var(--gray)}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--primary)}
-.form-group textarea{resize:vertical;min-height:120px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.contact-info{display:flex;flex-direction:column;gap:24px}
-.contact-card{background:var(--white);border-radius:20px;padding:28px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,.03)}
-.contact-card svg{flex-shrink:0;color:var(--primary);margin-top:2px}
-.contact-card h4{font-size:1rem;margin-bottom:4px}
-.contact-card p{color:var(--text);font-size:.95rem}
+/* ===== FOOTER ===== */
+footer{background:var(--dark-green);color:rgba(255,255,255,0.7);padding:4rem 5% 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto 3rem}
+.footer-col h4{color:var(--white);font-size:1.1rem;margin-bottom:1.2rem;font-weight:600}
+.footer-col p{line-height:1.8;font-size:0.9rem}
+.footer-col ul li{margin-bottom:0.6rem}
+.footer-col ul li a{font-size:0.9rem;transition:color 0.3s}
+.footer-col ul li a:hover{color:var(--accent)}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem}
+.footer-bottom span{color:var(--accent);font-weight:600}
 
-/* FOOTER */
-footer{background:var(--secondary);color:rgba(255,255,255,.8);padding:60px 0 30px}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand h3{font-size:1.4rem;color:#fff;margin-bottom:12px}
-.footer-brand h3 span{color:var(--accent)}
-.footer-brand p{font-size:.95rem;line-height:1.7;margin-bottom:20px}
-.footer-col h4{color:#fff;font-size:1rem;margin-bottom:16px}
-.footer-col ul{list-style:none}
-.footer-col li{margin-bottom:10px;font-size:.95rem}
-.footer-col a:hover{color:var(--accent)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-bottom p{font-size:.85rem}
-.footer-credit{color:var(--accent);font-weight:600}
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+.reveal-delay-5{transition-delay:0.5s}
 
-/* RESPONSIVE */
-@media(max-width:968px){
-.hero h1{font-size:2.4rem}
-.hero-visual{display:none}
-.about-grid,.tech-grid,.contact-grid{grid-template-columns:1fr}
-.properties-grid,.test-grid{grid-template-columns:1fr 1fr}
-.features-grid{grid-template-columns:1fr}
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+.hero-content h1{font-size:2.6rem}
+.section-header h2{font-size:2rem}
 .footer-grid{grid-template-columns:1fr 1fr}
-.process-connector{display:none}
-.process-steps{gap:30px}
+.nav-links{display:none}
+.nav-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(27,67,50,0.97);justify-content:center;align-items:center;gap:2rem;z-index:100}
+.hamburger{display:flex}
 }
 @media(max-width:600px){
-.hero{padding:130px 0 60px}
-.hero h1{font-size:2rem}
-.hero-stats{flex-direction:column;gap:20px}
-.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:20px;gap:16px;box-shadow:0 8px 30px rgba(0,0,0,.08)}
-.nav-links.open{display:flex}
-.nav-toggle{display:block}
-.properties-grid,.test-grid{grid-template-columns:1fr}
+.hero-content h1{font-size:2rem}
+.prop-grid{grid-template-columns:1fr}
 .footer-grid{grid-template-columns:1fr}
-.form-row{grid-template-columns:1fr}
-.about-features{grid-template-columns:1fr}
-section{padding:60px 0}
-.section-title{font-size:1.8rem}
+section{padding:4rem 5%}
 }
 </style>
 </head>
 <body>
+
+<!-- FLOATING 3D LEAVES -->
+<div class="leaf-container">
+<div class="leaf">🌿</div><div class="leaf">🍃</div><div class="leaf">🌱</div><div class="leaf">☘️</div>
+<div class="leaf">🌿</div><div class="leaf">🍃</div><div class="leaf">🌿</div><div class="leaf">🌱</div>
+</div>
+
 <!-- NAV -->
 <nav id="navbar">
-<div class="nav-inner">
-<a href="#" class="logo">
-<svg viewBox="0 0 36 36" fill="none"><path d="M18 4L4 16h4v14h8v-8h4v8h8V16h4L18 4z" fill="#00A651"/><circle cx="18" cy="14" r="3" fill="#fff" opacity=".6"/><path d="M18 8 Q14 12 18 14 Q22 12 18 8Z" fill="#4CD964" opacity=".5"/></svg>
-Home<span>Smart</span>
-</a>
-<ul class="nav-links" id="navLinks">
-<li><a href="#about">About</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#properties">Properties</a></li>
-<li><a href="#process">Process</a></li>
-<li><a href="#testimonials">Reviews</a></li>
-<li><a href="#contact" class="btn nav-cta">Get in Touch</a></li>
-</ul>
-<button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+<a href="#" class="nav-logo"><span class="eco-icon">🏡</span> HomeSmart</a>
+<div class="nav-links" id="navLinks">
+<a href="#features">Features</a>
+<a href="#properties">Properties</a>
+<a href="#technology">Technology</a>
+<a href="#testimonials">Reviews</a>
+<a href="#cta" class="nav-cta">Get Started</a>
+</div>
+<div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
 <span></span><span></span><span></span>
-</button>
 </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-<div class="container">
+<video class="hero-video" autoplay muted loop playsinline>
+<source src="https://assets.mixkit.co/videos/25065/25065-360.mp4" type="video/mp4">
+</video>
+<div class="hero-overlay">
 <div class="hero-content">
-<h1>The <span class="green">Fresh Way</span> to Buy &amp; Sell Homes</h1>
-<p>HomeSmart is a technology-driven real estate brokerage making homeownership simple, transparent, and affordable with our flat-fee commission model since 2000.</p>
+<h1>Find Your <span>Perfect</span> Smart Home</h1>
+<p>HomeSmart combines cutting-edge technology with sustainable living to help you discover properties that are as intelligent as they are beautiful.</p>
 <div class="hero-btns">
-<a href="#contact" class="btn">Start Your Journey</a>
-<a href="#properties" class="btn btn-outline">Browse Properties</a>
-</div>
-<div class="hero-stats">
-<div class="hero-stat"><h3>20,000+</h3><p>Agents Nationwide</p></div>
-<div class="hero-stat"><h3>350+</h3><p>Office Locations</p></div>
-<div class="hero-stat"><h3>25+</h3><p>Years of Trust</p></div>
+<a href="#properties" class="btn btn-primary">Explore Properties</a>
+<a href="#features" class="btn btn-outline">Learn More</a>
 </div>
 </div>
 </div>
-<!-- Decorative leaves -->
-<svg class="leaf-deco leaf1" viewBox="0 0 100 120"><path d="M50 0C20 20 0 60 10 100c20-10 40-30 40-70S70 10 50 0z"/><path d="M50 0c30 20 50 60 40 100-20-10-40-30-40-70S30 10 50 0z"/></svg>
-<svg class="leaf-deco leaf2" viewBox="0 0 100 120"><path d="M50 0C20 20 0 60 10 100c20-10 40-30 40-70S70 10 50 0z"/></svg>
-<svg class="leaf-deco leaf3" viewBox="0 0 100 120"><path d="M50 10C30 30 10 60 20 95c15-8 30-25 30-60S65 20 50 10z"/><path d="M50 10c20 20 30 50 25 85-15-8-30-25-30-60S35 20 50 10z"/></svg>
-<svg class="leaf-deco leaf4" viewBox="0 0 80 100"><circle cx="40" cy="50" r="30" opacity=".3"/><path d="M40 20c-15 15-25 35-15 60 15-8 25-25 25-55S55 25 40 20z"/></svg>
+<div class="scroll-indicator">⌄</div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-<div class="container">
-<div class="about-grid">
-<div class="about-img"><div class="about-img-inner"></div></div>
-<div class="about-text">
-<span class="section-tag">🌿 About HomeSmart</span>
-<h2 class="section-title">Real Estate, Reimagined</h2>
-<p>Founded in 2000 in Scottsdale, Arizona, HomeSmart disrupted the traditional real estate model by introducing a flat-fee commission structure. We believe every agent deserves to keep more of what they earn, and every client deserves a transparent, modern experience.</p>
-<p>With over 20,000 agents and 350+ offices across the country, we combine cutting-edge technology with a human-first approach to make buying and selling homes effortless.</p>
-<div class="about-features">
-<div class="about-feat">
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-Flat-Fee Model
-</div>
-<div class="about-feat">
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-Tech-Powered Platform
-</div>
-<div class="about-feat">
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-National Coverage
-</div>
-<div class="about-feat">
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-25+ Years Trusted
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- FEATURES -->
+<!-- SMART FEATURES -->
 <section class="features" id="features">
-<div class="container">
-<span class="section-tag">🌱 Why Choose Us</span>
-<h2 class="section-title">Built for the Modern Homeowner</h2>
-<p class="section-sub">We combine innovation with experience to deliver an unmatched real estate journey.</p>
+<div class="section-header">
+<h2 class="reveal">Smart Home Features</h2>
+<p class="reveal reveal-delay-1">Every HomeSmart property comes equipped with the latest in intelligent home technology</p>
+<div class="accent-line reveal reveal-delay-2"></div>
+</div>
 <div class="features-grid">
-<div class="feature-card">
-<div class="feature-top">
-<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/><path d="M6 18h36" stroke="currentColor" stroke-width="2.5"/><circle cx="14" cy="30" r="4" stroke="currentColor" stroke-width="2"/><circle cx="34" cy="30" r="4" stroke="currentColor" stroke-width="2"/></svg>
-<h3>SmartMLS Listing</h3>
+<div class="feature-card reveal reveal-delay-1">
+<div class="feature-icon">🤖</div>
+<h3>AI-Powered Climate Control</h3>
+<p>Machine learning algorithms adapt to your comfort preferences, optimizing energy usage while maintaining your ideal temperature 24/7.</p>
 </div>
-<div class="feature-body">
-<p>Get your property on the MLS instantly with our streamlined digital listing system. Reach millions of buyers with one click.</p>
+<div class="feature-card reveal reveal-delay-2">
+<div class="feature-icon">🔒</div>
+<h3>Biometric Security</h3>
+<p>Facial recognition and fingerprint access ensure only authorized residents enter. Real-time alerts sent to your phone for all activity.</p>
 </div>
+<div class="feature-card reveal reveal-delay-3">
+<div class="feature-icon">⚡</div>
+<h3>Solar Energy Integration</h3>
+<p>Built-in solar panels and battery storage systems reduce your carbon footprint by up to 60% and cut energy bills dramatically.</p>
 </div>
-<div class="feature-card">
-<div class="feature-top">
-<svg viewBox="0 0 48 48" fill="none"><path d="M24 4L4 24l8 4 8 16 8-12 8 12 8-16 8-4L24 4z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
-<h3>Flat-Fee Commission</h3>
+<div class="feature-card reveal reveal-delay-4">
+<div class="feature-icon">💧</div>
+<h3>Smart Water Management</h3>
+<p>Leak detection sensors and automated irrigation systems conserve water while keeping your garden lush and beautiful year-round.</p>
 </div>
-<div class="feature-body">
-<p>Pay a flat fee, not a percentage. Our revolutionary model saves agents and clients thousands on every transaction.</p>
+<div class="feature-card reveal reveal-delay-5">
+<div class="feature-icon">📱</div>
+<h3>Unified Home App</h3>
+<p>Control every aspect of your home from one intuitive app — lighting, security, climate, entertainment, and appliance management.</p>
 </div>
-</div>
-<div class="feature-card">
-<div class="feature-top">
-<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" stroke-width="2.5"/><path d="M16 16h16M16 22h12M16 28h8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="34" cy="34" r="8" stroke="currentColor" stroke-width="2.5"/><path d="M34 30v4l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-<h3>Digital Paperwork</h3>
-</div>
-<div class="feature-body">
-<p>Sign, submit, and manage all documents digitally. No more printing, scanning, or office visits required.</p>
-</div>
-</div>
-<div class="feature-card">
-<div class="feature-top">
-<svg viewBox="0 0 48 48" fill="none"><path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" stroke="currentColor" stroke-width="2.5"/><path d="M4 24h40M24 4c5.3 5.3 8.2 12.2 8.2 20s-2.9 14.7-8.2 20c-5.3-5.3-8.2-12.2-8.2-20S18.7 9.3 24 4z" stroke="currentColor" stroke-width="2"/></svg>
-<h3>National Network</h3>
-</div>
-<div class="feature-body">
-<p>Access 350+ offices and 20,000+ agents coast-to-coast. Wherever you're buying or selling, we've got you covered.</p>
-</div>
-</div>
+<div class="feature-card reveal reveal-delay-5">
+<div class="feature-icon">🌿</div>
+<h3>Indoor Air Quality</h3>
+<p>HEPA filtration and CO₂ monitoring systems ensure the air you breathe is always fresh and clean throughout your entire home.</p>
 </div>
 </div>
 </section>
 
-<!-- PROPERTIES -->
+<!-- PROPERTY GRID -->
 <section class="properties" id="properties">
-<div class="container">
-<span class="section-tag">🏡 Featured Listings</span>
-<h2 class="section-title">Explore Our Properties</h2>
-<p class="section-sub">Handpicked homes across Arizona's most desirable neighborhoods.</p>
-<div class="properties-grid">
-<div class="prop-card">
+<div class="section-header">
+<h2 class="reveal">Featured Properties</h2>
+<p class="reveal reveal-delay-1">Explore our curated selection of smart-enabled homes in premium locations</p>
+<div class="accent-line reveal reveal-delay-2"></div>
+</div>
+<div class="prop-grid">
+<div class="prop-card reveal reveal-delay-1">
 <div class="prop-img">
-<span class="prop-badge">New Listing</span>
-<svg viewBox="0 0 60 60" fill="none"><path d="M30 8L6 30l8 4 8 18 8-14 8 14 8-18 8-4L30 8z" fill="currentColor"/></svg>
+<img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop" alt="Modern Villa" loading="lazy">
+<div class="prop-badge">Smart Home</div>
+<div class="prop-price">$1,285,000</div>
 </div>
 <div class="prop-info">
-<h3>Desert Bloom Residence</h3>
-<div class="price">$485,000</div>
-<p>A stunning 3-bed, 2-bath home in North Scottsdale with mountain views and a modern open floor plan.</p>
-<div class="prop-meta"><span>🛏 3 Beds</span><span>🛁 2 Baths</span><span>📐 2,100 sqft</span></div>
+<h3>Emerald Grove Villa</h3>
+<div class="location">📍 Portland, Oregon</div>
+<div class="prop-stats">
+<span>🛏 <b>4</b> Beds</span>
+<span>🚿 <b>3.5</b> Baths</span>
+<span>📐 <b>3,200</b> sqft</span>
+<span>⚡ <b>Solar</b></span>
 </div>
 </div>
-<div class="prop-card">
-<div class="prop-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)">
-<span class="prop-badge" style="background:#E67E22">Open House</span>
-<svg viewBox="0 0 60 60" fill="none"><path d="M30 8L6 30l8 4 8 18 8-14 8 14 8-18 8-4L30 8z" fill="currentColor" opacity=".4"/></svg>
 </div>
-<div class="prop-info">
-<h3>Sunrise Valley Villa</h3>
-<div class="price">$625,000</div>
-<p>Luxurious 4-bed estate with pool, spa, and gourmet kitchen in the heart of Paradise Valley.</p>
-<div class="prop-meta"><span>🛏 4 Beds</span><span>🛁 3 Baths</span><span>📐 3,200 sqft</span></div>
-</div>
-</div>
-<div class="prop-card">
-<div class="prop-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">
-<span class="prop-badge" style="background:#2196F3">Price Reduced</span>
-<svg viewBox="0 0 60 60" fill="none"><path d="M30 8L6 30l8 4 8 18 8-14 8 14 8-18 8-4L30 8z" fill="currentColor" opacity=".4"/></svg>
+<div class="prop-card reveal reveal-delay-2">
+<div class="prop-img">
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Eco Townhome" loading="lazy">
+<div class="prop-badge">Eco Certified</div>
+<div class="prop-price">$875,000</div>
 </div>
 <div class="prop-info">
-<h3>Cactus Creek Cottage</h3>
-<div class="price">$349,000</div>
-<p>Charming 2-bed starter home with a landscaped backyard and updated interiors in Chandler.</p>
-<div class="prop-meta"><span>🛏 2 Beds</span><span>🛁 2 Baths</span><span>📐 1,450 sqft</span></div>
+<h3>Willow Creek Townhome</h3>
+<div class="location">📍 Austin, Texas</div>
+<div class="prop-stats">
+<span>🛏 <b>3</b> Beds</span>
+<span>🚿 <b>2.5</b> Baths</span>
+<span>📐 <b>2,450</b> sqft</span>
+<span>🌿 <b>LEED</b></span>
+</div>
+</div>
+</div>
+<div class="prop-card reveal reveal-delay-3">
+<div class="prop-img">
+<img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop" alt="Smart Apartment" loading="lazy">
+<div class="prop-badge">New Listing</div>
+<div class="prop-price">$625,000</div>
+</div>
+<div class="prop-info">
+<h3>Canopy Heights Condo</h3>
+<div class="location">📍 Denver, Colorado</div>
+<div class="prop-stats">
+<span>🛏 <b>2</b> Beds</span>
+<span>🚿 <b>2</b> Baths</span>
+<span>📐 <b>1,800</b> sqft</span>
+<span>🔒 <b>Secured</b></span>
+</div>
+</div>
+</div>
+<div class="prop-card reveal reveal-delay-1">
+<div class="prop-img">
+<img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop" alt="Luxury Smart Home" loading="lazy">
+<div class="prop-badge">Premium</div>
+<div class="prop-price">$2,150,000</div>
+</div>
+<div class="prop-info">
+<h3>Birchwood Estate</h3>
+<div class="location">📍 Scottsdale, Arizona</div>
+<div class="prop-stats">
+<span>🛏 <b>5</b> Beds</span>
+<span>🚿 <b>4.5</b> Baths</span>
+<span>📐 <b>4,800</b> sqft</span>
+<span>☀️ <b>Premium Solar</b></span>
+</div>
+</div>
+</div>
+<div class="prop-card reveal reveal-delay-2">
+<div class="prop-img">
+<img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop" alt="Green Modern Home" loading="lazy">
+<div class="prop-badge">Smart + Green</div>
+<div class="prop-price">$735,000</div>
+</div>
+<div class="prop-info">
+<h3>Cedar Lane Modern</h3>
+<div class="location">📍 Raleigh, North Carolina</div>
+<div class="prop-stats">
+<span>🛏 <b>3</b> Beds</span>
+<span>🚿 <b>2</b> Baths</span>
+<span>📐 <b>2,100</b> sqft</span>
+<span>💧 <b>Water Smart</b></span>
+</div>
+</div>
+</div>
+<div class="prop-card reveal reveal-delay-3">
+<div class="prop-img">
+<img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop" alt="Smart Beach House" loading="lazy">
+<div class="prop-badge">Waterfront</div>
+<div class="prop-price">$1,690,000</div>
+</div>
+<div class="prop-info">
+<h3>Oceanview Smart Villa</h3>
+<div class="location">📍 San Diego, California</div>
+<div class="prop-stats">
+<span>🛏 <b>4</b> Beds</span>
+<span>🚿 <b>3</b> Baths</span>
+<span>📐 <b>3,500</b> sqft</span>
+<span>🌊 <b>Coastal</b></span>
 </div>
 </div>
 </div>
 </div>
 </section>
 
-<!-- TECH -->
-<section class="tech" id="tech">
-<div class="container">
+<!-- TECHNOLOGY -->
+<section class="tech" id="technology">
+<div class="section-header">
+<h2 class="reveal">HomeSmart Technology</h2>
+<p class="reveal reveal-delay-1">Our proprietary platform connects every device in your home seamlessly</p>
+<div class="accent-line reveal reveal-delay-2"></div>
+</div>
 <div class="tech-grid">
-<div>
-<span class="section-tag">💻 Technology</span>
-<h2 class="section-title">Innovation at Every Step</h2>
-<p class="section-sub" style="margin-bottom:32px">Our proprietary platform powers everything from listing to closing.</p>
-<ul class="tech-list">
-<li>
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span><strong>Smart Agent Portal</strong> — Manage leads, track commissions, and access training from one dashboard.</span>
-</li>
-<li>
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span><strong>Automated Marketing</strong> — AI-powered social posts, email campaigns, and ad management built in.</span>
-</li>
-<li>
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span><strong>Secure E-Signatures</strong> — Legally binding digital signatures for contracts, disclosures, and addenda.</span>
-</li>
-<li>
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span><strong>24/7 Support Line</strong> — Our dedicated team is always available to help agents and clients alike.</span>
-</li>
-</ul>
+<div class="tech-item reveal reveal-delay-1">
+<span class="tech-num">15K+</span>
+<h4>Smart Homes Deployed</h4>
+<p>Properties across North America powered by our integrated smart home platform</p>
 </div>
-<div class="tech-visual">
-<div class="tech-circle">
-<svg viewBox="0 0 100 100" fill="none"><rect x="15" y="25" width="70" height="50" rx="6" stroke="currentColor" stroke-width="3"/><path d="M35 75v10h30V75" stroke="currentColor" stroke-width="3"/><path d="M15 65h70" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="48" r="10" stroke="currentColor" stroke-width="2.5"/><path d="M42 48l6 4 10-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-<div class="tech-dot"></div>
-<div class="tech-dot"></div>
-<div class="tech-dot"></div>
+<div class="tech-item reveal reveal-delay-2">
+<span class="tech-num">40%</span>
+<h4>Energy Savings</h4>
+<p>Average reduction in energy consumption through AI-optimized resource management</p>
 </div>
+<div class="tech-item reveal reveal-delay-3">
+<span class="tech-num">99.9%</span>
+<h4>Uptime Guarantee</h4>
+<p>Cloud infrastructure ensuring your home's smart systems are always connected</p>
 </div>
-</div>
-</div>
-</section>
-
-<!-- PROCESS -->
-<section class="process" id="process">
-<div class="container">
-<div style="text-align:center">
-<span class="section-tag">🔄 How It Works</span>
-<h2 class="section-title">Your Path to Homeownership</h2>
-<p class="section-sub" style="margin:0 auto">Four simple steps to close your deal with HomeSmart.</p>
-</div>
-<div class="process-steps">
-<div class="process-step">
-<div class="process-circle">1</div>
-<div class="process-connector"></div>
-<h3>Get Connected</h3>
-<p>Fill out our form and get matched with a top local agent in your area.</p>
-</div>
-<div class="process-step">
-<div class="process-circle">2</div>
-<div class="process-connector"></div>
-<h3>Explore Options</h3>
-<p>Browse listings, schedule tours, and explore financing with expert guidance.</p>
-</div>
-<div class="process-step">
-<div class="process-circle">3</div>
-<div class="process-connector"></div>
-<h3>Make Your Move</h3>
-<p>Negotiate, submit offers, and handle all paperwork digitally through our platform.</p>
-</div>
-<div class="process-step">
-<div class="process-circle">4</div>
-<h3>Close & Celebrate</h3>
-<p>Finalize the deal, get your keys, and celebrate your new beginning.</p>
-</div>
+<div class="tech-item reveal reveal-delay-4">
+<span class="tech-num">24/7</span>
+<h4>Live Support</h4>
+<p>Real human technicians available around the clock for any smart home issue</p>
 </div>
 </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
-<div class="container">
-<div style="text-align:center">
-<span class="section-tag">💬 Testimonials</span>
-<h2 class="section-title">What People Are Saying</h2>
-<p class="section-sub" style="margin:0 auto">Real stories from real homeowners who chose HomeSmart.</p>
+<div class="section-header">
+<h2 class="reveal">What Homeowners Say</h2>
+<p class="reveal reveal-delay-1">Real experiences from people who made the switch to smart living</p>
+<div class="accent-line reveal reveal-delay-2"></div>
 </div>
 <div class="test-grid">
-<div class="test-card">
-<div class="test-quote">"</div>
-<p>HomeSmart's flat-fee model saved us over $8,000 on our home sale. The technology made everything seamless from listing to closing.</p>
+<div class="test-card reveal reveal-delay-1">
+<div class="test-stars">★★★★★</div>
+<p>"The energy savings alone paid for the smart system in the first year. Our HomeSmart app controls everything — lights, thermostat, even the garden irrigation. It's like living in the future."</p>
 <div class="test-author">
-<div class="test-avatar">JR</div>
-<div><div class="test-name">Jennifer Rodriguez</div><div class="test-role">Home Seller, Scottsdale</div></div>
+<div class="test-avatar">SK</div>
+<div>Sarah Kim<div>Portland, OR</div></div>
 </div>
 </div>
-<div class="test-card">
-<div class="test-quote">"</div>
-<p>As an agent, keeping more of my commission while having access to best-in-class tools is a game changer. I've never been more productive.</p>
+<div class="test-card reveal reveal-delay-2">
+<div class="test-stars">★★★★★</div>
+<p>"After the biometric security system was installed, I finally feel completely safe. My kids can unlock the door with a fingerprint, and I get instant alerts. Worth every penny."</p>
 <div class="test-author">
-<div class="test-avatar">MC</div>
-<div><div class="test-name">Marcus Chen</div><div class="test-role">HomeSmart Agent, Phoenix</div></div>
+<div class="test-avatar">MR</div>
+<div>Michael Rodriguez<div>Austin, TX</div></div>
 </div>
 </div>
-<div class="test-card">
-<div class="test-quote">"</div>
-<p>The digital paperwork and e-signature system meant we never had to leave our living room. Closing day was stress-free and exciting!</p>
+<div class="test-card reveal reveal-delay-3">
+<div class="test-stars">★★★★★</div>
+<p>"HomeSmart's climate AI learned our preferences in just two weeks. We no longer argue about the thermostat! The air quality sensors are an incredible bonus — especially with allergies."</p>
 <div class="test-author">
-<div class="test-avatar">SP</div>
-<div><div class="test-name">Sarah Patel</div><div class="test-role">First-Time Buyer, Mesa</div></div>
-</div>
+<div class="test-avatar">JP</div>
+<div>Jennifer Patel<div>Denver, CO</div></div>
 </div>
 </div>
 </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-<div class="container">
-<span class="section-tag">📬 Get in Touch</span>
-<h2 class="section-title">Ready to Start?</h2>
-<p class="section-sub">Connect with our team and take the first step toward your real estate goals.</p>
-<div class="contact-grid">
-<div class="contact-form">
-<form id="contactForm">
-<div class="form-row">
-<div class="form-group">
-<label>First Name</label>
-<input type="text" placeholder="John" required>
-</div>
-<div class="form-group">
-<label>Last Name</label>
-<input type="text" placeholder="Doe" required>
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label>Email</label>
-<input type="email" placeholder="john@example.com" required>
-</div>
-<div class="form-group">
-<label>Phone</label>
-<input type="tel" placeholder="+1 (555) 000-0000">
-</div>
-</div>
-<div class="form-group">
-<label>I'm Interested In</label>
-<select required>
-<option value="">Select an option</option>
-<option>Buying a Home</option>
-<option>Selling a Home</option>
-<option>Becoming an Agent</option>
-<option>General Inquiry</option>
-</select>
-</div>
-<div class="form-group">
-<label>Message</label>
-<textarea placeholder="Tell us about your real estate goals..."></textarea>
-</div>
-<button type="submit" class="btn" style="width:100%;font-size:1.05rem">Send Message 🌿</button>
-</form>
-</div>
-<div class="contact-info">
-<div class="contact-card">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2"/></svg>
-<div><h4>Phone</h4><p>+1-602-553-5700</p></div>
-</div>
-<div class="contact-card">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M2 7l10 6 10-6" stroke="currentColor" stroke-width="2"/></svg>
-<div><h4>Email</h4><p>info@homesmart.com</p></div>
-</div>
-<div class="contact-card">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/></svg>
-<div><h4>Headquarters</h4><p>Scottsdale, Arizona</p></div>
-</div>
-<div class="contact-card">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-<div><h4>Office Hours</h4><p>Mon – Fri: 8 AM – 6 PM MST</p></div>
-</div>
-</div>
-</div>
-</div>
+<!-- CTA -->
+<section class="cta" id="cta">
+<h2 class="reveal">Ready to Go Smart?</h2>
+<p class="reveal reveal-delay-1">Join thousands of homeowners who are saving money, reducing their carbon footprint, and living smarter with HomeSmart technology.</p>
+<a href="#" class="btn btn-primary reveal reveal-delay-2">Schedule a Free Consultation</a>
 </section>
 
 <!-- FOOTER -->
 <footer>
-<div class="container">
 <div class="footer-grid">
-<div class="footer-brand">
-<h3>Home<span>Smart</span></h3>
-<p>A technology-driven real estate brokerage with a flat-fee commission model. Making homeownership accessible since 2000.</p>
-<div style="display:flex;gap:12px">
-<a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='#00A651'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-</a>
-<a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='#00A651'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
-</a>
-<a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='#00A651'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-</a>
-</div>
+<div class="footer-col">
+<h4>🏡 HomeSmart</h4>
+<p>Pioneering the future of sustainable, intelligent living. Every HomeSmart property is designed to minimize environmental impact while maximizing comfort, security, and convenience.</p>
 </div>
 <div class="footer-col">
 <h4>Quick Links</h4>
 <ul>
-<li><a href="#about">About Us</a></li>
-<li><a href="#features">Features</a></li>
+<li><a href="#features">Smart Features</a></li>
 <li><a href="#properties">Properties</a></li>
-<li><a href="#process">How It Works</a></li>
+<li><a href="#technology">Technology</a></li>
+<li><a href="#testimonials">Reviews</a></li>
 </ul>
 </div>
 <div class="footer-col">
 <h4>Services</h4>
 <ul>
-<li><a href="#">Buy a Home</a></li>
-<li><a href="#">Sell a Home</a></li>
-<li><a href="#">Join as Agent</a></li>
-<li><a href="#">Relocation</a></li>
+<li><a href="#">Smart Home Consulting</a></li>
+<li><a href="#">Energy Audits</a></li>
+<li><a href="#">Security Setup</a></li>
+<li><a href="#">Solar Installation</a></li>
 </ul>
 </div>
 <div class="footer-col">
 <h4>Contact</h4>
 <ul>
-<li>+1-602-553-5700</li>
-<li>info@homesmart.com</li>
-<li>Scottsdale, AZ</li>
-<li>Mon-Fri 8AM-6PM</li>
+<li><a href="#">info@homesmart.demo</a></li>
+<li><a href="#">1-800-HOME-SMART</a></li>
+<li><a href="#">Portland, OR 97201</a></li>
+<li><a href="#">Mon–Sat, 8am–7pm</a></li>
 </ul>
 </div>
 </div>
 <div class="footer-bottom">
-<p>&copy; 2024 HomeSmart. All rights reserved.</p>
-<p class="footer-credit">Demo site built by Alok Web Services</p>
-</div>
+<p>Demo site built by <span>Alok Web Services</span> &copy; 2026 HomeSmart. All rights reserved.</p>
 </div>
 </footer>
 
 <script>
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-navbar.classList.toggle('scrolled', window.scrollY > 50);
+// Nav scroll
+window.addEventListener('scroll',()=>{
+document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
 });
 
-// Mobile nav toggle
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-const target = document.querySelector(this.getAttribute('href'));
-if (target) {
-target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-navLinks.classList.remove('open');
-}
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal');
+const revealObs=new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}
 });
-});
-
-// Contact form handling
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-e.preventDefault();
-const btn = this.querySelector('button[type="submit"]');
-const origText = btn.textContent;
-btn.textContent = '✓ Message Sent!';
-btn.style.background = '#00A651';
-setTimeout(() => { btn.textContent = origText; btn.style.background = ''; }, 3000);
-this.reset();
-});
-
-// Scroll reveal animation
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.style.opacity = '1';
-entry.target.style.transform = 'translateY(0)';
-}
-});
-}, observerOptions);
-
-document.querySelectorAll('.feature-card, .prop-card, .test-card, .contact-card, .process-step, .about-grid, .tech-grid').forEach(el => {
-el.style.opacity = '0';
-el.style.transform = 'translateY(30px)';
-el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-observer.observe(el);
-});
-
-// Active nav link highlight
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-const scrollPos = window.scrollY + 200;
-sections.forEach(section => {
-const id = section.getAttribute('id');
-const link = document.querySelector(`.nav-links a[href="#${id}"]`);
-if (link) {
-if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-link.style.color = '#00A651';
-} else {
-link.style.color = '';
-}
-}
-});
-});
+},{threshold:0.12});
+reveals.forEach(r=>revealObs.observe(r));
 </script>
 </body>
 </html>
