@@ -1,608 +1,945 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Howard Hanna Real Estate | Family Heritage Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #006B3F;
-        --secondary: #8B0000;
-        --accent: #FFD700;
-        --bg: #FAFFF5;
-        --fg: #1A3A1A;
-        --card-bg: #FFFFFF;
-        --heading-font: 'Bitter', serif;
-        --body-font: 'Source Sans 3', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #006B3Fdd, #8B0000cc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Howard Hanna Real Estate | Family Heritage Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #2D6A4F;
+  --green-dark: #1B4332;
+  --green-light: #40916C;
+  --gold: #B8860B;
+  --gold-light: #DAA520;
+  --cream: #FFF8DC;
+  --cream-dark: #F5E6B8;
+  --dark: #1a1a1a;
+  --white: #fff;
+  --radius: 16px;
+  --shadow-gold: 0 8px 32px rgba(184,134,11,0.25);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--dark); line-height: 1.7; overflow-x: hidden; }
+h1, h2, h3, h4, h5 { font-family: 'Cinzel', serif; line-height: 1.2; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; height: auto; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ═══ NAV ═══ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 20px 0; transition: var(--transition);
+}
+.navbar.scrolled {
+  background: rgba(45,106,79,0.95); backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15); padding: 12px 0;
+}
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); letter-spacing: 0.05em; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--gold); color: var(--dark) !important; padding: 10px 28px; border-radius: 100px; font-weight: 600; font-size: 0.9rem; transition: var(--transition); border: 2px solid var(--gold); }
+.nav-cta:hover { background: transparent; color: var(--gold) !important; }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+.nav-toggle span { width: 26px; height: 2.5px; background: white; transition: var(--transition); border-radius: 2px; }
+
+/* ═══ HERO — VIDEO ═══ */
+.hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  overflow: hidden;
+}
+.hero-video-wrap {
+  position: absolute; inset: 0; overflow: hidden;
+}
+.hero-video-wrap video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(45,106,79,0.88) 0%, rgba(27,67,50,0.82) 40%, rgba(184,134,11,0.25) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2; max-width: 750px; padding: 140px 60px 80px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(10px);
+  padding: 8px 22px; border-radius: 100px; font-size: 0.8rem;
+  font-weight: 600; color: var(--cream); margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.hero-badge::before { content: '★'; color: var(--gold); }
+.hero-overline {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.25em; color: var(--gold); margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+}
+.hero-title {
+  font-size: clamp(2.8rem, 7vw, 5.5rem); color: var(--white);
+  margin-bottom: 16px; letter-spacing: -0.02em; font-weight: 700;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.hero-title span { color: var(--gold); }
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: rgba(255,255,255,0.9); margin-bottom: 36px; font-weight: 400;
+  font-style: italic; max-width: 550px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-stats { display: flex; gap: 48px; }
+.hero-stat { text-align: center; }
+.hero-stat-num { display: block; font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); }
+.hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 16px 36px; border-radius: 100px; font-weight: 600; font-size: 0.95rem;
+  transition: var(--transition); cursor: pointer; border: none; font-family: 'Inter', sans-serif;
+}
+.btn-gold { background: var(--gold); color: var(--dark); }
+.btn-gold:hover { transform: translateY(-3px); box-shadow: var(--shadow-gold); background: var(--gold-light); }
+.btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); color: var(--gold); }
+.btn-green { background: var(--green); color: var(--white); }
+.btn-green:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(45,106,79,0.4); }
+.btn-white { background: var(--white); color: var(--green-dark); }
+.btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.btn-large { padding: 18px 48px; font-size: 1.05rem; }
+
+/* ═══ SECTION UTILS ═══ */
+.section-label {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: var(--gold); margin-bottom: 12px;
+  font-family: 'Inter', sans-serif;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 20px; color: var(--green-dark);
+}
+.section-subtitle {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+  color: rgba(0,0,0,0.6); max-width: 600px; font-style: italic;
+}
+.section-header { text-align: center; margin-bottom: 64px; }
+.section-header .section-subtitle { margin: 0 auto; }
+
+/* ═══ 3D FLOATING HOME ICON ═══ */
+.floating-home {
+  position: fixed; bottom: 32px; right: 32px; z-index: 900;
+  width: 60px; height: 60px; background: var(--gold);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(184,134,11,0.5);
+  cursor: pointer; transition: var(--transition);
+  animation: floatBounce 3s ease-in-out infinite;
+}
+.floating-home:hover { transform: scale(1.15) translateY(-4px); }
+.floating-home svg { width: 28px; height: 28px; fill: var(--dark); }
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ═══ 3D FAMILY TREE DECORATION ═══ */
+.family-tree-3d {
+  position: absolute; top: 60px; right: 60px; z-index: 1;
+  perspective: 800px; opacity: 0.15;
+}
+.tree-node {
+  width: 50px; height: 50px; border: 2px solid var(--gold);
+  border-radius: 50%; position: absolute;
+  transform-style: preserve-3d;
+  animation: treeFloat 4s ease-in-out infinite;
+}
+.tree-node:nth-child(1) { top: 0; left: 0; animation-delay: 0s; }
+.tree-node:nth-child(2) { top: 60px; left: 40px; animation-delay: 0.5s; }
+.tree-node:nth-child(3) { top: 20px; left: 100px; animation-delay: 1s; }
+.tree-node:nth-child(4) { top: 90px; left: 120px; animation-delay: 1.5s; }
+.tree-branch {
+  position: absolute; background: var(--gold); opacity: 0.4;
+}
+@keyframes treeFloat {
+  0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
+  50% { transform: rotateY(15deg) rotateX(5deg); }
+}
+
+/* ═══ ABOUT ═══ */
+.about { padding: 120px 0; background: var(--white); position: relative; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-img-wrap {
+  position: relative; border-radius: 20px; overflow: hidden;
+  box-shadow: var(--shadow-lg); transform: perspective(1000px) rotateY(-3deg);
+  transition: var(--transition);
+}
+.about-img-wrap:hover { transform: perspective(1000px) rotateY(0deg); }
+.about-img-wrap img { width: 100%; height: 420px; object-fit: cover; display: block; }
+.about-img-wrap::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(45,106,79,0.15), transparent);
+}
+.about-text { font-size: 1.05rem; line-height: 1.9; margin-bottom: 32px; color: rgba(0,0,0,0.7); }
+.about-features { display: flex; flex-direction: column; gap: 14px; }
+.about-feature {
+  display: flex; align-items: center; gap: 14px; font-weight: 500; font-size: 0.95rem;
+}
+.about-feature-icon {
+  width: 42px; height: 42px; min-width: 42px; background: rgba(45,106,79,0.1);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--green); font-size: 1.1rem;
+}
+
+/* ═══ TIMELINE — FAMILY HERITAGE ═══ */
+.timeline-section { padding: 120px 0; background: var(--green-dark); position: relative; overflow: hidden; }
+.timeline-section .section-title { color: var(--white); }
+.timeline-section .section-subtitle { color: rgba(255,255,255,0.7); }
+
+.timeline {
+  position: relative; max-width: 900px; margin: 0 auto;
+  padding: 20px 0;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 3px; background: linear-gradient(to bottom, var(--gold), var(--gold-light), var(--gold));
+  transform: translateX(-50%); border-radius: 3px;
+}
+.timeline-item {
+  position: relative; width: 50%; padding: 20px 50px;
+  opacity: 0; transform: translateY(40px);
+  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.timeline-item.visible { opacity: 1; transform: translateY(0); }
+.timeline-item:nth-child(odd) { left: 0; text-align: right; }
+.timeline-item:nth-child(even) { left: 50%; text-align: left; }
+.timeline-dot {
+  position: absolute; top: 30px; width: 18px; height: 18px;
+  background: var(--gold); border: 4px solid var(--green-dark);
+  border-radius: 50%; z-index: 2;
+  box-shadow: 0 0 0 4px rgba(184,134,11,0.3);
+}
+.timeline-item:nth-child(odd) .timeline-dot { right: -9px; }
+.timeline-item:nth-child(even) .timeline-dot { left: -9px; }
+.timeline-card {
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius);
+  padding: 28px 24px; transition: var(--transition);
+  transform-style: preserve-3d; perspective: 600px;
+}
+.timeline-card:hover {
+  transform: translateY(-4px) rotateX(2deg);
+  box-shadow: 0 12px 40px rgba(184,134,11,0.2);
+  border-color: rgba(184,134,11,0.3);
+}
+.timeline-year {
+  font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700;
+  color: var(--gold); margin-bottom: 8px;
+}
+.timeline-card h3 { font-size: 1.1rem; color: var(--white); margin-bottom: 8px; }
+.timeline-card p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+/* ═══ PROPERTY GRID ═══ */
+.properties { padding: 120px 0; background: var(--cream); }
+.properties-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+.property-card {
+  background: var(--white); border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: var(--transition); position: relative;
+  transform-style: preserve-3d; perspective: 1000px;
+}
+.property-card:hover {
+  transform: translateY(-8px) rotateX(2deg);
+  box-shadow: var(--shadow-gold);
+}
+.property-img { position: relative; height: 240px; overflow: hidden; }
+.property-img img {
+  width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s;
+}
+.property-card:hover .property-img img { transform: scale(1.08); }
+.property-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--gold); color: var(--dark); padding: 6px 16px;
+  border-radius: 100px; font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.property-price {
+  font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700;
+  color: var(--green-dark); margin-bottom: 6px;
+}
+.property-info { padding: 24px; }
+.property-info h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 4px; font-family: 'Cinzel', serif; }
+.property-location { font-size: 0.85rem; color: rgba(0,0,0,0.5); margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+.property-location::before { content: '📍'; font-size: 0.8rem; }
+.property-features { display: flex; gap: 16px; font-size: 0.8rem; color: rgba(0,0,0,0.5); border-top: 1px solid rgba(0,0,0,0.08); padding-top: 14px; }
+.property-features span { display: flex; align-items: center; gap: 4px; }
+
+/* ═══ COMMUNITY ═══ */
+.community { padding: 120px 0; background: var(--white); position: relative; }
+.community-content { max-width: 800px; margin: 0 auto; text-align: center; }
+.community-content > p {
+  font-size: 1.1rem; line-height: 1.9; margin-bottom: 48px;
+  color: rgba(0,0,0,0.65); font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-style: italic;
+}
+.community-stats { display: flex; justify-content: center; gap: 72px; flex-wrap: wrap; }
+.community-stat { text-align: center; }
+.community-stat-num {
+  display: block; font-family: 'Cinzel', serif; font-size: 2.4rem;
+  font-weight: 700; color: var(--green);
+}
+.community-stat-label { font-size: 0.8rem; color: rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 0.1em; }
+.community-features {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px;
+}
+.community-feature-card {
+  text-align: center; padding: 36px 24px; border-radius: var(--radius);
+  background: var(--cream); transition: var(--transition);
+  transform-style: preserve-3d; perspective: 800px;
+}
+.community-feature-card:hover {
+  transform: translateY(-6px) rotateX(3deg);
+  box-shadow: var(--shadow-gold);
+}
+.community-feature-icon {
+  width: 64px; height: 64px; margin: 0 auto 16px;
+  background: rgba(45,106,79,0.1); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; transition: var(--transition);
+}
+.community-feature-card:hover .community-feature-icon { background: var(--gold); }
+.community-feature-card h4 { font-size: 1rem; margin-bottom: 8px; color: var(--green-dark); }
+.community-feature-card p { font-size: 0.85rem; color: rgba(0,0,0,0.6); }
+
+/* ═══ TESTIMONIALS ═══ */
+.testimonials { padding: 120px 0; background: var(--green-dark); position: relative; overflow: hidden; }
+.testimonials .section-title { color: var(--white); }
+.testimonials .section-subtitle { color: rgba(255,255,255,0.6); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.testimonial-card {
+  background: rgba(255,255,255,0.07); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius);
+  padding: 32px; transition: var(--transition);
+  transform-style: preserve-3d; perspective: 600px;
+}
+.testimonial-card:hover {
+  transform: translateY(-6px) rotateX(2deg);
+  box-shadow: 0 12px 40px rgba(184,134,11,0.2);
+  border-color: rgba(184,134,11,0.3);
+}
+.testimonial-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; letter-spacing: 2px; }
+.testimonial-card blockquote {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+  line-height: 1.8; color: rgba(255,255,255,0.85); font-style: italic;
+  margin-bottom: 24px; position: relative; padding-left: 20px;
+  border-left: 3px solid var(--gold);
+}
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
+.testimonial-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem;
+  color: var(--dark);
+}
+.testimonial-author-info strong { display: block; font-size: 0.95rem; color: var(--white); }
+.testimonial-author-info span { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+/* ═══ CTA ═══ */
+.cta {
+  padding: 100px 0; text-align: center; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 60%, #143a2a 100%);
+}
+.cta::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(184,134,11,0.15), transparent 70%);
+  border-radius: 50%;
+}
+.cta h2 { font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin-bottom: 16px; position: relative; }
+.cta p { color: rgba(255,255,255,0.8); margin-bottom: 40px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; position: relative; }
+.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* ═══ FOOTER ═══ */
+.footer { background: var(--dark); color: rgba(255,255,255,0.7); padding: 80px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 60px; }
+.footer-brand h3 { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--white); margin-bottom: 12px; }
+.footer-brand h3 span { color: var(--gold); }
+.footer-brand p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); display: flex;
+  align-items: center; justify-content: center;
+  transition: var(--transition); font-size: 0.9rem;
+}
+.footer-social a:hover { background: var(--gold); color: var(--dark); transform: translateY(-3px); }
+.footer-col h4 {
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--gold); margin-bottom: 20px; font-family: 'Inter', sans-serif;
+}
+.footer-col a {
+  display: block; font-size: 0.9rem; color: rgba(255,255,255,0.6);
+  margin-bottom: 10px; transition: var(--transition);
+}
+.footer-col a:hover { color: var(--gold); transform: translateX(4px); }
+.footer-col p { font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding: 24px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: rgba(255,255,255,0.4);
+}
+.footer-bottom a { color: var(--gold); transition: var(--transition); }
+.footer-bottom a:hover { color: var(--gold-light); }
+.footer-credit { color: var(--gold); font-weight: 500; }
+
+/* ═══ ANIMATIONS ═══ */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in-left { opacity: 0; transform: translateX(-40px); transition: all 0.7s ease; }
+.fade-in-left.visible { opacity: 1; transform: translateX(0); }
+.fade-in-right { opacity: 0; transform: translateX(40px); transition: all 0.7s ease; }
+.fade-in-right.visible { opacity: 1; transform: translateX(0); }
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184,134,11,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(184,134,11,0); }
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .properties-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--green-dark); flex-direction: column; padding: 24px;
+    gap: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .nav-links.active { display: flex; }
+  .nav-toggle { display: flex; }
+  .nav-cta { display: none; }
+  .hero-content { padding: 120px 24px 60px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-img-wrap { transform: none; }
+  .about-img-wrap:hover { transform: none; }
+  .timeline::before { left: 20px; }
+  .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding: 16px 16px 16px 52px; }
+  .timeline-dot { left: 11px !important; right: auto !important; }
+  .properties-grid, .testimonials-grid, .community-features { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 24px; }
+  .community-stats { flex-direction: column; gap: 24px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .family-tree-3d { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .fade-in-left, .fade-in-right { opacity: 1; transform: none; transition: none; }
+  .timeline-item { opacity: 1; transform: none; }
+  .floating-home { animation: none; }
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Howard</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#" class="nav-logo">Howard <span>Hanna</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#timeline">Heritage</a></li>
+      <li><a href="#properties">Homes</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">Find Your Home</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ HERO — VIDEO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1920&q=80">
+      <source src="https://assets.mixkit.co/videos/4938/4938-360.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+  <!-- 3D Family Tree Decoration -->
+  <div class="family-tree-3d" aria-hidden="true">
+    <div class="tree-node"></div>
+    <div class="tree-node"></div>
+    <div class="tree-node"></div>
+    <div class="tree-node"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Est. 1957 · Family Owned</div>
+    <div class="hero-overline">Howard Hanna Real Estate</div>
+    <h1 class="hero-title">Where <span>Family</span><br>Meets Home</h1>
+    <p class="hero-tagline">For three generations, the Hanna family has helped families find their perfect home. Your story begins here.</p>
+    <div class="hero-actions">
+      <a href="#properties" class="btn btn-gold btn-large">Explore Homes</a>
+      <a href="#timeline" class="btn btn-outline">Our Heritage</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">67+</span>
+        <span class="hero-stat-label">Years</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">11K+</span>
+        <span class="hero-stat-label">Agents</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">500+</span>
+        <span class="hero-stat-label">Offices</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">4.4★</span>
+        <span class="hero-stat-label">Rating</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-in-left">
+        <img src="https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?w=800&q=80" alt="Howard Hanna Real Estate Office" loading="lazy">
+      </div>
+      <div class="about-content fade-in-right">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">A Family Tradition<br>of Trust</h2>
+        <p class="about-text">Founded by Howard W. Hanna Jr. in 1957, our company has grown from a single office in Cleveland, Ohio to one of the largest family-owned real estate companies in the nation. With over 11,000 agents across 500+ offices, we remain committed to the values that started it all: integrity, service, and family.</p>
+        <div class="about-features">
+          <div class="about-feature fade-in stagger-1">
+            <div class="about-feature-icon">🏛️</div>
+            <span>Licensed & Certified Professionals</span>
+          </div>
+          <div class="about-feature fade-in stagger-2">
+            <div class="about-feature-icon">👨‍👩‍👧‍👦</div>
+            <span>Three Generations of Hanna Leadership</span>
+          </div>
+          <div class="about-feature fade-in stagger-3">
+            <div class="about-feature-icon">🏆</div>
+            <span>#1 Family-Owned Real Estate Company</span>
+          </div>
+          <div class="about-feature fade-in stagger-4">
+            <div class="about-feature-icon">💚</div>
+            <span>4.4★ Customer Satisfaction Rating</span>
+          </div>
         </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-bg"><img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1920&q=80" alt="Howard Hanna Real Estate"><div class="hero-overlay"></div></div>
-            <div class="hero-content">
-                <div class="hero-badge">Est. 1957</div>
-                <h1 class="hero-title">Howard Hanna Real Estate</h1>
-                <p class="hero-tagline">Home is Where the Hanna Is</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Contact Us</a>
-                    <a href="#properties" class="btn btn-outline">View Properties</a>
-                </div>
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?w=800&q=80" alt="Howard Hanna Real Estate" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 1957</h2>
-                    <p class="about-text">Howard Hanna Real Estate is a family-owned real estate company with a strong presence in the Northeast and Midwest, offering comprehensive real estate services.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>11,000+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.4★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>67+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAMILY TIMELINE ═══ -->
+<section class="timeline-section" id="timeline">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Our Heritage</div>
+      <h2 class="section-title">The Hanna Family Timeline</h2>
+      <p class="section-subtitle">Three generations of building trust, one family at a time.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">1957</div>
+          <h3>The Beginning</h3>
+          <p>Howard W. Hanna Jr. opens the first Howard Hanna Real Estate office in Cleveland, Ohio, establishing a legacy built on trust and personal service.</p>
         </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#006B3F" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Residential Sales</h3>
-            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">1975</div>
+          <h3>Regional Expansion</h3>
+          <p>Second generation joins the business. Howard Hanna expands across Ohio and Pennsylvania, becoming a dominant force in Northeast real estate.</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#006B3F" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Commercial Real Estate</h3>
-            <p>Expert commercial real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">1997</div>
+          <h3>Mortgage & Insurance</h3>
+          <p>Howard Hanna Financial Services launches, offering one-stop shopping with mortgage, insurance, and title services under one trusted name.</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#006B3F" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Mortgage Services</h3>
-            <p>Expert mortgage services services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">2001</div>
+          <h3>National Reach</h3>
+          <p>The third generation of Hanna leadership takes the helm. The company expands to 13 states with over 7,000 agents serving families nationwide.</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#006B3F" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Insurance Services</h3>
-            <p>Expert insurance services services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">2012</div>
+          <h3>Real Living Partnership</h3>
+          <p>Howard Hanna acquires Real Living, creating one of the largest residential real estate companies in America with a coast-to-coast presence.</p>
         </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600596543018-36b561de28d0?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">Pittsburgh, Pennsylvania</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">Today</div>
+          <h3>11,000+ Agents Strong</h3>
+          <p>With 500+ offices and $37B+ in annual sales, Howard Hanna remains proudly family-owned — serving families across the nation with the same values.</p>
         </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600585154939-5bb6a6b5f6e3?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">Pittsburgh, Pennsylvania</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROPERTY GRID ═══ -->
+<section class="properties" id="properties">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Featured Family Homes</div>
+      <h2 class="section-title">Discover Your Heritage</h2>
+      <p class="section-subtitle">Handpicked family homes where lasting memories are made.</p>
+    </div>
+    <div class="properties-grid">
+      <!-- Property 1 -->
+      <div class="property-card fade-in stagger-1">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600596543018-36b561de28d0?w=600&q=80" alt="Estate Colonial" loading="lazy">
+          <div class="property-badge">Heritage</div>
         </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">Pittsburgh, Pennsylvania</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div></div>
+        <div class="property-info">
+          <div class="property-price">$875,000</div>
+          <h3>The Heritage Colonial</h3>
+          <div class="property-location">Shaker Heights, OH</div>
+          <div class="property-features">
+            <span>🛏️ 5 Bed</span><span>🛁 3.5 Bath</span><span>📐 3,800 sqft</span>
+          </div>
         </div>
-    </section>
-    
-    
-            <section class="legacy">
-                <div class="container">
-                    <div class="legacy-grid">
-                        <div class="legacy-content">
-                            <div class="section-label">Our Legacy</div>
-                            <h2 class="section-title">A Tradition of Excellence</h2>
-                            <p>Since 1957, Howard Hanna Real Estate has been a cornerstone of trust in real estate. With 11,000+ agents across 500+ offices, we've helped millions find their dream homes.</p>
-                            <div class="legacy-stats">
-                                <div><strong>67+</strong><span>Years</span></div>
-                                <div><strong>11,000+</strong><span>Agents</span></div>
-                                <div><strong>500+</strong><span>Offices</span></div>
-                            </div>
-                        </div>
-                        <div class="legacy-image"><img src="https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?w=800&q=80" alt="Heritage"></div>
-                    </div>
-                </div>
-            </section>
-            <section class="community">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Community</div>
-                        <h2 class="section-title">Giving Back</h2>
-                    </div>
-                    <div class="community-content">
-                        <p>Howard Hanna Real Estate is committed to making a positive impact in the communities we serve. Through charitable initiatives, volunteer programs, and community partnerships, we strive to build stronger neighborhoods.</p>
-                        <div class="community-stats">
-                            <div><strong>$2M+</strong><span>Donated Annually</span></div>
-                            <div><strong>10K+</strong><span>Volunteer Hours</span></div>
-                            <div><strong>50+</strong><span>Partner Organizations</span></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Testimonials</div>
-                <h2 class="section-title">What Our Clients Say</h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Howard Hanna Real Estate made our home buying experience seamless. Their expertise and dedication are unmatched in the industry."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div><strong>John D.</strong><span>Home Buyer</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Professional, responsive, and truly caring. They found us the perfect home within our budget. Highly recommended!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div><strong>Sarah M.</strong><span>Home Seller</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"The best real estate experience we've ever had. Their market knowledge helped us make an informed decision."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RK</div>
-                        <div><strong>Robert K.</strong><span>Property Investor</span></div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <!-- Property 2 -->
+      <div class="property-card fade-in stagger-2">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600585154939-5bb6a6b5f6e3?w=600&q=80" alt="Family Estate" loading="lazy">
+          <div class="property-badge">New Listing</div>
         </div>
-    </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let Howard Hanna Real Estate's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
+        <div class="property-info">
+          <div class="property-price">$1,250,000</div>
+          <h3>The Hanna Family Estate</h3>
+          <div class="property-location">Fox Chapel, PA</div>
+          <div class="property-features">
+            <span>🛏️ 6 Bed</span><span>🛁 4 Bath</span><span>📐 5,200 sqft</span>
+          </div>
         </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-412-967-9000">+1-412-967-9000</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:info@howardhanna.com">info@howardhanna.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>Pittsburgh, Pennsylvania</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.howardhanna.com" target="_blank">www.howardhanna.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
+      </div>
+      <!-- Property 3 -->
+      <div class="property-card fade-in stagger-3">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=600&q=80" alt="Lakeside Home" loading="lazy">
+          <div class="property-badge">Premium</div>
         </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>Howard Hanna Real Estate</h3><p>Home is Where the Hanna Is</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-412-967-9000</p><p>info@howardhanna.com</p><p>Pittsburgh, Pennsylvania</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Howard Hanna Real Estate. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
+        <div class="property-info">
+          <div class="property-price">$699,000</div>
+          <h3>Lakeside Family Retreat</h3>
+          <div class="property-location">Chagrin Falls, OH</div>
+          <div class="property-features">
+            <span>🛏️ 4 Bed</span><span>🛁 3 Bath</span><span>📐 2,900 sqft</span>
+          </div>
         </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+      </div>
+      <!-- Property 4 -->
+      <div class="property-card fade-in stagger-4">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Modern Family" loading="lazy">
+          <div class="property-badge">Featured</div>
+        </div>
+        <div class="property-info">
+          <div class="property-price">$1,475,000</div>
+          <h3>The Modern Homestead</h3>
+          <div class="property-location">Upper Arlington, OH</div>
+          <div class="property-features">
+            <span>🛏️ 5 Bed</span><span>🛁 4.5 Bath</span><span>📐 4,500 sqft</span>
+          </div>
+        </div>
+      </div>
+      <!-- Property 5 -->
+      <div class="property-card fade-in stagger-5">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Victorian Home" loading="lazy">
+          <div class="property-badge">Historic</div>
+        </div>
+        <div class="property-info">
+          <div class="property-price">$549,000</div>
+          <h3>The Victorian Legacy</h3>
+          <div class="property-location">Beaver, PA</div>
+          <div class="property-features">
+            <span>🛏️ 4 Bed</span><span>🛁 2.5 Bath</span><span>📐 2,600 sqft</span>
+          </div>
+        </div>
+      </div>
+      <!-- Property 6 -->
+      <div class="property-card fade-in stagger-6">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Craftsman Home" loading="lazy">
+          <div class="property-badge">SOLD</div>
+        </div>
+        <div class="property-info">
+          <div class="property-price">$425,000</div>
+          <h3>The Craftsman Classic</h3>
+          <div class="property-location">Mentor, OH</div>
+          <div class="property-features">
+            <span>🛏️ 3 Bed</span><span>🛁 2 Bath</span><span>📐 2,100 sqft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMMUNITY ═══ -->
+<section class="community" id="community">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Giving Back</div>
+      <h2 class="section-title">Stronger Together</h2>
+      <p class="section-subtitle">Building stronger neighborhoods, one family at a time.</p>
+    </div>
+    <div class="community-content">
+      <p>The Howard &amp; Susan Hanna Foundation invests in the communities we call home. From supporting local schools and food banks to funding youth programs and disaster relief, we believe that when families thrive, communities flourish.</p>
+      <div class="community-stats">
+        <div class="community-stat fade-in stagger-1">
+          <span class="community-stat-num">$3.5M+</span>
+          <span class="community-stat-label">Donated Annually</span>
+        </div>
+        <div class="community-stat fade-in stagger-2">
+          <span class="community-stat-num">15,000+</span>
+          <span class="community-stat-label">Volunteer Hours</span>
+        </div>
+        <div class="community-stat fade-in stagger-3">
+          <span class="community-stat-num">75+</span>
+          <span class="community-stat-label">Partner Organizations</span>
+        </div>
+      </div>
+      <div class="community-features">
+        <div class="community-feature-card fade-in stagger-1">
+          <div class="community-feature-icon">🏫</div>
+          <h4>Education First</h4>
+          <p>Funding scholarships and school programs for the next generation of leaders.</p>
+        </div>
+        <div class="community-feature-card fade-in stagger-2">
+          <div class="community-feature-icon">🏠</div>
+          <h4>Housing for All</h4>
+          <p>Supporting Habitat for Humanity and affordable housing initiatives.</p>
+        </div>
+        <div class="community-feature-card fade-in stagger-3">
+          <div class="community-feature-icon">🤝</div>
+          <h4>Neighbor to Neighbor</h4>
+          <p>Local volunteer programs connecting agents and families in need.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Family Voices</div>
+      <h2 class="section-title">Stories from Our Families</h2>
+      <p class="section-subtitle">Real stories from families who found their forever home with us.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in stagger-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"The Hanna family treated us like their own. Our agent understood exactly what we needed for our growing family. Finding our home in Fox Chapel was a dream come true."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MJ</div>
+          <div class="testimonial-author-info">
+            <strong>Maria & James Thornton</strong>
+            <span>Fox Chapel, PA — Homeowners since 2019</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in stagger-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"After 30 years in our first home, downsizing felt overwhelming. Howard Hanna's team made it seamless. They handled everything with the care and respect our family deserved."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RK</div>
+          <div class="testimonial-author-info">
+            <strong>Robert & Karen Mitchell</strong>
+            <span>Shaker Heights, OH — Selling Clients</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in stagger-3">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"As first-time buyers, we had so many questions. Our Howard Hanna agent was patient, knowledgeable, and genuinely invested in finding us the right home. We couldn't be happier!"</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DL</div>
+          <div class="testimonial-author-info">
+            <strong>David & Lisa Chen</strong>
+            <span>Columbus, OH — First-Time Buyers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta" id="cta">
+  <div class="container">
+    <h2>Your Family's Next Chapter<br>Starts Here</h2>
+    <p>Let the Howard Hanna family help yours find the perfect place to call home. Over 67 years of trust, service, and expertise.</p>
+    <div class="cta-actions">
+      <a href="https://www.howardhanna.com" target="_blank" class="btn btn-gold btn-large">Start Your Search</a>
+      <a href="https://www.howardhanna.com/agents" target="_blank" class="btn btn-outline">Find an Agent</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Howard <span>Hanna</span></h3>
+        <p>Home is where the Hanna is. A family-owned real estate company serving families across the nation since 1957.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Twitter">🐦</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#about">Our Story</a>
+        <a href="#timeline">Heritage</a>
+        <a href="#properties">Homes</a>
+        <a href="#community">Community</a>
+        <a href="#testimonials">Reviews</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Buy a Home</a>
+        <a href="#">Sell a Home</a>
+        <a href="#">Mortgage</a>
+        <a href="#">Insurance</a>
+        <a href="#">Title Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>11501 Mayfield Rd<br>Cleveland, OH 44104</p>
+        <p style="margin-top:12px"><a href="tel:+18002824262">1-800-282-4262</a></p>
+        <p><a href="mailto:info@howardhanna.com">info@howardhanna.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Howard Hanna Real Estate. All rights reserved.</span>
+      <span class="footer-credit">Demo site built by <a href="#">Alok Web Services</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ FLOATING HOME ICON ═══ -->
+<div class="floating-home" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})" title="Back to top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+</div>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  const spans = navToggle.querySelectorAll('span');
+  if (navLinks.classList.contains('active')) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px,5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px,-5px)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+});
+// Close nav on link click
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    const spans = navToggle.querySelectorAll('span');
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  });
+});
+
+// Intersection Observer for fade-in animations
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .timeline-item').forEach(el => {
+  observer.observe(el);
+});
+
+// Parallax on hero stats
+window.addEventListener('scroll', () => {
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) {
+    const scrolled = window.scrollY;
+    heroStats.style.transform = `translateY(${scrolled * 0.05}px)`;
+  }
+});
+
+// Animate counters on hero
+function animateValue(el, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * (end - start) + start);
+    if (progress < 1) window.requestAnimationFrame(step);
+  };
+  window.requestAnimationFrame(step);
+}
+</script>
 </body>
 </html>
