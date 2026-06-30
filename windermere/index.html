@@ -6,1855 +6,1486 @@
 <title>Windermere Real Estate | Pacific Northwest's Finest Since 1972</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+/* ===== CSS VARIABLES ===== */
 :root {
---primary: #2D5F2D;
---primary-dark: #1A3A1A;
---primary-light: #3D7A3D;
---secondary: #8B6914;
---accent: #D4A84B;
---cream: #FFF8F0;
---warm-white: #FFFDF9;
---bark: #4A3728;
---bark-light: #6B5344;
---moss: #4A6741;
---sage: #7D9472;
---pine: #2C4A2C;
---gold-light: #F5E6C8;
---shadow: rgba(45, 95, 45, 0.15);
+  --green: #2D5016;
+  --green-dark: #1a3a0e;
+  --green-light: #3D7A2D;
+  --brown: #8B6914;
+  --brown-light: #A88020;
+  --cream: #FAF5E4;
+  --cream-dark: #EDE5CC;
+  --dark: #1a1a1a;
+  --white: #fff;
+  --gold: #D4A84B;
+  --shadow: 0 4px 20px rgba(0,0,0,0.15);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.2);
 }
+
+/* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-font-family: 'Nunito', sans-serif;
-color: #333;
-background: var(--cream);
-overflow-x: hidden;
-line-height: 1.7;
+  font-family: 'Nunito', sans-serif;
+  color: var(--dark);
+  background: var(--cream);
+  overflow-x: hidden;
+  line-height: 1.7;
 }
 h1, h2, h3, h4, h5 {
-font-family: 'Playfair Display', serif;
-color: var(--primary-dark);
-line-height: 1.3;
+  font-family: 'Playfair Display', serif;
+  color: var(--green-dark);
+  line-height: 1.3;
 }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== SECTION UTILITIES ===== */
 .section-label {
-display: inline-flex;
-align-items: center;
-gap: 10px;
-font-size: 0.8rem;
-text-transform: uppercase;
-letter-spacing: 3px;
-color: var(--secondary);
-font-weight: 700;
-margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--brown);
+  font-weight: 700;
+  margin-bottom: 16px;
 }
 .section-label::before, .section-label::after {
-content: '';
-width: 30px;
-height: 2px;
-background: var(--accent);
+  content: '';
+  width: 30px;
+  height: 2px;
+  background: var(--gold);
 }
 .section-title {
-font-size: clamp(2rem, 4vw, 3rem);
-margin-bottom: 20px;
-color: var(--primary-dark);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 20px;
+  color: var(--green-dark);
 }
 .section-subtitle {
-font-size: 1.1rem;
-color: #666;
-max-width: 650px;
-line-height: 1.8;
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 650px;
+  line-height: 1.8;
 }
+
 /* ===== NAVIGATION ===== */
 .navbar {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-z-index: 1000;
-padding: 20px 0;
-transition: all 0.4s ease;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: all 0.4s ease;
 }
 .navbar.scrolled {
-background: var(--primary-dark);
-padding: 12px 0;
-box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  background: rgba(26, 58, 14, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 12px 0;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
 }
 .navbar .container {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .nav-logo {
-display: flex;
-align-items: center;
-gap: 12px;
-color: #fff;
-font-family: 'Playfair Display', serif;
-font-size: 1.4rem;
-font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 .nav-logo .logo-icon {
-width: 48px;
-height: 48px;
-background: var(--accent);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-color: var(--primary-dark);
+  width: 48px; height: 48px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--green-dark);
 }
 .nav-links {
-display: flex;
-list-style: none;
-gap: 32px;
-align-items: center;
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  align-items: center;
 }
 .nav-links a {
-color: rgba(255,255,255,0.9);
-font-weight: 600;
-font-size: 0.9rem;
-text-transform: uppercase;
-letter-spacing: 1px;
-transition: color 0.3s;
-position: relative;
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+  position: relative;
 }
 .nav-links a::after {
-content: '';
-position: absolute;
-bottom: -4px;
-left: 0;
-width: 0;
-height: 2px;
-background: var(--accent);
-transition: width 0.3s;
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.3s;
 }
-.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover { color: var(--gold); }
 .nav-links a:hover::after { width: 100%; }
 .nav-cta {
-background: var(--accent) !important;
-color: var(--primary-dark) !important;
-padding: 10px 24px;
-border-radius: 30px;
-font-weight: 700 !important;
-transition: transform 0.3s, box-shadow 0.3s !important;
+  background: var(--gold) !important;
+  color: var(--green-dark) !important;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 700 !important;
+  transition: transform 0.3s, box-shadow 0.3s !important;
 }
 .nav-cta:hover {
-transform: translateY(-2px);
-box-shadow: 0 6px 20px rgba(212, 168, 75, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 168, 75, 0.4);
 }
 .nav-cta::after { display: none !important; }
 .hamburger {
-display: none;
-flex-direction: column;
-gap: 5px;
-cursor: pointer;
-z-index: 1001;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+  background: none;
+  border: none;
 }
 .hamburger span {
-width: 28px;
-height: 2px;
-background: #fff;
-transition: 0.3s;
+  width: 28px; height: 2px;
+  background: #fff;
+  transition: 0.3s;
 }
+
 /* ===== HERO ===== */
 .hero {
-position: relative;
-height: 100vh;
-min-height: 700px;
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-background:
-linear-gradient(135deg, rgba(26, 58, 26, 0.85), rgba(45, 95, 45, 0.7), rgba(26, 58, 26, 0.8)),
-url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%232D5F2D" width="1200" height="800"/><circle cx="200" cy="300" r="150" fill="%231A3A1A" opacity="0.3"/><circle cx="800" cy="200" r="200" fill="%232C4A2C" opacity="0.4"/><rect x="500" y="400" width="300" height="400" rx="8" fill="%234A6741" opacity="0.3"/><polygon points="600,100 700,350 500,350" fill="%232D5F2D" opacity="0.5"/><polygon points="750,150 850,380 650,380" fill="%231A3A1A" opacity="0.4"/><polygon points="450,200 550,400 350,400" fill="%232C4A2C" opacity="0.35"/></svg>');
-background-size: cover;
-background-position: center;
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-.hero::before {
-content: '';
-position: absolute;
-inset: 0;
-background:
-radial-gradient(ellipse at 20% 80%, rgba(212, 168, 75, 0.15) 0%, transparent 50%),
-radial-gradient(ellipse at 80% 20%, rgba(45, 95, 45, 0.2) 0%, transparent 50%);
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
 }
-.hero-particles {
-position: absolute;
-inset: 0;
-overflow: hidden;
-pointer-events: none;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26,58,14,0.85) 0%, rgba(45,80,22,0.7) 50%, rgba(26,58,14,0.8) 100%);
+  z-index: 1;
 }
-.particle {
-position: absolute;
-width: 4px;
-height: 4px;
-background: rgba(212, 168, 75, 0.4);
-border-radius: 50%;
-animation: float-particle linear infinite;
+/* Floating 3D Mountain shapes */
+.mountain-layer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 250px;
+  z-index: 2;
+  pointer-events: none;
 }
-@keyframes float-particle {
-0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-10% { opacity: 1; }
-90% { opacity: 1; }
-100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+.mountain {
+  position: absolute;
+  bottom: 0;
+  width: 0; height: 0;
+  opacity: 0.15;
 }
+.mountain-1 {
+  left: 5%;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-bottom: 220px solid var(--cream);
+  transform: perspective(500px) rotateX(10deg);
+  animation: mountainFloat 8s ease-in-out infinite;
+}
+.mountain-2 {
+  left: 30%;
+  border-left: 300px solid transparent;
+  border-right: 300px solid transparent;
+  border-bottom: 320px solid var(--gold);
+  opacity: 0.08;
+  transform: perspective(500px) rotateX(5deg);
+  animation: mountainFloat 10s ease-in-out infinite 1s;
+}
+.mountain-3 {
+  right: 10%;
+  border-left: 180px solid transparent;
+  border-right: 180px solid transparent;
+  border-bottom: 200px solid var(--cream);
+  transform: perspective(500px) rotateX(8deg);
+  animation: mountainFloat 7s ease-in-out infinite 2s;
+}
+@keyframes mountainFloat {
+  0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+  50% { transform: perspective(500px) rotateX(10deg) translateY(-15px); }
+}
+
+/* Hero Content */
 .hero-content {
-position: relative;
-z-index: 2;
-text-align: center;
-color: #fff;
-max-width: 800px;
-padding: 0 24px;
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  padding: 0 24px;
 }
 .hero-badge {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-background: rgba(212, 168, 75, 0.2);
-border: 1px solid rgba(212, 168, 75, 0.4);
-padding: 8px 20px;
-border-radius: 30px;
-font-size: 0.85rem;
-font-weight: 600;
-letter-spacing: 2px;
-text-transform: uppercase;
-color: var(--accent);
-margin-bottom: 24px;
-backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 168, 75, 0.2);
+  border: 1px solid rgba(212, 168, 75, 0.4);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
 }
 .hero h1 {
-font-size: clamp(2.8rem, 6vw, 4.5rem);
-font-weight: 900;
-line-height: 1.1;
-margin-bottom: 20px;
-text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.3);
 }
 .hero h1 span {
-color: var(--accent);
-display: block;
-font-style: italic;
+  color: var(--gold);
+  display: block;
+  font-style: italic;
 }
 .hero p {
-font-size: 1.2rem;
-opacity: 0.9;
-max-width: 600px;
-margin: 0 auto 36px;
-line-height: 1.8;
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
 }
 .hero-buttons {
-display: flex;
-gap: 16px;
-justify-content: center;
-flex-wrap: wrap;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .btn {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-padding: 16px 36px;
-border-radius: 50px;
-font-family: 'Nunito', sans-serif;
-font-weight: 700;
-font-size: 1rem;
-cursor: pointer;
-transition: all 0.3s;
-border: none;
-text-transform: uppercase;
-letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 .btn-primary {
-background: var(--accent);
-color: var(--primary-dark);
+  background: var(--gold);
+  color: var(--green-dark);
 }
 .btn-primary:hover {
-background: var(--secondary);
-transform: translateY(-3px);
-box-shadow: 0 10px 30px rgba(212, 168, 75, 0.4);
+  background: var(--brown);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(212, 168, 75, 0.4);
 }
 .btn-outline {
-background: transparent;
-color: #fff;
-border: 2px solid rgba(255,255,255,0.4);
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
 }
 .btn-outline:hover {
-background: rgba(255,255,255,0.1);
-border-color: #fff;
-transform: translateY(-3px);
+  background: rgba(255,255,255,0.1);
+  border-color: #fff;
+  transform: translateY(-3px);
 }
 .hero-stats {
-display: flex;
-justify-content: center;
-gap: 48px;
-margin-top: 60px;
-padding-top: 40px;
-border-top: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.15);
 }
-.hero-stat {
-text-align: center;
-}
+.hero-stat { text-align: center; }
 .hero-stat .number {
-font-family: 'Playfair Display', serif;
-font-size: 2.4rem;
-font-weight: 700;
-color: var(--accent);
-display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
 }
 .hero-stat .label {
-font-size: 0.85rem;
-opacity: 0.7;
-text-transform: uppercase;
-letter-spacing: 1px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 .scroll-indicator {
-position: absolute;
-bottom: 30px;
-left: 50%;
-transform: translateX(-50%);
-z-index: 2;
-animation: bounce 2s infinite;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: bounce 2s infinite;
 }
 .scroll-indicator svg { width: 30px; height: 30px; fill: rgba(255,255,255,0.6); }
 @keyframes bounce {
-0%, 100% { transform: translateX(-50%) translateY(0); }
-50% { transform: translateX(-50%) translateY(10px); }
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
 }
-/* ===== ABOUT ===== */
-.about {
-padding: 100px 0;
-background: var(--warm-white);
+
+/* ===== PNW LIFESTYLE ===== */
+.lifestyle {
+  padding: 100px 0;
+  background: var(--white);
+  position: relative;
 }
-.about-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 60px;
-align-items: center;
-margin-top: 48px;
+.lifestyle-header {
+  text-align: center;
+  margin-bottom: 60px;
 }
-.about-image {
-position: relative;
-border-radius: 20px;
-overflow: hidden;
-height: 450px;
-background:
-linear-gradient(135deg, var(--primary), var(--moss)),
-url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400"><rect fill="%232D5F2D" width="500" height="400"/><polygon points="250,50 350,200 150,200" fill="%231A3A1A" opacity="0.6"/><polygon points="350,80 430,220 270,220" fill="%234A6741" opacity="0.5"/><rect x="100" y="220" width="300" height="180" rx="4" fill="%233D7A3D" opacity="0.3"/><ellipse cx="80" cy="280" rx="60" ry="40" fill="%232C4A2C" opacity="0.4"/><ellipse cx="420" cy="260" rx="80" ry="50" fill="%231A3A1A" opacity="0.3"/></svg>');
-background-size: cover;
+.lifestyle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 48px;
 }
-.about-image::after {
-content: '';
-position: absolute;
-inset: 0;
-background: linear-gradient(to top, rgba(26, 58, 26, 0.4), transparent 50%);
+.lifestyle-card {
+  perspective: 1000px;
+  height: 380px;
 }
-.about-image-badge {
-position: absolute;
-bottom: 24px;
-left: 24px;
-background: rgba(26, 58, 26, 0.9);
-backdrop-filter: blur(10px);
-color: #fff;
-padding: 16px 24px;
-border-radius: 12px;
-border-left: 4px solid var(--accent);
-z-index: 2;
+.lifestyle-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
 }
-.about-image-badge .year {
-font-family: 'Playfair Display', serif;
-font-size: 2rem;
-color: var(--accent);
-font-weight: 700;
+.lifestyle-card:hover .lifestyle-card-inner {
+  transform: rotateY(8deg) rotateX(-3deg) scale(1.02);
 }
-.about-image-badge .text {
-font-size: 0.85rem;
-opacity: 0.8;
+.lifestyle-card-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
 }
-.about-content h2 {
-font-size: 2.4rem;
-margin-bottom: 24px;
+.lifestyle-card-icon {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 60px;
+  height: 60px;
+  background: rgba(212, 168, 75, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
-.about-content p {
-color: #555;
-line-height: 1.9;
-margin-bottom: 16px;
+.lifestyle-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(26,58,14,0.95), transparent);
+  color: #fff;
 }
-.about-features {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 16px;
-margin-top: 28px;
+.lifestyle-card h3 {
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 8px;
 }
-.about-feature {
-display: flex;
-align-items: center;
-gap: 12px;
-padding: 14px 18px;
-background: rgba(45, 95, 45, 0.06);
-border-radius: 12px;
-border-left: 3px solid var(--primary);
+.lifestyle-card p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.6;
 }
-.about-feature .icon {
-width: 36px;
-height: 36px;
-background: var(--primary);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: #fff;
-font-size: 1rem;
-flex-shrink: 0;
+
+/* ===== PROPERTY GRID ===== */
+.properties {
+  padding: 100px 0;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
 }
-.about-feature span {
-font-weight: 600;
-font-size: 0.9rem;
-color: var(--primary-dark);
+.properties::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(45,80,22,0.05) 0%, transparent 70%);
+  border-radius: 50%;
 }
+.properties-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+}
+.property-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.property-card:hover {
+  transform: translateY(-8px) rotateX(2deg);
+  box-shadow: var(--shadow-lg);
+}
+.property-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+}
+.property-image-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  opacity: 0.2;
+  color: #fff;
+}
+.property-badge {
+  position: absolute;
+  top: 16px; left: 16px;
+  background: var(--gold);
+  color: var(--green-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.property-price-tag {
+  position: absolute;
+  bottom: 16px; right: 16px;
+  background: rgba(26, 58, 14, 0.9);
+  backdrop-filter: blur(10px);
+  color: var(--gold);
+  padding: 8px 20px;
+  border-radius: 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.property-info {
+  padding: 24px;
+}
+.property-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: var(--green-dark);
+}
+.property-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--brown);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.property-features {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.property-feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #666;
+  background: var(--cream);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.property-desc {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
 /* ===== COMMUNITY ===== */
 .community {
-padding: 100px 0;
-background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--pine));
-color: #fff;
-position: relative;
-overflow: hidden;
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--green-dark), var(--green), #2C4A2C);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
 }
 .community::before {
-content: '';
-position: absolute;
-inset: 0;
-background:
-url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(212,168,75,0.08)" stroke-width="1"/></svg>') repeat;
-background-size: 200px;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(212, 168, 75, 0.1) 0%, transparent 50%);
 }
 .community .container { position: relative; z-index: 1; }
 .community-header { text-align: center; margin-bottom: 60px; }
-.community-header .section-label { color: var(--accent); }
+.community-header .section-label { color: var(--gold); }
 .community-header .section-title { color: #fff; }
 .community-header .section-subtitle { color: rgba(255,255,255,0.8); margin: 0 auto; }
 .community-stats {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 30px;
-margin-bottom: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
 }
 .community-stat {
-text-align: center;
-padding: 32px 20px;
-background: rgba(255,255,255,0.08);
-border-radius: 16px;
-backdrop-filter: blur(10px);
-border: 1px solid rgba(255,255,255,0.1);
-transition: transform 0.3s;
+  text-align: center;
+  padding: 32px 20px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s;
 }
 .community-stat:hover { transform: translateY(-5px); }
 .community-stat .stat-icon {
-width: 56px;
-height: 56px;
-background: var(--accent);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 0 auto 16px;
-font-size: 1.5rem;
+  width: 56px; height: 56px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 1.5rem;
 }
 .community-stat .stat-number {
-font-family: 'Playfair Display', serif;
-font-size: 2.2rem;
-font-weight: 700;
-color: var(--accent);
-display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
 }
 .community-stat .stat-label {
-font-size: 0.9rem;
-opacity: 0.8;
-margin-top: 4px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 4px;
 }
 .community-highlight {
-background: rgba(212, 168, 75, 0.1);
-border: 1px solid rgba(212, 168, 75, 0.3);
-border-radius: 20px;
-padding: 40px;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 40px;
-align-items: center;
+  background: rgba(212, 168, 75, 0.1);
+  border: 1px solid rgba(212, 168, 75, 0.3);
+  border-radius: 20px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
 }
 .community-highlight h3 {
-font-size: 1.8rem;
-color: #fff;
-margin-bottom: 16px;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 16px;
 }
 .community-highlight p {
-color: rgba(255,255,255,0.8);
-line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.8;
 }
 .community-highlight .charities {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
 }
 .charity-tag {
-background: rgba(212, 168, 75, 0.2);
-border: 1px solid rgba(212, 168, 75, 0.3);
-padding: 6px 16px;
-border-radius: 20px;
-font-size: 0.85rem;
-color: var(--accent);
-font-weight: 600;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255,255,255,0.2);
 }
-/* ===== SERVICES ===== */
-.services {
-padding: 100px 0;
-background: var(--cream);
+.community-highlight-image {
+  height: 280px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  opacity: 0.6;
 }
-.services-header {
-text-align: center;
-margin-bottom: 60px;
-}
-.services-header .section-subtitle { margin: 0 auto; }
-.services-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 30px;
-}
-.service-card {
-background: #fff;
-border-radius: 20px;
-padding: 40px 32px;
-border: 1px solid rgba(45, 95, 45, 0.1);
-transition: all 0.4s;
-position: relative;
-overflow: hidden;
-}
-.service-card::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-height: 4px;
-background: linear-gradient(90deg, var(--primary), var(--accent));
-transform: scaleX(0);
-transition: transform 0.4s;
-}
-.service-card:hover {
-transform: translateY(-8px);
-box-shadow: 0 20px 50px var(--shadow);
-}
-.service-card:hover::before { transform: scaleX(1); }
-.service-icon {
-width: 64px;
-height: 64px;
-background: linear-gradient(135deg, var(--primary), var(--moss));
-border-radius: 16px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.6rem;
-color: #fff;
-margin-bottom: 24px;
-}
-.service-card h3 {
-font-size: 1.3rem;
-margin-bottom: 12px;
-}
-.service-card p {
-color: #666;
-font-size: 0.95rem;
-line-height: 1.8;
-}
-.service-card .learn-more {
-display: inline-flex;
-align-items: center;
-gap: 6px;
-margin-top: 16px;
-color: var(--primary);
-font-weight: 700;
-font-size: 0.9rem;
-transition: gap 0.3s;
-}
-.service-card:hover .learn-more { gap: 12px; }
-/* ===== PROPERTIES ===== */
-.properties {
-padding: 100px 0;
-background: var(--warm-white);
-}
-.properties-header {
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-margin-bottom: 60px;
-}
-.properties-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 30px;
-}
-.property-card {
-background: #fff;
-border-radius: 20px;
-overflow: hidden;
-border: 1px solid rgba(45, 95, 45, 0.08);
-transition: all 0.4s;
-}
-.property-card:hover {
-transform: translateY(-8px);
-box-shadow: 0 20px 50px var(--shadow);
-}
-.property-image {
-height: 260px;
-position: relative;
-overflow: hidden;
-}
-.property-image .img-placeholder {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-.property-tag {
-position: absolute;
-top: 16px;
-left: 16px;
-background: var(--primary);
-color: #fff;
-padding: 6px 16px;
-border-radius: 20px;
-font-size: 0.8rem;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-.property-price {
-position: absolute;
-bottom: 16px;
-right: 16px;
-background: rgba(26, 58, 26, 0.9);
-backdrop-filter: blur(10px);
-color: var(--accent);
-padding: 8px 18px;
-border-radius: 10px;
-font-family: 'Playfair Display', serif;
-font-size: 1.3rem;
-font-weight: 700;
-}
-.property-details {
-padding: 24px;
-}
-.property-details h3 {
-font-size: 1.2rem;
-margin-bottom: 8px;
-}
-.property-details .location {
-color: var(--sage);
-font-size: 0.9rem;
-margin-bottom: 16px;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-.property-features {
-display: flex;
-gap: 20px;
-padding-top: 16px;
-border-top: 1px solid #eee;
-}
-.property-feature {
-display: flex;
-align-items: center;
-gap: 6px;
-font-size: 0.85rem;
-color: #666;
-}
-.property-feature .feat-icon {
-color: var(--primary);
-}
-/* ===== AWARDS ===== */
-.awards {
-padding: 100px 0;
-background: linear-gradient(135deg, #F5E6C8, #FFF8F0, #F5E6C8);
-}
-.awards-header { text-align: center; margin-bottom: 60px; }
-.awards-header .section-subtitle { margin: 0 auto; }
-.awards-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 24px;
-}
-.award-card {
-background: #fff;
-border-radius: 16px;
-padding: 32px 24px;
-text-align: center;
-border: 1px solid rgba(139, 105, 20, 0.15);
-transition: all 0.3s;
-position: relative;
-overflow: hidden;
-}
-.award-card::after {
-content: '';
-position: absolute;
-bottom: 0;
-left: 0;
-right: 0;
-height: 4px;
-background: linear-gradient(90deg, var(--secondary), var(--accent));
-}
-.award-card:hover {
-transform: translateY(-5px);
-box-shadow: 0 15px 40px rgba(139, 105, 20, 0.15);
-}
-.award-badge {
-width: 72px;
-height: 72px;
-background: linear-gradient(135deg, var(--secondary), var(--accent));
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 0 auto 16px;
-font-size: 1.8rem;
-color: #fff;
-box-shadow: 0 4px 15px rgba(139, 105, 20, 0.3);
-}
-.award-card h4 {
-font-size: 1rem;
-margin-bottom: 8px;
-color: var(--bark);
-}
-.award-card p {
-font-size: 0.85rem;
-color: #888;
-}
-.award-year {
-display: inline-block;
-margin-top: 12px;
-background: var(--gold-light);
-color: var(--secondary);
-padding: 4px 14px;
-border-radius: 20px;
-font-size: 0.8rem;
-font-weight: 700;
-}
-/* ===== PROCESS ===== */
-.process {
-padding: 100px 0;
-background: var(--warm-white);
-}
-.process-header { text-align: center; margin-bottom: 60px; }
-.process-header .section-subtitle { margin: 0 auto; }
-.timeline {
-position: relative;
-max-width: 700px;
-margin: 0 auto;
-}
-.timeline::before {
-content: '';
-position: absolute;
-left: 50%;
-transform: translateX(-50%);
-width: 3px;
-height: 100%;
-background: linear-gradient(to bottom, var(--primary), var(--accent), var(--primary));
-border-radius: 3px;
-}
-.timeline-item {
-display: flex;
-align-items: flex-start;
-margin-bottom: 50px;
-position: relative;
-}
-.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
-.timeline-item .timeline-content {
-width: calc(50% - 40px);
-background: #fff;
-padding: 28px;
-border-radius: 16px;
-box-shadow: 0 8px 30px var(--shadow);
-border: 1px solid rgba(45, 95, 45, 0.08);
-transition: transform 0.3s;
-}
-.timeline-item .timeline-content:hover { transform: translateY(-3px); }
-.timeline-dot {
-position: absolute;
-left: 50%;
-transform: translateX(-50%);
-width: 20px;
-height: 20px;
-background: var(--accent);
-border: 4px solid var(--primary);
-border-radius: 50%;
-z-index: 2;
-}
-.timeline-step {
-display: inline-block;
-background: var(--primary);
-color: #fff;
-padding: 4px 14px;
-border-radius: 20px;
-font-size: 0.8rem;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 1px;
-margin-bottom: 12px;
-}
-.timeline-content h4 {
-font-size: 1.1rem;
-margin-bottom: 8px;
-}
-.timeline-content p {
-color: #666;
-font-size: 0.95rem;
-line-height: 1.7;
-}
+
 /* ===== TESTIMONIALS ===== */
 .testimonials {
-padding: 100px 0;
-background: var(--primary-dark);
-position: relative;
-overflow: hidden;
+  padding: 100px 0;
+  background: var(--white);
 }
-.testimonials::before {
-content: '';
-position: absolute;
-inset: 0;
-background: radial-gradient(ellipse at 30% 50%, rgba(45, 95, 45, 0.5), transparent 70%);
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 60px;
 }
-.testimonials .container { position: relative; z-index: 1; }
-.testimonials-header { text-align: center; margin-bottom: 60px; }
-.testimonials-header .section-label { color: var(--accent); }
-.testimonials-header .section-title { color: #fff; }
-.testimonials-header .section-subtitle { color: rgba(255,255,255,0.7); margin: 0 auto; }
 .testimonials-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
 }
 .testimonial-card {
-background: rgba(255,255,255,0.05);
-border: 2px solid rgba(45, 95, 45, 0.4);
-border-radius: 20px;
-padding: 36px;
-backdrop-filter: blur(10px);
-transition: all 0.3s;
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 36px;
+  position: relative;
+  border: 1px solid var(--cream-dark);
+  transition: all 0.4s ease;
+  transform-style: preserve-3d;
+  perspective: 800px;
 }
 .testimonial-card:hover {
-background: rgba(255,255,255,0.08);
-border-color: var(--accent);
-transform: translateY(-5px);
+  transform: translateY(-5px) rotateY(3deg);
+  box-shadow: var(--shadow-lg);
 }
-.testimonial-quote {
-font-size: 2rem;
-color: var(--accent);
-margin-bottom: 16px;
-font-family: 'Playfair Display', serif;
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: 20px; left: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: 0.2;
+  line-height: 1;
 }
-.testimonial-card p {
-color: rgba(255,255,255,0.85);
-font-size: 1rem;
-line-height: 1.8;
-margin-bottom: 24px;
-font-style: italic;
+.testimonial-text {
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
 }
 .testimonial-author {
-display: flex;
-align-items: center;
-gap: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 .testimonial-avatar {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-background: linear-gradient(135deg, var(--primary), var(--moss));
-display: flex;
-align-items: center;
-justify-content: center;
-color: #fff;
-font-weight: 700;
-font-size: 1.1rem;
-border: 2px solid var(--accent);
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
-.testimonial-info .name {
-color: #fff;
-font-weight: 700;
-font-size: 1rem;
+.testimonial-name {
+  font-weight: 700;
+  color: var(--green-dark);
+  font-size: 1rem;
 }
-.testimonial-info .role {
-color: var(--accent);
-font-size: 0.85rem;
+.testimonial-role {
+  font-size: 0.85rem;
+  color: var(--brown);
 }
 .testimonial-stars {
-color: var(--accent);
-font-size: 0.9rem;
-margin-bottom: 12px;
+  color: var(--gold);
+  margin-top: 4px;
+  font-size: 0.9rem;
 }
-/* ===== CONTACT ===== */
-.contact {
-padding: 100px 0;
-background: linear-gradient(135deg, var(--primary), var(--pine));
-position: relative;
+
+/* ===== CTA ===== */
+.cta {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, var(--green-light) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
-.contact .container {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 60px;
-align-items: start;
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(212, 168, 75, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
 }
-.contact-info { color: #fff; }
-.contact-info .section-label { color: var(--accent); }
-.contact-info .section-title { color: #fff; margin-bottom: 24px; }
-.contact-info > p {
-color: rgba(255,255,255,0.8);
-line-height: 1.8;
-margin-bottom: 32px;
+.cta-content {
+  position: relative;
+  z-index: 1;
 }
-.contact-details {
-display: flex;
-flex-direction: column;
-gap: 20px;
+.cta h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+  margin-bottom: 16px;
 }
-.contact-item {
-display: flex;
-align-items: center;
-gap: 16px;
-padding: 16px;
-background: rgba(255,255,255,0.08);
-border-radius: 12px;
-border-left: 3px solid var(--accent);
-transition: background 0.3s;
+.cta p {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
 }
-.contact-item:hover { background: rgba(255,255,255,0.12); }
-.contact-item .icon {
-width: 44px;
-height: 44px;
-background: var(--accent);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: var(--primary-dark);
-font-size: 1.1rem;
-flex-shrink: 0;
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.contact-item .text {
-font-weight: 600;
-font-size: 0.95rem;
+.cta .btn-primary {
+  background: var(--gold);
+  color: var(--green-dark);
 }
-.contact-item .sub {
-font-size: 0.8rem;
-opacity: 0.7;
-margin-top: 2px;
+.cta .btn-outline {
+  border-color: rgba(255,255,255,0.5);
 }
-.contact-form {
-background: var(--cream);
-border-radius: 20px;
-padding: 40px;
-box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-}
-.contact-form h3 {
-font-size: 1.6rem;
-margin-bottom: 8px;
-}
-.contact-form .form-subtitle {
-color: #888;
-margin-bottom: 28px;
-}
-.form-group {
-margin-bottom: 20px;
-}
-.form-group label {
-display: block;
-font-weight: 700;
-font-size: 0.9rem;
-color: var(--primary-dark);
-margin-bottom: 8px;
-}
-.form-group input,
-.form-group textarea,
-.form-group select {
-width: 100%;
-padding: 14px 18px;
-border: 2px solid #e0d8cc;
-border-radius: 12px;
-font-family: 'Nunito', sans-serif;
-font-size: 0.95rem;
-transition: border-color 0.3s;
-background: #fff;
-}
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-outline: none;
-border-color: var(--primary);
-box-shadow: 0 0 0 4px rgba(45, 95, 45, 0.1);
-}
-.form-group textarea { resize: vertical; min-height: 120px; }
-.form-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 16px;
-}
-.form-submit {
-width: 100%;
-padding: 16px;
-background: var(--primary);
-color: #fff;
-border: none;
-border-radius: 12px;
-font-family: 'Nunito', sans-serif;
-font-size: 1rem;
-font-weight: 700;
-cursor: pointer;
-transition: all 0.3s;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-.form-submit:hover {
-background: var(--primary-dark);
-transform: translateY(-2px);
-box-shadow: 0 8px 25px rgba(45, 95, 45, 0.3);
-}
+
 /* ===== FOOTER ===== */
 .footer {
-background: linear-gradient(135deg, #0D1F0D, #1A3A1A);
-color: #fff;
-padding: 80px 0 0;
+  background: var(--dark);
+  color: rgba(255,255,255,0.7);
+  padding: 80px 0 0;
 }
 .footer-grid {
-display: grid;
-grid-template-columns: 2fr 1fr 1fr 1fr;
-gap: 40px;
-margin-bottom: 60px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 60px;
 }
-.footer-brand .footer-logo {
-display: flex;
-align-items: center;
-gap: 12px;
-margin-bottom: 20px;
-}
-.footer-logo .logo-icon {
-width: 48px;
-height: 48px;
-background: var(--accent);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-color: var(--primary-dark);
-}
-.footer-logo h4 {
-font-family: 'Playfair Display', serif;
-font-size: 1.3rem;
-color: #fff;
+.footer-brand .nav-logo {
+  margin-bottom: 16px;
 }
 .footer-brand p {
-color: rgba(255,255,255,0.6);
-line-height: 1.8;
-font-size: 0.95rem;
-margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
 }
 .footer-social {
-display: flex;
-gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 .footer-social a {
-width: 40px;
-height: 40px;
-background: rgba(255,255,255,0.08);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: rgba(255,255,255,0.7);
-transition: all 0.3s;
-font-size: 0.9rem;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.3s;
+  font-size: 1.1rem;
 }
 .footer-social a:hover {
-background: var(--accent);
-color: var(--primary-dark);
+  background: var(--gold);
+  color: var(--green-dark);
+  transform: translateY(-3px);
 }
-.footer-col h5 {
-font-family: 'Playfair Display', serif;
-color: var(--accent);
-font-size: 1.1rem;
-margin-bottom: 20px;
+.footer-col h4 {
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 }
 .footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 12px; }
-.footer-col ul a {
-color: rgba(255,255,255,0.6);
-font-size: 0.9rem;
-transition: color 0.3s;
+.footer-col li { margin-bottom: 12px; }
+.footer-col a {
+  font-size: 0.9rem;
+  transition: color 0.3s;
 }
-.footer-col ul a:hover { color: var(--accent); }
-.footer-newsletter {
-margin-top: 16px;
-}
-.footer-newsletter input {
-width: 100%;
-padding: 12px 16px;
-background: rgba(255,255,255,0.08);
-border: 1px solid rgba(255,255,255,0.15);
-border-radius: 10px;
-color: #fff;
-font-family: 'Nunito', sans-serif;
-margin-bottom: 10px;
-}
-.footer-newsletter input::placeholder { color: rgba(255,255,255,0.4); }
-.footer-newsletter button {
-width: 100%;
-padding: 12px;
-background: var(--accent);
-color: var(--primary-dark);
-border: none;
-border-radius: 10px;
-font-family: 'Nunito', sans-serif;
-font-weight: 700;
-cursor: pointer;
-transition: background 0.3s;
-}
-.footer-newsletter button:hover { background: var(--secondary); }
+.footer-col a:hover { color: var(--gold); }
 .footer-bottom {
-border-top: 1px solid rgba(255,255,255,0.1);
-padding: 24px 0;
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-wrap: wrap;
-gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
 }
-.footer-bottom p {
-color: rgba(255,255,255,0.4);
-font-size: 0.85rem;
+.footer-bottom p { font-size: 0.85rem; }
+.footer-credit { color: var(--gold); font-weight: 600; }
+
+/* ===== 3D TREE DECORATIONS ===== */
+.tree-deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
 }
-.footer-bottom .credit {
-color: var(--accent);
-font-weight: 600;
+.tree-deco svg {
+  opacity: 0.04;
 }
+.tree-left {
+  left: -60px;
+  top: 20%;
+  transform: rotate(-5deg);
+}
+.tree-right {
+  right: -60px;
+  top: 40%;
+  transform: rotate(5deg);
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+/* ===== PARALLAX MOUNTAINS ===== */
+.parallax-mountains {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 300px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.p-mountain {
+  position: absolute;
+  bottom: 0;
+  border-left: solid transparent;
+  border-right: solid transparent;
+  border-bottom: solid;
+}
+.p-mountain-1 {
+  left: -5%;
+  border-left-width: 350px;
+  border-right-width: 350px;
+  border-bottom-width: 280px;
+  border-bottom-color: rgba(45, 80, 22, 0.06);
+  animation: pFloat1 12s ease-in-out infinite;
+}
+.p-mountain-2 {
+  left: 25%;
+  border-left-width: 450px;
+  border-right-width: 450px;
+  border-bottom-width: 350px;
+  border-bottom-color: rgba(139, 105, 20, 0.04);
+  animation: pFloat2 15s ease-in-out infinite;
+}
+.p-mountain-3 {
+  right: -10%;
+  border-left-width: 300px;
+  border-right-width: 300px;
+  border-bottom-width: 250px;
+  border-bottom-color: rgba(45, 80, 22, 0.05);
+  animation: pFloat3 10s ease-in-out infinite;
+}
+@keyframes pFloat1 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-10px) translateX(5px); }
+}
+@keyframes pFloat2 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-8px) translateX(-8px); }
+}
+@keyframes pFloat3 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-12px) translateX(4px); }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-.properties-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
-.awards-grid { grid-template-columns: repeat(2, 1fr); }
-.footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .lifestyle-grid { grid-template-columns: repeat(2, 1fr); }
+  .community-stats { grid-template-columns: repeat(2, 1fr); }
+  .community-highlight { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-.nav-links {
-position: fixed;
-top: 0;
-right: -100%;
-width: 80%;
-max-width: 320px;
-height: 100vh;
-background: var(--primary-dark);
-flex-direction: column;
-padding: 80px 40px 40px;
-transition: right 0.3s;
-gap: 20px;
-}
-.nav-links.active { right: 0; }
-.hamburger { display: flex; }
-.about-grid,
-.services-grid,
-.properties-grid,
-.testimonials-grid,
-.contact .container {
-grid-template-columns: 1fr;
-}
-.community-stats { grid-template-columns: repeat(2, 1fr); }
-.community-highlight { grid-template-columns: 1fr; }
-.hero-stats { flex-direction: column; gap: 20px; }
-.timeline::before { left: 20px; }
-.timeline-item,
-.timeline-item:nth-child(odd) { flex-direction: row; padding-left: 50px; }
-.timeline-dot { left: 20px; }
-.timeline-item .timeline-content { width: 100%; }
-.form-row { grid-template-columns: 1fr; }
-.properties-header { flex-direction: column; gap: 16px; align-items: flex-start; }
-.footer-grid { grid-template-columns: 1fr; }
-.footer-bottom { flex-direction: column; text-align: center; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--green-dark);
+    padding: 24px;
+    gap: 16px;
+  }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .lifestyle-grid { grid-template-columns: 1fr; }
+  .properties-grid { grid-template-columns: 1fr; }
+  .community-stats { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
 }
 @media (max-width: 480px) {
-.community-stats { grid-template-columns: 1fr; }
-.awards-grid { grid-template-columns: 1fr; }
-.about-features { grid-template-columns: 1fr; }
-.hero h1 { font-size: 2.2rem; }
-}
-/* Leaf decoration */
-.leaf-divider {
-text-align: center;
-padding: 20px 0;
-font-size: 1.5rem;
-color: var(--primary);
-opacity: 0.3;
-}
-/* Smooth scroll reveal */
-.reveal {
-opacity: 0;
-transform: translateY(30px);
-transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible {
-opacity: 1;
-transform: translateY(0);
+  .hero h1 { font-size: 2.2rem; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .community-stats { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
+<!-- ===== NAVIGATION ===== -->
 <nav class="navbar" id="navbar">
-<div class="container">
-<a href="#" class="nav-logo">
-<div class="logo-icon">🌲</div>
-<span>Windermere</span>
-</a>
-<ul class="nav-links" id="navLinks">
-<li><a href="#about">About</a></li>
-<li><a href="#community">Community</a></li>
-<li><a href="#services">Services</a></li>
-<li><a href="#properties">Properties</a></li>
-<li><a href="#process">Process</a></li>
-<li><a href="#testimonials">Reviews</a></li>
-<li><a href="#contact" class="nav-cta">Contact</a></li>
-</ul>
-<div class="hamburger" id="hamburger" onclick="toggleNav()">
-<span></span><span></span><span></span>
-</div>
-</div>
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">🏔</div>
+      Windermere
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#lifestyle">Lifestyle</a>
+      <a href="#properties">Properties</a>
+      <a href="#community">Community</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact" class="nav-cta">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- ===== HERO ===== -->
 <section class="hero" id="hero">
-<div class="hero-particles" id="particles"></div>
-<div class="hero-content">
-<div class="hero-badge">🏔️ Pacific Northwest's Premier Brokerage</div>
-<h1>Rooted in Community,<br><span>Growing Together</span></h1>
-<p>For over five decades, Windermere Real Estate has been the Pacific Northwest's most trusted family-owned brokerage — connecting people with the places they love.</p>
-<div class="hero-buttons">
-<a href="#properties" class="btn btn-primary">View Properties</a>
-<a href="#about" class="btn btn-outline">Our Story</a>
-</div>
-<div class="hero-stats">
-<div class="hero-stat">
-<span class="number" data-target="6000">0</span>
-<span class="label">Agents</span>
-</div>
-<div class="hero-stat">
-<span class="number" data-target="300">0</span>
-<span class="label">Offices</span>
-</div>
-<div class="hero-stat">
-<span class="number" data-target="50">0</span>
-<span class="label">Years Strong</span>
-</div>
-<div class="hero-stat">
-<span class="number" data-target="48">0</span>
-<span class="label">Million Donated</span>
-</div>
-</div>
-</div>
-<div class="scroll-indicator">
-<svg viewBox="0 0 24 24"><path d="M12 16l-6-6h12z"/></svg>
-</div>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/4009/4009-360.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  
+  <!-- Floating 3D Mountain Shapes -->
+  <div class="mountain-layer">
+    <div class="mountain mountain-1"></div>
+    <div class="mountain mountain-2"></div>
+    <div class="mountain mountain-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🌲 Since 1972 • Pacific Northwest</div>
+    <h1>Where Nature Meets <span>Home</span></h1>
+    <p>Discover extraordinary properties nestled among ancient forests, pristine lakes, and majestic mountain peaks across the Pacific Northwest.</p>
+    <div class="hero-buttons">
+      <a href="#properties" class="btn btn-primary">Explore Properties</a>
+      <a href="#lifestyle" class="btn btn-outline">PNW Lifestyle</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="number">50+</span>
+        <span class="label">Years of Service</span>
+      </div>
+      <div class="hero-stat">
+        <span class="number">$12B+</span>
+        <span class="label">In Sales Volume</span>
+      </div>
+      <div class="hero-stat">
+        <span class="number">30+</span>
+        <span class="label">Offices</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24"><path d="M12 16l-6-6h12z"/></svg>
+  </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-<div class="container">
-<div class="section-label">Our Heritage</div>
-<h2 class="section-title">A Legacy of Roots & Community</h2>
-<p class="section-subtitle">Founded in 1972 on the shores of Lake Washington, Windermere Real Estate has grown from a single office into the Pacific Northwest's most recognized real estate brand.</p>
+<!-- ===== PNW LIFESTYLE ===== -->
+<section class="lifestyle" id="lifestyle">
+  <!-- Parallax Mountains -->
+  <div class="parallax-mountains">
+    <div class="p-mountain p-mountain-1"></div>
+    <div class="p-mountain p-mountain-2"></div>
+    <div class="p-mountain p-mountain-3"></div>
+  </div>
+  
+  <!-- 3D Tree Decoration -->
+  <div class="tree-deco tree-left">
+    <svg width="200" height="400" viewBox="0 0 200 400">
+      <polygon points="100,0 160,120 40,120" fill="#2D5016"/>
+      <polygon points="100,60 170,200 30,200" fill="#2D5016"/>
+      <polygon points="100,130 180,300 20,300" fill="#2D5016"/>
+      <rect x="85" y="300" width="30" height="100" fill="#8B6914"/>
+    </svg>
+  </div>
+  <div class="tree-deco tree-right">
+    <svg width="200" height="400" viewBox="0 0 200 400">
+      <polygon points="100,0 160,120 40,120" fill="#2D5016"/>
+      <polygon points="100,60 170,200 30,200" fill="#2D5016"/>
+      <polygon points="100,130 180,300 20,300" fill="#2D5016"/>
+      <rect x="85" y="300" width="30" height="100" fill="#8B6914"/>
+    </svg>
+  </div>
 
-<div class="about-grid reveal">
-<div class="about-image">
-<div class="about-image-badge">
-<div class="year">1972</div>
-<div class="text">Founded in Seattle, WA</div>
-</div>
-</div>
-<div class="about-content">
-<h3>Family-Owned.<br>Community-Driven.</h3>
-<p>What began with John W. Brenneman's vision of a real estate company that genuinely cares about its neighbors has become a tradition spanning over five decades. Our agents don't just sell homes — they build communities.</p>
-<p>Every transaction is guided by our core values: integrity, service, and an unwavering commitment to the Pacific Northwest way of life. We believe in giving back, showing up, and making every neighborhood a little better than we found it.</p>
-<div class="about-features">
-<div class="about-feature">
-<div class="icon">🏠</div>
-<span>Family-Owned Since 1972</span>
-</div>
-<div class="about-feature">
-<div class="icon">🤝</div>
-<span>Community First Philosophy</span>
-</div>
-<div class="about-feature">
-<div class="icon">🌲</div>
-<span>Pacific NW Specialists</span>
-</div>
-<div class="about-feature">
-<div class="icon">💚</div>
-<span>$48M+ Charitable Giving</span>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <div class="lifestyle-header reveal">
+      <div class="section-label">The PNW Experience</div>
+      <h2 class="section-title">Live the Pacific Northwest Lifestyle</h2>
+      <p class="section-subtitle" style="margin:0 auto;">From morning kayaks on Puget Sound to evening hikes through old-growth forests, life in the PNW is unlike anywhere else.</p>
+    </div>
+    <div class="lifestyle-grid">
+      <div class="lifestyle-card reveal stagger-1">
+        <div class="lifestyle-card-inner" style="background: linear-gradient(135deg, #2D5016, #1a3a0e);">
+          <div class="lifestyle-card-icon">🌲</div>
+          <div class="lifestyle-card-content">
+            <h3>Forest Living</h3>
+            <p>Wake up surrounded by towering Douglas firs, Western red cedars, and centuries-old forests that inspire awe.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lifestyle-card reveal stagger-2">
+        <div class="lifestyle-card-inner" style="background: linear-gradient(135deg, #8B6914, #6B5210);">
+          <div class="lifestyle-card-icon">⛰️</div>
+          <div class="lifestyle-card-content">
+            <h3>Mountain Adventures</h3>
+            <p>From the Cascades to the Olympics, world-class skiing, hiking, and climbing are right outside your door.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lifestyle-card reveal stagger-3">
+        <div class="lifestyle-card-inner" style="background: linear-gradient(135deg, #3D7A2D, #2D5016);">
+          <div class="lifestyle-card-icon">🌊</div>
+          <div class="lifestyle-card-content">
+            <h3>Waterfront Life</h3>
+            <p>Lakefront cabins, ocean-view retreats, and river properties offer endless aquatic adventures year-round.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- COMMUNITY -->
-<section class="community" id="community">
-<div class="container">
-<div class="community-header reveal">
-<div class="section-label">Giving Back</div>
-<h2 class="section-title">Rooted in the Community</h2>
-<p class="section-subtitle">Through the Windermere Foundation, we've donated over $48 million to local charities — because home is about more than a house.</p>
-</div>
-
-<div class="community-stats reveal">
-<div class="community-stat">
-<div class="stat-icon">💚</div>
-<span class="stat-number">$48M+</span>
-<span class="stat-label">Donated to Charity</span>
-</div>
-<div class="community-stat">
-<div class="stat-icon">🏘️</div>
-<span class="stat-number">500+</span>
-<span class="stat-label">Nonprofit Partners</span>
-</div>
-<div class="community-stat">
-<div class="stat-icon">🎯</div>
-<span class="stat-number">100%</span>
-<span class="stat-label">Agents Contribute</span>
-</div>
-<div class="community-stat">
-<div class="stat-icon">🌿</div>
-<span class="stat-number">50+</span>
-<span class="stat-label">Years of Service</span>
-</div>
-</div>
-
-<div class="community-highlight reveal">
-<div>
-<h3>The Windermere Foundation</h3>
-<p>Since 1989, every transaction at Windermere contributes to our Foundation. We believe that when our communities thrive, everyone wins. Our agents lead with generosity, organizing volunteer events, fundraisers, and service projects throughout the Pacific Northwest.</p>
-<div class="charities">
-<span class="charity-tag">🏠 Habitat for Humanity</span>
-<span class="charity-tag">🍲 Food Banks</span>
-<span class="charity-tag">🎓 Youth Education</span>
-<span class="charity-tag">🐕 Animal Shelters</span>
-<span class="charity-tag">🌱 Environmental</span>
-<span class="charity-tag">🏥 Health Services</span>
-</div>
-</div>
-<div style="text-align:center;">
-<div style="font-size:5rem;margin-bottom:16px;">🌲🏡🌲</div>
-<div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent);font-weight:700;">48+ Million</div>
-<div style="color:rgba(255,255,255,0.7);font-size:1.1rem;margin-top:8px;">Donated to local communities since 1989</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-<div class="container">
-<div class="services-header reveal">
-<div class="section-label">What We Do</div>
-<h2 class="section-title">Guided by Nature,<br>Grounded in Expertise</h2>
-<p class="section-subtitle">From first-time buyers to seasoned investors, our team provides the personalized service that defines the Windermere difference.</p>
-</div>
-
-<div class="services-grid">
-<div class="service-card reveal">
-<div class="service-icon">🏡</div>
-<h3>Buyer Representation</h3>
-<p>We navigate the Pacific Northwest market with local expertise, finding you a home that fits your life — not just your budget.</p>
-<a href="#" class="learn-more">Learn More →</a>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">📋</div>
-<h3>Seller Services</h3>
-<p>Strategic marketing, professional staging, and our extensive network ensure your property reaches the right buyers at the best price.</p>
-<a href="#" class="learn-more">Learn More →</a>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">🏗️</div>
-<h3>New Construction</h3>
-<p>Partner with our builders' network to create your dream Pacific Northwest home, surrounded by the beauty of nature.</p>
-<a href="#" class="learn-more">Learn More →</a>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">💼</div>
-<h3>Investment Properties</h3>
-<p>From waterfront cottages to urban apartments, we identify opportunities that align with your long-term wealth strategy.</p>
-<a href="#" class="learn-more">Learn More →</a>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">🏔️</div>
-<h3>Luxury Estates</h3>
-<p>Exclusive access to the Pacific Northwest's finest properties — mountain retreats, waterfront mansions, and urban penthouses.</p>
-<a href="#" class="learn-more">Learn More →</a>
-</div>
-<div class="service-card reveal">
-<div class="service-icon">🌿</div>
-<h3>Relocation Services</h3>
-<p>Moving to the Pacific Northwest? Our relocation specialists handle everything from school searches to neighborhood tours.</p>
-<a href="#" class="learn-more">Learn More →</a>
-</div>
-</div>
-</div>
-</section>
-
-<!-- PROPERTIES -->
+<!-- ===== PROPERTY GRID ===== -->
 <section class="properties" id="properties">
-<div class="container">
-<div class="properties-header">
-<div>
-<div class="section-label">Featured Listings</div>
-<h2 class="section-title">Discover Your<br>Pacific Northwest Retreat</h2>
-</div>
-<a href="#" class="btn btn-primary" style="margin-top:20px;">View All Properties</a>
-</div>
-
-<div class="properties-grid">
-<div class="property-card reveal">
-<div class="property-image" style="background:linear-gradient(135deg,#2D5F2D,#4A6741);display:flex;align-items:center;justify-content:center;">
-<div style="text-align:center;color:#fff;">
-<div style="font-size:3rem;">🏔️</div>
-<div style="font-size:0.9rem;opacity:0.8;margin-top:8px;">Mountain View Estate</div>
-</div>
-<span class="property-tag">Featured</span>
-<span class="property-price">$2,450,000</span>
-</div>
-<div class="property-details">
-<h3>Alpine Crest Estate</h3>
-<div class="location">📍 Snoqualmie, Washington</div>
-<div class="property-features">
-<div class="property-feature"><span class="feat-icon">🛏️</span> 5 Beds</div>
-<div class="property-feature"><span class="feat-icon">🚿</span> 4 Baths</div>
-<div class="property-feature"><span class="feat-icon">📐</span> 4,200 sqft</div>
-</div>
-</div>
-</div>
-
-<div class="property-card reveal">
-<div class="property-image" style="background:linear-gradient(135deg,#2C4A2C,#3D7A3D);display:flex;align-items:center;justify-content:center;">
-<div style="text-align:center;color:#fff;">
-<div style="font-size:3rem;">🌊</div>
-<div style="font-size:0.9rem;opacity:0.8;margin-top:8px;">Waterfront Living</div>
-</div>
-<span class="property-tag">New</span>
-<span class="property-price">$3,875,000</span>
-</div>
-<div class="property-details">
-<h3>Lake Washington Retreat</h3>
-<div class="location">📍 Medina, Washington</div>
-<div class="property-features">
-<div class="property-feature"><span class="feat-icon">🛏️</span> 6 Beds</div>
-<div class="property-feature"><span class="feat-icon">🚿</span> 5 Baths</div>
-<div class="property-feature"><span class="feat-icon">📐</span> 5,800 sqft</div>
-</div>
-</div>
-</div>
-
-<div class="property-card reveal">
-<div class="property-image" style="background:linear-gradient(135deg,#4A6741,#7D9472);display:flex;align-items:center;justify-content:center;">
-<div style="text-align:center;color:#fff;">
-<div style="font-size:3rem;">🌲</div>
-<div style="font-size:0.9rem;opacity:0.8;margin-top:8px;">Forest Retreat</div>
-</div>
-<span class="property-tag">Popular</span>
-<span class="property-price">$1,295,000</span>
-</div>
-<div class="property-details">
-<h3>Cascade Forest Lodge</h3>
-<div class="location">📍 Issaquah, Washington</div>
-<div class="property-features">
-<div class="property-feature"><span class="feat-icon">🛏️</span> 4 Beds</div>
-<div class="property-feature"><span class="feat-icon">🚿</span> 3 Baths</div>
-<div class="property-feature"><span class="feat-icon">📐</span> 3,100 sqft</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <div class="properties-header reveal">
+      <div class="section-label">Featured Properties</div>
+      <h2 class="section-title">Extraordinary PNW Residences</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Each property is carefully selected to embody the spirit of Pacific Northwest living.</p>
+    </div>
+    <div class="properties-grid">
+      <!-- Property 1 -->
+      <div class="property-card reveal stagger-1">
+        <div class="property-image" style="background: linear-gradient(135deg, #1a3a0e, #2D5016);">
+          <div class="property-image-bg">🏔</div>
+          <div class="property-badge">Featured</div>
+          <div class="property-price-tag">$2,850,000</div>
+        </div>
+        <div class="property-info">
+          <h3>Mount Rainier Estate</h3>
+          <div class="property-location">📍 Ashland, Washington</div>
+          <div class="property-features">
+            <span class="property-feature">🛏 5 Beds</span>
+            <span class="property-feature">🚿 4 Baths</span>
+            <span class="property-feature">📐 4,800 sqft</span>
+            <span class="property-feature">🌳 12 Acres</span>
+          </div>
+          <p class="property-desc">A breathtaking mountain estate with panoramic views of Mount Rainier. Features hand-hewn timber beams, floor-to-ceiling windows, and a private hiking trail system.</p>
+        </div>
+      </div>
+      <!-- Property 2 -->
+      <div class="property-card reveal stagger-2">
+        <div class="property-image" style="background: linear-gradient(135deg, #8B6914, #6B5210);">
+          <div class="property-image-bg">🌊</div>
+          <div class="property-badge">New Listing</div>
+          <div class="property-price-tag">$1,975,000</div>
+        </div>
+        <div class="property-info">
+          <h3>Puget Sound Retreat</h3>
+          <div class="property-location">📍 San Juan Islands, Washington</div>
+          <div class="property-features">
+            <span class="property-feature">🛏 4 Beds</span>
+            <span class="property-feature">🚿 3 Baths</span>
+            <span class="property-feature">📐 3,200 sqft</span>
+            <span class="property-feature">⛵ Waterfront</span>
+          </div>
+          <p class="property-desc">A stunning waterfront property with private dock access. Enjoy Orca whale watching from your living room and sunsets over the Olympic Mountains.</p>
+        </div>
+      </div>
+      <!-- Property 3 -->
+      <div class="property-card reveal stagger-3">
+        <div class="property-image" style="background: linear-gradient(135deg, #2D5016, #3D7A2D);">
+          <div class="property-image-bg">🌲</div>
+          <div class="property-badge">Price Reduced</div>
+          <div class="property-price-tag">$1,425,000</div>
+        </div>
+        <div class="property-info">
+          <h3>Timber Ridge Cabin</h3>
+          <div class="property-location">📍 Bend, Oregon</div>
+          <div class="property-features">
+            <span class="property-feature">🛏 3 Beds</span>
+            <span class="property-feature">🚿 2 Baths</span>
+            <span class="property-feature">📐 2,600 sqft</span>
+            <span class="property-feature">🎿 Near Skiing</span>
+          </div>
+          <p class="property-desc">A handcrafted timber cabin nestled in the Deschutes National Forest. Stone fireplace, wrap-around deck, and private hot tub with mountain views.</p>
+        </div>
+      </div>
+      <!-- Property 4 -->
+      <div class="property-card reveal stagger-4">
+        <div class="property-image" style="background: linear-gradient(135deg, #1a3a0e, #8B6914);">
+          <div class="property-image-bg">🌅</div>
+          <div class="property-badge">Waterfront</div>
+          <div class="property-price-tag">$3,200,000</div>
+        </div>
+        <div class="property-info">
+          <h3>Salish Sea Modern</h3>
+          <div class="property-location">📍 Friday Harbor, Washington</div>
+          <div class="property-features">
+            <span class="property-feature">🛏 4 Beds</span>
+            <span class="property-feature">🚿 3.5 Baths</span>
+            <span class="property-feature">📐 3,800 sqft</span>
+            <span class="property-feature">🏖 Beach Access</span>
+          </div>
+          <p class="property-desc">Contemporary architecture meets PNW elegance. Walls of glass frame the Salish Sea, with a chef's kitchen and sustainable living systems throughout.</p>
+        </div>
+      </div>
+      <!-- Property 5 -->
+      <div class="property-card reveal stagger-5">
+        <div class="property-image" style="background: linear-gradient(135deg, #3D7A2D, #1a3a0e);">
+          <div class="property-image-bg">🏡</div>
+          <div class="property-badge">Under Contract</div>
+          <div class="property-price-tag">$985,000</div>
+        </div>
+        <div class="property-info">
+          <h3>Cascade Lake Cottage</h3>
+          <div class="property-location">📍 Leavenworth, Washington</div>
+          <div class="property-features">
+            <span class="property-feature">🛏 3 Beds</span>
+            <span class="property-feature">🚿 2 Baths</span>
+            <span class="property-feature">📐 2,100 sqft</span>
+            <span class="property-feature">🐟 Lakefront</span>
+          </div>
+          <p class="property-desc">A charming lakeside cottage with private dock, perfect for year-round outdoor adventures. Features wood-burning stove and covered porch.</p>
+        </div>
+      </div>
+      <!-- Property 6 -->
+      <div class="property-card reveal stagger-6">
+        <div class="property-image" style="background: linear-gradient(135deg, #8B6914, #2D5016);">
+          <div class="property-image-bg">🌿</div>
+          <div class="property-badge">Just Listed</div>
+          <div class="property-price-tag">$4,100,000</div>
+        </div>
+        <div class="property-info">
+          <h3>Olympic Peninsula Lodge</h3>
+          <div class="property-location">📍 Port Angeles, Washington</div>
+          <div class="property-features">
+            <span class="property-feature">🛏 6 Beds</span>
+            <span class="property-feature">🚿 5 Baths</span>
+            <span class="property-feature">📐 6,200 sqft</span>
+            <span class="property-feature">🌊 Ocean Views</span>
+          </div>
+          <p class="property-desc">A grand lodge estate on the edge of Olympic National Park. Wrap-around porch, guest house, and 20 acres of pristine PNW wilderness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- AWARDS -->
-<section class="awards" id="awards">
-<div class="container">
-<div class="awards-header reveal">
-<div class="section-label">Recognition</div>
-<h2 class="section-title">Award-Winning Excellence</h2>
-<p class="section-subtitle">Our commitment to service has been recognized by industry leaders and communities alike.</p>
-</div>
-
-<div class="awards-grid">
-<div class="award-card reveal">
-<div class="award-badge">🏆</div>
-<h4>#1 Brokerage</h4>
-<p>Pacific Northwest Market Share Leader</p>
-<span class="award-year">2024</span>
-</div>
-<div class="award-card reveal">
-<div class="award-badge">⭐</div>
-<h4>Best Places to Work</h4>
-<p>Seattle Business Magazine</p>
-<span class="award-year">2023</span>
-</div>
-<div class="award-card reveal">
-<div class="award-badge">🤝</div>
-<h4>Community Impact</h4>
-<p>National Association of REALTORS®</p>
-<span class="award-year">2023</span>
-</div>
-<div class="award-card reveal">
-<div class="award-badge">🌟</div>
-<h4>Top Franchise</h4>
-<p>Real Trends 500 Ranking</p>
-<span class="award-year">2024</span>
-</div>
-</div>
-</div>
+<!-- ===== COMMUNITY ===== -->
+<section class="community" id="community">
+  <div class="container">
+    <div class="community-header reveal">
+      <div class="section-label">Giving Back</div>
+      <h2 class="section-title">Rooted in Community</h2>
+      <p class="section-subtitle">Windermere Foundation has donated over $48 million to organizations that support homeless children and families across the Pacific Northwest.</p>
+    </div>
+    <div class="community-stats">
+      <div class="community-stat reveal stagger-1">
+        <div class="stat-icon">🏠</div>
+        <span class="stat-number" data-target="48">0</span>
+        <span class="stat-label">Million Donated</span>
+      </div>
+      <div class="community-stat reveal stagger-2">
+        <div class="stat-icon">👨‍👩‍👧‍👦</div>
+        <span class="stat-number" data-target="300">0</span>
+        <span class="stat-label">Nonprofits Supported</span>
+      </div>
+      <div class="community-stat reveal stagger-3">
+        <div class="stat-icon">🌲</div>
+        <span class="stat-number" data-target="30">0</span>
+        <span class="stat-label">Office Locations</span>
+      </div>
+      <div class="community-stat reveal stagger-4">
+        <div class="stat-icon">🤝</div>
+        <span class="stat-number" data-target="7000">0</span>
+        <span class="stat-label">Agents Nationwide</span>
+      </div>
+    </div>
+    <div class="community-highlight reveal">
+      <div>
+        <h3>Windermere Foundation</h3>
+        <p>Since 1989, every Windermere office has proudly supported the Windermere Foundation. Through events, fundraisers, and individual donations, our agents and employees help organizations that provide shelter, food, children's programs, and emergency services to those in need.</p>
+        <div class="charities">
+          <span class="charity-tag">🏠 Emergency Housing</span>
+          <span class="charity-tag">🍎 Food Banks</span>
+          <span class="charity-tag">📚 Youth Education</span>
+          <span class="charity-tag">👩‍⚕️ Health Services</span>
+          <span class="charity-tag">🌿 Environmental</span>
+        </div>
+      </div>
+      <div class="community-highlight-image">
+        <span>🤝</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- PROCESS -->
-<section class="process" id="process">
-<div class="container">
-<div class="process-header reveal">
-<div class="section-label">How It Works</div>
-<h2 class="section-title">Your Journey Home</h2>
-<p class="section-subtitle">A guided path from first conversation to closing day, with expert support every step of the way.</p>
-</div>
-
-<div class="timeline">
-<div class="timeline-item reveal">
-<div class="timeline-content">
-<span class="timeline-step">Step 1</span>
-<h4>Discovery Consultation</h4>
-<p>We sit down together — ideally with a cup of locally roasted coffee — to understand your needs, dreams, and timeline for finding the perfect Pacific Northwest home.</p>
-</div>
-<div class="timeline-dot"></div>
-</div>
-
-<div class="timeline-item reveal">
-<div class="timeline-content">
-<span class="timeline-step">Step 2</span>
-<h4>Market Analysis & Strategy</h4>
-<p>Your agent provides a comprehensive market analysis, customizing a strategy that positions you competitively whether buying or selling in today's market.</p>
-</div>
-<div class="timeline-dot"></div>
-</div>
-
-<div class="timeline-item reveal">
-<div class="timeline-content">
-<span class="timeline-step">Step 3</span>
-<h4>Active Search or Listing</h4>
-<p>For buyers: curated property tours across neighborhoods. For sellers: professional staging, photography, and marketing that showcases your home's unique character.</p>
-</div>
-<div class="timeline-dot"></div>
-</div>
-
-<div class="timeline-item reveal">
-<div class="timeline-content">
-<span class="timeline-step">Step 4</span>
-<h4>Negotiation & Closing</h4>
-<p>Expert negotiation ensures the best outcome. We handle inspections, paperwork, and all details — so you can focus on the excitement of your new chapter.</p>
-</div>
-<div class="timeline-dot"></div>
-</div>
-
-<div class="timeline-item reveal">
-<div class="timeline-content">
-<span class="timeline-step">Step 5</span>
-<h4>Welcome Home</h4>
-<p>Keys in hand, you're part of the Windermere family. Our relationship continues with neighborhood resources, maintenance tips, and lifelong support.</p>
-</div>
-<div class="timeline-dot"></div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- TESTIMONIALS -->
+<!-- ===== TESTIMONIALS ===== -->
 <section class="testimonials" id="testimonials">
-<div class="container">
-<div class="testimonials-header reveal">
-<div class="section-label">Client Stories</div>
-<h2 class="section-title">What Our Clients Say</h2>
-<p class="section-subtitle">Real stories from real people who found their Pacific Northwest home with Windermere.</p>
-</div>
-
-<div class="testimonials-grid">
-<div class="testimonial-card reveal">
-<div class="testimonial-stars">★★★★★</div>
-<div class="testimonial-quote">"</div>
-<p>Our Windermere agent didn't just help us find a house — they helped us find a community. The attention to our family's needs was extraordinary. We couldn't be happier in our Lake Washington home.</p>
-<div class="testimonial-author">
-<div class="testimonial-avatar">MR</div>
-<div class="testimonial-info">
-<div class="name">Michael & Rachel T.</div>
-<div class="role">Homeowners, Bellevue</div>
-</div>
-</div>
-</div>
-
-<div class="testimonial-card reveal">
-<div class="testimonial-stars">★★★★★</div>
-<div class="testimonial-quote">"</div>
-<p>As first-time buyers, we were nervous about the competitive Seattle market. Our Windermere agent made the process seamless and even connected us with community resources. Truly exceptional service.</p>
-<div class="testimonial-author">
-<div class="testimonial-avatar">JK</div>
-<div class="testimonial-info">
-<div class="name">Jessica K.</div>
-<div class="role">First-Time Buyer, Seattle</div>
-</div>
-</div>
-</div>
-
-<div class="testimonial-card reveal">
-<div class="testimonial-stars">★★★★★</div>
-<div class="testimonial-quote">"</div>
-<p>Selling our family home of 25 years was emotional. Our Windermere agent treated it with the care it deserved and helped us find the perfect downsized retreat in the foothills. Grateful beyond words.</p>
-<div class="testimonial-author">
-<div class="testimonial-avatar">DW</div>
-<div class="testimonial-info">
-<div class="name">David & Wendy L.</div>
-<div class="role">Retirees, Issaquah</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <div class="testimonials-header reveal">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title">Voices of the PNW</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Hear from families who found their dream home in the Pacific Northwest.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal stagger-1">
+        <p class="testimonial-text">"Our Windermere agent helped us find the perfect lakefront property in the Cascades. The whole process was seamless, and we couldn't be happier with our new home. Morning coffee with mountain views is everything."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JR</div>
+          <div>
+            <div class="testimonial-name">James & Rachel Miller</div>
+            <div class="testimonial-role">Homeowners, Leavenworth</div>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal stagger-2">
+        <p class="testimonial-text">"We moved from California and were amazed by how much more home our budget could get in Washington. Our agent knew every hidden gem in the San Juan Islands and found us our forever home."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SK</div>
+          <div>
+            <div class="testimonial-name">Sarah Kim</div>
+            <div class="testimonial-role">Homeowner, Friday Harbor</div>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal stagger-3">
+        <p class="testimonial-text">"As a first-time buyer, I was nervous about the process. My Windermere agent made it so easy and even connected me with local contractors for renovations. True community-focused service."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DM</div>
+          <div>
+            <div class="testimonial-name">David Martinez</div>
+            <div class="testimonial-role">Homeowner, Bend, OR</div>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-<div class="container">
-<div class="contact-info reveal">
-<div class="section-label">Get in Touch</div>
-<h2 class="section-title">Let's Find Your<br>Pacific Northwest Home</h2>
-<p>Whether you're buying your first home, selling a cherished property, or simply exploring the market — we're here to guide you every step of the way.</p>
-
-<div class="contact-details">
-<div class="contact-item">
-<div class="icon">📞</div>
-<div>
-<div class="text">+1-206-577-6500</div>
-<div class="sub">Mon–Sat, 8am–8pm PST</div>
-</div>
-</div>
-<div class="contact-item">
-<div class="icon">✉️</div>
-<div>
-<div class="text">info@windermere.com</div>
-<div class="sub">We respond within 24 hours</div>
-</div>
-</div>
-<div class="contact-item">
-<div class="icon">📍</div>
-<div>
-<div class="text">4000 Aurora Avenue N</div>
-<div class="sub">Seattle, WA 98103</div>
-</div>
-</div>
-<div class="contact-item">
-<div class="icon">🕐</div>
-<div>
-<div class="text">Office Hours</div>
-<div class="sub">Mon–Fri: 8am–6pm | Sat: 9am–5pm</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="contact-form reveal">
-<h3>Send Us a Message</h3>
-<p class="form-subtitle">Fill out the form and we'll connect you with the right agent.</p>
-<form onsubmit="handleSubmit(event)">
-<div class="form-row">
-<div class="form-group">
-<label>First Name</label>
-<input type="text" placeholder="John" required>
-</div>
-<div class="form-group">
-<label>Last Name</label>
-<input type="text" placeholder="Doe" required>
-</div>
-</div>
-<div class="form-row">
-<div class="form-group">
-<label>Email</label>
-<input type="email" placeholder="john@example.com" required>
-</div>
-<div class="form-group">
-<label>Phone</label>
-<input type="tel" placeholder="(206) 555-0100">
-</div>
-</div>
-<div class="form-group">
-<label>I'm Looking To</label>
-<select required>
-<option value="">Select an option...</option>
-<option>Buy a Home</option>
-<option>Sell a Home</option>
-<option>Invest in Property</option>
-<option>Relocate to PNW</option>
-<option>Other</option>
-</select>
-</div>
-<div class="form-group">
-<label>Message</label>
-<textarea placeholder="Tell us about your real estate goals..."></textarea>
-</div>
-<button type="submit" class="form-submit">Send Message 🌲</button>
-</form>
-</div>
-</div>
+<!-- ===== CTA ===== -->
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-content reveal">
+      <h2>Ready to Find Your PNW Home?</h2>
+      <p>Whether you're seeking a mountain retreat, waterfront sanctuary, or forest hideaway, our local experts will guide you to your perfect Pacific Northwest property.</p>
+      <div class="cta-buttons">
+        <a href="https://www.windermere.com" target="_blank" class="btn btn-primary">Schedule a Consultation</a>
+        <a href="tel:+12065551234" class="btn btn-outline">📞 Call (206) 555-1234</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
-<div class="container">
-<div class="footer-grid">
-<div class="footer-brand">
-<div class="footer-logo">
-<div class="logo-icon">🌲</div>
-<h4>Windermere Real Estate</h4>
-</div>
-<p>Family-owned since 1972, serving the Pacific Northwest with integrity, expertise, and a deep commitment to community. Home is where the heart is — and our hearts are rooted here.</p>
-<div class="footer-social">
-<a href="#" aria-label="Facebook">f</a>
-<a href="#" aria-label="Instagram">ig</a>
-<a href="#" aria-label="Twitter">tw</a>
-<a href="#" aria-label="LinkedIn">in</a>
-</div>
-</div>
-<div class="footer-col">
-<h5>Quick Links</h5>
-<ul>
-<li><a href="#about">About Us</a></li>
-<li><a href="#community">Community</a></li>
-<li><a href="#services">Services</a></li>
-<li><a href="#properties">Properties</a></li>
-<li><a href="#process">Our Process</a></li>
-<li><a href="#testimonials">Testimonials</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h5>Services</h5>
-<ul>
-<li><a href="#">Buyer Representation</a></li>
-<li><a href="#">Seller Services</a></li>
-<li><a href="#">New Construction</a></li>
-<li><a href="#">Investment Properties</a></li>
-<li><a href="#">Luxury Estates</a></li>
-<li><a href="#">Relocation</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h5>Stay Connected</h5>
-<p style="color:rgba(255,255,255,0.6);font-size:0.9rem;margin-bottom:16px;">Subscribe to our newsletter for market updates and featured listings.</p>
-<div class="footer-newsletter">
-<input type="email" placeholder="Enter your email">
-<button>Subscribe</button>
-</div>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2024 Windermere Real Estate. All rights reserved.</p>
-<p>Demo site built by <span class="credit">Alok Web Services</span></p>
-</div>
-</div>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <div class="logo-icon">🏔</div>
+          Windermere
+        </a>
+        <p>Serving the Pacific Northwest since 1972. We're committed to helping families find their perfect home while giving back to our communities.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Twitter">🐦</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Properties</h4>
+        <ul>
+          <li><a href="#">Featured Listings</a></li>
+          <li><a href="#">Waterfront Homes</a></li>
+          <li><a href="#">Mountain Estates</a></li>
+          <li><a href="#">New Construction</a></li>
+          <li><a href="#">Land & Lots</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Buy a Home</a></li>
+          <li><a href="#">Sell a Home</a></li>
+          <li><a href="#">Mortgage</a></li>
+          <li><a href="#">Property Management</a></li>
+          <li><a href="#">Home Valuation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Agents</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Windermere Real Estate. All rights reserved.</p>
+      <p class="footer-credit">Demo site built by Alok Web Services</p>
+    </div>
+  </div>
 </footer>
 
+<!-- ===== JAVASCRIPT ===== -->
 <script>
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-navbar.classList.toggle('scrolled', window.scrollY > 50);
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Mobile nav toggle
-function toggleNav() {
-document.getElementById('navLinks').classList.toggle('active');
-}
-document.querySelectorAll('.nav-links a').forEach(link => {
-link.addEventListener('click', () => {
-document.getElementById('navLinks').classList.remove('active');
-});
+// Mobile menu toggle
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
 });
 
-// Hero particles
-const particlesContainer = document.getElementById('particles');
-for (let i = 0; i < 30; i++) {
-const p = document.createElement('div');
-p.className = 'particle';
-p.style.left = Math.random() * 100 + '%';
-p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-p.style.animationDelay = Math.random() * 10 + 's';
-p.style.width = p.style.height = (Math.random() * 4 + 2) + 'px';
-particlesContainer.appendChild(p);
-}
-
-// Counter animation
-function animateCounters() {
-document.querySelectorAll('.hero-stat .number').forEach(el => {
-const target = +el.dataset.target;
-const suffix = el.dataset.target === '48' ? 'M+' : el.dataset.target === '6000' ? '+' : el.dataset.target === '300' ? '+' : '+';
-const duration = 2000;
-const start = performance.now();
-function update(now) {
-const elapsed = now - start;
-const progress = Math.min(elapsed / duration, 1);
-const eased = 1 - Math.pow(1 - progress, 3);
-el.textContent = Math.floor(target * eased).toLocaleString() + (progress >= 1 ? suffix : '');
-if (progress < 1) requestAnimationFrame(update);
-}
-requestAnimationFrame(update);
-});
-}
-
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('visible');
-if (entry.target.closest('.hero') || entry.target.closest('.hero-stats')) {
-animateCounters();
-}
-}
-});
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Trigger counter animation on load
-setTimeout(animateCounters, 500);
-
-// Form submission
-function handleSubmit(e) {
-e.preventDefault();
-const btn = e.target.querySelector('.form-submit');
-btn.textContent = '✓ Message Sent!';
-btn.style.background = '#2D5F2D';
-setTimeout(() => {
-btn.textContent = 'Send Message 🌲';
-btn.style.background = '';
-e.target.reset();
-}, 3000);
-}
-
-// Smooth scroll for anchor links
+// Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-const target = document.querySelector(this.getAttribute('href'));
-if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      navLinks.classList.remove('active');
+    }
+  });
 });
+
+// Scroll reveal animations
+const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Counter animation for community stats
+function animateCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  counters.forEach(counter => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current).toLocaleString() + (target >= 100 ? '+' : '');
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target.toLocaleString() + '+';
+      }
+    };
+    updateCounter();
+  });
+}
+
+// Observe community section for counter animation
+const communitySection = document.querySelector('.community');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounters();
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+if (communitySection) counterObserver.observe(communitySection);
+
+// Parallax effect for mountains on scroll
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const mountains = document.querySelectorAll('.p-mountain');
+  mountains.forEach((mountain, i) => {
+    const speed = (i + 1) * 0.15;
+    mountain.style.transform = `translateY(${-scrolled * speed}px)`;
+  });
+});
+
+// 3D tilt effect on property cards
+document.querySelectorAll('.property-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+  });
 });
 </script>
 </body>
