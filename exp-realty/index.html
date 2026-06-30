@@ -6,112 +6,89 @@
 <title>eXp Realty — The Cloud-Based Brokerage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ============ RESET & BASE ============ */
+/* ============ RESET & VARIABLES ============ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+:root {
+  --teal: #00b4d8;
+  --blue: #0077b6;
+  --dark: #023047;
+  --white: #fff;
+  --accent: #90e0ef;
+  --grad-main: linear-gradient(135deg, #00b4d8, #0077b6);
+  --grad-reverse: linear-gradient(135deg, #0077b6, #00b4d8);
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+html { scroll-behavior: smooth; }
 body {
-  font-family: 'DM Sans', sans-serif;
-  color: #1a1a2e;
-  background: #f0f4f8;
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: #f0f7fa;
   overflow-x: hidden;
   line-height: 1.6;
 }
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
-}
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
-img { max-width: 100%; display: block; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-/* ============ UTILITY ============ */
-.gradient-text {
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
+/* ============ 3D GRADIENT TEXT ============ */
+.gradient-text-3d {
+  background: linear-gradient(135deg, var(--teal), var(--blue), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-.gradient-border {
-  border: 3px solid transparent;
-  background-image: linear-gradient(white, white), linear-gradient(135deg, #00B4D8, #0077B6);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-}
-.section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  text-align: center;
-  margin-bottom: 12px;
-}
-.section-subtitle {
-  text-align: center;
-  color: #5a6a7e;
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto 48px;
-}
-.btn-pill {
-  display: inline-block;
-  padding: 14px 36px;
-  border-radius: 50px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  transition: all 0.35s cubic-bezier(.4,0,.2,1);
-  position: relative;
-  overflow: hidden;
-}
-.btn-primary {
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(0,119,182,0.35);
-}
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,180,216,0.5);
-}
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  transition: left 0.5s;
-}
-.btn-primary:hover::after { left: 100%; }
-.btn-outline {
-  background: transparent;
-  color: #0077B6;
-  border: 2px solid #00B4D8;
-}
-.btn-outline:hover {
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  color: #fff;
+  filter: drop-shadow(2px 2px 4px rgba(0,119,182,0.3));
 }
 
-/* ============ FLOATING PARTICLES ============ */
-.particles {
+/* ============ FLOATING CLOUDS ============ */
+.clouds-bg {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
 }
-.particle {
+.cloud {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.08;
-  animation: floatParticle linear infinite;
+  background: radial-gradient(circle, rgba(0,180,216,0.06), transparent 70%);
+  animation: floatCloud linear infinite;
 }
-@keyframes floatParticle {
-  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.08; }
-  90% { opacity: 0.08; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+.cloud-3d {
+  position: absolute;
+  background: radial-gradient(ellipse at 30% 40%, rgba(144,224,239,0.12), rgba(0,180,216,0.04) 60%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 8px 32px rgba(0,119,182,0.06);
+  animation: floatCloud3D ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+@keyframes floatCloud {
+  0% { transform: translateY(110vh) translateX(0) scale(0.8); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) translateX(40px) scale(1.1); opacity: 0; }
+}
+@keyframes floatCloud3D {
+  0%,100% { transform: translateY(0) translateX(0) perspective(600px) rotateX(5deg) rotateY(-3deg); }
+  50% { transform: translateY(-30px) translateX(20px) perspective(600px) rotateX(-5deg) rotateY(3deg); }
+}
+
+/* ============ HEXAGON DECORATION ============ */
+.hexagon-deco {
+  position: absolute;
+  width: 120px; height: 120px;
+  background: linear-gradient(135deg, rgba(0,180,216,0.08), rgba(0,119,182,0.04));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: rotateHex 20s linear infinite;
+  pointer-events: none;
+}
+@keyframes rotateHex {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ============ NAVIGATION ============ */
@@ -119,13 +96,13 @@ img { max-width: 100%; display: block; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  padding: 16px 0;
+  padding: 18px 0;
   transition: all 0.4s ease;
 }
 .nav.scrolled {
   background: linear-gradient(135deg, rgba(0,180,216,0.95), rgba(0,119,182,0.95));
   backdrop-filter: blur(20px);
-  box-shadow: 0 4px 30px rgba(0,119,182,0.3);
+  box-shadow: 0 4px 30px rgba(2,48,71,0.3);
   padding: 10px 0;
 }
 .nav-inner {
@@ -137,33 +114,33 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.6rem;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
   font-weight: 700;
 }
-.nav-logo .logo-icon {
-  width: 44px;
-  height: 44px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 14px;
+.nav-logo .logo-hex {
+  width: 42px; height: 42px;
+  background: rgba(255,255,255,0.15);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.1);
+  animation: rotateHex 12s linear infinite;
 }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 .nav-links a {
   color: rgba(255,255,255,0.85);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.3s;
+  transition: all 0.3s;
   position: relative;
 }
 .nav-links a::after {
@@ -171,35 +148,33 @@ img { max-width: 100%; display: block; }
   position: absolute;
   bottom: -4px; left: 0;
   width: 0; height: 2px;
-  background: #fff;
+  background: var(--white);
   transition: width 0.3s;
 }
 .nav-links a:hover { color: #fff; }
 .nav-links a:hover::after { width: 100%; }
 .nav-cta {
-  padding: 10px 28px !important;
-  background: #fff !important;
-  color: #0077B6 !important;
+  padding: 10px 26px !important;
+  background: var(--white) !important;
+  color: var(--blue) !important;
   border-radius: 50px;
   font-weight: 700 !important;
-  box-shadow: 0 4px 20px rgba(255,255,255,0.3);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.25);
   transition: all 0.3s !important;
 }
 .nav-cta::after { display: none !important; }
-.nav-cta:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(255,255,255,0.4);
-}
+.nav-cta:hover { transform: translateY(-2px) scale(1.05); }
 .hamburger {
   display: none;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
   padding: 8px;
+  z-index: 1001;
 }
 .hamburger span {
   width: 28px; height: 3px;
-  background: #fff;
+  background: var(--white);
   border-radius: 4px;
   transition: all 0.3s;
 }
@@ -207,54 +182,51 @@ img { max-width: 100%; display: block; }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-6px); }
 
-/* ============ HERO ============ */
+/* ============ HERO (VIDEO BG) ============ */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, #00B4D8 0%, #0077B6 50%, #005f8a 100%);
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
   overflow: hidden;
   padding: 120px 0 80px;
 }
-.hero::before {
-  content: '';
+.hero-video {
   position: absolute;
-  top: -50%; right: -20%;
-  width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: heroOrb 15s ease-in-out infinite;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
-.hero::after {
-  content: '';
+.hero-overlay {
   position: absolute;
-  bottom: -30%; left: -10%;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: heroOrb 20s ease-in-out infinite reverse;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(2,48,71,0.85) 0%, rgba(0,119,182,0.75) 50%, rgba(0,180,216,0.65) 100%);
+  z-index: 1;
+  animation: gradientShift 8s ease-in-out infinite;
 }
-@keyframes heroOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(60px, -40px) scale(1.1); }
+@keyframes gradientShift {
+  0%,100% { background: linear-gradient(135deg, rgba(2,48,71,0.85) 0%, rgba(0,119,182,0.75) 50%, rgba(0,180,216,0.65) 100%); }
+  50% { background: linear-gradient(135deg, rgba(0,180,216,0.75) 0%, rgba(0,119,182,0.8) 50%, rgba(2,48,71,0.85) 100%); }
 }
 .hero-content {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
-  position: relative;
-  z-index: 2;
+  color: var(--white);
 }
-.hero-left { color: #fff; }
+.hero-left {}
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.12);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.18);
   padding: 8px 20px;
   border-radius: 50px;
   font-size: 0.85rem;
@@ -269,22 +241,28 @@ img { max-width: 100%; display: block; }
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
+  0%,100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.3); }
 }
 .hero h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
-  color: #fff;
+  color: var(--white);
   margin-bottom: 20px;
   animation: fadeInUp 0.8s 0.2s ease forwards;
   opacity: 0;
 }
-.hero h1 span {
+.hero h1 .text-3d {
   display: block;
-  background: linear-gradient(135deg, #fff, #b8e8f0);
+  background: linear-gradient(135deg, var(--accent), var(--white));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(144,224,239,0.4));
+  animation: text3dPulse 4s ease-in-out infinite;
+}
+@keyframes text3dPulse {
+  0%,100% { filter: drop-shadow(0 2px 8px rgba(144,224,239,0.4)); }
+  50% { filter: drop-shadow(0 4px 16px rgba(144,224,239,0.7)); }
 }
 .hero p {
   font-size: 1.15rem;
@@ -301,90 +279,102 @@ img { max-width: 100%; display: block; }
   animation: fadeInUp 0.8s 0.6s ease forwards;
   opacity: 0;
 }
-.hero-btn-white {
+.btn-hero-white {
   padding: 14px 36px;
   border-radius: 50px;
-  background: #fff;
-  color: #0077B6;
-  font-family: 'Space Grotesk', sans-serif;
+  background: var(--white);
+  color: var(--blue);
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1rem;
   border: none;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  transition: all 0.35s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
 }
-.hero-btn-white:hover {
-  transform: translateY(-3px);
+.btn-hero-white:hover {
+  transform: translateY(-3px) scale(1.03);
   box-shadow: 0 12px 40px rgba(0,0,0,0.2);
 }
-.hero-btn-ghost {
+.btn-hero-white::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,180,216,0.15), transparent);
+  transition: left 0.5s;
+}
+.btn-hero-white:hover::after { left: 100%; }
+.btn-hero-ghost {
   padding: 14px 36px;
   border-radius: 50px;
   background: transparent;
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
+  color: var(--white);
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1rem;
-  border: 2px solid rgba(255,255,255,0.4);
+  border: 2px solid rgba(255,255,255,0.35);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.35s;
 }
-.hero-btn-ghost:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: #fff;
+.btn-hero-ghost:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--white);
 }
 .hero-right {
   position: relative;
   animation: fadeInUp 0.8s 0.5s ease forwards;
   opacity: 0;
 }
-.hero-cards {
-  position: relative;
-  height: 450px;
-}
+.hero-cards { position: relative; height: 450px; }
 .floating-card {
   position: absolute;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 20px;
   padding: 24px;
-  color: #fff;
+  color: var(--white);
   box-shadow: 0 20px 60px rgba(0,0,0,0.15);
   transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+  transform-style: preserve-3d;
+  perspective: 800px;
 }
-.floating-card:hover { transform: translateY(-8px) scale(1.02) !important; }
+.floating-card:hover {
+  transform: translateY(-8px) scale(1.02) perspective(600px) rotateX(3deg) rotateY(-2deg) !important;
+}
 .fc-1 {
-  top: 0; left: 10%;
+  top: 0; left: 8%;
   width: 260px;
   animation: float1 6s ease-in-out infinite;
 }
 .fc-2 {
-  top: 60px; right: 0;
+  top: 50px; right: 0;
   width: 220px;
   animation: float2 7s ease-in-out infinite;
 }
 .fc-3 {
-  bottom: 20px; left: 20%;
+  bottom: 20px; left: 15%;
   width: 280px;
   animation: float3 8s ease-in-out infinite;
 }
 @keyframes float1 {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  0%,100% { transform: translateY(0) rotate(-1deg); }
   50% { transform: translateY(-18px) rotate(1deg); }
 }
 @keyframes float2 {
-  0%, 100% { transform: translateY(0) rotate(1deg); }
+  0%,100% { transform: translateY(0) rotate(1deg); }
   50% { transform: translateY(-14px) rotate(-1deg); }
 }
 @keyframes float3 {
-  0%, 100% { transform: translateY(0) rotate(0.5deg); }
+  0%,100% { transform: translateY(0) rotate(0.5deg); }
   50% { transform: translateY(-20px) rotate(-0.5deg); }
 }
 .fc-icon {
   width: 48px; height: 48px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.08));
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -392,16 +382,13 @@ img { max-width: 100%; display: block; }
   font-size: 1.5rem;
   margin-bottom: 14px;
 }
-.fc-card h4 { font-size: 1rem; margin-bottom: 6px; }
-.fc-card p { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+.floating-card h4 { font-size: 1rem; margin-bottom: 6px; }
+.floating-card p { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+
+/* ============ SCROLL CTA ============ */
 .hero-scroll {
   position: absolute;
-  bottom: 30px;
-  left: 50%;
+  bottom: 30px; left: 50%;
   transform: translateX(-50%);
   color: rgba(255,255,255,0.5);
   font-size: 0.8rem;
@@ -418,263 +405,223 @@ img { max-width: 100%; display: block; }
   margin: 8px auto 0;
 }
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0); }
   40% { transform: translateX(-50%) translateY(-10px); }
   60% { transform: translateX(-50%) translateY(-5px); }
 }
 
-/* ============ ABOUT ============ */
-.about {
+/* ============ SECTION HEADERS ============ */
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.section-subtitle {
+  text-align: center;
+  color: #5a6a7e;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 48px;
+}
+
+/* ============ CLOUD FEATURES ============ */
+.cloud-features {
   padding: 100px 0;
-  background: #f0f4f8;
-  position: relative;
-}
-.about-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  background: #fff;
-  border-radius: 28px;
-  padding: 56px;
-  border: 3px solid transparent;
-  background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, #00B4D8, #0077B6);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  box-shadow: 0 20px 60px rgba(0,119,182,0.08);
-}
-.about-visual {
-  position: relative;
-}
-.about-shapes {
-  width: 100%;
-  height: 350px;
-  background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: var(--white);
   position: relative;
   overflow: hidden;
 }
-.about-shapes::before {
-  content: '';
-  position: absolute;
-  width: 120px; height: 120px;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  border-radius: 30px;
-  top: 20%; left: 15%;
-  animation: morphBlob 8s ease-in-out infinite;
+.cloud-features .hexagon-deco {
+  top: -40px; right: -30px;
+  width: 180px; height: 180px;
+  opacity: 0.4;
 }
-.about-shapes::after {
-  content: '';
-  position: absolute;
-  width: 100px; height: 100px;
-  background: linear-gradient(135deg, rgba(0,180,216,0.3), rgba(0,119,182,0.3));
-  border-radius: 50%;
-  bottom: 20%; right: 20%;
-  animation: morphBlob 10s ease-in-out infinite reverse;
-}
-@keyframes morphBlob {
-  0%, 100% { border-radius: 30px; transform: rotate(0deg) scale(1); }
-  25% { border-radius: 50% 30px 50% 30px; }
-  50% { border-radius: 50%; transform: rotate(45deg) scale(1.1); }
-  75% { border-radius: 30px 50% 30px 50%; }
-}
-.about-center-icon {
-  position: relative;
-  z-index: 2;
-  width: 100px; height: 100px;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  border-radius: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  color: #fff;
-  box-shadow: 0 20px 50px rgba(0,119,182,0.3);
-}
-.about-text h2 { font-size: 2.2rem; margin-bottom: 20px; }
-.about-text .lead {
-  color: #5a6a7e;
-  font-size: 1.1rem;
-  margin-bottom: 28px;
-  line-height: 1.8;
-}
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 32px;
-}
-.about-stat {
-  text-align: center;
-  padding: 20px 12px;
-  background: #f0f8ff;
-  border-radius: 16px;
-}
-.about-stat .num {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.about-stat .label {
-  font-size: 0.82rem;
-  color: #7a8a9e;
-  margin-top: 4px;
-}
-
-/* ============ FEATURES ============ */
-.features {
-  padding: 100px 0;
-  background: #fff;
+.cloud-features .hexagon-deco.hex2 {
+  bottom: -60px; left: -40px;
+  width: 140px; height: 140px;
+  animation-direction: reverse;
+  animation-duration: 25s;
 }
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
+  position: relative;
+  z-index: 1;
 }
 .feature-card {
   padding: 36px 28px;
   border-radius: 20px;
-  background: #f8fbff;
-  border: 1px solid #e8f0f8;
+  background: #f4fafe;
+  border: 1px solid #e0f0f8;
   transition: all 0.4s cubic-bezier(.4,0,.2,1);
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 600px;
 }
 .feature-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #00B4D8, #0077B6);
+  background: var(--grad-main);
   opacity: 0;
   transition: opacity 0.3s;
 }
 .feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0,119,182,0.1);
+  transform: translateY(-8px) perspective(600px) rotateX(2deg);
+  box-shadow: 0 24px 60px rgba(0,119,182,0.12);
   border-color: transparent;
 }
 .feature-card:hover::before { opacity: 1; }
 .feature-icon {
-  width: 60px; height: 60px;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  width: 64px; height: 64px;
+  background: var(--grad-main);
   border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
-  color: #fff;
+  font-size: 1.7rem;
+  color: var(--white);
   margin-bottom: 20px;
   box-shadow: 0 8px 24px rgba(0,180,216,0.25);
   transition: transform 0.3s;
 }
-.feature-card:hover .feature-icon { transform: scale(1.1) rotate(-5deg); }
-.feature-card h3 {
-  font-size: 1.15rem;
-  margin-bottom: 10px;
+.feature-card:hover .feature-icon {
+  transform: scale(1.1) rotate(-5deg);
 }
-.feature-card p {
-  color: #6a7a8e;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
+.feature-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.feature-card p { color: #5a6a7e; font-size: 0.92rem; line-height: 1.7; }
 
-/* ============ VIRTUAL TOUR ============ */
-.virtual-tour {
+/* ============ AGENT NETWORK ============ */
+.agent-network {
   padding: 100px 0;
-  background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0a1628 100%);
-  color: #fff;
+  background: linear-gradient(135deg, var(--dark) 0%, #0a2540 100%);
+  color: var(--white);
   position: relative;
   overflow: hidden;
 }
-.virtual-tour::before {
+.agent-network::before {
   content: '';
   position: absolute;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(0,180,216,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,180,216,0.1) 0%, transparent 70%);
   top: -200px; right: -100px;
   border-radius: 50%;
 }
-.virtual-tour .section-subtitle { color: rgba(255,255,255,0.6); }
-.virtual-grid {
+.agent-network .section-subtitle { color: rgba(255,255,255,0.6); }
+.agent-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-bottom: 60px;
 }
-.virtual-card {
+.agent-stat {
+  text-align: center;
+  padding: 40px 20px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(0,180,216,0.15);
   border-radius: 20px;
-  padding: 36px;
-  transition: all 0.4s;
   position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+  transform-style: preserve-3d;
 }
-.virtual-card::before {
+.agent-stat:hover {
+  transform: translateY(-6px) perspective(500px) rotateX(3deg);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 20px 50px rgba(0,180,216,0.15);
+}
+.agent-stat::after {
   content: '';
   position: absolute;
-  inset: -1px;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad-main);
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+.agent-stat:hover::after { transform: scaleX(1); }
+.agent-stat .number {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.agent-stat .stat-icon { font-size: 1.5rem; margin-bottom: 12px; }
+.agent-stat .stat-label {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+}
+.agent-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.agent-highlight-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,180,216,0.12);
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(0,180,216,0.3), rgba(0,119,182,0.3));
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.4s;
 }
-.virtual-card:hover::before { opacity: 1; }
-.virtual-card:hover {
+.agent-highlight-card:hover {
   background: rgba(255,255,255,0.08);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0,180,216,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,180,216,0.1);
 }
-.vc-icon {
-  width: 56px; height: 56px;
+.agent-highlight-card .agent-icon {
+  width: 60px; height: 60px;
   background: linear-gradient(135deg, rgba(0,180,216,0.2), rgba(0,119,182,0.2));
-  border-radius: 16px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  margin-bottom: 20px;
+  margin: 0 auto 16px;
   border: 1px solid rgba(0,180,216,0.2);
 }
-.virtual-card h3 { font-size: 1.15rem; margin-bottom: 10px; color: #fff; }
-.virtual-card p { color: rgba(255,255,255,0.6); font-size: 0.92rem; line-height: 1.7; }
+.agent-highlight-card h4 { font-size: 1.05rem; margin-bottom: 8px; color: var(--white); }
+.agent-highlight-card p { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.6; }
 
-/* ============ PROPERTIES ============ */
-.properties {
+/* ============ PROPERTY LISTINGS ============ */
+.listings {
   padding: 100px 0;
-  background: #f0f4f8;
+  background: #f0f7fa;
 }
-.properties-grid {
+.listings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 28px;
 }
 .property-card {
-  background: #fff;
+  background: var(--white);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid #e8f0f8;
+  border: 1px solid #e0f0f8;
   transition: all 0.4s cubic-bezier(.4,0,.2,1);
   position: relative;
+  transform-style: preserve-3d;
+  perspective: 800px;
 }
 .property-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #00B4D8, #0077B6);
+  background: var(--grad-main);
   z-index: 2;
 }
 .property-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 24px 60px rgba(0,119,182,0.12);
+  transform: translateY(-10px) perspective(600px) rotateX(2deg);
+  box-shadow: 0 28px 70px rgba(0,119,182,0.14);
 }
 .property-img {
   height: 220px;
@@ -693,28 +640,18 @@ img { max-width: 100%; display: block; }
 .property-badge {
   position: absolute;
   top: 16px; left: 16px;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  color: #fff;
+  background: var(--grad-main);
+  color: var(--white);
   padding: 6px 16px;
   border-radius: 50px;
   font-size: 0.78rem;
   font-weight: 600;
   z-index: 2;
 }
-.property-body {
-  padding: 28px;
-}
+.property-body { padding: 28px; }
 .property-body h3 { font-size: 1.15rem; margin-bottom: 6px; }
-.property-body .address {
-  color: #7a8a9e;
-  font-size: 0.88rem;
-  margin-bottom: 16px;
-}
-.property-features {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-}
+.property-body .address { color: #7a8a9e; font-size: 0.88rem; margin-bottom: 16px; }
+.property-features { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
 .property-features span {
   display: flex;
   align-items: center;
@@ -723,120 +660,19 @@ img { max-width: 100%; display: block; }
   color: #5a6a7e;
 }
 .property-price {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.4rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  background: var(--grad-main);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-/* ============ COMMUNITY ============ */
-.community {
-  padding: 100px 0;
-  background: #fff;
-}
-.community-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-}
-.community-stat {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #f0f8ff, #f8fbff);
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s;
-}
-.community-stat:hover { transform: translateY(-4px); }
-.community-stat::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #00B4D8, #0077B6);
-}
-.community-stat .number {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 2.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
-}
-.community-stat .stat-label {
-  font-size: 0.95rem;
-  color: #5a6a7e;
-  font-weight: 500;
-}
-.community-stat .stat-icon {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-}
-
-/* ============ PROCESS ============ */
-.process {
-  padding: 100px 0;
-  background: #f0f4f8;
-}
-.process-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  position: relative;
-}
-.process-steps::before {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 12%;
-  right: 12%;
-  height: 3px;
-  background: linear-gradient(90deg, #00B4D8, #0077B6);
-  border-radius: 4px;
-  z-index: 0;
-}
-.process-step {
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-.step-circle {
-  width: 80px; height: 80px;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  box-shadow: 0 10px 30px rgba(0,180,216,0.3);
-  position: relative;
-  transition: transform 0.3s;
-}
-.process-step:hover .step-circle { transform: scale(1.1); }
-.step-circle::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,180,216,0.2);
-}
-.process-step h3 { font-size: 1.05rem; margin-bottom: 8px; }
-.process-step p { font-size: 0.88rem; color: #6a7a8e; line-height: 1.6; }
 
 /* ============ TESTIMONIALS ============ */
 .testimonials {
   padding: 100px 0;
-  background: #fff;
+  background: var(--white);
 }
 .testimonial-grid {
   display: grid;
@@ -844,28 +680,29 @@ img { max-width: 100%; display: block; }
   gap: 28px;
 }
 .testimonial-card {
-  background: linear-gradient(135deg, #f8fbff, #f0f8ff);
+  background: linear-gradient(135deg, #f8fbfe, #f0f8ff);
   border-radius: 20px;
   padding: 36px;
-  border: 1px solid #e8f0f8;
+  border: 1px solid #e0f0f8;
   transition: all 0.3s;
   position: relative;
+  transform-style: preserve-3d;
 }
 .testimonial-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,119,182,0.08);
+  transform: translateY(-6px) perspective(500px) rotateX(2deg);
+  box-shadow: 0 20px 50px rgba(0,119,182,0.1);
 }
 .testimonial-card::before {
-  content: '"';
+  content: '\201C';
   position: absolute;
-  top: 20px; right: 28px;
-  font-size: 4rem;
-  font-family: 'Space Grotesk', sans-serif;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  top: 16px; right: 24px;
+  font-size: 4.5rem;
+  font-family: var(--font-heading);
+  background: var(--grad-main);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  opacity: 0.3;
+  opacity: 0.2;
   line-height: 1;
 }
 .testimonial-card p {
@@ -875,151 +712,108 @@ img { max-width: 100%; display: block; }
   margin-bottom: 24px;
   font-style: italic;
 }
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
 .author-avatar {
   width: 48px; height: 48px;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  background: var(--grad-main);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
+  color: var(--white);
+  font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 .author-info .name {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.95rem;
 }
-.author-info .role {
-  font-size: 0.82rem;
-  color: #7a8a9e;
-}
+.author-info .role { font-size: 0.82rem; color: #7a8a9e; }
 .stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 4px; }
 
-/* ============ CONTACT ============ */
-.contact {
+/* ============ CTA ============ */
+.cta-section {
   padding: 100px 0;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  background: var(--grad-main);
   position: relative;
+  overflow: hidden;
 }
-.contact::before {
+.cta-section::before {
   content: '';
   position: absolute;
   top: -60px; left: 0; right: 0;
   height: 120px;
-  background: linear-gradient(135deg, #f0f4f8, #f0f4f8);
+  background: var(--white);
   clip-path: ellipse(55% 100% at 50% 100%);
 }
-.contact .section-subtitle { color: rgba(255,255,255,0.8); }
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
+.cta-section .hexagon-deco {
+  top: -60px; left: 10%;
+  width: 160px; height: 160px;
+  opacity: 0.15;
 }
-.contact-info {
-  color: #fff;
+.cta-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  color: var(--white);
 }
-.contact-info h3 {
-  font-size: 1.6rem;
+.cta-content h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--white);
   margin-bottom: 16px;
 }
-.contact-info > p {
-  color: rgba(255,255,255,0.8);
-  margin-bottom: 32px;
-  line-height: 1.8;
+.cta-content p {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 600px;
+  margin: 0 auto 36px;
 }
-.contact-items {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.contact-item-icon {
-  width: 52px; height: 52px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
-}
-.contact-item-text .label {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.7);
-}
-.contact-item-text .value {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-cta-white {
+  padding: 16px 40px;
+  border-radius: 50px;
+  background: var(--white);
+  color: var(--blue);
+  font-family: var(--font-heading);
+  font-weight: 700;
   font-size: 1.05rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
-.contact-form-card {
-  background: #fff;
-  border-radius: 24px;
-  padding: 44px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+.btn-cta-white:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
 }
-.contact-form-card h3 {
-  font-size: 1.4rem;
-  margin-bottom: 24px;
+.btn-cta-ghost {
+  padding: 16px 40px;
+  border-radius: 50px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: 2px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: all 0.35s;
 }
-.form-group {
-  margin-bottom: 20px;
-}
-.form-group label {
-  display: block;
-  font-weight: 500;
-  font-size: 0.88rem;
-  color: #4a5a6e;
-  margin-bottom: 6px;
-}
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 14px 18px;
-  border: 2px solid #e8f0f8;
-  border-radius: 14px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
-  transition: border-color 0.3s;
-  outline: none;
-  background: #f8fbff;
-}
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-  border-color: #00B4D8;
-  background: #fff;
-}
-.form-group textarea { resize: vertical; min-height: 100px; }
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.btn-cta-ghost:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--white);
 }
 
 /* ============ FOOTER ============ */
 .footer {
-  background: #0a1628;
+  background: var(--dark);
   color: rgba(255,255,255,0.7);
-  padding-top: 60px;
+  padding-top: 0;
 }
 .footer-accent {
   height: 3px;
-  background: linear-gradient(90deg, #00B4D8, #0077B6, #00B4D8);
+  background: linear-gradient(90deg, var(--teal), var(--blue), var(--teal));
 }
 .footer-grid {
   display: grid;
@@ -1029,7 +823,7 @@ img { max-width: 100%; display: block; }
 }
 .footer-brand h3 {
   font-size: 1.4rem;
-  color: #fff;
+  color: var(--white);
   margin-bottom: 12px;
 }
 .footer-brand p {
@@ -1037,10 +831,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.7;
   margin-bottom: 20px;
 }
-.footer-social {
-  display: flex;
-  gap: 12px;
-}
+.footer-social { display: flex; gap: 12px; }
 .footer-social a {
   width: 42px; height: 42px;
   background: rgba(255,255,255,0.08);
@@ -1052,22 +843,20 @@ img { max-width: 100%; display: block; }
   transition: all 0.3s;
 }
 .footer-social a:hover {
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  background: var(--grad-main);
   transform: translateY(-3px);
 }
 .footer-col h4 {
-  color: #fff;
+  color: var(--white);
   font-size: 1rem;
   margin-bottom: 20px;
 }
-.footer-col ul li {
-  margin-bottom: 12px;
-}
+.footer-col ul li { margin-bottom: 12px; }
 .footer-col ul li a {
   font-size: 0.9rem;
   transition: color 0.3s;
 }
-.footer-col ul li a:hover { color: #00B4D8; }
+.footer-col ul li a:hover { color: var(--teal); }
 .footer-newsletter p {
   font-size: 0.9rem;
   margin-bottom: 16px;
@@ -1082,8 +871,8 @@ img { max-width: 100%; display: block; }
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.06);
-  color: #fff;
-  font-family: 'DM Sans', sans-serif;
+  color: var(--white);
+  font-family: var(--font-body);
   font-size: 0.9rem;
   outline: none;
 }
@@ -1091,11 +880,11 @@ img { max-width: 100%; display: block; }
 .footer-newsletter-form button {
   padding: 12px 20px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #00B4D8, #0077B6);
-  color: #fff;
+  background: var(--grad-main);
+  color: var(--white);
   border: none;
   cursor: pointer;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.85rem;
   transition: all 0.3s;
@@ -1109,7 +898,7 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
   font-size: 0.85rem;
 }
-.footer-bottom a { color: #00B4D8; transition: opacity 0.3s; }
+.footer-bottom a { color: var(--teal); transition: opacity 0.3s; }
 .footer-bottom a:hover { opacity: 0.8; }
 
 /* ============ SCROLL REVEAL ============ */
@@ -1122,6 +911,17 @@ img { max-width: 100%; display: block; }
   opacity: 1;
   transform: translateY(0);
 }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 1024px) {
@@ -1129,20 +929,16 @@ img { max-width: 100%; display: block; }
   .hero-left p { margin-left: auto; margin-right: auto; }
   .hero-buttons { justify-content: center; }
   .hero-right { display: none; }
-  .about-card { grid-template-columns: 1fr; }
-  .community-stats { grid-template-columns: repeat(2, 1fr); }
-  .process-steps { grid-template-columns: repeat(2, 1fr); }
-  .process-steps::before { display: none; }
+  .agent-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
   .nav-links {
     position: fixed;
     top: 0; right: -100%;
-    width: 75%;
-    max-width: 320px;
+    width: 75%; max-width: 320px;
     height: 100vh;
-    background: linear-gradient(135deg, #00B4D8, #0077B6);
+    background: linear-gradient(135deg, var(--teal), var(--blue));
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1152,39 +948,36 @@ img { max-width: 100%; display: block; }
   }
   .nav-links.open { right: 0; }
   .nav-links a { font-size: 1.2rem; color: #fff; }
-  .hamburger { display: flex; z-index: 1001; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .properties-grid { grid-template-columns: 1fr; }
+  .hamburger { display: flex; }
+  .listings-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-  .process-steps { grid-template-columns: 1fr; }
+  .agent-stats-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
-  .about-stats { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .community-stats { grid-template-columns: 1fr; }
+  .agent-stats-grid { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; align-items: center; }
 }
 </style>
 </head>
 <body>
 
-<!-- PARTICLES -->
-<div class="particles" id="particles"></div>
+<!-- FLOATING 3D CLOUDS -->
+<div class="clouds-bg" id="cloudsBg"></div>
 
 <!-- NAVIGATION -->
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <a href="#" class="nav-logo">
-      <span class="logo-icon">☁</span>
+      <span class="logo-hex">☁</span>
       eXp Realty
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
       <li><a href="#features">Features</a></li>
-      <li><a href="#virtual">Virtual Tour</a></li>
-      <li><a href="#properties">Properties</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+      <li><a href="#network">Network</a></li>
+      <li><a href="#listings">Properties</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#cta" class="nav-cta">Join eXp</a></li>
     </ul>
     <div class="hamburger" id="hamburger">
       <span></span><span></span><span></span>
@@ -1192,43 +985,41 @@ img { max-width: 100%; display: block; }
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO (VIDEO BACKGROUND) -->
 <section class="hero" id="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/27543/27543-360.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="container hero-content">
     <div class="hero-left">
       <div class="hero-badge">
         <span class="dot"></span>
         Cloud-Powered Real Estate
       </div>
-      <h1>The Future of Real Estate is <span>in the Cloud</span></h1>
-      <p>eXp Realty is a cloud-based brokerage where agents connect, collaborate, and close deals in a revolutionary virtual world — no brick-and-mortar offices required.</p>
+      <h1>The Future of Real Estate is <span class="text-3d">in the Cloud</span></h1>
+      <p>eXp Realty is the world's largest cloud-based real estate brokerage, connecting 85,000+ agents across 50+ countries in a revolutionary virtual environment — no brick-and-mortar offices required.</p>
       <div class="hero-buttons">
-        <a href="#contact" class="hero-btn-white">Join Our Team</a>
-        <a href="#virtual" class="hero-btn-ghost">Explore Virtual Office</a>
+        <a href="#cta" class="btn-hero-white">Join Our Team</a>
+        <a href="#features" class="btn-hero-ghost">Explore Cloud Office</a>
       </div>
     </div>
     <div class="hero-right">
       <div class="hero-cards">
         <div class="floating-card fc-1">
           <div class="fc-icon">🏠</div>
-          <div class="fc-card">
-            <h4>Virtual Offices</h4>
-            <p>Meet clients and teammates in immersive 3D spaces from anywhere in the world.</p>
-          </div>
+          <h4>Virtual Offices</h4>
+          <p>Meet clients and teammates in immersive 3D spaces from anywhere in the world.</p>
         </div>
         <div class="floating-card fc-2">
           <div class="fc-icon">🌐</div>
-          <div class="fc-card">
-            <h4>Global Network</h4>
-            <p>85,000+ agents connected across 50 states and international markets.</p>
-          </div>
+          <h4>Global Network</h4>
+          <p>85,000+ agents connected across 50 states and international markets.</p>
         </div>
         <div class="floating-card fc-3">
           <div class="fc-icon">⚡</div>
-          <div class="fc-card">
-            <h4>Cloud Technology</h4>
-            <p>AI-powered tools, instant collaboration, and a paperless transaction system.</p>
-          </div>
+          <h4>Cloud Technology</h4>
+          <p>AI-powered tools, instant collaboration, and a paperless transaction system.</p>
         </div>
       </div>
     </div>
@@ -1239,129 +1030,107 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
+<!-- CLOUD-BASED FEATURES -->
+<section class="cloud-features" id="features">
   <div class="container">
-    <div class="about-card reveal">
-      <div class="about-visual">
-        <div class="about-shapes">
-          <div class="about-center-icon">☁</div>
-        </div>
-      </div>
-      <div class="about-text">
-        <h2 class="gradient-text">Redefining Real Estate Since 2009</h2>
-        <p class="lead">
-          eXp Realty isn't just a brokerage — it's a movement. We pioneered the cloud-based model, eliminating the overhead of traditional offices while giving agents cutting-edge tools, transparent commission structures, and a supportive global community that puts people first.
-        </p>
-        <p class="lead">
-          From our headquarters in Bellingham, Washington, we've grown into one of the fastest-growing real estate companies on the planet — all powered by technology, collaboration, and an unwavering commitment to agent success.
-        </p>
-        <div class="about-stats">
-          <div class="about-stat">
-            <div class="num">85K+</div>
-            <div class="label">Agents Worldwide</div>
-          </div>
-          <div class="about-stat">
-            <div class="num">50+</div>
-            <div class="label">Countries</div>
-          </div>
-          <div class="about-stat">
-            <div class="num">$300B+</div>
-            <div class="label">Transaction Volume</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="container">
-    <h2 class="section-title reveal gradient-text">Why Choose eXp Realty</h2>
+    <div class="hexagon-deco"></div>
+    <div class="hexagon-deco hex2"></div>
+    <h2 class="section-title reveal gradient-text-3d">Why eXp Realty</h2>
     <p class="section-subtitle reveal">Everything you need to thrive in modern real estate — powered by the cloud and built for the future.</p>
     <div class="features-grid">
-      <div class="feature-card reveal">
+      <div class="feature-card reveal reveal-delay-1">
         <div class="feature-icon">🌍</div>
         <h3>Cloud-Based Office</h3>
-        <p>Work from anywhere with our virtual campus featuring 3D meeting rooms, training centers, and collaborative workspaces.</p>
+        <p>Work from anywhere with our virtual campus featuring 3D meeting rooms, training centers, and collaborative workspaces accessible 24/7.</p>
       </div>
-      <div class="feature-card reveal">
+      <div class="feature-card reveal reveal-delay-2">
         <div class="feature-icon">💰</div>
         <h3>Competitive Compensation</h3>
-        <p>Earn more with our transparent revenue-sharing model, stock options, and performance bonuses that reward your growth.</p>
+        <p>Earn more with our transparent revenue-sharing model, stock options, and performance bonuses that reward your growth and leadership.</p>
       </div>
-      <div class="feature-card reveal">
+      <div class="feature-card reveal reveal-delay-3">
         <div class="feature-icon">📚</div>
         <h3>World-Class Training</h3>
-        <p>Access thousands of live and on-demand training sessions, mentorship programs, and professional development resources daily.</p>
+        <p>Access thousands of live and on-demand training sessions, mentorship programs, and professional development resources every day.</p>
       </div>
-      <div class="feature-card reveal">
+      <div class="feature-card reveal reveal-delay-4">
         <div class="feature-icon">🤝</div>
         <h3>Global Collaboration</h3>
         <p>Connect with 85,000+ agents worldwide through our virtual community, share leads, and build referral networks instantly.</p>
       </div>
-      <div class="feature-card reveal">
+      <div class="feature-card reveal reveal-delay-5">
         <div class="feature-icon">📊</div>
-        <h3>Marketing Tools</h3>
+        <h3>Marketing & CRM Tools</h3>
         <p>Leverage AI-powered marketing, CRM systems, lead generation tools, and customizable digital advertising platforms.</p>
       </div>
-      <div class="feature-card reveal">
+      <div class="feature-card reveal reveal-delay-6">
         <div class="feature-icon">🚀</div>
         <h3>Stock & Equity</h3>
-        <p>Every agent earns company stock through our equity program, giving you a real stake in the company's continued growth.</p>
+        <p>Every agent earns company stock through our equity program, giving you a real stake in the company's continued global growth.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VIRTUAL TOUR -->
-<section class="virtual-tour" id="virtual">
+<!-- AGENT NETWORK -->
+<section class="agent-network" id="network">
   <div class="container">
-    <h2 class="section-title reveal" style="color:#fff;">Step Into Our Virtual World</h2>
-    <p class="section-subtitle reveal">Experience eXp's revolutionary virtual campus — a fully immersive digital environment where agents meet, learn, and collaborate.</p>
-    <div class="virtual-grid">
-      <div class="virtual-card reveal">
-        <div class="vc-icon">🏢</div>
-        <h3>Virtual Campus</h3>
-        <p>Walk through our stunning virtual headquarters, complete with reception, conference rooms, and breakout spaces — all in 3D.</p>
+    <h2 class="section-title reveal" style="color:#fff;">Our Global Agent Network</h2>
+    <p class="section-subtitle reveal">The numbers behind the fastest-growing cloud-based real estate brokerage in the world.</p>
+    <div class="agent-stats-grid">
+      <div class="agent-stat reveal reveal-delay-1">
+        <div class="stat-icon">👥</div>
+        <div class="number" data-target="85000">85,000+</div>
+        <div class="stat-label">Licensed Agents</div>
       </div>
-      <div class="virtual-card reveal">
-        <div class="vc-icon">🎓</div>
-        <h3>Live Training Center</h3>
-        <p>Attend daily training sessions with industry experts in our virtual auditorium. Learn new skills without leaving your home.</p>
+      <div class="agent-stat reveal reveal-delay-2">
+        <div class="stat-icon">🌍</div>
+        <div class="number">50+</div>
+        <div class="stat-label">U.S. States & Countries</div>
       </div>
-      <div class="virtual-card reveal">
-        <div class="vc-icon">🎤</div>
-        <h3>Agent Conference Hall</h3>
-        <p>Host client presentations, team meetings, and networking events in professional virtual venues that leave lasting impressions.</p>
+      <div class="agent-stat reveal reveal-delay-3">
+        <div class="stat-icon">📈</div>
+        <div class="number">$4.2B</div>
+        <div class="stat-label">Agent Commissions Paid</div>
       </div>
-      <div class="virtual-card reveal">
-        <div class="vc-icon">🌐</div>
-        <h3>Global Breakout Rooms</h3>
-        <p>Collaborate with agents across the globe in themed spaces designed for brainstorming, problem-solving, and creative sessions.</p>
+      <div class="agent-stat reveal reveal-delay-4">
+        <div class="stat-icon">🏆</div>
+        <div class="number">15+</div>
+        <div class="stat-label">Years of Innovation</div>
       </div>
-      <div class="virtual-card reveal">
-        <div class="vc-icon">🏆</div>
-        <h3>Awards Gallery</h3>
-        <p>Celebrate achievements and milestones in our virtual awards hall — recognizing top performers from every region worldwide.</p>
+    </div>
+    <div class="agent-cards-grid">
+      <div class="agent-highlight-card reveal reveal-delay-1">
+        <div class="agent-icon">🎓</div>
+        <h4>Live Training</h4>
+        <p>Daily sessions with industry experts in our virtual auditorium — learn without leaving your home.</p>
       </div>
-      <div class="virtual-card reveal">
-        <div class="vc-icon">☕</div>
-        <h3>Social Lounge</h3>
-        <p>Unwind and connect with fellow agents in casual virtual spaces designed for organic conversations and relationship building.</p>
+      <div class="agent-highlight-card reveal reveal-delay-2">
+        <div class="agent-icon">🎤</div>
+        <h4>Agent Conferences</h4>
+        <p>Host client presentations and team meetings in professional virtual venues worldwide.</p>
+      </div>
+      <div class="agent-highlight-card reveal reveal-delay-3">
+        <div class="agent-icon">🌐</div>
+        <h4>Global Breakout Rooms</h4>
+        <p>Collaborate with agents across the globe in themed spaces for brainstorming and creative sessions.</p>
+      </div>
+      <div class="agent-highlight-card reveal reveal-delay-4">
+        <div class="agent-icon">🏆</div>
+        <h4>Awards & Recognition</h4>
+        <p>Celebrate achievements in our virtual awards hall — recognizing top performers from every region.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROPERTIES -->
-<section class="properties" id="properties">
+<!-- PROPERTY LISTINGS (6 PROPERTIES) -->
+<section class="listings" id="listings">
   <div class="container">
-    <h2 class="section-title reveal gradient-text">Featured Properties</h2>
-    <p class="section-subtitle reveal">Discover exceptional homes represented by our agents across the Pacific Northwest and beyond.</p>
-    <div class="properties-grid">
-      <div class="property-card reveal">
+    <h2 class="section-title reveal gradient-text-3d">Featured Properties</h2>
+    <p class="section-subtitle reveal">Discover exceptional homes represented by eXp agents across the Pacific Northwest and beyond.</p>
+    <div class="listings-grid">
+      <div class="property-card reveal reveal-delay-1">
         <div class="property-img">
           <div class="property-badge">Featured</div>
           <div class="placeholder">🏡</div>
@@ -1377,7 +1146,7 @@ img { max-width: 100%; display: block; }
           <div class="property-price">$1,250,000</div>
         </div>
       </div>
-      <div class="property-card reveal">
+      <div class="property-card reveal reveal-delay-2">
         <div class="property-img">
           <div class="property-badge">New Listing</div>
           <div class="placeholder">🏘️</div>
@@ -1393,7 +1162,7 @@ img { max-width: 100%; display: block; }
           <div class="property-price">$875,000</div>
         </div>
       </div>
-      <div class="property-card reveal">
+      <div class="property-card reveal reveal-delay-3">
         <div class="property-img">
           <div class="property-badge">Open House</div>
           <div class="placeholder">🏗️</div>
@@ -1409,65 +1178,53 @@ img { max-width: 100%; display: block; }
           <div class="property-price">$695,000</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMMUNITY -->
-<section class="community" id="community">
-  <div class="container">
-    <h2 class="section-title reveal gradient-text">Our Global Community</h2>
-    <p class="section-subtitle reveal">The numbers behind the fastest-growing cloud-based real estate brokerage in the world.</p>
-    <div class="community-stats">
-      <div class="community-stat reveal">
-        <div class="stat-icon">👥</div>
-        <div class="number">85,000+</div>
-        <div class="stat-label">Licensed Agents</div>
+      <div class="property-card reveal reveal-delay-4">
+        <div class="property-img">
+          <div class="property-badge">Price Reduced</div>
+          <div class="placeholder">🏠</div>
+        </div>
+        <div class="property-body">
+          <h3>Portland Craftsman Bungalow</h3>
+          <p class="address">📍 3421 SE Hawthorne, Portland, OR</p>
+          <div class="property-features">
+            <span>🛏 3 Beds</span>
+            <span>🛁 2 Baths</span>
+            <span>📐 1,850 sqft</span>
+          </div>
+          <div class="property-price">$520,000</div>
+        </div>
       </div>
-      <div class="community-stat reveal">
-        <div class="stat-icon">🌍</div>
-        <div class="number">50+</div>
-        <div class="stat-label">U.S. States & Countries</div>
+      <div class="property-card reveal reveal-delay-5">
+        <div class="property-img">
+          <div class="property-badge">Luxury</div>
+          <div class="placeholder">🏰</div>
+        </div>
+        <div class="property-body">
+          <h3>Seattle Penthouse View</h3>
+          <p class="address">📍 1201 Elliott Ave, Seattle, WA</p>
+          <div class="property-features">
+            <span>🛏 4 Beds</span>
+            <span>🛁 3 Baths</span>
+            <span>📐 3,600 sqft</span>
+          </div>
+          <div class="property-price">$2,100,000</div>
+        </div>
       </div>
-      <div class="community-stat reveal">
-        <div class="stat-icon">📈</div>
-        <div class="number">$4.2B</div>
-        <div class="stat-label">Agent Commissions Paid</div>
-      </div>
-      <div class="community-stat reveal">
-        <div class="stat-icon">🏆</div>
-        <div class="number">15+</div>
-        <div class="stat-label">Years of Innovation</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="container">
-    <h2 class="section-title reveal gradient-text">Your Journey With Us</h2>
-    <p class="section-subtitle reveal">Four simple steps to join the future of real estate and start building your career in the cloud.</p>
-    <div class="process-steps">
-      <div class="process-step reveal">
-        <div class="step-circle">1</div>
-        <h3>Apply Online</h3>
-        <p>Fill out our quick online application. Share your license details, experience, and goals with our recruitment team.</p>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-circle">2</div>
-        <h3>Welcome Call</h3>
-        <p>Connect with a dedicated onboarding specialist who'll walk you through everything eXp Realty offers.</p>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-circle">3</div>
-        <h3>Virtual Training</h3>
-        <p>Complete our comprehensive onboarding program — all conducted in our virtual campus at your own pace.</p>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-circle">4</div>
-        <h3>Launch & Grow</h3>
-        <p>Start serving clients with full access to tools, technology, and a global network ready to support you.</p>
+      <div class="property-card reveal reveal-delay-6">
+        <div class="property-img">
+          <div class="property-badge">Just Listed</div>
+          <div class="placeholder">🏡</div>
+        </div>
+        <div class="property-body">
+          <h3>Denver Modern Farmhouse</h3>
+          <p class="address">📍 8901 Ridgecrest Dr, Denver, CO</p>
+          <div class="property-features">
+            <span>🛏 5 Beds</span>
+            <span>🛁 4 Baths</span>
+            <span>📐 3,900 sqft</span>
+          </div>
+          <div class="property-price">$785,000</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1476,10 +1233,10 @@ img { max-width: 100%; display: block; }
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
   <div class="container">
-    <h2 class="section-title reveal gradient-text">What Our Agents Say</h2>
-    <p class="section-subtitle reveal">Real stories from real agents who transformed their careers with eXp Realty.</p>
+    <h2 class="section-title reveal gradient-text-3d">What Our Agents Say</h2>
+    <p class="section-subtitle reveal">Real stories from agents who transformed their careers with eXp Realty.</p>
     <div class="testimonial-grid">
-      <div class="testimonial-card reveal">
+      <div class="testimonial-card reveal reveal-delay-1">
         <div class="stars">★★★★★</div>
         <p>"Joining eXp was the best decision of my career. The virtual office model gave me freedom to work anywhere while having access to training and mentorship I never had at a traditional brokerage."</p>
         <div class="testimonial-author">
@@ -1490,7 +1247,7 @@ img { max-width: 100%; display: block; }
           </div>
         </div>
       </div>
-      <div class="testimonial-card reveal">
+      <div class="testimonial-card reveal reveal-delay-2">
         <div class="stars">★★★★★</div>
         <p>"The revenue sharing model changed everything. I'm now earning passive income from agents I helped recruit, on top of my commissions. The stock equity program is the cherry on top."</p>
         <div class="testimonial-author">
@@ -1501,7 +1258,7 @@ img { max-width: 100%; display: block; }
           </div>
         </div>
       </div>
-      <div class="testimonial-card reveal">
+      <div class="testimonial-card reveal reveal-delay-3">
         <div class="stars">★★★★★</div>
         <p>"I relocated internationally and never missed a beat. My virtual office traveled with me. eXp's global community is unlike anything in real estate — supportive, innovative, and always evolving."</p>
         <div class="testimonial-author">
@@ -1516,83 +1273,16 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
+<!-- CTA SECTION -->
+<section class="cta-section" id="cta">
+  <div class="hexagon-deco"></div>
   <div class="container">
-    <h2 class="section-title reveal" style="color:#fff;">Ready to Go Cloud?</h2>
-    <p class="section-subtitle reveal">Join the revolution. Start your journey with eXp Realty today and experience the future of real estate.</p>
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <h3>Let's Connect</h3>
-        <p>Whether you're an experienced agent looking for a better model or just starting out, we'd love to hear from you.</p>
-        <div class="contact-items">
-          <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
-            <div class="contact-item-text">
-              <div class="label">Headquarters</div>
-              <div class="value">Bellingham, Washington</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">📞</div>
-            <div class="contact-item-text">
-              <div class="label">Phone</div>
-              <div class="value">+1-360-685-4441</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">✉️</div>
-            <div class="contact-item-text">
-              <div class="label">Email</div>
-              <div class="value">info@exprealty.com</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">🌐</div>
-            <div class="contact-item-text">
-              <div class="label">Virtual Office</div>
-              <div class="value">Available 24/7 Online</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="contact-form-card reveal">
-        <h3>Send Us a Message</h3>
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input type="text" id="firstName" placeholder="John" required>
-            </div>
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" placeholder="Doe" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="john@example.com" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" placeholder="+1 (555) 000-0000">
-          </div>
-          <div class="form-group">
-            <label for="interest">I'm interested in...</label>
-            <select id="interest">
-              <option value="">Select an option</option>
-              <option value="agent">Joining as an Agent</option>
-              <option value="broker">Brokerage Partnership</option>
-              <option value="client">Working With an Agent</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" placeholder="Tell us about your goals..." rows="4"></textarea>
-          </div>
-          <button type="submit" class="btn-pill btn-primary" style="width:100%;font-size:1.05rem;">Send Message 🚀</button>
-        </form>
+    <div class="cta-content reveal">
+      <h2>Ready to Go Cloud?</h2>
+      <p>Join the revolution. Start your journey with eXp Realty today and experience the future of real estate — work from anywhere, earn more, and grow with 85,000+ agents worldwide.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-cta-white">Become an Agent</a>
+        <a href="#" class="btn-cta-ghost">Schedule a Call</a>
       </div>
     </div>
   </div>
@@ -1617,7 +1307,7 @@ img { max-width: 100%; display: block; }
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#about">About Us</a></li>
+          <li><a href="#features">About Us</a></li>
           <li><a href="#">Careers</a></li>
           <li><a href="#">Newsroom</a></li>
           <li><a href="#">Investor Relations</a></li>
@@ -1628,10 +1318,10 @@ img { max-width: 100%; display: block; }
         <h4>Resources</h4>
         <ul>
           <li><a href="#features">Agent Benefits</a></li>
-          <li><a href="#virtual">Virtual Office</a></li>
+          <li><a href="#features">Virtual Office</a></li>
           <li><a href="#">Training Hub</a></li>
           <li><a href="#">Agent Store</a></li>
-          <li><a href="#properties">Property Search</a></li>
+          <li><a href="#listings">Property Search</a></li>
         </ul>
       </div>
       <div class="footer-col footer-newsletter">
@@ -1644,97 +1334,97 @@ img { max-width: 100%; display: block; }
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2024 eXp Realty, LLC. All rights reserved.</span>
+      <span>&copy; 2026 eXp Realty, LLC. All rights reserved.</span>
       <span>Demo site built by <a href="#">Alok Web Services</a></span>
     </div>
   </div>
 </footer>
 
 <script>
-/* ============ PARTICLES ============ */
-(function() {
-  const container = document.getElementById('particles');
-  const count = 20;
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 60 + 20;
-    p.style.width = size + 'px';
-    p.style.height = size + 'px';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.background = Math.random() > 0.5 ? '#00B4D8' : '#0077B6';
-    p.style.animationDuration = (Math.random() * 20 + 15) + 's';
-    p.style.animationDelay = (Math.random() * 20) + 's';
-    container.appendChild(p);
+/* ============ FLOATING 3D CLOUDS ============ */
+(function(){
+  var container = document.getElementById('cloudsBg');
+  var count = 12;
+  for (var i = 0; i < count; i++) {
+    var c = document.createElement('div');
+    c.className = i % 2 === 0 ? 'cloud' : 'cloud-3d';
+    var size = Math.random() * 200 + 80;
+    c.style.width = size + 'px';
+    c.style.height = (size * 0.6) + 'px';
+    c.style.left = Math.random() * 100 + '%';
+    if (c.classList.contains('cloud')) {
+      c.style.animationDuration = (Math.random() * 25 + 20) + 's';
+      c.style.animationDelay = (Math.random() * 25) + 's';
+    } else {
+      c.style.animationDuration = (Math.random() * 6 + 5) + 's';
+      c.style.animationDelay = (Math.random() * 3) + 's';
+      c.style.top = (Math.random() * 80 + 10) + '%';
+    }
+    container.appendChild(c);
   }
 })();
 
 /* ============ NAV SCROLL ============ */
-(function() {
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
+(function(){
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
 })();
 
 /* ============ HAMBURGER ============ */
-(function() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
+(function(){
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', function(){
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('open');
   });
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
       hamburger.classList.remove('active');
       navLinks.classList.remove('open');
     });
   });
 })();
 
-/* ============ SCROLL REVEAL ============ */
-(function() {
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+/* ============ SCROLL REVEAL (STAGGERED) ============ */
+(function(){
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 80);
+        entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(function(el){ observer.observe(el); });
 })();
 
 /* ============ COUNTER ANIMATION ============ */
-(function() {
-  const counters = document.querySelectorAll('.number, .num');
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+(function(){
+  var counters = document.querySelectorAll('.agent-stat .number');
+  var counterObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
       if (entry.isIntersecting) {
-        const el = entry.target;
-        const text = el.textContent;
-        const match = text.match(/^([\d,.]+)/);
+        var el = entry.target;
+        var text = el.textContent;
+        var match = text.match(/^([\d,.]+)/);
         if (!match) return;
-        const target = parseFloat(match[1].replace(/,/g, ''));
-        const suffix = text.replace(match[1], '');
-        const hasDecimal = match[1].includes('.');
-        const duration = 2000;
-        const start = performance.now();
-        function update(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          let current = target * eased;
-          if (hasDecimal) {
-            current = current.toFixed(1);
-          } else {
-            current = Math.floor(current);
-          }
-          const formatted = current.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        var target = parseFloat(match[1].replace(/,/g, ''));
+        var suffix = text.replace(match[1], '');
+        var hasDecimal = match[1].includes('.');
+        var duration = 2000;
+        var start = performance.now();
+        function update(now){
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = target * eased;
+          if (hasDecimal) { current = current.toFixed(1); }
+          else { current = Math.floor(current); }
+          var formatted = current.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
           el.textContent = formatted + suffix;
           if (progress < 1) requestAnimationFrame(update);
           else el.textContent = text;
@@ -1744,30 +1434,13 @@ img { max-width: 100%; display: block; }
       }
     });
   }, { threshold: 0.5 });
-  counters.forEach(c => counterObserver.observe(c));
-})();
-
-/* ============ FORM HANDLER ============ */
-(function() {
-  const form = document.getElementById('contactForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('button');
-    const original = btn.innerHTML;
-    btn.innerHTML = '✓ Message Sent!';
-    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.style.background = '';
-      form.reset();
-    }, 2500);
-  });
+  counters.forEach(function(c){ counterObserver.observe(c); });
 })();
 
 /* ============ SMOOTH ANCHOR SCROLL ============ */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    const target = document.querySelector(a.getAttribute('href'));
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var target = document.querySelector(a.getAttribute('href'));
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
