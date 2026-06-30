@@ -4,1123 +4,193 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Berkshire Hathaway HomeServices | Heritage Prestige Real Estate</title>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --navy:#003366;
-  --white:#FFFFFF;
+  --cream:#F5F0E8;
   --gold:#B8860B;
-  --cream:#FDF8F0;
-  --gold-light:#D4AF37;
+  --dark:#1a1a1a;
+  --white:#fff;
   --navy-dark:#001a33;
 }
 html{scroll-behavior:smooth}
 body{
-  font-family:'Source Sans 3',sans-serif;
-  color:#1a1a1a;
+  font-family:'Lato',sans-serif;
+  color:var(--dark);
   line-height:1.6;
   overflow-x:hidden;
   background:var(--cream);
 }
 h1,h2,h3,h4,h5,h6{
-  font-family:'Libre Baskerville',serif;
+  font-family:'Playfair Display',serif;
   font-weight:700;
   line-height:1.2;
 }
-img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* FLOATING GEOMETRIC SHAPES */
+.geo-shape{
+  position:absolute;
+  pointer-events:none;
+  opacity:0.07;
+  z-index:0;
+}
+.geo-diamond{
+  width:80px;height:80px;
+  border:3px solid var(--gold);
+  transform:rotate(45deg);
+  animation:geoFloat 6s ease-in-out infinite;
+}
+.geo-circle{
+  width:120px;height:120px;
+  border:3px solid var(--gold);
+  border-radius:50%;
+  animation:geoFloat 8s ease-in-out infinite reverse;
+}
+.geo-triangle{
+  width:0;height:0;
+  border-left:50px solid transparent;
+  border-right:50px solid transparent;
+  border-bottom:86px solid rgba(184,134,11,0.15);
+  animation:geoFloat 7s ease-in-out infinite;
+}
+@keyframes geoFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-30px) rotate(10deg)}
+}
 
 /* NAVIGATION */
 .nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
+  position:fixed;top:0;left:0;right:0;z-index:1000;
   background:rgba(0,51,102,0.97);
   border-bottom:3px solid var(--gold);
   padding:15px 0;
   transition:all 0.3s ease;
 }
-.nav.scrolled{
-  padding:8px 0;
-  background:rgba(0,26,51,0.98);
-}
+.nav.scrolled{padding:8px 0;background:rgba(0,26,51,0.98)}
 .nav-inner{
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:60px;
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
   padding:0 40px;
 }
-.nav-links{
-  display:flex;
-  list-style:none;
-  gap:35px;
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;color:var(--white);
+  letter-spacing:1px;line-height:1.2;
 }
+.nav-logo span{display:block;font-size:9px;letter-spacing:3px;font-weight:400;color:var(--gold);margin-top:2px}
+.nav-links{display:flex;list-style:none;gap:30px}
 .nav-links a{
-  color:var(--white);
-  font-size:13px;
-  font-weight:600;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  position:relative;
-  padding:5px 0;
-  transition:color 0.3s;
+  color:var(--white);font-size:12px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  position:relative;padding:5px 0;transition:color 0.3s;
 }
 .nav-links a::after{
-  content:'';
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:0;
-  height:2px;
-  background:var(--gold);
-  transition:width 0.3s;
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:2px;background:var(--gold);transition:width 0.3s;
 }
 .nav-links a:hover::after{width:100%}
 .nav-links a:hover{color:var(--gold)}
-.nav-logo{
-  font-family:'Libre Baskerville',serif;
-  font-size:22px;
-  font-weight:700;
-  color:var(--white);
-  letter-spacing:1px;
-  white-space:nowrap;
-  text-align:center;
-  line-height:1.2;
-}
-.nav-logo span{display:block;font-size:10px;letter-spacing:3px;font-weight:400;color:var(--gold);margin-top:3px}
 .mobile-toggle{
-  display:none;
-  background:none;
-  border:none;
-  cursor:pointer;
-  padding:10px;
+  display:none;background:none;border:none;cursor:pointer;padding:10px;
 }
 .mobile-toggle span{
-  display:block;
-  width:25px;
-  height:2px;
-  background:var(--white);
-  margin:6px 0;
-  transition:0.3s;
+  display:block;width:25px;height:2px;background:var(--white);
+  margin:6px 0;transition:0.3s;
 }
 
 /* HERO */
 .hero{
-  display:flex;
-  min-height:100vh;
-  margin-top:70px;
-}
-.hero-image{
-  flex:1;
-  background:linear-gradient(135deg,#001a33 0%,#003366 50%,#004080 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
   overflow:hidden;
-  min-height:600px;
 }
-.hero-image::before{
-  content:'';
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:
-    radial-gradient(circle at 30% 40%,rgba(184,134,11,0.15) 0%,transparent 50%),
-    radial-gradient(circle at 70% 60%,rgba(184,134,11,0.1) 0%,transparent 50%);
+.hero-video{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;z-index:0;
 }
-.hero-image::after{
-  content:'';
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:300px;
-  height:300px;
-  border:2px solid rgba(184,134,11,0.3);
-  border-radius:50%;
-  animation:heroPulse 4s ease-in-out infinite;
-}
-@keyframes heroPulse{
-  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.3}
-  50%{transform:translate(-50%,-50%) scale(1.1);opacity:0.6}
-}
-.hero-estate{
-  position:relative;
-  z-index:2;
-  text-align:center;
-  color:var(--white);
-  padding:40px;
-}
-.hero-estate svg{
-  width:200px;
-  height:200px;
-  margin-bottom:30px;
-  opacity:0.9;
-}
-.hero-estate h3{
-  font-size:16px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:15px;
-}
-.hero-estate p{
-  font-size:14px;
-  opacity:0.7;
-  font-style:italic;
-  max-width:280px;
+.hero-overlay{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(135deg,rgba(0,26,51,0.88) 0%,rgba(0,51,102,0.75) 50%,rgba(0,26,51,0.9) 100%);
+  z-index:1;
 }
 .hero-content{
-  flex:1;
-  background:var(--navy);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:80px 60px;
-  position:relative;
-  overflow:hidden;
+  position:relative;z-index:2;text-align:center;
+  padding:120px 40px 80px;max-width:900px;
 }
-.hero-content::before{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  width:40%;
-  height:100%;
-  background:linear-gradient(135deg,transparent,rgba(184,134,11,0.05));
+
+/* HERITAGE SHIELD */
+.shield-wrapper{
+  perspective:800px;margin-bottom:40px;
 }
-.hero-text{
-  position:relative;
-  z-index:2;
-  max-width:500px;
+.heritage-shield{
+  display:inline-block;width:120px;height:140px;
+  position:relative;transform-style:preserve-3d;
+  animation:shieldRotate 8s ease-in-out infinite;
 }
-.hero-crest{
-  display:inline-block;
-  width:60px;
-  height:60px;
-  border:2px solid var(--gold);
-  border-radius:50%;
-  margin-bottom:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+@keyframes shieldRotate{
+  0%,100%{transform:rotateY(0deg) rotateX(0deg)}
+  25%{transform:rotateY(15deg) rotateX(5deg)}
+  50%{transform:rotateY(0deg) rotateX(0deg)}
+  75%{transform:rotateY(-15deg) rotateX(-5deg)}
 }
-.hero-crest span{
-  font-family:'Libre Baskerville',serif;
-  font-size:24px;
-  color:var(--gold);
+.heritage-shield svg{width:100%;height:100%}
+
+.hero-subtitle{
+  font-size:13px;color:var(--gold);letter-spacing:5px;
+  text-transform:uppercase;margin-bottom:20px;
+  font-family:'Lato',sans-serif;font-weight:600;
 }
-.hero-text h1{
-  font-size:48px;
-  color:var(--white);
-  margin-bottom:20px;
-  line-height:1.1;
+.hero-title{
+  font-size:clamp(36px,6vw,64px);color:var(--white);
+  margin-bottom:20px;line-height:1.1;
 }
-.hero-text h1 span{color:var(--gold);font-style:italic}
-.hero-text .tagline{
-  font-size:18px;
-  color:rgba(255,255,255,0.7);
-  margin-bottom:30px;
-  font-weight:300;
-  letter-spacing:1px;
-}
-.hero-text .est{
-  font-size:13px;
-  color:var(--gold);
-  letter-spacing:4px;
-  text-transform:uppercase;
-  margin-bottom:40px;
-  font-family:'Libre Baskerville',serif;
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-desc{
+  font-size:18px;color:rgba(255,255,255,0.75);
+  margin-bottom:40px;font-weight:300;letter-spacing:0.5px;
 }
 .hero-btn{
-  display:inline-block;
-  padding:16px 45px;
-  border:2px solid var(--gold);
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  transition:all 0.4s;
-  font-weight:600;
+  display:inline-block;padding:16px 50px;
+  border:2px solid var(--gold);color:var(--gold);
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  transition:all 0.4s;font-weight:700;
 }
-.hero-btn:hover{
-  background:var(--gold);
-  color:var(--navy);
-}
-.hero-divider{
-  width:60px;
-  height:1px;
-  background:var(--gold);
-  margin:30px 0;
-}
-.hero-contact-info{
-  margin-top:40px;
-  padding-top:30px;
-  border-top:1px solid rgba(184,134,11,0.3);
-}
-.hero-contact-info p{
-  color:rgba(255,255,255,0.5);
-  font-size:13px;
-  letter-spacing:1px;
-}
-.hero-contact-info a{
-  color:var(--gold);
-  font-weight:600;
-}
+.hero-btn:hover{background:var(--gold);color:var(--navy)}
 
-/* ABOUT - PARALLAX */
-.about{
-  position:relative;
-  min-height:80vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-.about-parallax{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:
-    linear-gradient(135deg,#001a33 0%,#003366 40%,#004080 70%,#003366 100%);
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-}
-.about-parallax::before{
-  content:'';
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:
-    repeating-linear-gradient(0deg,transparent,transparent 100px,rgba(184,134,11,0.03) 100px,rgba(184,134,11,0.03) 101px),
-    repeating-linear-gradient(90deg,transparent,transparent 100px,rgba(184,134,11,0.03) 100px,rgba(184,134,11,0.03) 101px);
-}
-.about-parallax::after{
-  content:'';
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:rgba(0,51,102,0.85);
-}
-.about-card{
-  position:relative;
-  z-index:2;
-  background:rgba(255,255,255,0.95);
-  max-width:800px;
-  margin:0 auto;
-  padding:80px 70px;
-  text-align:center;
-  border:1px solid rgba(184,134,11,0.3);
-  box-shadow:0 30px 80px rgba(0,0,0,0.3);
-}
-.about-card::before{
-  content:'';
-  position:absolute;
-  top:15px;
-  left:15px;
-  right:15px;
-  bottom:15px;
-  border:1px solid var(--gold);
-  pointer-events:none;
-}
-.about-card h2{
-  font-size:36px;
-  color:var(--navy);
-  margin-bottom:10px;
-}
-.about-card .subtitle{
-  font-size:13px;
-  color:var(--gold);
-  letter-spacing:4px;
-  text-transform:uppercase;
-  margin-bottom:30px;
-}
-.about-card .gold-line{
-  width:80px;
-  height:1px;
-  background:var(--gold);
-  margin:0 auto 30px;
-}
-.about-card p{
-  font-size:17px;
-  color:#444;
-  line-height:1.9;
-  margin-bottom:20px;
-  font-weight:300;
-}
-.about-card .signature{
-  margin-top:40px;
-  font-family:'Libre Baskerville',serif;
-  font-style:italic;
-  color:var(--navy);
-  font-size:18px;
-}
-
-/* STATS */
-.stats{
-  background:var(--navy);
-  padding:80px 0;
-  border-top:3px solid var(--gold);
-  border-bottom:3px solid var(--gold);
-}
-.stats-inner{
-  max-width:1100px;
-  margin:0 auto;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:0;
-}
-.stat-item{
-  flex:1;
-  text-align:center;
-  padding:30px 20px;
-  position:relative;
-}
-.stat-item:not(:last-child)::after{
-  content:'';
-  position:absolute;
-  right:0;
-  top:20%;
-  height:60%;
-  width:1px;
-  background:var(--gold);
-}
-.stat-number{
-  font-family:'Libre Baskerville',serif;
-  font-size:48px;
-  font-weight:700;
-  color:var(--gold);
-  line-height:1;
-  margin-bottom:10px;
-}
-.stat-label{
-  font-size:13px;
-  color:rgba(255,255,255,0.7);
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:300;
-}
-
-/* SERVICES */
-.services{
-  padding:100px 0;
-  background:var(--white);
-}
-.services-inner{
-  max-width:1000px;
-  margin:0 auto;
-  padding:0 40px;
-}
-.section-header{
-  text-align:center;
-  margin-bottom:60px;
-}
-.section-header h2{
-  font-size:36px;
-  color:var(--navy);
-  margin-bottom:10px;
-}
-.section-header .subtitle{
-  font-size:13px;
-  color:var(--gold);
-  letter-spacing:4px;
-  text-transform:uppercase;
-}
-.section-header .gold-line{
-  width:80px;
-  height:1px;
-  background:var(--gold);
-  margin:20px auto 0;
-}
-.services-list{
-  display:flex;
-  flex-direction:column;
-  border-top:1px solid #e0d5c5;
-}
-.service-item{
-  display:flex;
-  align-items:center;
-  padding:35px 0;
-  border-bottom:1px solid #e0d5c5;
-  transition:all 0.3s;
-}
-.service-item:hover{
-  padding-left:15px;
-}
-.service-icon{
-  width:50px;
-  height:50px;
-  border:2px solid var(--gold);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-right:30px;
-  flex-shrink:0;
-}
-.service-icon svg{
-  width:24px;
-  height:24px;
-  fill:var(--gold);
-}
-.service-text h4{
-  font-size:18px;
-  color:var(--navy);
-  margin-bottom:5px;
-  letter-spacing:1px;
-}
-.service-text p{
-  font-size:14px;
-  color:#666;
-  font-weight:300;
-}
-.service-arrow{
-  margin-left:auto;
-  color:var(--gold);
-  font-size:20px;
-  transition:transform 0.3s;
-}
-.service-item:hover .service-arrow{
-  transform:translateX(5px);
-}
-
-/* PROPERTIES */
-.properties{
-  padding:100px 0;
-  background:var(--cream);
-}
-.properties-inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 40px;
-}
-.properties-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:30px;
-}
-.property-card{
-  background:var(--white);
-  border:2px solid var(--gold);
-  overflow:hidden;
-  transition:all 0.4s;
-}
-.property-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 20px 50px rgba(0,0,0,0.15);
-}
-.property-image{
-  height:250px;
-  position:relative;
-  overflow:hidden;
-}
-.property-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.property-image-placeholder{
-  width:100%;
-  height:100%;
-  background:linear-gradient(135deg,#003366,#004080);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--gold);
-  font-family:'Libre Baskerville',serif;
-  font-size:14px;
-  letter-spacing:2px;
-}
-.property-tag{
-  position:absolute;
-  top:15px;
-  left:15px;
-  background:var(--navy);
-  color:var(--gold);
-  padding:6px 15px;
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:600;
-}
-.property-price{
-  position:absolute;
-  bottom:15px;
-  right:15px;
-  background:rgba(0,51,102,0.95);
-  color:var(--white);
-  padding:8px 20px;
-  font-family:'Libre Baskerville',serif;
-  font-size:20px;
-  font-weight:700;
-}
-.property-details{
-  padding:25px;
-}
-.property-details h4{
-  font-size:18px;
-  color:var(--navy);
-  margin-bottom:8px;
-}
-.property-details .address{
-  font-size:13px;
-  color:#888;
-  margin-bottom:15px;
-  letter-spacing:1px;
-}
-.property-features{
-  display:flex;
-  gap:20px;
-  padding-top:15px;
-  border-top:1px solid #e0d5c5;
-}
-.property-features span{
-  font-size:13px;
-  color:#666;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.property-features svg{
-  width:16px;
-  height:16px;
-  fill:var(--gold);
-}
-
-/* TESTIMONIALS */
-.testimonials{
-  padding:100px 0;
-  background:var(--navy);
-  border-top:3px solid var(--gold);
-  border-bottom:3px solid var(--gold);
-}
-.testimonials-inner{
-  max-width:1000px;
-  margin:0 auto;
-  padding:0 40px;
-}
-.testimonials .section-header h2{color:var(--white)}
-.testimonials .section-header .subtitle{color:var(--gold)}
-.testimonials .section-header .gold-line{background:var(--gold)}
-.testimonial-list{
-  display:flex;
-  flex-direction:column;
-  gap:50px;
-}
-.testimonial-item{
-  display:flex;
-  align-items:center;
-  gap:40px;
-}
-.testimonial-photo{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  border:3px solid var(--gold);
-  overflow:hidden;
-  flex-shrink:0;
-  background:linear-gradient(135deg,#1a3a5c,#003366);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.testimonial-photo span{
-  font-family:'Libre Baskerville',serif;
-  font-size:36px;
-  color:var(--gold);
-}
-.testimonial-text{
-  flex:1;
-}
-.testimonial-quote{
-  font-family:'Libre Baskerville',serif;
-  font-style:italic;
-  font-size:20px;
-  color:var(--white);
-  line-height:1.7;
-  margin-bottom:15px;
-  position:relative;
-  padding-left:30px;
-}
-.testimonial-quote::before{
-  content:'\201C';
-  position:absolute;
-  left:0;
-  top:-10px;
-  font-size:50px;
-  color:var(--gold);
-  font-family:'Libre Baskerville',serif;
-  line-height:1;
-}
-.testimonial-author{
-  font-size:14px;
-  color:var(--gold);
-  letter-spacing:2px;
-  text-transform:uppercase;
-  font-weight:600;
-}
-
-/* AWARDS */
-.awards{
-  padding:80px 0;
-  background:var(--white);
-  overflow:hidden;
-}
-.awards-inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 40px;
-}
-.awards-scroll{
-  display:flex;
-  gap:40px;
-  overflow-x:auto;
-  padding:20px 0;
-  scrollbar-width:thin;
-  scrollbar-color:var(--gold) #e0d5c5;
-}
-.awards-scroll::-webkit-scrollbar{height:6px}
-.awards-scroll::-webkit-scrollbar-track{background:#e0d5c5}
-.awards-scroll::-webkit-scrollbar-thumb{background:var(--gold)}
-.award-badge{
-  min-width:180px;
-  height:180px;
-  border:2px solid var(--gold);
-  border-radius:50%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-  flex-shrink:0;
-  transition:all 0.3s;
-  background:var(--cream);
-}
-.award-badge:hover{
-  transform:scale(1.05);
-  box-shadow:0 10px 30px rgba(184,134,11,0.2);
-}
-.award-badge svg{
-  width:40px;
-  height:40px;
-  fill:var(--gold);
-  margin-bottom:10px;
-}
-.award-badge h5{
-  font-size:12px;
-  color:var(--navy);
-  letter-spacing:1px;
-  line-height:1.3;
-}
-.award-badge p{
-  font-size:10px;
-  color:var(--gold);
-  margin-top:5px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-/* LEGACY TIMELINE */
-.legacy{
-  padding:100px 0;
-  background:var(--cream);
-}
-.legacy-inner{
-  max-width:900px;
-  margin:0 auto;
-  padding:0 40px;
-  position:relative;
-}
-.legacy-timeline{
-  position:relative;
-}
-.legacy-timeline::before{
-  content:'';
-  position:absolute;
-  left:50%;
-  top:0;
-  bottom:0;
-  width:2px;
-  background:var(--gold);
-  transform:translateX(-50%);
-}
-.timeline-item{
-  display:flex;
-  align-items:flex-start;
-  margin-bottom:60px;
-  position:relative;
-}
-.timeline-item:nth-child(odd){
-  flex-direction:row-reverse;
-  text-align:right;
-}
-.timeline-content{
-  width:45%;
-  background:var(--white);
-  padding:30px;
-  border:1px solid rgba(184,134,11,0.3);
-  position:relative;
-}
-.timeline-content::before{
-  content:'';
-  position:absolute;
-  top:20px;
-  width:12px;
-  height:12px;
-  background:var(--gold);
-  border-radius:50%;
-  border:3px solid var(--white);
-}
-.timeline-item:nth-child(odd) .timeline-content::before{
-  left:-31px;
-}
-.timeline-item:nth-child(even) .timeline-content::before{
-  right:-31px;
-}
-.timeline-year{
-  font-family:'Libre Baskerville',serif;
-  font-size:24px;
-  color:var(--gold);
-  margin-bottom:8px;
-  font-weight:700;
-}
-.timeline-content h4{
-  font-size:16px;
-  color:var(--navy);
-  margin-bottom:8px;
-}
-.timeline-content p{
-  font-size:14px;
-  color:#666;
-  line-height:1.7;
-}
-
-/* CONTACT */
-.contact{
-  padding:100px 0;
-  background:var(--white);
-}
-.contact-inner{
-  max-width:1100px;
-  margin:0 auto;
-  padding:0 40px;
-}
-.contact-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  border:2px solid var(--gold);
-  position:relative;
-}
-.contact-grid::before{
-  content:'';
-  position:absolute;
-  top:10px;
-  left:10px;
-  right:10px;
-  bottom:10px;
-  border:1px solid rgba(184,134,11,0.3);
-  pointer-events:none;
-}
-.contact-info{
-  padding:50px;
-}
-.contact-info h3{
-  font-size:28px;
-  color:var(--navy);
-  margin-bottom:30px;
-}
-.contact-detail{
-  display:flex;
-  align-items:flex-start;
-  gap:15px;
-  margin-bottom:25px;
-}
-.contact-detail svg{
-  width:20px;
-  height:20px;
-  fill:var(--gold);
-  margin-top:3px;
-  flex-shrink:0;
-}
-.contact-detail h5{
-  font-size:12px;
-  color:var(--gold);
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:3px;
-  font-weight:600;
-}
-.contact-detail p{
-  font-size:15px;
-  color:#444;
-}
-.contact-detail a{
-  color:var(--navy);
-  transition:color 0.3s;
-}
-.contact-detail a:hover{color:var(--gold)}
-.contact-form{
-  padding:50px;
-  background:var(--cream);
-}
-.contact-form h3{
-  font-size:28px;
-  color:var(--navy);
-  margin-bottom:30px;
-}
-.form-group{
-  margin-bottom:20px;
-}
-.form-group label{
-  display:block;
-  font-size:12px;
-  color:var(--gold);
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:8px;
-  font-weight:600;
-}
-.form-group input,
-.form-group textarea{
-  width:100%;
-  padding:12px 15px;
-  border:1px solid #d0c5b5;
-  background:var(--white);
-  font-family:'Source Sans 3',sans-serif;
-  font-size:15px;
-  color:#333;
-  transition:border-color 0.3s;
-}
-.form-group input:focus,
-.form-group textarea:focus{
-  outline:none;
-  border-color:var(--gold);
-}
-.form-group textarea{
-  height:120px;
-  resize:vertical;
-}
-.form-submit{
-  display:inline-block;
-  padding:14px 40px;
-  background:var(--navy);
-  color:var(--gold);
-  border:2px solid var(--gold);
-  font-size:12px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:all 0.4s;
-  font-weight:600;
-}
-.form-submit:hover{
-  background:var(--gold);
-  color:var(--navy);
-}
-
-/* FOOTER */
-.footer{
-  background:var(--navy-dark);
-  color:var(--white);
-  border-top:3px solid var(--gold);
-}
-.footer-main{
-  max-width:1200px;
-  margin:0 auto;
-  padding:80px 40px 40px;
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1.5fr;
-  gap:50px;
-}
-.footer-brand h3{
-  font-size:24px;
-  color:var(--white);
-  margin-bottom:10px;
-}
-.footer-brand .est{
-  font-size:11px;
-  color:var(--gold);
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:20px;
-}
-.footer-brand p{
-  font-size:14px;
-  color:rgba(255,255,255,0.6);
-  line-height:1.8;
-  font-weight:300;
-}
-.footer-col h4{
-  font-size:14px;
-  color:var(--gold);
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:25px;
-  padding-bottom:10px;
-  border-bottom:1px solid rgba(184,134,11,0.3);
-}
-.footer-col ul{
-  list-style:none;
-}
-.footer-col li{
-  margin-bottom:12px;
-}
-.footer-col a{
-  font-size:14px;
-  color:rgba(255,255,255,0.6);
-  transition:color 0.3s;
-  font-weight:300;
-}
-.footer-col a:hover{color:var(--gold)}
-.footer-contact-item{
-  display:flex;
-  align-items:flex-start;
-  gap:12px;
-  margin-bottom:15px;
-}
-.footer-contact-item svg{
-  width:16px;
-  height:16px;
-  fill:var(--gold);
-  margin-top:3px;
-  flex-shrink:0;
-}
-.footer-contact-item p{
-  font-size:14px;
-  color:rgba(255,255,255,0.6);
-  font-weight:300;
-}
-.footer-bottom{
-  border-top:1px solid rgba(184,134,11,0.2);
-  padding:25px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  max-width:1200px;
-  margin:0 auto;
-}
-.footer-bottom p{
-  font-size:12px;
-  color:rgba(255,255,255,0.4);
-  letter-spacing:1px;
-}
-.footer-bottom a{
-  color:var(--gold);
-  transition:color 0.3s;
-}
-.footer-bottom a:hover{color:var(--white)}
-
-/* SCROLL ANIMATIONS */
-.fade-in{
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity 0.8s ease,transform 0.8s ease;
-}
-.fade-in.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .hero{flex-direction:column}
-  .hero-image{min-height:400px}
-  .hero-content{padding:60px 40px}
-  .properties-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-main{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:768px){
-  .nav-inner{flex-direction:column;gap:15px;padding:10px 20px}
-  .nav-links{display:none;flex-direction:column;gap:15px;text-align:center}
-  .nav-links.active{display:flex}
-  .mobile-toggle{display:block}
-  .hero-text h1{font-size:32px}
-  .hero-content{padding:40px 20px}
-  .about-card{padding:40px 30px;margin:0 20px}
-  .stats-inner{flex-direction:column;gap:0}
-  .stat-item:not(:last-child)::after{display:none}
-  .stat-item{border-bottom:1px solid rgba(184,134,11,0.3)}
-  .stat-item:last-child{border-bottom:none}
-  .properties-grid{grid-template-columns:1fr}
-  .testimonial-item{flex-direction:column;text-align:center}
-  .testimonial-quote{padding-left:0}
-  .timeline-timeline::before{left:20px}
-  .timeline-item,.timeline-item:nth-child(odd){flex-direction:column;text-align:left}
-  .timeline-content{width:100%;margin-left:40px}
-  .timeline-item:nth-child(odd) .timeline-content::before,
-  .timeline-item:nth-child(even) .timeline-content::before{left:-31px}
-  .contact-grid{grid-template-columns:1fr}
-  .footer-main{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
-}
-
-/* BACK TO TOP */
-.back-to-top{
-  position:fixed;
-  bottom:30px;
-  right:30px;
-  width:50px;
-  height:50px;
-  background:var(--navy);
-  border:2px solid var(--gold);
-  color:var(--gold);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  opacity:0;
-  visibility:hidden;
-  transition:all 0.3s;
-  z-index:999;
-}
-.back-to-top.visible{
-  opacity:1;
-  visibility:visible;
-}
-.back-to-top:hover{
-  background:var(--gold);
-  color:var(--navy);
+/* SCROLL INDICATOR */
+.scroll-indicator{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:3;
+}
+.scroll-arrow{
+  width:24px;height:40px;border:2px solid rgba(255,255,255,0.5);
+  border-radius:12px;position:relative;
+}
+.scroll-arrow::before{
+  content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);
+  width:4px;height:8px;background:var(--white);border-radius:2px;
+  animation:scrollBounce 2s infinite;
+}
+@keyframes scrollBounce{
+  0%,100%{transform:translateX(-50%) translateY(0);opacity:1}
+  50%{transform:translateX(-50%) translateY(8px);opacity:0.5}
 }
 </style>
 </head>
 <body>
-
 <!-- NAVIGATION -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#properties">Properties</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-    </ul>
-    <div class="nav-logo">
-      BERKSHIRE HATHAWAY
-      <span>HomeServices</span>
-    </div>
-    <ul class="nav-links" id="navLinks2">
-      <li><a href="#awards">Awards</a></li>
+    <div class="nav-logo">Berkshire Hathaway<span>HomeServices</span></div>
+    <ul class="nav-links">
       <li><a href="#legacy">Legacy</a></li>
+      <li><a href="#properties">Properties</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#contact" class="hero-btn" style="padding:8px 20px;font-size:11px">Inquire</a></li>
     </ul>
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1129,558 +199,28 @@ a{text-decoration:none;color:inherit}
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-image">
-    <div class="hero-estate">
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="30" y="80" width="140" height="100" stroke="#B8860B" stroke-width="2" fill="none"/>
-        <path d="M20 85 L100 30 L180 85" stroke="#B8860B" stroke-width="2" fill="none"/>
-        <rect x="85" y="120" width="30" height="60" stroke="#B8860B" stroke-width="1.5" fill="none"/>
-        <rect x="45" y="100" width="25" height="25" stroke="#B8860B" stroke-width="1.5" fill="none"/>
-        <rect x="130" y="100" width="25" height="25" stroke="#B8860B" stroke-width="1.5" fill="none"/>
-        <line x1="100" y1="30" x2="100" y2="15" stroke="#B8860B" stroke-width="1.5"/>
-        <polygon points="95,18 100,5 105,18" fill="#B8860B"/>
-      </svg>
-      <h3>Trusted Since 2013</h3>
-      <p>A legacy of excellence in real estate, built on integrity and the highest standards of service</p>
-    </div>
-  </div>
+<section class="hero" id="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/34015/34015-360.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-text">
-      <div class="hero-crest"><span>BH</span></div>
-      <h1>Where Heritage Meets <span>Prestige</span></h1>
-      <div class="hero-divider"></div>
-      <p class="tagline">Unwavering commitment to excellence in luxury real estate since 2013</p>
-      <p class="est">Est. 2013 &mdash; Omaha, Nebraska</p>
-      <a href="#contact" class="hero-btn">Begin Your Legacy</a>
-      <div class="hero-contact-info">
-        <p>Call us: <a href="tel:+18006494853">+1-800-649-4853</a></p>
+    <div class="shield-wrapper">
+      <div class="heritage-shield">
+        <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60 5 L110 25 L110 75 Q110 110 60 135 Q10 110 10 75 L10 25 Z" stroke="#B8860B" stroke-width="2.5" fill="rgba(184,134,11,0.1)"/>
+          <path d="M60 15 L100 32 L100 73 Q100 103 60 125 Q20 103 20 73 L20 32 Z" stroke="#B8860B" stroke-width="1" fill="none"/>
+          <text x="60" y="55" text-anchor="middle" fill="#B8860B" font-family="Playfair Display,serif" font-size="11" font-weight="700">EST.</text>
+          <text x="60" y="78" text-anchor="middle" fill="#B8860B" font-family="Playfair Display,serif" font-size="22" font-weight="700">1773</text>
+          <line x1="35" y1="90" x2="85" y2="90" stroke="#B8860B" stroke-width="1"/>
+          <text x="60" y="108" text-anchor="middle" fill="#B8860B" font-family="Lato,sans-serif" font-size="7" letter-spacing="3">HERITAGE</text>
+        </svg>
       </div>
     </div>
+    <div class="hero-subtitle">Since 1998 — A Legacy of Excellence</div>
+    <h1 class="hero-title">Berkshire Hathaway<br><em>HomeServices</em></h1>
+    <p class="hero-desc">One of the most trusted names in real estate, delivering unparalleled service and integrity across the nation.</p>
+    <a href="#properties" class="hero-btn">Explore Properties</a>
   </div>
+  <div class="scroll-indicator"><div class="scroll-arrow"></div></div>
 </section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-parallax"></div>
-  <div class="about-card fade-in">
-    <h2>Our Heritage</h2>
-    <p class="subtitle">A Tradition of Excellence</p>
-    <div class="gold-line"></div>
-    <p>Founded in 2013 in the heart of Omaha, Nebraska, Berkshire Hathaway HomeServices has grown from a visionary dream into one of the most respected names in real estate. Our heritage is rooted in the timeless values of integrity, trust, and an unwavering commitment to our clients' aspirations.</p>
-    <p>With over 50,000 distinguished agents across 1,500+ offices, we represent not merely transactions, but the fulfillment of legacies. Each home we represent carries the weight of our reputation&mdash;a reputation built over decades of service to families seeking the extraordinary.</p>
-    <p class="signature">&mdash; The Berkshire Hathaway HomeServices Family</p>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats">
-  <div class="stats-inner">
-    <div class="stat-item fade-in">
-      <div class="stat-number" data-target="50000">0</div>
-      <div class="stat-label">Expert Agents</div>
-    </div>
-    <div class="stat-item fade-in">
-      <div class="stat-number" data-target="1500">0</div>
-      <div class="stat-label">Offices Worldwide</div>
-    </div>
-    <div class="stat-item fade-in">
-      <div class="stat-number" data-target="2013">0</div>
-      <div class="stat-label">Year Established</div>
-    </div>
-    <div class="stat-item fade-in">
-      <div class="stat-number" data-target="98">0</div>
-      <div class="stat-label">Client Satisfaction %</div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-inner">
-    <div class="section-header fade-in">
-      <h2>Distinguished Services</h2>
-      <p class="subtitle">Tailored to Your Legacy</p>
-      <div class="gold-line"></div>
-    </div>
-    <div class="services-list">
-      <div class="service-item fade-in">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
-        </div>
-        <div class="service-text">
-          <h4>Luxury Property Acquisition</h4>
-          <p>Exclusive access to the finest estates and premium properties across the nation</p>
-        </div>
-        <span class="service-arrow">&rarr;</span>
-      </div>
-      <div class="service-item fade-in">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-        </div>
-        <div class="service-text">
-          <h4>Portfolio & Investment Advisory</h4>
-          <p>Strategic counsel for discerning investors seeking to build enduring real estate portfolios</p>
-        </div>
-        <span class="service-arrow">&rarr;</span>
-      </div>
-      <div class="service-item fade-in">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        </div>
-        <div class="service-text">
-          <h4>Heritage Estate Marketing</h4>
-          <p>Curated presentation of distinguished properties to qualified buyers worldwide</p>
-        </div>
-        <span class="service-arrow">&rarr;</span>
-      </div>
-      <div class="service-item fade-in">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-        </div>
-        <div class="service-text">
-          <h4>Concierge Relocation Services</h4>
-          <p>White-glove assistance for seamless transitions to your next distinguished residence</p>
-        </div>
-        <span class="service-arrow">&rarr;</span>
-      </div>
-      <div class="service-item fade-in">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zM5.08 16h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
-        </div>
-        <div class="service-text">
-          <h4>Global Network Access</h4>
-          <p>Connections to exclusive markets and opportunities through our worldwide affiliate network</p>
-        </div>
-        <span class="service-arrow">&rarr;</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROPERTIES -->
-<section class="properties" id="properties">
-  <div class="properties-inner">
-    <div class="section-header fade-in">
-      <h2>Prestigious Properties</h2>
-      <p class="subtitle">Curated Collection</p>
-      <div class="gold-line"></div>
-    </div>
-    <div class="properties-grid">
-      <div class="property-card fade-in">
-        <div class="property-image">
-          <div class="property-image-placeholder">
-            <svg viewBox="0 0 100 80" width="100" height="80" fill="none" stroke="#B8860B" stroke-width="1.5">
-              <rect x="10" y="30" width="80" height="45"/>
-              <path d="M5 33 L50 5 L95 33"/>
-              <rect x="38" y="50" width="24" height="25"/>
-              <rect x="18" y="40" width="14" height="12"/>
-              <rect x="68" y="40" width="14" height="12"/>
-            </svg>
-          </div>
-          <span class="property-tag">Featured</span>
-          <span class="property-price">$2,450,000</span>
-        </div>
-        <div class="property-details">
-          <h4>The Georgian Estate</h4>
-          <p class="address">1247 Heritage Lane, Omaha, NE 68102</p>
-          <div class="property-features">
-            <span><svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>6 Beds</span>
-            <span><svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.65 6.65l-1.41-1.41L17 11.83V16h-2v-5l-2-2v5H9v-6H7v8c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2v-3.17l2.35 2.35z"/></svg>4 Baths</span>
-            <span><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>5,200 sqft</span>
-          </div>
-        </div>
-      </div>
-      <div class="property-card fade-in">
-        <div class="property-image">
-          <div class="property-image-placeholder">
-            <svg viewBox="0 0 100 80" width="100" height="80" fill="none" stroke="#B8860B" stroke-width="1.5">
-              <rect x="15" y="25" width="70" height="50"/>
-              <path d="M10 28 L50 5 L90 28"/>
-              <rect x="40" y="45" width="20" height="30"/>
-              <rect x="20" y="35" width="15" height="12"/>
-              <rect x="65" y="35" width="15" height="12"/>
-              <line x1="50" y1="5" x2="50" y2="0"/>
-            </svg>
-          </div>
-          <span class="property-tag">Exclusive</span>
-          <span class="property-price">$3,875,000</span>
-        </div>
-        <div class="property-details">
-          <h4>The Belmont Manor</h4>
-          <p class="address">892 Prescott Avenue, Omaha, NE 68104</p>
-          <div class="property-features">
-            <span><svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>8 Beds</span>
-            <span><svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.65 6.65l-1.41-1.41L17 11.83V16h-2v-5l-2-2v5H9v-6H7v8c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2v-3.17l2.35 2.35z"/></svg>5 Baths</span>
-            <span><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>7,800 sqft</span>
-          </div>
-        </div>
-      </div>
-      <div class="property-card fade-in">
-        <div class="property-image">
-          <div class="property-image-placeholder">
-            <svg viewBox="0 0 100 80" width="100" height="80" fill="none" stroke="#B8860B" stroke-width="1.5">
-              <rect x="10" y="35" width="80" height="40"/>
-              <path d="M5 38 L50 10 L95 38"/>
-              <rect x="35" y="50" width="30" height="25"/>
-              <rect x="15" y="42" width="12" height="10"/>
-              <rect x="73" y="42" width="12" height="10"/>
-              <circle cx="50" cy="25" r="5"/>
-            </svg>
-          </div>
-          <span class="property-tag">New Listing</span>
-          <span class="property-price">$1,925,000</span>
-        </div>
-        <div class="property-details">
-          <h4>The Whitfield Residence</h4>
-          <p class="address">3156 Park Boulevard, Omaha, NE 68114</p>
-          <div class="property-features">
-            <span><svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>5 Beds</span>
-            <span><svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.65 6.65l-1.41-1.41L17 11.83V16h-2v-5l-2-2v5H9v-6H7v8c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2v-3.17l2.35 2.35z"/></svg>3 Baths</span>
-            <span><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>4,100 sqft</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="testimonials">
-  <div class="testimonials-inner">
-    <div class="section-header fade-in">
-      <h2>Words of Distinction</h2>
-      <p class="subtitle">From Our Esteemed Clients</p>
-      <div class="gold-line"></div>
-    </div>
-    <div class="testimonial-list">
-      <div class="testimonial-item fade-in">
-        <div class="testimonial-photo"><span>RW</span></div>
-        <div class="testimonial-text">
-          <div class="testimonial-quote">Berkshire Hathaway HomeServices provided an experience that transcended mere real estate. Their attention to detail and understanding of our family's legacy requirements was nothing short of extraordinary.</div>
-          <div class="testimonial-author">Robert Whitfield &mdash; Omaha, Nebraska</div>
-        </div>
-      </div>
-      <div class="testimonial-item fade-in">
-        <div class="testimonial-photo"><span>EC</span></div>
-        <div class="testimonial-text">
-          <div class="testimonial-quote">From the initial consultation to the final closing, every step was handled with the utmost professionalism and discretion. They found us not just a house, but a home worthy of our family's heritage.</div>
-          <div class="testimonial-author">Eleanor Chen &mdash; New York, New York</div>
-        </div>
-      </div>
-      <div class="testimonial-item fade-in">
-        <div class="testimonial-photo"><span>JM</span></div>
-        <div class="testimonial-text">
-          <div class="testimonial-quote">The concierge service was unparalleled. They understood that purchasing a heritage estate requires sensitivity and expertise that only decades of experience can provide.</div>
-          <div class="testimonial-author">James Montgomery III &mdash; Greenwich, Connecticut</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AWARDS -->
-<section class="awards" id="awards">
-  <div class="awards-inner">
-    <div class="section-header fade-in">
-      <h2>Accolades & Recognition</h2>
-      <p class="subtitle">A History of Excellence</p>
-      <div class="gold-line"></div>
-    </div>
-    <div class="awards-scroll">
-      <div class="award-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <h5>Brand of the Year</h5>
-        <p>2023</p>
-      </div>
-      <div class="award-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        <h5>Top Real Estate Network</h5>
-        <p>2023</p>
-      </div>
-      <div class="award-badge">
-        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-        <h5>Excellence in Client Service</h5>
-        <p>2022</p>
-      </div>
-      <div class="award-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <h5>Most Trusted Brokerage</h5>
-        <p>2022</p>
-      </div>
-      <div class="award-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        <h5>Luxury Market Leader</h5>
-        <p>2021</p>
-      </div>
-      <div class="award-badge">
-        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-        <h5>Customer Choice Award</h5>
-        <p>2021</p>
-      </div>
-      <div class="award-badge">
-        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <h5>National Association Gold</h5>
-        <p>2020</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LEGACY TIMELINE -->
-<section class="legacy" id="legacy">
-  <div class="legacy-inner">
-    <div class="section-header fade-in">
-      <h2>Our Legacy</h2>
-      <p class="subtitle">A Chronicle of Distinction</p>
-      <div class="gold-line"></div>
-    </div>
-    <div class="legacy-timeline">
-      <div class="timeline-item fade-in">
-        <div class="timeline-content">
-          <div class="timeline-year">2013</div>
-          <h4>The Founding</h4>
-          <p>Berkshire Hathaway HomeServices was established in Omaha, Nebraska, carrying forward a legacy of trust and integrity in real estate.</p>
-        </div>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-content">
-          <div class="timeline-year">2015</div>
-          <h4>National Expansion</h4>
-          <p>Expanded operations across 35 states, bringing our distinguished service to communities from coast to coast.</p>
-        </div>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-content">
-          <div class="timeline-year">2018</div>
-          <h4>Global Recognition</h4>
-          <p>Named Real Estate Brand of the Year, solidifying our position as the most trusted name in luxury properties.</p>
-        </div>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-content">
-          <div class="timeline-year">2020</div>
-          <h4>Digital Excellence</h4>
-          <p>Launched our proprietary platform connecting discerning buyers with exclusive properties worldwide.</p>
-        </div>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-content">
-          <div class="timeline-year">2023</div>
-          <h4>50,000 Agents Strong</h4>
-          <p>Reached the milestone of 50,000 distinguished agents across 1,500+ offices, serving families in every major market.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-inner">
-    <div class="section-header fade-in">
-      <h2>Begin Your Journey</h2>
-      <p class="subtitle">Private Consultations Available</p>
-      <div class="gold-line"></div>
-    </div>
-    <div class="contact-grid fade-in">
-      <div class="contact-info">
-        <h3>Contact Our Office</h3>
-        <div class="contact-detail">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          <div>
-            <h5>Headquarters</h5>
-            <p>Omaha, Nebraska</p>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          <div>
-            <h5>Telephone</h5>
-            <p><a href="tel:+18006494853">+1-800-649-4853</a></p>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <div>
-            <h5>Correspondence</h5>
-            <p><a href="mailto:info@bhhaffiliated.com">info@bhhaffiliated.com</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="contact-form">
-        <h3>Request a Consultation</h3>
-        <form id="contactForm">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your distinguished name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Telephone</label>
-            <input type="tel" id="phone" name="phone" placeholder="+1 (___) ___-____">
-          </div>
-          <div class="form-group">
-            <label for="message">Your Inquiry</label>
-            <textarea id="message" name="message" placeholder="Tell us about your real estate aspirations..." required></textarea>
-          </div>
-          <button type="submit" class="form-submit">Submit Inquiry</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-main">
-    <div class="footer-brand">
-      <h3>Berkshire Hathaway HomeServices</h3>
-      <p class="est">Established 2013 &mdash; Omaha, Nebraska</p>
-      <p>A legacy of trust, integrity, and unparalleled service in luxury real estate. Our commitment to excellence defines every interaction, every transaction, and every relationship we build.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Navigation</h4>
-      <ul>
-        <li><a href="#about">Our Heritage</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#properties">Properties</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#awards">Awards</a></li>
-        <li><a href="#legacy">Legacy</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li><a href="#services">Luxury Acquisition</a></li>
-        <li><a href="#services">Investment Advisory</a></li>
-        <li><a href="#services">Estate Marketing</a></li>
-        <li><a href="#services">Concierge Relocation</a></li>
-        <li><a href="#services">Global Network</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <div class="footer-contact-item">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        <p>Omaha, Nebraska</p>
-      </div>
-      <div class="footer-contact-item">
-        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        <p><a href="tel:+18006494853">+1-800-649-4853</a></p>
-      </div>
-      <div class="footer-contact-item">
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <p><a href="mailto:info@bhhaffiliated.com">info@bhhaffiliated.com</a></p>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2024 Berkshire Hathaway HomeServices. All rights reserved.</p>
-    <p>Demo site built by <a href="#">Alok Web Services</a></p>
-  </div>
-</footer>
-
-<!-- BACK TO TOP -->
-<button class="back-to-top" id="backToTop" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-</button>
-
-<script>
-// NAV SCROLL
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 100);
-});
-
-// MOBILE MENU
-const mobileToggle = document.getElementById('mobileToggle');
-const navLinks = document.getElementById('navLinks');
-const navLinks2 = document.getElementById('navLinks2');
-mobileToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-  navLinks2.classList.toggle('active');
-});
-
-// SMOOTH SCROLL
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      navLinks.classList.remove('active');
-      navLinks2.classList.remove('active');
-    }
-  });
-});
-
-// FADE IN ON SCROLL
-const fadeElements = document.querySelectorAll('.fade-in');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-fadeElements.forEach(el => observer.observe(el));
-
-// COUNTER ANIMATION
-const statNumbers = document.querySelectorAll('.stat-number');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const target = parseInt(el.getAttribute('data-target'));
-      const duration = 2000;
-      const step = target / (duration / 16);
-      let current = 0;
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          current = target;
-          clearInterval(timer);
-        }
-        if (target > 1000) {
-          el.textContent = Math.floor(current).toLocaleString() + '+';
-        } else {
-          el.textContent = Math.floor(current) + (target === 98 ? '%' : '+');
-        }
-      }, 16);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-statNumbers.forEach(el => counterObserver.observe(el));
-
-// BACK TO TOP
-const backToTop = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-  backToTop.classList.toggle('visible', window.scrollY > 500);
-});
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// FORM SUBMISSION
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.form-submit');
-  btn.textContent = 'Inquiry Received';
-  btn.style.background = 'var(--gold)';
-  btn.style.color = 'var(--navy)';
-  setTimeout(() => {
-    btn.textContent = 'Submit Inquiry';
-    btn.style.background = '';
-    btn.style.color = '';
-    this.reset();
-  }, 3000);
-});
-</script>
-</body>
-</html>
