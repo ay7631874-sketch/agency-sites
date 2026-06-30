@@ -1,606 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keller Williams Realty | Bold Corporate Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #B40101;
-        --secondary: #1A1A1A;
-        --accent: #D4A84B;
-        --bg: #FAFAFA;
-        --fg: #1A1A1A;
-        --card-bg: #FFFFFF;
-        --heading-font: 'Playfair Display', serif;
-        --body-font: 'Source Sans 3', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #B40101dd, #1A1A1Acc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keller Williams Realty | The World's Largest Real Estate Franchise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#B40101;--secondary:#1A1A1A;--accent:#D4A84B;--white:#FFFFFF;--gray:#F5F5F5;--dark-gray:#888}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;color:var(--secondary);background:var(--white);overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4,h5,h6{font-family:'Bebas Neue',sans-serif;letter-spacing:0.02em;line-height:1}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.section-pad{padding:120px 60px}
+.reveal{opacity:0;transform:translateY(60px);transition:opacity 0.9s cubic-bezier(.22,1,.36,1),transform 0.9s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-80px);transition:opacity 0.9s cubic-bezier(.22,1,.36,1),transform 0.9s cubic-bezier(.22,1,.36,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(80px);transition:opacity 0.9s cubic-bezier(.22,1,.36,1),transform 0.9s cubic-bezier(.22,1,.36,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* NAV */
+nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;width:calc(100% - 80px);max-width:1200px;background:rgba(255,255,255,0.12);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.18);border-radius:60px;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s}
+nav.scrolled{background:rgba(26,26,26,0.85);border-color:rgba(255,255,255,0.08)}
+nav .logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);letter-spacing:0.08em}
+nav .logo span{color:var(--accent)}
+nav ul{display:flex;list-style:none;gap:32px}
+nav ul li a{color:rgba(255,255,255,0.8);font-size:0.85rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.3s}
+nav ul li a:hover{color:var(--accent)}
+
+/* HERO */
+.hero{height:100vh;background:var(--primary);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 40%,rgba(0,0,0,0.15) 0%,transparent 60%);pointer-events:none}
+.hero h1{color:var(--white);font-size:clamp(4rem,12vw,13rem);line-height:0.9;margin-bottom:20px;position:relative;z-index:1}
+.hero h1 .accent{color:var(--accent)}
+.hero p{color:rgba(255,255,255,0.7);font-size:clamp(1rem,1.5vw,1.3rem);max-width:600px;font-weight:300;letter-spacing:0.04em;position:relative;z-index:1}
+.hero .est{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--accent);letter-spacing:0.3em;margin-top:30px;position:relative;z-index:1}
+.hero .scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:1}
+.hero .scroll-hint span{display:block;width:2px;height:50px;background:rgba(255,255,255,0.3);margin:0 auto 8px;position:relative;overflow:hidden}
+.hero .scroll-hint span::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--accent);animation:scrollDown 2s infinite}
+@keyframes scrollDown{0%{top:-100%}100%{top:100%}}
+
+/* STATS MARQUEE */
+.stats-ticker{background:var(--secondary);padding:30px 0;overflow:hidden;position:relative}
+.stats-ticker .track{display:flex;width:max-content;animation:ticker 25s linear infinite}
+.stats-ticker .track:hover{animation-play-state:paused}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.stats-ticker .stat-item{display:flex;align-items:center;gap:16px;padding:0 60px;white-space:nowrap}
+.stats-ticker .stat-item .num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--accent);line-height:1}
+.stats-ticker .stat-item .label{color:rgba(255,255,255,0.6);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em}
+.stats-ticker .stat-item .dot{width:6px;height:6px;background:var(--primary);border-radius:50%;flex-shrink:0}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Keller</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">KW <span>REALTY</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#testimonials">Voices</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 class="reveal">KELLER<br><span class="accent">WILLIAMS</span></h1>
+  <p class="reveal">The world's largest real estate franchise by agent count. Redefining what it means to belong in real estate since 1983.</p>
+  <div class="est">EST. 1983 &mdash; AUSTIN, TEXAS</div>
+  <div class="scroll-hint"><span></span></div>
+</section>
+
+<!-- STATS TICKER -->
+<section class="stats-ticker">
+  <div class="track">
+    <div class="stat-item"><span class="num">180,000+</span><span class="label">Agents Worldwide</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">1,000+</span><span class="label">Offices Globally</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">$400B+</span><span class="label">In Annual Sales</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">41</span><span class="label">Years of Excellence</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">#1</span><span class="label">Ranked Franchise</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">50+</span><span class="label">Countries</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">180,000+</span><span class="label">Agents Worldwide</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">1,000+</span><span class="label">Offices Globally</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">$400B+</span><span class="label">In Annual Sales</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">41</span><span class="label">Years of Excellence</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">#1</span><span class="label">Ranked Franchise</span><span class="dot"></span></div>
+    <div class="stat-item"><span class="num">50+</span><span class="label">Countries</span><span class="dot"></span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about section-pad" id="about" style="background:var(--white)">
+  <div class="about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1400px;margin:0 auto;align-items:center">
+    <div class="reveal-left">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--primary);letter-spacing:0.3em;margin-bottom:16px">ABOUT US</div>
+      <h2 style="font-size:clamp(3rem,6vw,5.5rem);line-height:0.95;margin-bottom:40px">BUILT ON<br><span style="color:var(--accent)">BELIEF</span></h2>
+      <p style="font-size:1.15rem;color:#555;line-height:1.8;margin-bottom:30px">Keller Williams Realty was founded in 1983 by Gary Keller and Joe Williams in Austin, Texas. What started as a single office has grown into the world's largest real estate franchise, fueled by a technology-driven model that puts agents first.</p>
+      <div class="pull-quote" style="border-left:4px solid var(--accent);padding:20px 30px;background:var(--gray);margin:40px 0">
+        <p style="font-size:1.4rem;font-style:italic;color:var(--secondary);line-height:1.6">"We don't just sell homes. We build communities, empower entrepreneurs, and create legacies."</p>
+        <span style="font-size:0.85rem;color:var(--dark-gray);margin-top:8px;display:block">&mdash; Gary Keller, Co-Founder</span>
+      </div>
+      <p style="font-size:1.15rem;color:#555;line-height:1.8">With over 180,000 associates across 1,000+ offices worldwide, KW combines cutting-edge technology with unparalleled training, education, and profit-sharing opportunities that transform agents into business owners.</p>
+    </div>
+    <div class="reveal-right" style="position:relative">
+      <div style="background:var(--secondary);border-radius:12px;padding:60px 50px;position:relative">
+        <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:var(--accent);border-radius:12px;z-index:-1"></div>
+        <h3 style="font-size:3.5rem;color:var(--white);margin-bottom:30px">THE KW<br>DIFFERENCE</h3>
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div style="width:40px;height:40px;background:var(--primary);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Bebas Neue';font-size:1.2rem">01</div>
+            <div><h4 style="color:var(--accent);font-size:1.5rem;margin-bottom:4px">Technology First</h4><p style="color:rgba(255,255,255,0.6);font-size:0.9rem">Proprietary platforms that give agents a competitive edge in every market.</p></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div style="width:40px;height:40px;background:var(--primary);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Bebas Neue';font-size:1.2rem">02</div>
+            <div><h4 style="color:var(--accent);font-size:1.5rem;margin-bottom:4px">Agent-Centric</h4><p style="color:rgba(255,255,255,0.6);font-size:0.9rem">Our model is designed around you — your growth, your profit, your future.</p></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div style="width:40px;height:40px;background:var(--primary);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Bebas Neue';font-size:1.2rem">03</div>
+            <div><h4 style="color:var(--accent);font-size:1.5rem;margin-bottom:4px">Profit Sharing</h4><p style="color:rgba(255,255,255,0.6);font-size:0.9rem">Build wealth through our unique profit-sharing program — your production funds your future.</p></div>
+          </div>
         </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-left">
-                <div class="hero-badge">Est. 1983</div>
-                <h1 class="hero-title">Keller Williams Realty</h1>
-                <p class="hero-tagline">The World's Largest Real Estate Franchise</p>
-                <div class="hero-stats">
-                    <div class="stat"><span class="stat-num">180,000+</span><span class="stat-label">Agents</span></div>
-                    <div class="stat"><span class="stat-num">1,000+</span><span class="stat-label">Offices</span></div>
-                    <div class="stat"><span class="stat-num">4.5★</span><span class="stat-label">25,000 Reviews</span></div>
-                </div>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Get Started</a>
-                    <a href="#properties" class="btn btn-outline">View Properties</a>
-                </div>
-            </div>
-            <div class="hero-right">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80" alt="Keller Williams Realty">
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Keller Williams Realty" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 1983</h2>
-                    <p class="about-text">Keller Williams Realty is the world's largest real estate franchise by agent count, with over 180,000 associates across the globe. Known for its technology-driven approach and agent-centric culture.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>180,000+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.5★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>41+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section-pad" id="services" style="background:var(--gray)">
+  <div style="max-width:1400px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:80px" class="reveal">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--primary);letter-spacing:0.3em;margin-bottom:16px">WHAT WE OFFER</div>
+      <h2 style="font-size:clamp(3rem,6vw,5.5rem);line-height:0.95">SERVICES THAT<br><span style="color:var(--accent)">TRANSFORM</span></h2>
+    </div>
+    <div class="masonry" style="display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:200px;gap:24px">
+      <div class="reveal" style="grid-row:span 2;background:var(--secondary);border-radius:16px;padding:40px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:var(--accent);margin-bottom:12px">01</div>
+        <h3 style="color:var(--white);font-size:2.2rem;margin-bottom:12px">BUYER REPRESENTATION</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.7">Expert negotiation, market analysis, and personalized search to find your perfect property. We handle every detail so you don't have to.</p>
+      </div>
+      <div class="reveal" style="background:var(--primary);border-radius:16px;padding:40px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(255,255,255,0.3);margin-bottom:8px">02</div>
+        <h3 style="color:var(--white);font-size:1.8rem;margin-bottom:8px">SELLER STRATEGY</h3>
+        <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;line-height:1.6">Pricing, staging, marketing, and closing — a data-driven approach that maximizes your return.</p>
+      </div>
+      <div class="reveal" style="background:var(--accent);border-radius:16px;padding:40px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(26,26,26,0.3);margin-bottom:8px">03</div>
+        <h3 style="color:var(--secondary);font-size:1.8rem;margin-bottom:8px">INVESTMENT ADVISORY</h3>
+        <p style="color:rgba(26,26,26,0.7);font-size:0.9rem;line-height:1.6">Portfolio analysis, market forecasting, and deal sourcing for smart real estate investors.</p>
+      </div>
+      <div class="reveal" style="grid-row:span 2;background:var(--white);border:1px solid #e0e0e0;border-radius:16px;padding:40px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:var(--primary);margin-bottom:12px">04</div>
+        <h3 style="color:var(--secondary);font-size:2.2rem;margin-bottom:12px">PROPERTY MANAGEMENT</h3>
+        <p style="color:#555;font-size:0.95rem;line-height:1.7">Full-service management for landlords and investors. Tenant screening, maintenance coordination, rent collection, and financial reporting — all under one roof.</p>
+      </div>
+      <div class="reveal" style="background:var(--secondary);border-radius:16px;padding:40px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--accent);margin-bottom:8px">05</div>
+        <h3 style="color:var(--white);font-size:1.8rem;margin-bottom:8px">RELOCATION</h3>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.6">Seamless corporate and personal relocations with local expertise in every market.</p>
+      </div>
+      <div class="reveal" style="grid-column:span 2;background:linear-gradient(135deg,var(--primary),#8B0000);border-radius:16px;padding:50px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(255,255,255,0.2);margin-bottom:12px">06</div>
+        <h3 style="color:var(--white);font-size:2.5rem;margin-bottom:12px">COMMERCIAL & LUXURY</h3>
+        <p style="color:rgba(255,255,255,0.7);font-size:1rem;line-height:1.7;max-width:700px">From high-rise offices to waterfront estates, our commercial and luxury divisions connect discerning clients with extraordinary properties worldwide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="section-pad" id="properties" style="background:var(--white);padding-bottom:60px">
+  <div style="max-width:1400px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;padding:0 40px" class="reveal">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--primary);letter-spacing:0.3em;margin-bottom:16px">FEATURED LISTINGS</div>
+        <h2 style="font-size:clamp(3rem,6vw,5.5rem);line-height:0.95">PROPERTIES<br><span style="color:var(--accent)">SPOTLIGHT</span></h2>
+      </div>
+      <p style="color:var(--dark-gray);font-size:0.95rem;max-width:300px">Scroll to explore our curated selection of premium properties across Austin and beyond.</p>
+    </div>
+  </div>
+  <div class="property-scroll" style="display:flex;gap:24px;padding:0 40px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:20px;scrollbar-width:thin;scrollbar-color:var(--primary) var(--gray)">
+    <div class="reveal" style="flex:0 0 380px;scroll-snap-align:start;border-radius:16px;overflow:hidden;background:var(--gray)">
+      <div style="height:280px;background:linear-gradient(135deg,#2c3e50,#3498db);display:flex;align-items:center;justify-content:center"><span style="font-family:'Bebas Neue';font-size:4rem;color:rgba(255,255,255,0.15)">$1.2M</span></div>
+      <div style="padding:28px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-family:'Bebas Neue';font-size:1.8rem;color:var(--secondary)">Hill Country Estate</span><span style="background:var(--primary);color:var(--white);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600">FOR SALE</span></div>
+        <p style="color:var(--dark-gray);font-size:0.9rem;margin-bottom:16px">4 BD &bull; 3.5 BA &bull; 3,800 sq ft &bull; Lake View</p>
+        <div style="display:flex;gap:12px;font-size:0.8rem;color:var(--dark-gray)"><span>&#9679; Pool</span><span>&#9679; 2 Acres</span><span>&#9679; Wine Cellar</span></div>
+      </div>
+    </div>
+    <div class="reveal" style="flex:0 0 380px;scroll-snap-align:start;border-radius:16px;overflow:hidden;background:var(--gray)">
+      <div style="height:280px;background:linear-gradient(135deg,#8B4513,#D4A84B);display:flex;align-items:center;justify-content:center"><span style="font-family:'Bebas Neue';font-size:4rem;color:rgba(255,255,255,0.15)">$875K</span></div>
+      <div style="padding:28px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-family:'Bebas Neue';font-size:1.8rem;color:var(--secondary)">Downtown Loft</span><span style="background:var(--accent);color:var(--secondary);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600">NEW</span></div>
+        <p style="color:var(--dark-gray);font-size:0.9rem;margin-bottom:16px">2 BD &bull; 2 BA &bull; 1,600 sq ft &bull; City Views</p>
+        <div style="display:flex;gap:12px;font-size:0.8rem;color:var(--dark-gray)"><span>&#9679; Rooftop</span><span>&#9679; Smart Home</span><span>&#9679; Parking</span></div>
+      </div>
+    </div>
+    <div class="reveal" style="flex:0 0 380px;scroll-snap-align:start;border-radius:16px;overflow:hidden;background:var(--gray)">
+      <div style="height:280px;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center"><span style="font-family:'Bebas Neue';font-size:4rem;color:rgba(255,255,255,0.15)">$2.5M</span></div>
+      <div style="padding:28px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-family:'Bebas Neue';font-size:1.8rem;color:var(--secondary)">Lake Travis Villa</span><span style="background:var(--primary);color:var(--white);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600">PREMIUM</span></div>
+        <p style="color:var(--dark-gray);font-size:0.9rem;margin-bottom:16px">5 BD &bull; 4 BA &bull; 5,200 sq ft &bull; Waterfront</p>
+        <div style="display:flex;gap:12px;font-size:0.8rem;color:var(--dark-gray)"><span>&#9679; Boat Dock</span><span>&#9679; Guest House</span><span>&#9679; Gym</span></div>
+      </div>
+    </div>
+    <div class="reveal" style="flex:0 0 380px;scroll-snap-align:start;border-radius:16px;overflow:hidden;background:var(--gray)">
+      <div style="height:280px;background:linear-gradient(135deg,#2d4a22,#5a7d3a);display:flex;align-items:center;justify-content:center"><span style="font-family:'Bebas Neue';font-size:4rem;color:rgba(255,255,255,0.15)">$620K</span></div>
+      <div style="padding:28px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-family:'Bebas Neue';font-size:1.8rem;color:var(--secondary)">Barton Creek Home</span><span style="background:var(--primary);color:var(--white);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600">FOR SALE</span></div>
+        <p style="color:var(--dark-gray);font-size:0.9rem;margin-bottom:16px">3 BD &bull; 2.5 BA &bull; 2,400 sq ft &bull; Golf Course</p>
+        <div style="display:flex;gap:12px;font-size:0.8rem;color:var(--dark-gray)"><span>&#9679; Renovated</span><span>&#9679; Open Plan</span><span>&#9679; Garden</span></div>
+      </div>
+    </div>
+    <div class="reveal" style="flex:0 0 380px;scroll-snap-align:start;border-radius:16px;overflow:hidden;background:var(--gray)">
+      <div style="height:280px;background:linear-gradient(135deg,#4a0e4e,#81267f);display:flex;align-items:center;justify-content:center"><span style="font-family:'Bebas Neue';font-size:4rem;color:rgba(255,255,255,0.15)">$1.8M</span></div>
+      <div style="padding:28px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-family:'Bebas Neue';font-size:1.8rem;color:var(--secondary)">Mueller Modern</span><span style="background:var(--accent);color:var(--secondary);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600">SOLD</span></div>
+        <p style="color:var(--dark-gray);font-size:0.9rem;margin-bottom:16px">4 BD &bull; 3 BA &bull; 3,100 sq ft &bull; Eco-Certified</p>
+        <div style="display:flex;gap:12px;font-size:0.8rem;color:var(--dark-gray)"><span>&#9679; Solar</span><span>&#9679; EV Charging</span><span>&#9679; Smart</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-pad" id="testimonials" style="background:var(--secondary)">
+  <div style="max-width:1400px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:80px" class="reveal">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--accent);letter-spacing:0.3em;margin-bottom:16px">CLIENT VOICES</div>
+      <h2 style="font-size:clamp(3rem,6vw,5.5rem);line-height:0.95;color:var(--white)">WHAT THEY<br><span style="color:var(--accent)">SAY</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+      <div class="reveal" style="background:rgba(255,255,255,0.05);border-radius:20px;padding:50px;position:relative">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:10rem;color:var(--accent);opacity:0.15;position:absolute;top:10px;right:30px;line-height:1">&ldquo;</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:1.2rem;line-height:1.8;margin-bottom:30px;position:relative;z-index:1">The KW team didn't just find us a house — they understood our family's future. Their market knowledge and negotiation skills saved us $40,000 on our dream home in Westlake.</p>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:56px;height:56px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Bebas Neue';font-size:1.5rem">SM</div>
+          <div><div style="color:var(--white);font-weight:600">Sarah Mitchell</div><div style="color:rgba(255,255,255,0.4);font-size:0.85rem">Homebuyer, Westlake Hills</div></div>
         </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B40101" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Residential Sales</h3>
-            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+      <div class="reveal" style="background:rgba(255,255,255,0.05);border-radius:20px;padding:50px;position:relative">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:10rem;color:var(--primary);opacity:0.15;position:absolute;top:10px;right:30px;line-height:1">&ldquo;</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:1.2rem;line-height:1.8;margin-bottom:30px;position:relative;z-index:1">As a first-time investor, I was terrified. The KW investment team walked me through every step, from due diligence to closing. Three years later, my portfolio is up 34%.</p>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:56px;height:56px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--secondary);font-family:'Bebas Neue';font-size:1.5rem">JR</div>
+          <div><div style="color:var(--white);font-weight:600">James Rodriguez</div><div style="color:rgba(255,255,255,0.4);font-size:0.85rem">Investor, Downtown Austin</div></div>
         </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B40101" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Commercial Real Estate</h3>
-            <p>Expert commercial real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+      <div class="reveal" style="background:rgba(255,255,255,0.05);border-radius:20px;padding:50px;position:relative;grid-column:span 2">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:14rem;color:var(--accent);opacity:0.1;position:absolute;top:-20px;right:40px;line-height:1">&ldquo;</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:1.5rem;line-height:1.8;margin-bottom:30px;position:relative;z-index:1;max-width:800px;margin-left:auto;margin-right:auto;text-align:center">We relocated from San Francisco to Austin with two weeks notice. KW handled everything — our sale, our purchase, school districts, even restaurant recommendations. They turned a crisis into the best decision we ever made.</p>
+        <div style="display:flex;align-items:center;gap:16px;justify-content:center">
+          <div style="width:56px;height:56px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Bebas Neue';font-size:1.5rem">PC</div>
+          <div><div style="color:var(--white);font-weight:600">Patricia & Carlos Nguyen</div><div style="color:rgba(255,255,255,0.4);font-size:0.85rem">Relocated to Mueller, Austin</div></div>
         </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B40101" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Property Management</h3>
-            <p>Expert property management services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section-pad" id="process" style="background:var(--white)">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:80px" class="reveal">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--primary);letter-spacing:0.3em;margin-bottom:16px">HOW IT WORKS</div>
+      <h2 style="font-size:clamp(3rem,6vw,5.5rem);line-height:0.95">OUR<br><span style="color:var(--accent)">PROCESS</span></h2>
+    </div>
+    <div class="timeline" style="position:relative;padding-left:60px">
+      <div style="position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--primary),var(--accent))"></div>
+      <div class="reveal" style="margin-bottom:60px;position:relative">
+        <div style="position:absolute;left:-48px;top:0;width:18px;height:18px;background:var(--primary);border:4px solid var(--white);border-radius:50%;box-shadow:0 0 0 3px var(--primary);z-index:1"></div>
+        <div style="background:var(--gray);border-radius:16px;padding:36px">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:0.9rem;color:var(--primary);letter-spacing:0.2em;margin-bottom:8px">STEP 01</div>
+          <h3 style="font-size:2rem;margin-bottom:12px">DISCOVER</h3>
+          <p style="color:#555;line-height:1.7">We begin with a deep conversation — understanding your goals, timeline, and lifestyle. Whether you're buying your first home or building a portfolio, clarity starts here.</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B40101" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Real Estate Training</h3>
-            <p>Expert real estate training services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
+      </div>
+      <div class="reveal" style="margin-bottom:60px;position:relative">
+        <div style="position:absolute;left:-48px;top:0;width:18px;height:18px;background:var(--accent);border:4px solid var(--white);border-radius:50%;box-shadow:0 0 0 3px var(--accent);z-index:1"></div>
+        <div style="background:var(--gray);border-radius:16px;padding:36px">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:0.9rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:8px">STEP 02</div>
+          <h3 style="font-size:2rem;margin-bottom:12px">STRATEGIZE</h3>
+          <p style="color:#555;line-height:1.7">Your agent crafts a tailored strategy — pricing analysis, market positioning, staging recommendations, or search parameters — designed for your specific outcome.</p>
         </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">Austin, Texas</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+      </div>
+      <div class="reveal" style="margin-bottom:60px;position:relative">
+        <div style="position:absolute;left:-48px;top:0;width:18px;height:18px;background:var(--primary);border:4px solid var(--white);border-radius:50%;box-shadow:0 0 0 3px var(--primary);z-index:1"></div>
+        <div style="background:var(--gray);border-radius:16px;padding:36px">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:0.9rem;color:var(--primary);letter-spacing:0.2em;margin-bottom:8px">STEP 03</div>
+          <h3 style="font-size:2rem;margin-bottom:12px">EXECUTE</h3>
+          <p style="color:#555;line-height:1.7">Active marketing, showings, negotiations, and offers — handled with precision and speed. Our technology gives you real-time visibility into every step.</p>
         </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">Austin, Texas</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+      </div>
+      <div class="reveal" style="position:relative">
+        <div style="position:absolute;left:-48px;top:0;width:18px;height:18px;background:var(--accent);border:4px solid var(--white);border-radius:50%;box-shadow:0 0 0 3px var(--accent);z-index:1"></div>
+        <div style="background:var(--gray);border-radius:16px;padding:36px">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:0.9rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:8px">STEP 04</div>
+          <h3 style="font-size:2rem;margin-bottom:12px">CLOSE & BEYOND</h3>
+          <p style="color:#555;line-height:1.7">From contract to closing table, we manage the details. But our relationship doesn't end there — we're your lifelong real estate resource and community partner.</p>
         </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-pad" id="contact" style="background:var(--gray);padding-bottom:60px">
+  <div style="max-width:1400px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:80px" class="reveal">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--primary);letter-spacing:0.3em;margin-bottom:16px">GET IN TOUCH</div>
+      <h2 style="font-size:clamp(3rem,6vw,5.5rem);line-height:0.95">LET'S<br><span style="color:var(--accent)">CONNECT</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:stretch">
+      <div class="reveal-left" style="background:var(--white);border-radius:20px;padding:50px">
+        <form onsubmit="return false" style="display:flex;flex-direction:column;gap:24px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+            <div>
+              <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-gray);margin-bottom:8px;display:block;font-weight:500">First Name</label>
+              <input type="text" placeholder="John" style="width:100%;padding:14px 18px;border:1px solid #ddd;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;transition:border-color 0.3s;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#ddd'">
             </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">Austin, Texas</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
+            <div>
+              <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-gray);margin-bottom:8px;display:block;font-weight:500">Last Name</label>
+              <input type="text" placeholder="Doe" style="width:100%;padding:14px 18px;border:1px solid #ddd;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;transition:border-color 0.3s;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#ddd'">
             </div>
-        </div></div>
+          </div>
+          <div>
+            <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-gray);margin-bottom:8px;display:block;font-weight:500">Email</label>
+            <input type="email" placeholder="john@example.com" style="width:100%;padding:14px 18px;border:1px solid #ddd;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;transition:border-color 0.3s;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div>
+            <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-gray);margin-bottom:8px;display:block;font-weight:500">Phone</label>
+            <input type="tel" placeholder="+1 (512) 000-0000" style="width:100%;padding:14px 18px;border:1px solid #ddd;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;transition:border-color 0.3s;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div>
+            <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-gray);margin-bottom:8px;display:block;font-weight:500">I'm Interested In</label>
+            <select style="width:100%;padding:14px 18px;border:1px solid #ddd;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;background:var(--white);cursor:pointer;outline:none">
+              <option>Buying a Home</option>
+              <option>Selling a Home</option>
+              <option>Investment Property</option>
+              <option>Property Management</option>
+              <option>Joining KW</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dark-gray);margin-bottom:8px;display:block;font-weight:500">Message</label>
+            <textarea rows="4" placeholder="Tell us about your real estate goals..." style="width:100%;padding:14px 18px;border:1px solid #ddd;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;resize:vertical;transition:border-color 0.3s;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#ddd'"></textarea>
+          </div>
+          <button type="submit" style="background:var(--primary);color:var(--white);padding:16px 40px;border:none;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(180,1,1,0.3)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">SEND MESSAGE</button>
+        </form>
+      </div>
+      <div class="reveal-right" style="display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;border-radius:20px;overflow:hidden;background:#ddd;position:relative">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13537.258!2d-97.75!3d30.267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b4e0b3b3b3b3%3A0x0!2sAustin%2C+TX!5e0!3m2!1sen!2sus!4v1" width="100%" height="100%" style="border:0;min-height:300px" allowfullscreen="" loading="lazy"></iframe>
         </div>
-    </section>
-    
-    
-            <section class="awards">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Recognition</div>
-                        <h2 class="section-title">Awards & Achievements</h2>
-                    </div>
-                    <div class="awards-grid">
-                        <div class="award-card"><div class="award-icon">🏆</div><h4>#1 Brokerage</h4><p>Ranked #1 by NAR for agent count</p></div>
-                        <div class="award-card"><div class="award-icon">⭐</div><h4>5-Star Service</h4><p>Consistently rated top in customer satisfaction</p></div>
-                        <div class="award-card"><div class="award-icon">🌍</div><h4>Global Reach</h4><p>Presence in 1,000+ offices worldwide</p></div>
-                        <div class="award-card"><div class="award-icon">📈</div><h4>Market Leader</h4><p>Top market share for 41+ years</p></div>
-                    </div>
-                </div>
-            </section>
-    <section class="stats-bar">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item"><span class="stat-number">180,000+</span><span class="stat-text">Expert Agents</span></div>
-                <div class="stat-item"><span class="stat-number">1,000+</span><span class="stat-text">Offices Nationwide</span></div>
-                <div class="stat-item"><span class="stat-number">4.5★</span><span class="stat-text">Average Rating</span></div>
-                <div class="stat-item"><span class="stat-number">41+</span><span class="stat-text">Years of Trust</span></div>
-            </div>
+        <div style="background:var(--secondary);border-radius:20px;padding:36px;display:flex;gap:40px">
+          <div>
+            <div style="font-family:'Bebas Neue';font-size:0.9rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:8px">PHONE</div>
+            <a href="tel:+15123283600" style="color:var(--white);font-size:1.1rem;font-weight:500">+1-512-328-3600</a>
+          </div>
+          <div>
+            <div style="font-family:'Bebas Neue';font-size:0.9rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:8px">EMAIL</div>
+            <a href="mailto:info@kw.com" style="color:var(--white);font-size:1.1rem;font-weight:500">info@kw.com</a>
+          </div>
+          <div>
+            <div style="font-family:'Bebas Neue';font-size:0.9rem;color:var(--accent);letter-spacing:0.2em;margin-bottom:8px">OFFICE</div>
+            <span style="color:var(--white);font-size:1.1rem;font-weight:500">Austin, TX</span>
+          </div>
         </div>
-    </section>
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Testimonials</div>
-                <h2 class="section-title">What Our Clients Say</h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Keller Williams Realty made our home buying experience seamless. Their expertise and dedication are unmatched in the industry."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div><strong>John D.</strong><span>Home Buyer</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Professional, responsive, and truly caring. They found us the perfect home within our budget. Highly recommended!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div><strong>Sarah M.</strong><span>Home Seller</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"The best real estate experience we've ever had. Their market knowledge helped us make an informed decision."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RK</div>
-                        <div><strong>Robert K.</strong><span>Property Investor</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let Keller Williams Realty's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
-        </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-512-328-3600">+1-512-328-3600</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:info@kw.com">info@kw.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>Austin, Texas</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.kw.com" target="_blank">www.kw.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>Keller Williams Realty</h3><p>The World's Largest Real Estate Franchise</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-512-328-3600</p><p>info@kw.com</p><p>Austin, Texas</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Keller Williams Realty. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--secondary);padding:30px 40px;text-align:center">
+  <p style="color:rgba(255,255,255,0.4);font-size:0.85rem">&copy; 2026 Keller Williams Realty. All rights reserved. &bull; Demo site built by <span style="color:var(--accent)">Alok Web Services</span></p>
+</footer>
+
+<script>
+// IntersectionObserver for scroll reveal animations
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+// Nav scroll effect
+const nav = document.getElementById('navbar');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const current = window.scrollY;
+  if (current > 80) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+  lastScroll = current;
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Counter animation for stats
+function animateCounters() {
+  document.querySelectorAll('.stat-item .num').forEach(el => {
+    const text = el.textContent;
+    if (el.dataset.animated) return;
+    el.dataset.animated = 'true';
+    // Keep as-is since they're in marquee
+  });
+}
+
+// Parallax subtle effect on hero
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero h1');
+  if (hero) {
+    const scrolled = window.scrollY;
+    if (scrolled < window.innerHeight) {
+      hero.style.transform = `translateY(${scrolled * 0.15}px)`;
+      hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
+    }
+  }
+});
+
+// Add staggered reveal delay
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = `${(i % 4) * 0.1}s`;
+});
+
+// Property scroll - drag to scroll
+const propScroll = document.querySelector('.property-scroll');
+if (propScroll) {
+  let isDown = false, startX, scrollLeft;
+  propScroll.addEventListener('mousedown', e => {
+    isDown = true;
+    propScroll.style.cursor = 'grabbing';
+    startX = e.pageX - propScroll.offsetLeft;
+    scrollLeft = propScroll.scrollLeft;
+  });
+  propScroll.addEventListener('mouseleave', () => { isDown = false; propScroll.style.cursor = 'grab'; });
+  propScroll.addEventListener('mouseup', () => { isDown = false; propScroll.style.cursor = 'grab'; });
+  propScroll.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - propScroll.offsetLeft;
+    propScroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+  propScroll.style.cursor = 'grab';
+}
+
+// Form interaction
+const formBtn = document.querySelector('button[type="submit"]');
+if (formBtn) {
+  formBtn.addEventListener('click', function() {
+    this.textContent = 'MESSAGE SENT ✓';
+    this.style.background = '#2d7d46';
+    setTimeout(() => {
+      this.textContent = 'SEND MESSAGE';
+      this.style.background = 'var(--primary)';
+    }, 2500);
+  });
+}
+</script>
 </body>
 </html>
