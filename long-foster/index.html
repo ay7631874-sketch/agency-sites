@@ -1,581 +1,902 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Long & Foster Real Estate | East Coast Heritage Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #003366;
-        --secondary: #CC0000;
-        --accent: #F4A100;
-        --bg: #FFFFFF;
-        --fg: #1A1A1A;
-        --card-bg: #F0F4F8;
-        --heading-font: 'Libre Baskerville', serif;
-        --body-font: 'Open Sans', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #003366dd, #CC0000cc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Long &amp; Foster Real Estate — East Coast Colonial Heritage</title>
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#1B3A5C;
+  --cream:#FFF8E7;
+  --burgundy:#800020;
+  --dark:#1a1a1a;
+  --white:#fff;
+  --shadow-3d:6px 6px 0 var(--burgundy),12px 12px 0 rgba(128,0,32,.25);
+  --card-radius:6px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:Georgia,'Times New Roman',serif;
+  color:var(--dark);
+  background:var(--cream);
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+
+/* ── UTILITY ──────────────────────────────────────────────── */
+.container{width:min(1200px,92%);margin:0 auto}
+.section-padding{padding:100px 0}
+.text-center{text-align:center}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* ── HERO SECTION ─────────────────────────────────────────── */
+.hero{
+  position:relative;height:100vh;min-height:700px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;color:var(--white);
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:0;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(27,58,92,.75) 0%,rgba(27,58,92,.5) 50%,rgba(27,58,92,.85) 100%);
+  z-index:1;
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  max-width:850px;padding:0 20px;
+  perspective:1200px;
+}
+.hero-content h1{
+  font-size:clamp(2.6rem,6vw,4.8rem);
+  font-weight:900;letter-spacing:2px;
+  text-shadow:var(--shadow-3d);
+  margin-bottom:12px;
+  line-height:1.1;
+}
+.hero-content .sub{
+  font-size:clamp(1rem,2vw,1.35rem);
+  color:var(--cream);letter-spacing:6px;text-transform:uppercase;
+  margin-bottom:30px;opacity:.9;
+}
+.hero-content .tagline{
+  font-size:clamp(1.05rem,2vw,1.3rem);
+  font-style:italic;color:var(--cream);
+  margin-bottom:40px;line-height:1.7;
+}
+.hero-btn{
+  display:inline-block;padding:16px 48px;
+  background:var(--burgundy);color:var(--white);
+  font-family:inherit;font-size:1.1rem;letter-spacing:1px;
+  border:2px solid var(--burgundy);border-radius:0;
+  cursor:pointer;transition:all .4s;
+  text-transform:uppercase;font-weight:700;
+  transform:translateZ(0);
+}
+.hero-btn:hover{
+  background:transparent;color:var(--white);
+  box-shadow:0 0 30px rgba(128,0,32,.5);
+}
+
+/* Colonial columns decoration */
+.colonial-columns{
+  position:absolute;bottom:0;left:0;right:0;z-index:1;
+  display:flex;justify-content:space-between;
+  padding:0 4%;pointer-events:none;
+}
+.colonial-column{
+  width:50px;height:160px;position:relative;
+  transform-style:preserve-3d;
+}
+.colonial-column::before{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;height:100%;
+  background:linear-gradient(135deg,var(--cream) 0%,#ddd 40%,var(--cream) 60%,#ccc 100%);
+  border-radius:4px 4px 0 0;
+  box-shadow:4px 0 0 rgba(0,0,0,.1),-2px 0 0 rgba(255,255,255,.3);
+}
+.colonial-column::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:130%;height:20px;
+  background:var(--cream);border-radius:2px;
+  box-shadow:0 4px 8px rgba(0,0,0,.15);
+}
+
+/* scroll indicator */
+.scroll-indicator{
+  position:absolute;bottom:40px;left:50%;z-index:3;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--cream);opacity:.7;
+  animation:scrollBounce 2s infinite;
+}
+.scroll-indicator span{font-size:.85rem;letter-spacing:3px;text-transform:uppercase}
+.scroll-indicator .arrow{
+  width:20px;height:20px;border-right:2px solid var(--cream);border-bottom:2px solid var(--cream);
+  transform:rotate(45deg);
+}
+@keyframes scrollBounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(10px)}
+}
+
+/* ── HERITAGE SECTION ─────────────────────────────────────── */
+.heritage{
+  background:var(--white);position:relative;
+  overflow:hidden;
+}
+.heritage::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--navy),var(--burgundy),var(--navy));
+}
+.heritage-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+.heritage-text h2{
+  font-size:clamp(2rem,3.5vw,3rem);color:var(--navy);
+  margin-bottom:24px;line-height:1.2;
+  text-shadow:3px 3px 0 rgba(128,0,32,.15);
+}
+.heritage-text p{
+  font-size:1.1rem;line-height:1.8;color:#444;margin-bottom:18px;
+}
+
+/* Timeline */
+.timeline{position:relative;padding-left:30px;border-left:3px solid var(--burgundy)}
+.timeline-item{
+  position:relative;margin-bottom:40px;opacity:0;
+  transform:translateX(30px);
+  transition:all .6s cubic-bezier(.23,1,.32,1);
+}
+.timeline-item.visible{opacity:1;transform:translateX(0)}
+.timeline-item::before{
+  content:'';position:absolute;left:-38px;top:6px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--burgundy);border:3px solid var(--white);
+  box-shadow:0 0 0 2px var(--burgundy);
+}
+.timeline-item .year{
+  font-size:.9rem;font-weight:700;color:var(--burgundy);
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;
+}
+.timeline-item h3{font-size:1.15rem;color:var(--navy);margin-bottom:4px}
+.timeline-item p{font-size:.95rem;color:#666;line-height:1.6}
+
+/* ── PROPERTY GRID ────────────────────────────────────────── */
+.properties{background:var(--cream);position:relative}
+.properties h2{
+  font-size:clamp(2rem,3.5vw,3rem);color:var(--navy);
+  margin-bottom:16px;text-shadow:3px 3px 0 rgba(128,0,32,.15);
+}
+.properties .section-sub{
+  font-size:1.1rem;color:#666;margin-bottom:60px;
+  max-width:650px;margin-left:auto;margin-right:auto;
+}
+.property-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:36px;
+}
+.property-card{
+  background:var(--white);overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  transition:all .5s cubic-bezier(.23,1,.32,1);
+  transform-style:preserve-3d;perspective:800px;
+  opacity:0;transform:translateY(40px);
+}
+.property-card.visible{opacity:1;transform:translateY(0)}
+.property-card:hover{
+  transform:translateY(-8px) rotateX(2deg) rotateY(-1deg);
+  box-shadow:0 20px 50px rgba(27,58,92,.15);
+}
+.property-card .img-wrap{
+  height:240px;overflow:hidden;position:relative;
+}
+.property-card .img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s;
+}
+.property-card:hover .img-wrap img{transform:scale(1.08)}
+.property-card .badge{
+  position:absolute;top:16px;left:16px;
+  background:var(--burgundy);color:var(--white);
+  padding:6px 14px;font-size:.8rem;letter-spacing:1px;
+  text-transform:uppercase;font-weight:700;
+}
+.property-card .card-body{padding:24px}
+.property-card .price{
+  font-size:1.5rem;font-weight:700;color:var(--burgundy);
+  margin-bottom:6px;
+}
+.property-card .address{font-size:.95rem;color:#555;margin-bottom:12px}
+.property-card .specs{
+  display:flex;gap:16px;flex-wrap:wrap;
+  font-size:.85rem;color:var(--navy);font-weight:600;
+}
+.property-card .specs span{
+  display:flex;align-items:center;gap:4px;
+  padding:4px 10px;background:rgba(27,58,92,.06);border-radius:3px;
+}
+.property-card .view-btn{
+  display:inline-block;margin-top:16px;
+  padding:10px 28px;background:var(--navy);color:var(--white);
+  font-size:.85rem;letter-spacing:1px;text-transform:uppercase;
+  transition:all .3s;
+}
+.property-card .view-btn:hover{background:var(--burgundy)}
+
+/* ── SERVICES ─────────────────────────────────────────────── */
+.services{background:var(--navy);color:var(--white);position:relative;overflow:hidden}
+.services::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+}
+.services h2{font-size:clamp(2rem,3.5vw,3rem);margin-bottom:16px;text-shadow:3px 3px 0 rgba(0,0,0,.3)}
+.services .section-sub{color:rgba(255,255,255,.7);margin-bottom:60px}
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:32px;
+  position:relative;z-index:1;
+}
+.service-card{
+  background:rgba(255,255,255,.07);backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,.1);
+  padding:40px 32px;text-align:center;
+  transition:all .4s;
+  transform-style:preserve-3d;
+  opacity:0;transform:translateY(30px);
+}
+.service-card.visible{opacity:1;transform:translateY(0)}
+.service-card:hover{
+  background:rgba(255,255,255,.14);
+  transform:translateY(-6px) translateZ(10px);
+  box-shadow:0 16px 40px rgba(0,0,0,.25);
+}
+.service-card .icon{
+  font-size:2.8rem;margin-bottom:20px;
+  display:inline-block;
+  transition:transform .4s;
+}
+.service-card:hover .icon{transform:scale(1.2) rotateY(15deg)}
+.service-card h3{font-size:1.25rem;margin-bottom:12px;color:var(--cream)}
+.service-card p{font-size:.95rem;line-height:1.7;color:rgba(255,255,255,.75)}
+
+/* ── TESTIMONIALS ─────────────────────────────────────────── */
+.testimonials{background:var(--white);position:relative;overflow:hidden}
+.testimonials h2{font-size:clamp(2rem,3.5vw,3rem);color:var(--navy);margin-bottom:16px}
+.testimonials .section-sub{color:#666;margin-bottom:60px}
+.testimonials-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:32px;
+}
+.testimonial-card{
+  background:var(--cream);padding:36px;position:relative;
+  border-left:4px solid var(--burgundy);
+  box-shadow:0 4px 16px rgba(0,0,0,.06);
+  transition:all .4s;
+  opacity:0;transform:translateY(30px);
+}
+.testimonial-card.visible{opacity:1;transform:translateY(0)}
+.testimonial-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(0,0,0,.1);
+}
+.testimonial-card .quote{
+  font-size:1.05rem;line-height:1.8;color:#444;
+  font-style:italic;margin-bottom:20px;position:relative;
+}
+.testimonial-card .quote::before{
+  content:'\201C';position:absolute;top:-20px;left:-4px;
+  font-size:4rem;color:var(--burgundy);opacity:.2;
+  font-family:Georgia,serif;line-height:1;
+}
+.testimonial-card .author{font-weight:700;color:var(--navy);font-size:1rem}
+.testimonial-card .role{font-size:.85rem;color:#888;margin-top:4px}
+.testimonial-card .stars{color:var(--burgundy);margin-bottom:12px;font-size:1.1rem}
+
+/* ── CTA ──────────────────────────────────────────────────── */
+.cta{
+  background:linear-gradient(135deg,var(--navy),#244a72);
+  color:var(--white);text-align:center;
+  padding:100px 20px;position:relative;overflow:hidden;
+}
+.cta::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1.5' fill='rgba(255,255,255,0.08)'/%3E%3C/svg%3E");
+}
+.cta-content{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.cta h2{
+  font-size:clamp(2rem,4vw,3.2rem);margin-bottom:16px;
+  text-shadow:var(--shadow-3d);color:var(--cream);
+}
+.cta p{font-size:1.15rem;margin-bottom:36px;color:rgba(255,255,255,.85);line-height:1.7}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-btn-primary{
+  padding:16px 44px;background:var(--burgundy);color:var(--white);
+  font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  border:2px solid var(--burgundy);transition:all .4s;
+}
+.cta-btn-primary:hover{background:transparent;color:var(--white)}
+.cta-btn-secondary{
+  padding:16px 44px;background:transparent;color:var(--white);
+  font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  border:2px solid var(--cream);transition:all .4s;
+}
+.cta-btn-secondary:hover{background:var(--cream);color:var(--navy)}
+
+/* ── FOOTER ───────────────────────────────────────────────── */
+footer{
+  background:var(--dark);color:rgba(255,255,255,.7);padding:60px 0 30px;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;
+  margin-bottom:40px;
+}
+.footer-brand h3{font-size:1.4rem;color:var(--white);margin-bottom:12px}
+.footer-brand p{font-size:.9rem;line-height:1.7}
+.footer-col h4{
+  color:var(--cream);font-size:1rem;margin-bottom:16px;
+  text-transform:uppercase;letter-spacing:2px;
+}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:.9rem;color:rgba(255,255,255,.6);transition:color .3s}
+.footer-col a:hover{color:var(--burgundy)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:24px;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:12px;
+  font-size:.85rem;
+}
+.footer-bottom .alok{
+  color:var(--burgundy);font-weight:600;
+}
+
+/* ── 3D TEXT EFFECT ───────────────────────────────────────── */
+.text-3d{
+  text-shadow:var(--shadow-3d);
+  transform-style:preserve-3d;
+}
+
+/* ── PARALLAX SECTION DIVIDER ─────────────────────────────── */
+.parallax-divider{
+  height:200px;
+  background:linear-gradient(rgba(27,58,92,.6),rgba(27,58,92,.6)),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200"><rect fill="%231B3A5C" width="800" height="200"/></svg>');
+  background-size:cover;background-position:center;background-attachment:fixed;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--white);text-align:center;padding:0 20px;
+}
+.parallax-divider h3{
+  font-size:clamp(1.4rem,3vw,2rem);letter-spacing:4px;
+  text-transform:uppercase;text-shadow:2px 2px 0 rgba(0,0,0,.3);
+}
+
+/* ── NAV ──────────────────────────────────────────────────── */
+.top-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 0;transition:all .4s;
+}
+.top-nav.scrolled{
+  background:rgba(27,58,92,.97);padding:12px 0;
+  box-shadow:0 2px 20px rgba(0,0,0,.2);
+}
+.top-nav .container{
+  display:flex;justify-content:space-between;align-items:center;
+}
+.top-nav .logo{
+  font-size:1.4rem;font-weight:700;color:var(--white);
+  letter-spacing:1px;
+}
+.top-nav .logo span{color:var(--burgundy)}
+.top-nav ul{display:flex;list-style:none;gap:28px}
+.top-nav a{
+  color:rgba(255,255,255,.85);font-size:.9rem;
+  letter-spacing:1px;text-transform:uppercase;
+  transition:color .3s;position:relative;
+}
+.top-nav a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:2px;background:var(--burgundy);
+  transition:width .3s;
+}
+.top-nav a:hover{color:var(--white)}
+.top-nav a:hover::after{width:100%}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media(max-width:900px){
+  .heritage-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .property-grid{grid-template-columns:1fr}
+  .top-nav ul{display:none}
+}
+@media(max-width:600px){
+  .footer-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr}
+  .colonial-columns .colonial-column:nth-child(2),
+  .colonial-columns .colonial-column:nth-child(3){display:none}
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Long</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+
+<!-- ════════════════════════════════════════════════════════
+     NAVIGATION
+     ════════════════════════════════════════════════════════ -->
+<nav class="top-nav" id="topNav">
+  <div class="container">
+    <a href="#" class="logo">Long <span>&amp;</span> Foster</a>
+    <ul>
+      <li><a href="#heritage">Heritage</a></li>
+      <li><a href="#properties">Properties</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     HERO SECTION
+     ════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/4948/4948-360.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <!-- 3D Colonial Column Decorations -->
+  <div class="colonial-columns">
+    <div class="colonial-column"></div>
+    <div class="colonial-column"></div>
+    <div class="colonial-column"></div>
+    <div class="colonial-column"></div>
+  </div>
+
+  <div class="hero-content">
+    <h1 class="text-3d">Long &amp; Foster</h1>
+    <p class="sub">Real Estate</p>
+    <p class="tagline">
+      Serving the Mid-Atlantic &amp; East Coast with distinction since 1968.
+      <br>Where heritage meets modern excellence.
+    </p>
+    <a href="#properties" class="hero-btn">Explore Properties</a>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     HERITAGE SECTION
+     ════════════════════════════════════════════════════════ -->
+<section class="heritage section-padding" id="heritage">
+  <div class="container">
+    <div class="heritage-grid">
+      <div class="heritage-text">
+        <h2>Our Heritage on the<br>East Coast</h2>
+        <p>
+          Founded in 1968 by Hank Lee and P. Wesley Foster Jr. in Fairfax, Virginia,
+          Long &amp; Foster Real Estate has grown from a single office into the largest
+          privately owned real estate company in the United States.
+        </p>
+        <p>
+          Rooted in the tradition and values of the Mid-Atlantic region, we've built
+          our reputation on trust, integrity, and an unwavering commitment to serving
+          our communities. For over five decades, families across the East Coast have
+          turned to Long &amp; Foster to guide them home.
+        </p>
+        <p>
+          Today, with more than 200 locations across nine states and the District of
+          Columbia, our network of affiliated companies provides a full range of real
+          estate, mortgage, title, and insurance services.
+        </p>
+      </div>
+
+      <!-- Heritage Timeline -->
+      <div class="timeline">
+        <div class="timeline-item" data-delay="0">
+          <div class="year">1968</div>
+          <h3>Founded in Fairfax, VA</h3>
+          <p>Hank Lee and P. Wesley Foster Jr. open the first Long &amp; Foster office, bringing a new standard of service to Northern Virginia real estate.</p>
         </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-bg"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&q=80" alt="Long & Foster Real Estate"><div class="hero-overlay"></div></div>
-            <div class="hero-content">
-                <div class="hero-badge">Est. 1968</div>
-                <h1 class="hero-title">Long & Foster Real Estate</h1>
-                <p class="hero-tagline">The Real Estate Company</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Contact Us</a>
-                    <a href="#properties" class="btn btn-outline">View Properties</a>
-                </div>
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80" alt="Long & Foster Real Estate" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 1968</h2>
-                    <p class="about-text">Long & Foster Real Estate is the largest independent residential real estate company in the Eastern United States, serving the Mid-Atlantic region since 1968.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>8,000+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.3★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>56+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
+        <div class="timeline-item" data-delay="1">
+          <div class="year">1980s</div>
+          <h3>Regional Expansion</h3>
+          <p>The company expands throughout Virginia, Maryland, and Washington D.C., becoming the dominant name in Mid-Atlantic real estate.</p>
         </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Residential Sales</h3>
-            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="timeline-item" data-delay="2">
+          <div class="year">1990s</div>
+          <h3>Full-Service Network</h3>
+          <p>Long &amp; Foster launches affiliated companies in mortgage, title, and insurance, offering clients a seamless home-buying experience.</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Commercial Real Estate</h3>
-            <p>Expert commercial real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="timeline-item" data-delay="3">
+          <div class="year">2007</div>
+          <h3>#1 in the Nation</h3>
+          <p>Long &amp; Foster becomes the largest privately owned residential real estate company in the United States by sales volume.</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Mortgage Services</h3>
-            <p>Expert mortgage services services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="timeline-item" data-delay="4">
+          <div class="year">Today</div>
+          <h3>200+ Locations</h3>
+          <p>With over 200 offices across nine states, Long &amp; Foster continues to serve hundreds of thousands of families every year.</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Insurance Services</h3>
-            <p>Expert insurance services services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Parallax Divider -->
+<div class="parallax-divider">
+  <h3>Trusted by Generations of East Coast Families</h3>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PROPERTY GRID
+     ════════════════════════════════════════════════════════ -->
+<section class="properties section-padding" id="properties">
+  <div class="container">
+    <h2 class="text-center">Featured East Coast Properties</h2>
+    <p class="section-sub text-center">From colonial estates to waterfront retreats — discover the finest homes across the Mid-Atlantic and beyond.</p>
+
+    <div class="property-grid">
+
+      <!-- Property 1 -->
+      <div class="property-card" data-delay="0">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&h=480&fit=crop" alt="Georgetown Colonial" loading="lazy">
+          <span class="badge">Featured</span>
         </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">Chantilly, Virginia</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+        <div class="card-body">
+          <div class="price">$2,450,000</div>
+          <div class="address">3215 N Street NW, Georgetown, Washington D.C.</div>
+          <div class="specs">
+            <span>🛏 5 Bed</span>
+            <span>🛁 4 Bath</span>
+            <span>📐 4,200 sqft</span>
+          </div>
+          <a href="#" class="view-btn">View Details</a>
         </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">Chantilly, Virginia</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+      </div>
+
+      <!-- Property 2 -->
+      <div class="property-card" data-delay="1">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&h=480&fit=crop" alt="Alexandria Waterfront" loading="lazy">
+          <span class="badge">New Listing</span>
         </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">Chantilly, Virginia</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div></div>
+        <div class="card-body">
+          <div class="price">$1,875,000</div>
+          <div class="address">418 S Union Street, Old Town Alexandria, VA</div>
+          <div class="specs">
+            <span>🛏 4 Bed</span>
+            <span>🛁 3.5 Bath</span>
+            <span>📐 3,600 sqft</span>
+          </div>
+          <a href="#" class="view-btn">View Details</a>
         </div>
-    </section>
-    
-    
-            <section class="legacy">
-                <div class="container">
-                    <div class="legacy-grid">
-                        <div class="legacy-content">
-                            <div class="section-label">Our Legacy</div>
-                            <h2 class="section-title">A Tradition of Excellence</h2>
-                            <p>Since 1968, Long & Foster Real Estate has been a cornerstone of trust in real estate. With 8,000+ agents across 200+ offices, we've helped millions find their dream homes.</p>
-                            <div class="legacy-stats">
-                                <div><strong>56+</strong><span>Years</span></div>
-                                <div><strong>8,000+</strong><span>Agents</span></div>
-                                <div><strong>200+</strong><span>Offices</span></div>
-                            </div>
-                        </div>
-                        <div class="legacy-image"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80" alt="Heritage"></div>
-                    </div>
-                </div>
-            </section>
-    <section class="stats-bar">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item"><span class="stat-number">8,000+</span><span class="stat-text">Expert Agents</span></div>
-                <div class="stat-item"><span class="stat-number">200+</span><span class="stat-text">Offices Nationwide</span></div>
-                <div class="stat-item"><span class="stat-number">4.3★</span><span class="stat-text">Average Rating</span></div>
-                <div class="stat-item"><span class="stat-number">56+</span><span class="stat-text">Years of Trust</span></div>
-            </div>
+      </div>
+
+      <!-- Property 3 -->
+      <div class="property-card" data-delay="2">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&h=480&fit=crop" alt="Charleston Estate" loading="lazy">
+          <span class="badge">Colonial</span>
         </div>
-    </section>
-            <section class="team">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Our Team</div>
-                        <h2 class="section-title">Meet Our Experts</h2>
-                    </div>
-                    <div class="team-grid">
-                        <div class="team-card"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Agent"><h4>Michael Chen</h4><p>Managing Broker</p></div>
-                        <div class="team-card"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Agent"><h4>Sarah Williams</h4><p>Senior Agent</p></div>
-                        <div class="team-card"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Agent"><h4>David Rodriguez</h4><p>Client Relations</p></div>
-                    </div>
-                </div>
-            </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let Long & Foster Real Estate's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
+        <div class="card-body">
+          <div class="price">$3,200,000</div>
+          <div class="address">127 East Battery, Charleston, South Carolina</div>
+          <div class="specs">
+            <span>🛏 6 Bed</span>
+            <span>🛁 5 Bath</span>
+            <span>📐 5,800 sqft</span>
+          </div>
+          <a href="#" class="view-btn">View Details</a>
         </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-703-724-5800">+1-703-724-5800</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:info@longandfoster.com">info@longandfoster.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>Chantilly, Virginia</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.longandfoster.com" target="_blank">www.longandfoster.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
+      </div>
+
+      <!-- Property 4 -->
+      <div class="property-card" data-delay="3">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&h=480&fit=crop" alt="Annapolis Waterfront" loading="lazy">
+          <span class="badge">Waterfront</span>
         </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>Long & Foster Real Estate</h3><p>The Real Estate Company</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-703-724-5800</p><p>info@longandfoster.com</p><p>Chantilly, Virginia</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Long & Foster Real Estate. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
+        <div class="card-body">
+          <div class="price">$1,995,000</div>
+          <div class="address">92 Chester Avenue, Annapolis, Maryland</div>
+          <div class="specs">
+            <span>🛏 4 Bed</span>
+            <span>🛁 3 Bath</span>
+            <span>📐 3,100 sqft</span>
+          </div>
+          <a href="#" class="view-btn">View Details</a>
         </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
+      </div>
+
+      <!-- Property 5 -->
+      <div class="property-card" data-delay="4">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&h=480&fit=crop" alt="Richmond Victorian" loading="lazy">
+          <span class="badge">Historic</span>
+        </div>
+        <div class="card-body">
+          <div class="price">$1,350,000</div>
+          <div class="address">815 Franklin Street, The Fan, Richmond, VA</div>
+          <div class="specs">
+            <span>🛏 5 Bed</span>
+            <span>🛁 4 Bath</span>
+            <span>📐 4,400 sqft</span>
+          </div>
+          <a href="#" class="view-btn">View Details</a>
+        </div>
+      </div>
+
+      <!-- Property 6 -->
+      <div class="property-card" data-delay="5">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=700&h=480&fit=crop" alt="Cape May Cottage" loading="lazy">
+          <span class="badge">Coastal</span>
+        </div>
+        <div class="card-body">
+          <div class="price">$2,100,000</div>
+          <div class="address">510 Congress Street, Cape May, New Jersey</div>
+          <div class="specs">
+            <span>🛏 4 Bed</span>
+            <span>🛁 3 Bath</span>
+            <span>📐 2,800 sqft</span>
+          </div>
+          <a href="#" class="view-btn">View Details</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SERVICES
+     ════════════════════════════════════════════════════════ -->
+<section class="services section-padding" id="services">
+  <div class="container text-center">
+    <h2>Our Services</h2>
+    <p class="section-sub">A full spectrum of real estate solutions — from first-time buyers to luxury estates.</p>
+
+    <div class="services-grid">
+      <div class="service-card" data-delay="0">
+        <div class="icon">🏡</div>
+        <h3>Residential Sales</h3>
+        <p>Whether you're buying your first home or upgrading to a luxury estate, our expert agents guide you through every step with personalized attention.</p>
+      </div>
+      <div class="service-card" data-delay="1">
+        <div class="icon">🔑</div>
+        <h3>Property Management</h3>
+        <p>From tenant screening to maintenance coordination, we protect your investment and maximize returns with comprehensive management services.</p>
+      </div>
+      <div class="service-card" data-delay="2">
+        <div class="icon">📊</div>
+        <h3>Market Analysis</h3>
+        <p>Leverage our deep knowledge of East Coast markets with detailed comparative analyses, pricing strategies, and neighborhood insights.</p>
+      </div>
+      <div class="service-card" data-delay="3">
+        <div class="icon">📋</div>
+        <h3>Mortgage Services</h3>
+        <p>Through Long &amp; Foster Home Services, we connect you with competitive mortgage rates and pre-approval programs to strengthen your offer.</p>
+      </div>
+      <div class="service-card" data-delay="4">
+        <div class="icon">⚖️</div>
+        <h3>Title &amp; Insurance</h3>
+        <p>Our affiliated title and insurance companies ensure smooth closings and protect your home with comprehensive coverage options.</p>
+      </div>
+      <div class="service-card" data-delay="5">
+        <div class="icon">🏢</div>
+        <h3>Commercial Real Estate</h3>
+        <p>From retail spaces to office buildings, our commercial division provides expert brokerage for investors, developers, and business owners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     TESTIMONIALS
+     ════════════════════════════════════════════════════════ -->
+<section class="testimonials section-padding" id="testimonials">
+  <div class="container text-center">
+    <h2>What Our Clients Say</h2>
+    <p class="section-sub">Real stories from families who found their perfect home with Long &amp; Foster.</p>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card" data-delay="0">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Our Long &amp; Foster agent went above and beyond to find us the perfect colonial in Old Town Alexandria. The local expertise and attention to detail made all the difference in a competitive market.</p>
+        <p class="author">Margaret &amp; David Chen</p>
+        <p class="role">Homeowners — Alexandria, VA</p>
+      </div>
+      <div class="testimonial-card" data-delay="1">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Selling our family home of 30 years was emotional, but our agent handled everything with professionalism and genuine care. They secured a sale above asking price within two weeks.</p>
+        <p class="author">Robert Harrington</p>
+        <p class="role">Seller — Bethesda, MD</p>
+      </div>
+      <div class="testimonial-card" data-delay="2">
+        <div class="stars">★★★★★</div>
+        <p class="quote">As first-time buyers, we were nervous about the process. Our Long &amp; Foster agent walked us through everything — from mortgage pre-approval to closing day. We couldn't have asked for a better experience.</p>
+        <p class="author">Priya &amp; James Patel</p>
+        <p class="role">Homeowners — Falls Church, VA</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     CTA
+     ════════════════════════════════════════════════════════ -->
+<section class="cta" id="cta">
+  <div class="cta-content">
+    <h2 class="text-3d">Ready to Find Your<br>East Coast Home?</h2>
+    <p>
+      Connect with a local Long &amp; Foster agent today and discover why
+      hundreds of thousands of families have trusted us for over 50 years.
+      Your dream home on the East Coast is waiting.
+    </p>
+    <div class="cta-buttons">
+      <a href="#" class="cta-btn-primary">Find an Agent</a>
+      <a href="#" class="cta-btn-secondary">Schedule Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Long &amp; Foster</h3>
+        <p>
+          Serving the Mid-Atlantic and East Coast with distinction since 1968.
+          The largest privately owned real estate company in the United States,
+          committed to helping families find their perfect home.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Residential Sales</a></li>
+          <li><a href="#">Property Management</a></li>
+          <li><a href="#">Mortgage</a></li>
+          <li><a href="#">Title Services</a></li>
+          <li><a href="#">Insurance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Regions</h4>
+        <ul>
+          <li><a href="#">Virginia</a></li>
+          <li><a href="#">Maryland</a></li>
+          <li><a href="#">Washington D.C.</a></li>
+          <li><a href="#">Pennsylvania</a></li>
+          <li><a href="#">New Jersey</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Long &amp; Foster Real Estate, Inc. All rights reserved.</p>
+      <p>Demo site built by <span class="alok">Alok Web Services</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  // ── NAV SCROLL EFFECT ──────────────────────────────────
+  const nav = document.getElementById('topNav');
+  let ticking = false;
+  function onScroll(){
+    if(!ticking){
+      window.requestAnimationFrame(()=>{
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // ── INTERSECTION OBSERVER FOR REVEAL ANIMATIONS ────────
+  const observerOpts = {threshold:0.15, rootMargin:'0px 0px -40px 0px'};
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const delay = parseInt(entry.target.getAttribute('data-delay')||'0') * 120;
+        setTimeout(()=>{
+          entry.target.classList.add('visible');
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOpts);
+
+  // Observe all animatable elements
+  document.querySelectorAll(
+    '.timeline-item, .property-card, .service-card, .testimonial-card'
+  ).forEach(el => observer.observe(el));
+
+  // ── PARALLAX ON HERO (subtle) ──────────────────────────
+  const heroVideo = document.querySelector('.hero-video');
+  let rafId = null;
+  function parallaxHero(){
+    if(window.innerWidth > 768){
+      const y = window.scrollY;
+      heroVideo.style.transform = `translateY(${y * 0.3}px) scale(1.05)`;
+    }
+    rafId = null;
+  }
+  window.addEventListener('scroll', ()=>{
+    if(!rafId) rafId = requestAnimationFrame(parallaxHero);
+  }, {passive:true});
+
+  // ── SMOOTH SCROLL FOR NAV LINKS ────────────────────────
+  document.querySelectorAll('.top-nav a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  // ── 3D TILT ON PROPERTY CARDS (desktop only) ───────────
+  if(window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.property-card').forEach(card=>{
+      card.addEventListener('mousemove', e=>{
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left)/rect.width - 0.5;
+        const y = (e.clientY - rect.top)/rect.height - 0.5;
+        card.style.transform = `translateY(-8px) rotateY(${x*8}deg) rotateX(${-y*6}deg)`;
+      });
+      card.addEventListener('mouseleave', ()=>{
+        card.style.transform = 'translateY(0) rotateY(0) rotateX(0)';
+      });
+    });
+  }
+
+  // ── PARALLAX DIVIDER PARALLAX ──────────────────────────
+  const divider = document.querySelector('.parallax-divider');
+  if(divider){
+    window.addEventListener('scroll', ()=>{
+      if(!rafId){
+        rafId = requestAnimationFrame(()=>{
+          const rect = divider.getBoundingClientRect();
+          if(rect.top < window.innerHeight && rect.bottom > 0){
+            const offset = (rect.top - window.innerHeight) * 0.15;
+            divider.style.backgroundPositionY = `${offset}px`;
+          }
+          rafId = null;
         });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+      }
+    }, {passive:true});
+  }
+
+  // Trigger initial scroll state
+  onScroll();
+})();
+</script>
 </body>
 </html>
