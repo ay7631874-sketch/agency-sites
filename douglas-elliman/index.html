@@ -1,577 +1,1189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Douglas Elliman | NYC Luxury Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #1B2A4A;
-        --secondary: #8B7355;
-        --accent: #D4AF37;
-        --bg: #FAFAF8;
-        --fg: #1B2A4A;
-        --card-bg: #FFFFFF;
-        --heading-font: 'Cormorant', serif;
-        --body-font: 'Montserrat', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #1B2A4Add, #8B7355cc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Douglas Elliman — Luxury Real Estate Since 1911</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#1B2A4A;
+  --secondary:#8B7355;
+  --gold:#D4AF37;
+  --gold-light:#E8C866;
+  --dark:#0D1525;
+  --dark2:#131E35;
+  --text-light:#F5F0E8;
+  --text-muted:#A09880;
+  --white:#FFFFFF;
+  --overlay:rgba(13,21,37,0.85);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Montserrat',sans-serif;
+  background:var(--dark);
+  color:var(--text-light);
+  overflow-x:hidden;
+  line-height:1.7;
+}
+h1,h2,h3,h4,h5,h6{font-family:'Cormorant',serif;font-weight:400}
+a{text-decoration:none;color:inherit;transition:color .3s}
+img{max-width:100%;display:block}
+::selection{background:var(--gold);color:var(--dark)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ===== LOADER ===== */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:30px;
+  transition:opacity .8s,visibility .8s;
+}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+#loader .loader-line{
+  width:200px;height:1px;background:rgba(212,175,55,0.2);
+  position:relative;overflow:hidden;
+}
+#loader .loader-line::after{
+  content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;
+  background:var(--gold);
+  animation:loaderSlide 1.5s ease-in-out infinite;
+}
+@keyframes loaderSlide{0%{left:-100%}100%{left:100%}}
+#loader .loader-text{
+  font-family:'Cormorant',serif;font-size:1.1rem;letter-spacing:8px;
+  color:var(--gold);text-transform:uppercase;
+}
+
+/* ===== NAVIGATION ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:25px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .5s cubic-bezier(.4,0,.2,1);
+}
+nav.scrolled{
+  background:var(--dark);
+  padding:15px 60px;
+  box-shadow:0 4px 30px rgba(0,0,0,0.4);
+  border-bottom:1px solid rgba(212,175,55,0.15);
+}
+nav .logo{
+  font-family:'Cormorant',serif;font-size:1.6rem;
+  font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--white);
+}
+nav .logo span{color:var(--gold);font-weight:300}
+nav .nav-links{display:flex;gap:35px;list-style:none}
+nav .nav-links a{
+  font-size:.75rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--white);position:relative;padding-bottom:4px;
+  font-weight:400;
+}
+nav .nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:var(--gold);transition:width .4s;
+}
+nav .nav-links a:hover::after{width:100%}
+nav .nav-links a:hover{color:var(--gold)}
+nav .nav-cta{
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  border:1px solid var(--gold);color:var(--gold);
+  padding:10px 28px;transition:all .4s;
+}
+nav .nav-cta:hover{background:var(--gold);color:var(--dark)}
+nav .hamburger{display:none;cursor:pointer;flex-direction:column;gap:6px}
+nav .hamburger span{display:block;width:28px;height:1px;background:var(--white);transition:all .3s}
+
+/* ===== HERO ===== */
+.hero{
+  height:100vh;position:relative;display:flex;
+  align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(13,21,37,0.4) 0%,rgba(13,21,37,0.2) 40%,rgba(13,21,37,0.6) 100%),
+    url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=85') center/cover no-repeat;
+  transform:scale(1.1);
+  will-change:transform;
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  max-width:900px;padding:0 40px;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:12px;
+  margin-bottom:40px;
+}
+.hero-badge span{
+  width:40px;height:1px;background:var(--gold);
+}
+.hero-badge p{
+  font-size:.7rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+}
+.hero h1{
+  font-size:clamp(3rem,7vw,6rem);
+  font-weight:300;line-height:1.05;
+  color:var(--white);margin-bottom:10px;
+}
+.hero h1 .gold-line{
+  display:inline-block;
+  border-bottom:2px solid var(--gold);
+  padding-bottom:8px;
+}
+.hero .tagline{
+  font-size:clamp(1rem,2vw,1.3rem);
+  color:rgba(255,255,255,0.6);
+  font-weight:300;margin:30px auto 0;
+  max-width:550px;letter-spacing:1px;
+}
+.hero-cta{
+  margin-top:50px;display:inline-flex;gap:20px;
+}
+.hero-cta a{
+  font-size:.7rem;letter-spacing:4px;text-transform:uppercase;
+  padding:16px 40px;transition:all .4s;font-weight:500;
+}
+.hero-cta a.primary{
+  background:var(--gold);color:var(--dark);
+}
+.hero-cta a.primary:hover{background:var(--gold-light)}
+.hero-cta a.secondary{
+  border:1px solid rgba(255,255,255,0.3);color:var(--white);
+}
+.hero-cta a.secondary:hover{border-color:var(--gold);color:var(--gold)}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.hero-scroll span{font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+.hero-scroll .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent)}
+
+/* ===== SECTION STYLES ===== */
+.section{padding:120px 60px}
+.section-dark{background:var(--dark)}
+.section-primary{background:var(--primary)}
+.section-header{text-align:center;margin-bottom:80px}
+.section-header .overline{
+  font-size:.65rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;display:block;
+}
+.section-header h2{
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:300;color:var(--white);
+  line-height:1.2;
+}
+.section-header .divider{
+  width:60px;height:1px;background:var(--gold);
+  margin:25px auto 0;
+}
+.section-header p{
+  max-width:600px;margin:25px auto 0;
+  color:var(--text-muted);font-size:.95rem;
+  font-weight:300;line-height:1.8;
+}
+
+/* ===== ABOUT ===== */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;max-width:1200px;margin:0 auto;
+}
+.about-image{
+  position:relative;
+}
+.about-image img{
+  width:100%;height:500px;object-fit:cover;
+}
+.about-image .year-badge{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--gold);padding:30px;
+  text-align:center;
+}
+.about-image .year-badge .number{
+  font-family:'Cormorant',serif;font-size:2.5rem;
+  font-weight:700;color:var(--dark);line-height:1;
+}
+.about-image .year-badge .label{
+  font-size:.55rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--dark);margin-top:5px;
+}
+.about-text .gold-divider{
+  width:40px;height:2px;background:var(--gold);
+  margin-bottom:30px;
+}
+.about-text h2{
+  font-size:2.8rem;font-weight:300;
+  color:var(--white);line-height:1.2;
+  margin-bottom:30px;
+}
+.about-text p{
+  color:var(--text-muted);font-size:.95rem;
+  line-height:2;margin-bottom:20px;font-weight:300;
+}
+.about-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:30px;margin-top:40px;
+  border-top:1px solid rgba(212,175,55,0.2);
+  padding-top:40px;
+}
+.about-stats .stat h3{
+  font-size:2.5rem;color:var(--gold);font-weight:300;
+}
+.about-stats .stat p{
+  font-size:.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-muted);margin-top:5px;
+}
+
+/* ===== PROPERTIES ===== */
+.properties-scroll{
+  display:flex;gap:0;overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.properties-scroll::-webkit-scrollbar{display:none}
+.property-card{
+  min-width:80vw;max-width:80vw;
+  height:75vh;position:relative;
+  scroll-snap-align:start;
+  overflow:hidden;flex-shrink:0;
+}
+.property-card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 8s ease;
+}
+.property-card:hover img{transform:scale(1.05)}
+.property-card .overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 30%,rgba(13,21,37,0.8) 100%);
+}
+.property-card .property-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:50px 60px;
+}
+.property-card .property-tag{
+  font-size:.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+}
+.property-card h3{
+  font-size:2.5rem;color:var(--white);font-weight:300;
+}
+.property-card .property-location{
+  font-size:.85rem;color:rgba(255,255,255,0.6);
+  margin-top:8px;letter-spacing:1px;
+}
+.property-card .property-price{
+  font-family:'Cormorant',serif;font-size:1.5rem;
+  color:var(--gold);margin-top:15px;
+}
+.property-nav{
+  display:flex;justify-content:center;gap:15px;
+  margin-top:40px;
+}
+.property-nav button{
+  width:50px;height:50px;border:1px solid rgba(212,175,55,0.3);
+  background:transparent;color:var(--gold);cursor:pointer;
+  font-size:1.2rem;transition:all .3s;
+  display:flex;align-items:center;justify-content:center;
+}
+.property-nav button:hover{background:var(--gold);color:var(--dark)}
+.property-counter{
+  text-align:center;margin-top:20px;
+  font-size:.7rem;letter-spacing:3px;color:var(--text-muted);
+}
+
+/* ===== GALLERY ===== */
+.gallery-grid{
+  columns:3;column-gap:15px;
+  max-width:1400px;margin:0 auto;
+}
+.gallery-item{
+  break-inside:avoid;margin-bottom:15px;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.gallery-item img{
+  width:100%;display:block;
+  transition:transform .8s cubic-bezier(.4,0,.2,1);
+}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item .gallery-overlay{
+  position:absolute;inset:0;
+  background:rgba(13,21,37,0.7);
+  opacity:0;transition:opacity .5s;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;
+}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-item .gallery-overlay span{
+  font-size:.65rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);
+}
+.gallery-item .gallery-overlay .zoom-icon{
+  width:50px;height:50px;border:1px solid var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--gold);
+}
+
+/* ===== LUXURY FEATURES ===== */
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:30px;max-width:1200px;margin:0 auto;
+}
+.feature-card{
+  background:var(--dark2);
+  padding:60px 40px;
+  text-align:center;
+  border:1px solid rgba(212,175,55,0.08);
+  transition:all .5s;
+  position:relative;overflow:hidden;
+}
+.feature-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform .5s;
+}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-card:hover{
+  border-color:rgba(212,175,55,0.2);
+  transform:translateY(-5px);
+}
+.feature-card .icon{
+  width:70px;height:70px;margin:0 auto 30px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:50%;font-size:1.5rem;
+  color:var(--gold);
+  transition:all .4s;
+}
+.feature-card:hover .icon{
+  background:var(--gold);color:var(--dark);
+  border-color:var(--gold);
+}
+.feature-card h3{
+  font-size:1.6rem;color:var(--white);margin-bottom:15px;
+  font-weight:400;
+}
+.feature-card p{
+  color:var(--text-muted);font-size:.88rem;
+  line-height:1.8;font-weight:300;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonial-section{
+  padding:140px 60px;
+  background:var(--primary);
+  position:relative;
+}
+.testimonial-container{
+  max-width:900px;margin:0 auto;text-align:center;
+}
+.testimonial-quote{
+  position:relative;padding:0 40px;
+}
+.testimonial-quote .open-quote{
+  font-family:'Cormorant',serif;font-size:8rem;
+  color:var(--gold);line-height:0.5;
+  display:block;margin-bottom:30px;
+  opacity:0.4;
+}
+.testimonial-quote blockquote{
+  font-family:'Cormorant',serif;
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  font-style:italic;color:var(--white);
+  line-height:1.6;font-weight:300;
+}
+.testimonial-quote .close-quote{
+  font-family:'Cormorant',serif;font-size:8rem;
+  color:var(--gold);line-height:0.5;
+  display:block;margin-top:30px;
+  opacity:0.4;
+}
+.testimonial-author{
+  margin-top:40px;
+}
+.testimonial-author .name{
+  font-family:'Cormorant',serif;font-size:1.3rem;
+  color:var(--white);font-weight:500;
+}
+.testimonial-author .title{
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-top:8px;
+}
+.testimonial-dots{
+  display:flex;justify-content:center;gap:12px;
+  margin-top:40px;
+}
+.testimonial-dots .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(212,175,55,0.3);cursor:pointer;
+  transition:all .3s;
+}
+.testimonial-dots .dot.active{background:var(--gold);transform:scale(1.3)}
+
+/* ===== CONCIERGE ===== */
+.concierge-section{
+  padding:120px 60px;
+  background:var(--dark);
+}
+.concierge-card{
+  max-width:1000px;margin:0 auto;
+  border:1px solid rgba(212,175,55,0.3);
+  padding:80px;
+  position:relative;
+  text-align:center;
+}
+.concierge-card::before,
+.concierge-card::after{
+  content:'';position:absolute;width:20px;height:20px;
+  border-color:var(--gold);border-style:solid;
+}
+.concierge-card::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.concierge-card::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.concierge-card .overline{
+  font-size:.65rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.concierge-card h2{
+  font-size:2.8rem;color:var(--white);font-weight:300;
+  margin-bottom:25px;
+}
+.concierge-card p{
+  color:var(--text-muted);font-size:.95rem;
+  line-height:2;max-width:600px;margin:0 auto 40px;
+  font-weight:300;
+}
+.concierge-card .cta-btn{
+  display:inline-block;
+  font-size:.7rem;letter-spacing:4px;text-transform:uppercase;
+  background:var(--gold);color:var(--dark);
+  padding:16px 50px;font-weight:600;
+  transition:all .4s;
+}
+.concierge-card .cta-btn:hover{background:var(--gold-light)}
+
+/* ===== CONTACT ===== */
+.contact-section{
+  padding:120px 60px;
+  background:var(--primary);
+}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;max-width:1100px;margin:0 auto;
+}
+.contact-info h3{
+  font-size:2rem;color:var(--white);font-weight:300;
+  margin-bottom:30px;
+}
+.contact-info p{
+  color:var(--text-muted);font-size:.9rem;
+  line-height:1.9;margin-bottom:40px;font-weight:300;
+}
+.contact-details{list-style:none}
+.contact-details li{
+  display:flex;align-items:center;gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid rgba(212,175,55,0.1);
+}
+.contact-details li .icon{
+  width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(212,175,55,0.3);
+  color:var(--gold);font-size:.8rem;flex-shrink:0;
+}
+.contact-details li .text{font-size:.9rem;color:var(--text-light)}
+.contact-details li .label{
+  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-muted);display:block;margin-bottom:3px;
+}
+.contact-form{display:flex;flex-direction:column;gap:25px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group label{
+  font-size:.65rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);
+}
+.form-group input,.form-group textarea,.form-group select{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(212,175,55,0.15);
+  padding:14px 18px;
+  color:var(--white);
+  font-family:'Montserrat',sans-serif;
+  font-size:.88rem;
+  transition:border-color .3s;
+  outline:none;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  border-color:var(--gold);
+}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-group select option{background:var(--dark)}
+.contact-form .submit-btn{
+  background:var(--gold);color:var(--dark);
+  border:none;padding:16px 50px;
+  font-family:'Montserrat',sans-serif;
+  font-size:.7rem;letter-spacing:4px;
+  text-transform:uppercase;font-weight:600;
+  cursor:pointer;transition:all .4s;
+  align-self:flex-start;
+}
+.contact-form .submit-btn:hover{background:var(--gold-light)}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--dark);
+  padding:80px 60px 30px;
+  border-top:1px solid rgba(212,175,55,0.1);
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:60px;max-width:1200px;margin:0 auto;
+  padding-bottom:60px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.footer-brand .logo{
+  font-family:'Cormorant',serif;font-size:1.8rem;
+  font-weight:600;color:var(--gold);letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.footer-brand p{
+  color:var(--text-muted);font-size:.85rem;
+  line-height:1.8;font-weight:300;
+  max-width:300px;
+}
+.footer-col h4{
+  font-size:.65rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:25px;
+}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{
+  color:var(--text-muted);font-size:.85rem;
+  font-weight:300;transition:color .3s;
+}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-bottom{
+  max-width:1200px;margin:0 auto;
+  padding-top:30px;
+  display:flex;justify-content:space-between;
+  align-items:center;
+}
+.footer-bottom p{
+  font-size:.75rem;color:var(--text-muted);font-weight:300;
+}
+.footer-bottom .credit{
+  font-size:.7rem;color:rgba(255,255,255,0.25);
+  letter-spacing:1px;
+}
+
+/* ===== ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.15s}
+.reveal-delay-2{transition-delay:.3s}
+.reveal-delay-3{transition-delay:.45s}
+
+/* ===== MOBILE NAV ===== */
+.mobile-menu{
+  position:fixed;top:0;right:-100%;width:100%;height:100vh;
+  background:var(--dark);z-index:999;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:30px;
+  transition:right .5s cubic-bezier(.4,0,.2,1);
+}
+.mobile-menu.active{right:0}
+.mobile-menu a{
+  font-family:'Cormorant',serif;font-size:2rem;
+  color:var(--white);letter-spacing:3px;
+  transition:color .3s;
+}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-close{
+  position:absolute;top:30px;right:40px;
+  font-size:2rem;color:var(--white);cursor:pointer;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .section{padding:80px 30px}
+  nav{padding:20px 30px}
+  nav.scrolled{padding:15px 30px}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .about-image img{height:400px}
+  .gallery-grid{columns:2}
+  .features-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .property-card{min-width:90vw;max-width:90vw}
+}
+@media(max-width:768px){
+  nav .nav-links{display:none}
+  nav .nav-cta{display:none}
+  nav .hamburger{display:flex}
+  .hero h1{font-size:2.5rem}
+  .gallery-grid{columns:1}
+  .property-card{min-width:100vw;max-width:100vw;height:60vh}
+  .concierge-card{padding:40px 25px}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+  .about-stats{grid-template-columns:1fr;gap:20px}
+  .hero-cta{flex-direction:column;align-items:center}
+  .testimonial-quote .open-quote,
+  .testimonial-quote .close-quote{font-size:5rem}
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Douglas</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-text">Douglas Elliman</div>
+  <div class="loader-line"></div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="logo">Douglas <span>Elliman</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#features">Services</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Schedule Viewing</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-close" id="mobileClose">&times;</div>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#properties" class="mobile-link">Properties</a>
+  <a href="#gallery" class="mobile-link">Gallery</a>
+  <a href="#features" class="mobile-link">Services</a>
+  <a href="#testimonials" class="mobile-link">Reviews</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span></span>
+      <p>Est. 1911 · New York</p>
+      <span></span>
+    </div>
+    <h1>The Art of<br><span class="gold-line">Luxury Living</span></h1>
+    <p class="tagline">For over a century, Douglas Elliman has been the gateway to the world's most extraordinary residences.</p>
+    <div class="hero-cta">
+      <a href="#properties" class="primary">Explore Properties</a>
+      <a href="#contact" class="secondary">Book Consultation</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-dark" id="about">
+  <div class="about-grid">
+    <div class="about-image reveal">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="Luxury Property">
+      <div class="year-badge">
+        <div class="number">1911</div>
+        <div class="label">Year Established</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="gold-divider reveal"></div>
+      <h2 class="reveal">A Legacy of<br>Uncompromising Excellence</h2>
+      <p class="reveal">For more than a century, Douglas Elliman has set the standard in luxury real estate. From the penthouses of Manhattan to the estates of the Hamptons, we represent the most discerning properties and the most distinguished clientele in the world.</p>
+      <p class="reveal">Our network of 7,000+ agents across 120+ offices delivers an unparalleled combination of local expertise and global reach — connecting extraordinary properties with extraordinary lives.</p>
+      <div class="about-stats reveal">
+        <div class="stat">
+          <h3>7,000+</h3>
+          <p>Elite Agents</p>
         </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-bg"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1920&q=80" alt="Douglas Elliman"><div class="hero-overlay"></div></div>
-            <div class="hero-content">
-                <div class="hero-badge">Est. 1911</div>
-                <h1 class="hero-title">Douglas Elliman</h1>
-                <p class="hero-tagline">The Art of Real Estate</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Contact Us</a>
-                    <a href="#properties" class="btn btn-outline">View Properties</a>
-                </div>
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600566752229-250ed79470f6?w=800&q=80" alt="Douglas Elliman" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 1911</h2>
-                    <p class="about-text">Douglas Elliman is one of the largest residential real estate brokerages in the United States, specializing in luxury properties and high-end markets.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>7,000+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.5★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>113+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
+        <div class="stat">
+          <h3>120+</h3>
+          <p>Offices</p>
         </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Luxury Real Estate</h3>
-            <p>Expert luxury real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="stat">
+          <h3>$30B+</h3>
+          <p>Annual Volume</p>
         </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Residential Sales</h3>
-            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="section section-primary" id="properties">
+  <div class="section-header">
+    <span class="overline reveal">Featured Residences</span>
+    <h2 class="reveal">Extraordinary Properties</h2>
+    <div class="divider reveal"></div>
+  </div>
+  <div class="properties-scroll" id="propertyScroll">
+    <div class="property-card">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80" alt="Manhattan Penthouse">
+      <div class="overlay"></div>
+      <div class="property-info">
+        <div class="property-tag">Penthouse · Manhattan</div>
+        <h3>The Residences at One Manhattan Square</h3>
+        <div class="property-location">Lower East Side, New York</div>
+        <div class="property-price">$28,500,000</div>
+      </div>
+    </div>
+    <div class="property-card">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80" alt="Hamptons Estate">
+      <div class="overlay"></div>
+      <div class="property-info">
+        <div class="property-tag">Estate · Hamptons</div>
+        <h3>Oceanfront Compound</h3>
+        <div class="property-location">Southampton, New York</div>
+        <div class="property-price">$45,000,000</div>
+      </div>
+    </div>
+    <div class="property-card">
+      <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1600&q=80" alt="Miami Residence">
+      <div class="overlay"></div>
+      <div class="property-info">
+        <div class="property-tag">Waterfront · Miami</div>
+        <h3>Biscayne Bay Residence</h3>
+        <div class="property-location">Miami Beach, Florida</div>
+        <div class="property-price">$18,750,000</div>
+      </div>
+    </div>
+    <div class="property-card">
+      <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&q=80" alt="Beverly Hills">
+      <div class="overlay"></div>
+      <div class="property-info">
+        <div class="property-tag">Modern · Beverly Hills</div>
+        <h3>Hillside Modern Masterpiece</h3>
+        <div class="property-location">Beverly Hills, California</div>
+        <div class="property-price">$35,000,000</div>
+      </div>
+    </div>
+  </div>
+  <div class="property-nav">
+    <button onclick="scrollProperties(-1)">←</button>
+    <button onclick="scrollProperties(1)">→</button>
+  </div>
+  <div class="property-counter">
+    <span id="propertyCount">1</span> / 4
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section section-dark" id="gallery">
+  <div class="section-header">
+    <span class="overline reveal">Portfolio</span>
+    <h2 class="reveal">Visual Journey</h2>
+    <div class="divider reveal"></div>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=600&q=80" alt="Gallery 1">
+      <div class="gallery-overlay">
+        <div class="zoom-icon">+</div>
+        <span>View Details</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Gallery 2">
+      <div class="gallery-overlay">
+        <div class="zoom-icon">+</div>
+        <span>View Details</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&q=80" alt="Gallery 3">
+      <div class="gallery-overlay">
+        <div class="zoom-icon">+</div>
+        <span>View Details</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=600&q=80" alt="Gallery 4">
+      <div class="gallery-overlay">
+        <div class="zoom-icon">+</div>
+        <span>View Details</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80" alt="Gallery 5">
+      <div class="gallery-overlay">
+        <div class="zoom-icon">+</div>
+        <span>View Details</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1600047509358-9dc75509da58?w=600&q=80" alt="Gallery 6">
+      <div class="gallery-overlay">
+        <div class="zoom-icon">+</div>
+        <span>View Details</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LUXURY FEATURES -->
+<section class="section section-primary" id="features">
+  <div class="section-header">
+    <span class="overline reveal">What Sets Us Apart</span>
+    <h2 class="reveal">Luxury Redefined</h2>
+    <div class="divider reveal"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="icon">★</div>
+      <h3>Exclusive Access</h3>
+      <p>Off-market listings and private sales available only through our global network. Access properties before they reach the public market.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="icon">◆</div>
+      <h3>White Glove Service</h3>
+      <p>Dedicated advisors provide personalized guidance from discovery through closing, with attention to every detail of your transaction.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="icon">◈</div>
+      <h3>Global Reach</h3>
+      <p>Connected to Knight Frank's worldwide network spanning 60+ countries. Your next home awaits wherever your aspirations lead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonial-section" id="testimonials">
+  <div class="testimonial-container">
+    <div class="testimonial-quote reveal">
+      <span class="open-quote">"</span>
+      <blockquote id="testimonialText">Douglas Elliman understood exactly what we were looking for. Their knowledge of the New York market is unmatched, and they found us our dream penthouse before it even hit the market.</blockquote>
+      <span class="close-quote">"</span>
+    </div>
+    <div class="testimonial-author reveal">
+      <div class="name" id="testimonialName">Alexandra & William Chen</div>
+      <div class="title" id="testimonialTitle">One57 Penthouse, Manhattan</div>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots">
+      <div class="dot active" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+      <div class="dot" data-index="2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCIERGE -->
+<section class="concierge-section" id="concierge">
+  <div class="concierge-card reveal">
+    <div class="overline">Bespoke Experience</div>
+    <h2>Private Concierge</h2>
+    <p>From private jet arrangements to interior design consultations, our concierge team handles every aspect of your luxury lifestyle — ensuring a seamless experience from first showing to final detail.</p>
+    <a href="#contact" class="cta-btn">Request Concierge</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-primary" id="contact">
+  <div class="section-header">
+    <span class="overline reveal">Get in Touch</span>
+    <h2 class="reveal">Begin Your Journey</h2>
+    <div class="divider reveal"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Let Us Find Your Perfect Residence</h3>
+      <p>Whether you're seeking a Manhattan penthouse, a Hamptons estate, or a waterfront retreat in Miami, our advisors are ready to craft your next chapter in luxury living.</p>
+      <ul class="contact-details">
+        <li>
+          <div class="icon">☎</div>
+          <div>
+            <span class="label">Telephone</span>
+            <span class="text">+1-212-921-3000</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon">✉</div>
+          <div>
+            <span class="label">Email</span>
+            <span class="text">info@elliman.com</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon">⌂</div>
+          <div>
+            <span class="label">Headquarters</span>
+            <span class="text">575 Madison Avenue, New York, NY 10022</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Your first name" required>
         </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Commercial Properties</h3>
-            <p>Expert commercial properties services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Your last name" required>
         </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>International Realty</h3>
-            <p>Expert international realty services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com" required>
         </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">New York, New York</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+1 (___) ___-____">
         </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">New York, New York</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">New York, New York</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div></div>
-        </div>
-    </section>
-    
-    
-            <section class="luxury-features">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Exclusive</div>
-                        <h2 class="section-title">Luxury Living</h2>
-                    </div>
-                    <div class="luxury-grid">
-                        <div class="luxury-item"><h4>Prime Locations</h4><p>Exclusive access to the most coveted addresses.</p></div>
-                        <div class="luxury-item"><h4>Bespoke Service</h4><p>Personalized concierge-level real estate experience.</p></div>
-                        <div class="luxury-item"><h4>Global Network</h4><p>Connections to luxury markets worldwide.</p></div>
-                        <div class="luxury-item"><h4>White Glove</h4><p>Meticulous attention to every detail of your transaction.</p></div>
-                    </div>
-                </div>
-            </section>
-            <section class="gallery-showcase">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Portfolio</div>
-                        <h2 class="section-title">Featured Properties</h2>
-                    </div>
-                    <div class="gallery-grid">
-                        <div class="gallery-item large"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Property" loading="lazy"><div class="gallery-overlay"><span>View Details</span></div></div>
-                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=80" alt="Property" loading="lazy"><div class="gallery-overlay"><span>View Details</span></div></div>
-                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Property" loading="lazy"><div class="gallery-overlay"><span>View Details</span></div></div>
-                    </div>
-                </div>
-            </section>
-            <section class="concierge">
-                <div class="container">
-                    <div class="concierge-content">
-                        <h2>Concierge Service</h2>
-                        <p>Experience the pinnacle of personalized real estate service. Our dedicated concierge team handles every aspect of your property journey.</p>
-                        <a href="#contact" class="btn btn-primary">Request Concierge</a>
-                    </div>
-                </div>
-            </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let Douglas Elliman's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
-        </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-212-921-3000">+1-212-921-3000</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:info@elliman.com">info@elliman.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>New York, New York</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.elliman.com" target="_blank">www.elliman.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>Douglas Elliman</h3><p>The Art of Real Estate</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-212-921-3000</p><p>info@elliman.com</p><p>New York, New York</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Douglas Elliman. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+      </div>
+      <div class="form-group">
+        <label>Property Interest</label>
+        <select>
+          <option value="">Select a region</option>
+          <option>Manhattan</option>
+          <option>Brooklyn</option>
+          <option>Hamptons</option>
+          <option>Miami</option>
+          <option>Beverly Hills</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your ideal property..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Douglas Elliman</div>
+      <p>One of the largest residential real estate brokerages in the United States, specializing in luxury properties across the most desirable markets.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#features">Services</a></li>
+        <li><a href="#concierge">Concierge</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Markets</h4>
+      <ul>
+        <li><a href="#">New York</a></li>
+        <li><a href="#">Miami</a></li>
+        <li><a href="#">California</a></li>
+        <li><a href="#">Connecticut</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Douglas Elliman Real Estate. All rights reserved.</p>
+    <p class="credit">Demo site built by Alok Web Services</p>
+  </div>
+</footer>
+
+<script>
+/* ===== LOADER ===== */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loader').classList.add('hidden')},1800);
+});
+
+/* ===== NAV SCROLL ===== */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>80)navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+/* ===== HERO PARALLAX ===== */
+const heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(y<window.innerHeight){
+    heroBg.style.transform=`scale(1.1) translateY(${y*0.3}px)`;
+  }
+});
+
+/* ===== MOBILE MENU ===== */
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+const mobileClose=document.getElementById('mobileClose');
+hamburger.addEventListener('click',()=>mobileMenu.classList.add('active'));
+mobileClose.addEventListener('click',()=>mobileMenu.classList.remove('active'));
+document.querySelectorAll('.mobile-link').forEach(link=>{
+  link.addEventListener('click',()=>mobileMenu.classList.remove('active'));
+});
+
+/* ===== PROPERTIES SCROLL ===== */
+const propertyScroll=document.getElementById('propertyScroll');
+const propertyCount=document.getElementById('propertyCount');
+function scrollProperties(dir){
+  const cardW=propertyScroll.querySelector('.property-card').offsetWidth;
+  propertyScroll.scrollBy({left:dir*cardW,behavior:'smooth'});
+}
+propertyScroll.addEventListener('scroll',()=>{
+  const cardW=propertyScroll.querySelector('.property-card').offsetWidth;
+  const idx=Math.round(propertyScroll.scrollLeft/cardW)+1;
+  propertyCount.textContent=Math.min(idx,4);
+});
+
+/* ===== TESTIMONIALS ===== */
+const testimonials=[
+  {
+    text:'Douglas Elliman understood exactly what we were looking for. Their knowledge of the New York market is unmatched, and they found us our dream penthouse before it even hit the market.',
+    name:'Alexandra & William Chen',
+    title:'One57 Penthouse, Manhattan'
+  },
+  {
+    text:'The level of discretion and professionalism was extraordinary. Every detail was handled with the utmost care — from the private viewings to the final walkthrough.',
+    name:'Jonathan R. Whitfield',
+    title:'432 Park Avenue, Manhattan'
+  },
+  {
+    text:'Working with Douglas Elliman felt like having a trusted advisor, not just an agent. They navigated a complex international purchase with grace and precision.',
+    name:'Isabelle & Marcus Fontaine',
+    title:'Palm Beach Oceanfront Estate'
+  }
+];
+let currentTestimonial=0;
+const testimonialText=document.getElementById('testimonialText');
+const testimonialName=document.getElementById('testimonialName');
+const testimonialTitle=document.getElementById('testimonialTitle');
+const dots=document.querySelectorAll('.testimonial-dots .dot');
+
+function showTestimonial(idx){
+  currentTestimonial=idx;
+  testimonialText.style.opacity=0;
+  testimonialName.style.opacity=0;
+  testimonialTitle.style.opacity=0;
+  setTimeout(()=>{
+    testimonialText.textContent=testimonials[idx].text;
+    testimonialName.textContent=testimonials[idx].name;
+    testimonialTitle.textContent=testimonials[idx].title;
+    testimonialText.style.opacity=1;
+    testimonialName.style.opacity=1;
+    testimonialTitle.style.opacity=1;
+    dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+  },400);
+}
+
+dots.forEach(dot=>{
+  dot.addEventListener('click',()=>showTestimonial(parseInt(dot.dataset.index)));
+});
+
+setInterval(()=>{
+  showTestimonial((currentTestimonial+1)%testimonials.length);
+},7000);
+
+// Add transitions to testimonial elements
+testimonialText.style.transition='opacity .4s';
+testimonialName.style.transition='opacity .4s';
+testimonialTitle.style.transition='opacity .4s';
+
+/* ===== REVEAL ON SCROLL ===== */
+const reveals=document.querySelectorAll('.reveal');
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:0.15,rootMargin:'0px 0px -50px 0px'});
+reveals.forEach(el=>revealObserver.observe(el));
+
+/* ===== FORM HANDLER ===== */
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.submit-btn');
+  const origText=btn.textContent;
+  btn.textContent='Sending...';
+  btn.style.opacity='.7';
+  setTimeout(()=>{
+    btn.textContent='Inquiry Sent ✓';
+    btn.style.background='#2d7d46';
+    btn.style.color='#fff';
+    btn.style.opacity='1';
+    setTimeout(()=>{
+      btn.textContent=origText;
+      btn.style.background='';
+      btn.style.color='';
+      e.target.reset();
+    },3000);
+  },1500);
+}
+
+/* ===== SMOOTH SCROLL ===== */
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+  anchor.addEventListener('click',function(e){
+    e.preventDefault();
+    const target=document.querySelector(this.getAttribute('href'));
+    if(target){
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+});
+
+/* ===== COUNTER ANIMATION ===== */
+const stats=document.querySelectorAll('.stat h3');
+const statsObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el=entry.target;
+      const text=el.textContent;
+      const match=text.match(/[\d,]+/);
+      if(match){
+        const target=parseInt(match[0].replace(/,/g,''));
+        const prefix=text.substring(0,text.indexOf(match[0]));
+        const suffix=text.substring(text.indexOf(match[0])+match[0].length);
+        let current=0;
+        const increment=Math.ceil(target/60);
+        const timer=setInterval(()=>{
+          current+=increment;
+          if(current>=target){current=target;clearInterval(timer)}
+          el.textContent=prefix+current.toLocaleString()+suffix;
+        },25);
+      }
+      statsObserver.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+stats.forEach(s=>statsObserver.observe(s));
+</script>
 </body>
 </html>
