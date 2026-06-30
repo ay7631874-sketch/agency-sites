@@ -1,2174 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RE/MAX — Dashboard Metrics | Real Estate Excellence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ═══════════════════════════════════════════
-           RESET & VARIABLES
-        ═══════════════════════════════════════════ */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --primary: #003DA5;
-            --primary-dark: #002a75;
-            --primary-light: #1a5fc9;
-            --secondary: #DC1C2E;
-            --secondary-dark: #b01625;
-            --accent: #FFFFFF;
-            --bg-light: #F0F4F8;
-            --bg-card: #FFFFFF;
-            --text-dark: #1a1a2e;
-            --text-mid: #4a5568;
-            --text-light: #718096;
-            --shadow-sm: 0 2px 8px rgba(0,61,165,0.08);
-            --shadow-md: 0 4px 20px rgba(0,61,165,0.12);
-            --shadow-lg: 0 8px 40px rgba(0,61,165,0.16);
-            --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 24px;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            color: var(--text-dark);
-            background: var(--bg-light);
-            overflow-x: hidden;
-            line-height: 1.7;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-        img { max-width: 100%; display: block; }
-        ul { list-style: none; }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ═══════════════════════════════════════════
-           NAVIGATION
-        ═══════════════════════════════════════════ */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: var(--primary);
-            box-shadow: 0 2px 20px rgba(0,61,165,0.3);
-            height: 70px;
-        }
-
-        .nav-inner {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-logo-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--secondary);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 16px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-logo-icon::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-        }
-
-        .nav-logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-logo-text span {
-            color: var(--secondary);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links a {
-            color: rgba(255,255,255,0.85);
-            font-weight: 600;
-            font-size: 14px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: white;
-            background: rgba(255,255,255,0.12);
-        }
-
-        .nav-cta {
-            background: var(--secondary) !important;
-            color: white !important;
-            padding: 10px 20px !important;
-            border-radius: 8px !important;
-            font-weight: 700 !important;
-            box-shadow: 0 4px 15px rgba(220,28,46,0.4);
-        }
-
-        .nav-cta:hover {
-            background: var(--secondary-dark) !important;
-            transform: translateY(-1px);
-        }
-
-        .nav-hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .nav-hamburger span {
-            width: 24px;
-            height: 2.5px;
-            background: white;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        /* ═══════════════════════════════════════════
-           HERO — DASHBOARD STYLE
-        ═══════════════════════════════════════════ */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 24px 80px;
-            overflow: hidden;
-        }
-
-        .hero-accent-bar {
-            position: absolute;
-            top: 70px;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--secondary);
-            z-index: 10;
-        }
-
-        .hero-grid-bg {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-        }
-
-        .hero-glow {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(220,28,46,0.15) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
-            pointer-events: none;
-        }
-
-        .hero-glow-2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(26,95,201,0.3) 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
-            pointer-events: none;
-        }
-
-        .hero-content {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 8px 20px;
-            border-radius: 50px;
-            color: rgba(255,255,255,0.9);
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 32px;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--secondary);
-            border-radius: 50%;
-            animation: pulse-dot 2s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .hero h1 {
-            font-size: clamp(42px, 6vw, 72px);
-            color: white;
-            margin-bottom: 24px;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-        }
-
-        .hero h1 .highlight {
-            color: var(--secondary);
-            position: relative;
-        }
-
-        .hero-desc {
-            font-size: 18px;
-            color: rgba(255,255,255,0.75);
-            max-width: 600px;
-            margin: 0 auto 48px;
-            line-height: 1.8;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            flex-wrap: wrap;
-        }
-
-        .hero-stat {
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-stat::after {
-            content: '';
-            position: absolute;
-            right: -24px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 50px;
-            background: rgba(255,255,255,0.15);
-        }
-
-        .hero-stat:last-child::after { display: none; }
-
-        .hero-stat-num {
-            font-family: 'Poppins', sans-serif;
-            font-size: 48px;
-            font-weight: 800;
-            color: white;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .hero-stat-num .plus {
-            color: var(--secondary);
-        }
-
-        .hero-stat-label {
-            font-size: 13px;
-            color: rgba(255,255,255,0.5);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-
-        .hero-actions {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 48px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--secondary);
-            color: white;
-            padding: 16px 32px;
-            border-radius: var(--radius-md);
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(220,28,46,0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(220,28,46,0.5);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: transparent;
-            color: white;
-            padding: 16px 32px;
-            border-radius: var(--radius-md);
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            border: 2px solid rgba(255,255,255,0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.5);
-        }
-
-        /* ═══════════════════════════════════════════
-           QUICK STATS — METRIC CARDS
-        ═══════════════════════════════════════════ */
-        .quick-stats {
-            position: relative;
-            z-index: 10;
-            margin-top: -60px;
-            padding: 0 24px;
-        }
-
-        .quick-stats-grid {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .metric-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,61,165,0.06);
-        }
-
-        .metric-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,61,165,0.2);
-        }
-
-        .metric-card-top {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-
-        .metric-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
-
-        .metric-icon.blue { background: rgba(0,61,165,0.1); color: var(--primary); }
-        .metric-icon.red { background: rgba(220,28,46,0.1); color: var(--secondary); }
-        .metric-icon.green { background: rgba(16,185,129,0.1); color: #10b981; }
-        .metric-icon.purple { background: rgba(139,92,246,0.1); color: #8b5cf6; }
-
-        .metric-trend {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .metric-trend.up { background: rgba(16,185,129,0.1); color: #10b981; }
-        .metric-trend.down { background: rgba(220,28,46,0.1); color: var(--secondary); }
-
-        .metric-value {
-            font-family: 'Poppins', sans-serif;
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-
-        .metric-label {
-            font-size: 13px;
-            color: var(--text-light);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .metric-bar {
-            margin-top: 16px;
-            height: 6px;
-            background: var(--bg-light);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .metric-bar-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 1.5s ease-out;
-        }
-
-        .metric-bar-fill.blue { background: var(--primary); }
-        .metric-bar-fill.red { background: var(--secondary); }
-        .metric-bar-fill.green { background: #10b981; }
-        .metric-bar-fill.purple { background: #8b5cf6; }
-
-        /* ═══════════════════════════════════════════
-           SECTION HEADERS
-        ═══════════════════════════════════════════ */
-        .section { padding: 100px 0; }
-
-        .section-header {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 64px;
-        }
-
-        .section-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0,61,165,0.08);
-            color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 16px;
-        }
-
-        .section-tag::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--primary);
-            border-radius: 50%;
-        }
-
-        .section-title {
-            font-size: clamp(28px, 4vw, 42px);
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-title .hl { color: var(--secondary); }
-
-        .section-desc {
-            font-size: 16px;
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* ═══════════════════════════════════════════
-           ABOUT — CARD WITH GRADIENT BORDER
-        ═══════════════════════════════════════════ */
-        .about { background: var(--bg-light); }
-
-        .about-card {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: white;
-            border-radius: var(--radius-xl);
-            padding: 4px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
-            box-shadow: var(--shadow-lg);
-        }
-
-        .about-card-inner {
-            background: white;
-            border-radius: calc(var(--radius-xl) - 4px);
-            padding: 60px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-visual {
-            position: relative;
-        }
-
-        .about-dashboard {
-            background: var(--primary);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-dashboard::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
-        .about-dash-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 24px;
-            position: relative;
-        }
-
-        .about-dash-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .about-dash-dot:nth-child(1) { background: #ff5f57; }
-        .about-dash-dot:nth-child(2) { background: #febc2e; }
-        .about-dash-dot:nth-child(3) { background: #28c840; }
-
-        .about-dash-bars {
-            display: flex;
-            align-items: flex-end;
-            gap: 8px;
-            height: 120px;
-            padding-top: 20px;
-            position: relative;
-        }
-
-        .about-dash-bar {
-            flex: 1;
-            border-radius: 4px 4px 0 0;
-            animation: bar-grow 1.5s ease-out forwards;
-            transform-origin: bottom;
-        }
-
-        @keyframes bar-grow {
-            from { transform: scaleY(0); }
-            to { transform: scaleY(1); }
-        }
-
-        .about-dash-stat {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            position: relative;
-        }
-
-        .about-dash-stat-item {
-            text-align: center;
-        }
-
-        .about-dash-stat-num {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 22px;
-            color: white;
-        }
-
-        .about-dash-stat-label {
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .about-content h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .about-content h2 .hl { color: var(--secondary); }
-
-        .about-content p {
-            color: var(--text-mid);
-            margin-bottom: 16px;
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .about-feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            background: var(--bg-light);
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .about-feature-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background: rgba(0,61,165,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: var(--primary);
-            flex-shrink: 0;
-        }
-
-        /* ═══════════════════════════════════════════
-           SERVICES — 2x2 GRID
-        ═══════════════════════════════════════════ */
-        .services { background: white; }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 36px 32px;
-            box-shadow: var(--shadow-card);
-            border: 1px solid rgba(0,61,165,0.06);
-            border-left: 4px solid;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .service-card:nth-child(1) { border-left-color: var(--secondary); }
-        .service-card:nth-child(2) { border-left-color: var(--primary); }
-        .service-card:nth-child(3) { border-left-color: var(--secondary); }
-        .service-card:nth-child(4) { border-left-color: var(--primary); }
-
-        .service-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            border-radius: 0 0 0 100px;
-            opacity: 0.04;
-        }
-
-        .service-card:nth-child(1)::after,
-        .service-card:nth-child(3)::after { background: var(--secondary); }
-        .service-card:nth-child(2)::after,
-        .service-card:nth-child(4)::after { background: var(--primary); }
-
-        .service-icon-wrap {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .service-card:nth-child(odd) .service-icon-wrap {
-            background: rgba(220,28,46,0.1);
-        }
-
-        .service-card:nth-child(even) .service-icon-wrap {
-            background: rgba(0,61,165,0.1);
-        }
-
-        .service-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: var(--text-dark);
-        }
-
-        .service-card p {
-            font-size: 15px;
-            color: var(--text-light);
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .service-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .service-card:nth-child(odd) .service-link { color: var(--secondary); }
-        .service-card:nth-child(even) .service-link { color: var(--primary); }
-
-        .service-link-arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .service-link:hover .service-link-arrow {
-            transform: translateX(4px);
-        }
-
-        /* ═══════════════════════════════════════════
-           PROPERTIES — GRID WITH BADGES
-        ═══════════════════════════════════════════ */
-        .properties { background: var(--bg-light); }
-
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .property-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,61,165,0.06);
-        }
-
-        .property-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .property-img {
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .property-img-bg {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease;
-        }
-
-        .property-card:hover .property-img-bg {
-            transform: scale(1.05);
-        }
-
-        .property-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(10px);
-        }
-
-        .property-badge.sale {
-            background: rgba(220,28,46,0.9);
-            color: white;
-        }
-
-        .property-badge.rent {
-            background: rgba(0,61,165,0.9);
-            color: white;
-        }
-
-        .property-badge.new {
-            background: rgba(16,185,129,0.9);
-            color: white;
-        }
-
-        .property-price-badge {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-        }
-
-        .property-info {
-            padding: 20px;
-        }
-
-        .property-info h4 {
-            font-size: 16px;
-            margin-bottom: 4px;
-            color: var(--text-dark);
-        }
-
-        .property-location {
-            font-size: 13px;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-bottom: 12px;
-        }
-
-        .property-meta {
-            display: flex;
-            gap: 16px;
-            padding-top: 12px;
-            border-top: 1px solid var(--bg-light);
-        }
-
-        .property-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: var(--text-light);
-            font-weight: 600;
-        }
-
-        .property-meta-item span { font-size: 14px; }
-
-        /* ═══════════════════════════════════════════
-           TESTIMONIALS — SIDE BY SIDE
-        ═══════════════════════════════════════════ */
-        .testimonials { background: white; }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 36px;
-            box-shadow: var(--shadow-card);
-            border: 1px solid rgba(0,61,165,0.06);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            font-family: 'Poppins', sans-serif;
-            font-size: 80px;
-            font-weight: 800;
-            line-height: 1;
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            opacity: 0.06;
-        }
-
-        .testimonial-card:nth-child(1)::before { color: var(--primary); }
-        .testimonial-card:nth-child(2)::before { color: var(--secondary); }
-
-        .testimonial-stars {
-            display: flex;
-            gap: 2px;
-            margin-bottom: 16px;
-        }
-
-        .testimonial-stars span {
-            color: #fbbf24;
-            font-size: 16px;
-        }
-
-        .testimonial-text {
-            font-size: 15px;
-            color: var(--text-mid);
-            line-height: 1.8;
-            margin-bottom: 24px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-            color: white;
-        }
-
-        .testimonial-card:nth-child(1) .testimonial-avatar { background: var(--primary); }
-        .testimonial-card:nth-child(2) .testimonial-avatar { background: var(--secondary); }
-
-        .testimonial-name {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--text-dark);
-        }
-
-        .testimonial-role {
-            font-size: 13px;
-            color: var(--text-light);
-        }
-
-        /* ═══════════════════════════════════════════
-           PROCESS — 3-STEP STEPPER
-        ═══════════════════════════════════════════ */
-        .process { background: var(--bg-light); }
-
-        .stepper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 0;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .stepper::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 15%;
-            right: 15%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--secondary), var(--primary), var(--secondary));
-            border-radius: 2px;
-            z-index: 0;
-        }
-
-        .step {
-            flex: 1;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            padding: 0 20px;
-        }
-
-        .step-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: white;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-
-        .step:nth-child(1) .step-circle { background: var(--secondary); }
-        .step:nth-child(2) .step-circle { background: var(--primary); }
-        .step:nth-child(3) .step-circle { background: var(--secondary); }
-
-        .step-circle::after {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 3px solid;
-            opacity: 0.2;
-        }
-
-        .step:nth-child(1) .step-circle::after { border-color: var(--secondary); }
-        .step:nth-child(2) .step-circle::after { border-color: var(--primary); }
-        .step:nth-child(3) .step-circle::after { border-color: var(--secondary); }
-
-        .step h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: var(--text-dark);
-        }
-
-        .step p {
-            font-size: 14px;
-            color: var(--text-light);
-            line-height: 1.7;
-            max-width: 260px;
-            margin: 0 auto;
-        }
-
-        /* ═══════════════════════════════════════════
-           AWARDS — RIBBON/BADGE STYLE
-        ═══════════════════════════════════════════ */
-        .awards { background: white; }
-
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .award-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 32px 24px;
-            text-align: center;
-            box-shadow: var(--shadow-card);
-            border: 1px solid rgba(0,61,165,0.06);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .award-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .award-ribbon {
-            position: absolute;
-            top: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 6px;
-            border-radius: 0 0 6px 6px;
-        }
-
-        .award-card:nth-child(1) .award-ribbon,
-        .award-card:nth-child(3) .award-ribbon { background: var(--secondary); }
-
-        .award-card:nth-child(2) .award-ribbon,
-        .award-card:nth-child(4) .award-ribbon { background: var(--primary); }
-
-        .award-badge {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 32px;
-            position: relative;
-        }
-
-        .award-card:nth-child(odd) .award-badge {
-            background: rgba(220,28,46,0.1);
-        }
-
-        .award-card:nth-child(even) .award-badge {
-            background: rgba(0,61,165,0.1);
-        }
-
-        .award-badge::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px dashed;
-            opacity: 0.15;
-        }
-
-        .award-card:nth-child(odd) .award-badge::after { border-color: var(--secondary); }
-        .award-card:nth-child(even) .award-badge::after { border-color: var(--primary); }
-
-        .award-card h4 {
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .award-card p {
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .award-year {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .award-card:nth-child(odd) .award-year {
-            background: rgba(220,28,46,0.08);
-            color: var(--secondary);
-        }
-
-        .award-card:nth-child(even) .award-year {
-            background: rgba(0,61,165,0.08);
-            color: var(--primary);
-        }
-
-        /* ═══════════════════════════════════════════
-           CONTACT — FULL WIDTH BLUE
-        ═══════════════════════════════════════════ */
-        .contact {
-            background: var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-        }
-
-        .contact .section-tag {
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.9);
-        }
-
-        .contact .section-tag::before { background: white; }
-
-        .contact .section-title { color: white; }
-        .contact .section-desc { color: rgba(255,255,255,0.6); }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 36px 28px;
-            text-align: center;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-6px);
-        }
-
-        .contact-card-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 20px;
-        }
-
-        .contact-card:nth-child(1) .contact-card-icon {
-            background: rgba(0,61,165,0.1);
-            color: var(--primary);
-        }
-
-        .contact-card:nth-child(2) .contact-card-icon {
-            background: rgba(220,28,46,0.1);
-            color: var(--secondary);
-        }
-
-        .contact-card:nth-child(3) .contact-card-icon {
-            background: rgba(16,185,129,0.1);
-            color: #10b981;
-        }
-
-        .contact-card h4 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .contact-card p {
-            font-size: 14px;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .contact-card a {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .contact-card a:hover {
-            color: var(--secondary);
-        }
-
-        /* ═══════════════════════════════════════════
-           FOOTER
-        ═══════════════════════════════════════════ */
-        .footer {
-            background: #0a0f1e;
-            position: relative;
-            padding-top: 0;
-        }
-
-        .footer-accent-line {
-            height: 4px;
-            background: linear-gradient(90deg, var(--secondary), var(--primary), var(--secondary));
-        }
-
-        .footer-inner {
-            padding: 60px 0 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-
-        .footer-brand h3 {
-            font-size: 24px;
-            color: white;
-            margin-bottom: 16px;
-        }
-
-        .footer-brand h3 span { color: var(--secondary); }
-
-        .footer-brand p {
-            font-size: 14px;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 10px;
-        }
-
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255,255,255,0.6);
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .footer-social a:hover {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .footer-col h4 {
-            font-size: 15px;
-            color: white;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a {
-            font-size: 14px;
-            color: rgba(255,255,255,0.45);
-            transition: all 0.3s ease;
-        }
-
-        .footer-col ul li a:hover {
-            color: white;
-            padding-left: 4px;
-        }
-
-        .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .footer-copy {
-            font-size: 13px;
-            color: rgba(255,255,255,0.35);
-        }
-
-        .footer-credit {
-            font-size: 13px;
-            color: rgba(255,255,255,0.35);
-        }
-
-        .footer-credit a {
-            color: var(--secondary);
-            font-weight: 700;
-        }
-
-        .footer-credit a:hover {
-            color: white;
-        }
-
-        /* ═══════════════════════════════════════════
-           SCROLL TO TOP
-        ═══════════════════════════════════════════ */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,61,165,0.4);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-            border: none;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-        }
-
-        /* ═══════════════════════════════════════════
-           ANIMATIONS
-        ═══════════════════════════════════════════ */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ═══════════════════════════════════════════
-           RESPONSIVE
-        ═══════════════════════════════════════════ */
-        @media (max-width: 1024px) {
-            .quick-stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-card-inner { grid-template-columns: 1fr; gap: 40px; padding: 40px; }
-            .services-grid { grid-template-columns: 1fr; }
-            .properties-grid { grid-template-columns: repeat(2, 1fr); }
-            .awards-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .nav-hamburger { display: flex; }
-
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--primary);
-                padding: 20px;
-                gap: 8px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            }
-
-            .hero-stats { gap: 24px; }
-            .hero-stat::after { display: none; }
-            .hero-stat-num { font-size: 36px; }
-
-            .quick-stats-grid { grid-template-columns: 1fr; }
-            .properties-grid { grid-template-columns: 1fr; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .stepper { flex-direction: column; align-items: center; gap: 40px; }
-            .stepper::before { display: none; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .awards-grid { grid-template-columns: 1fr; }
-
-            .about-card-inner { padding: 28px; }
-            .about-features { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RE/MAX — Above the Crowd | Real Estate Excellence</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<style>
+/* ============ RESET & BASE ============ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#003366;--red:#CC0000;--white:#fff;--light:#f0f4f8;
+  --blue-accent:#1a73e8;--dark:#111;--gray:#666;--shadow:0 8px 32px rgba(0,0,0,.12);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--dark);background:var(--white);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-weight:700;line-height:1.2}
+
+/* ============ UTILITY ============ */
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.section{padding:100px 0}
+.section-title{text-align:center;margin-bottom:60px}
+.section-title span{display:inline-block;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--red);margin-bottom:8px}
+.section-title h2{font-size:clamp(2rem,5vw,3rem);color:var(--navy)}
+.section-title p{color:var(--gray);max-width:600px;margin:12px auto 0;font-size:1.05rem}
+
+/* ============ NAVBAR ============ */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .4s}
+.navbar.scrolled{background:rgba(0,51,102,.97);backdrop-filter:blur(12px);padding:10px 0;box-shadow:0 2px 20px rgba(0,0,0,.25)}
+.navbar .container{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.6rem;font-weight:800;color:#fff}
+.logo .remax{color:var(--red);font-size:2rem}
+.logo .balloon{font-size:1.8rem}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.85);font-weight:500;font-size:.95rem;transition:color .3s;position:relative}
+.nav-links a:hover{color:#fff}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--red);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--red);color:#fff!important;padding:10px 24px;border-radius:6px;font-weight:700;transition:transform .3s,box-shadow .3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(204,0,0,.4)}
+.nav-cta::after{display:none!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.hamburger span{width:28px;height:3px;background:#fff;border-radius:2px;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,51,102,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.active{display:flex}
+.mobile-menu a{color:#fff;font-size:1.4rem;font-weight:600}
+.mobile-close{position:absolute;top:24px;right:24px;color:#fff;font-size:2rem;cursor:pointer}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,51,102,.82),rgba(0,51,102,.65));z-index:1}
+.hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:120px 24px 80px;max-width:900px;margin:0 auto}
+.hero-content h1{font-size:clamp(2.4rem,6vw,4.2rem);margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.hero-content h1 .highlight{color:var(--red)}
+.hero-content p{font-size:clamp(1rem,2.5vw,1.3rem);margin-bottom:40px;opacity:.9;max-width:650px;margin-left:auto;margin-right:auto}
+.hero-search{display:flex;max-width:680px;margin:0 auto;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;overflow:hidden;backdrop-filter:blur(8px)}
+.hero-search input{flex:1;padding:18px 24px;border:none;background:transparent;color:#fff;font-size:1rem;outline:none}
+.hero-search input::placeholder{color:rgba(255,255,255,.6)}
+.hero-search button{background:var(--red);color:#fff;border:none;padding:18px 32px;font-weight:700;font-size:1rem;cursor:pointer;transition:background .3s}
+.hero-search button:hover{background:#a00}
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:60px;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:2.4rem;font-weight:800;color:var(--red)}
+.hero-stat .lbl{font-size:.85rem;opacity:.75;text-transform:uppercase;letter-spacing:1px}
+
+/* ============ FLOATING GLOBE ============ */
+.globe-wrapper{position:absolute;right:8%;top:50%;transform:translateY(-50%);z-index:2;perspective:800px;pointer-events:none}
+.globe{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#1a73e8,#003366);position:relative;animation:globeSpin 20s linear infinite;box-shadow:inset -20px -20px 40px rgba(0,0,0,.3),0 0 60px rgba(26,115,232,.2)}
+.globe::before{content:'';position:absolute;inset:8px;border-radius:50%;border:2px dashed rgba(255,255,255,.15);animation:globeSpin 12s linear infinite reverse}
+.globe::after{content:'';position:absolute;inset:24px;border-radius:50%;border:1px solid rgba(255,255,255,.1);animation:globeSpin 8s linear infinite}
+.globe-dot{position:absolute;width:8px;height:8px;background:var(--red);border-radius:50%;box-shadow:0 0 10px var(--red)}
+.globe-dot:nth-child(1){top:20%;left:60%;animation:pulse 2s ease infinite}
+.globe-dot:nth-child(2){top:55%;left:25%;animation:pulse 2s ease .5s infinite}
+.globe-dot:nth-child(3){top:35%;left:45%;animation:pulse 2s ease 1s infinite}
+.globe-dot:nth-child(4){top:70%;left:65%;animation:pulse 2s ease 1.5s infinite}
+@keyframes globeSpin{0%{transform:rotateY(0) rotateX(15deg)}100%{transform:rotateY(360deg) rotateX(15deg)}}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+
+/* ============ DASHBOARD STATS ============ */
+.dashboard{background:var(--navy);position:relative;overflow:hidden}
+.dashboard::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(204,0,0,.15),transparent);border-radius:50%}
+.dashboard::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(26,115,232,.1),transparent);border-radius:50%}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;perspective:1000px}
+.stat-card{background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:36px 28px;text-align:center;color:#fff;transform-style:preserve-3d;transition:transform .4s cubic-bezier(.25,.46,.45,.94),box-shadow .4s;cursor:default}
+.stat-card:hover{transform:rotateX(8deg) rotateY(-5deg) translateZ(20px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.stat-card .icon{font-size:2.4rem;margin-bottom:12px}
+.stat-card .number{font-size:3rem;font-weight:800;color:var(--red);display:block}
+.stat-card .label{font-size:.95rem;opacity:.8;text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+
+/* ============ PROPERTY GRID ============ */
+.properties{background:var(--light)}
+.property-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:28px;perspective:1200px}
+.property-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:transform .5s cubic-bezier(.25,.46,.45,.94),box-shadow .4s;transform-style:preserve-3d}
+.property-card:hover{transform:translateY(-8px) rotateY(2deg) rotateX(1deg);box-shadow:0 24px 60px rgba(0,0,0,.15)}
+.property-img{position:relative;height:240px;overflow:hidden}
+.property-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.property-card:hover .property-img img{transform:scale(1.08)}
+.property-badge{position:absolute;top:16px;left:16px;background:var(--red);color:#fff;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:700}
+.property-price{position:absolute;bottom:16px;right:16px;background:rgba(0,51,102,.9);color:#fff;padding:8px 18px;border-radius:8px;font-size:1.2rem;font-weight:800;backdrop-filter:blur(4px)}
+.property-body{padding:24px}
+.property-body h3{font-size:1.15rem;color:var(--navy);margin-bottom:6px}
+.property-body .address{color:var(--gray);font-size:.9rem;margin-bottom:16px;display:flex;align-items:center;gap:6px}
+.property-features{display:flex;gap:20px;padding-top:16px;border-top:1px solid #eee}
+.property-features span{font-size:.85rem;color:var(--gray);display:flex;align-items:center;gap:4px}
+
+/* ============ SERVICES ============ */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.service-card{background:var(--white);border-radius:16px;padding:36px 28px;text-align:center;box-shadow:var(--shadow);transition:transform .4s,box-shadow .4s;border-top:4px solid transparent}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.12);border-top-color:var(--red)}
+.service-icon{width:72px;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;background:var(--light);transition:background .3s}
+.service-card:hover .service-icon{background:var(--navy)}
+.service-card h3{font-size:1.2rem;color:var(--navy);margin-bottom:10px}
+.service-card p{color:var(--gray);font-size:.95rem}
+
+/* ============ AGENTS ============ */
+.agents{background:var(--light)}
+.agents-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.agent-card{background:var(--white);border-radius:16px;padding:32px 24px;text-align:center;box-shadow:var(--shadow);transition:transform .4s}
+.agent-card:hover{transform:translateY(-6px)}
+.agent-avatar{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:#fff;font-weight:700;border:4px solid var(--red)}
+.agent-card h3{font-size:1.1rem;color:var(--navy);margin-bottom:4px}
+.agent-card .role{color:var(--red);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.agent-card p{color:var(--gray);font-size:.9rem;margin-bottom:16px}
+.agent-social{display:flex;justify-content:center;gap:12px}
+.agent-social a{width:36px;height:36px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .3s}
+.agent-social a:hover{background:var(--navy);color:#fff}
+
+/* ============ TESTIMONIALS ============ */
+.testimonials-slider{position:relative;max-width:800px;margin:0 auto;overflow:hidden}
+.testimonial-track{display:flex;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.testimonial-slide{min-width:100%;padding:0 20px}
+.testimonial-card{background:var(--white);border-radius:20px;padding:48px 40px;text-align:center;box-shadow:var(--shadow);position:relative}
+.testimonial-card::before{content:'"';position:absolute;top:16px;left:32px;font-size:5rem;color:var(--red);opacity:.15;font-family:Georgia,serif;line-height:1}
+.testimonial-card .stars{color:#f5a623;font-size:1.1rem;margin-bottom:16px}
+.testimonial-card blockquote{font-size:1.15rem;color:var(--dark);line-height:1.7;font-style:italic;margin-bottom:20px;position:relative;z-index:1}
+.testimonial-author{display:flex;align-items:center;justify-content:center;gap:14px}
+.testimonial-author .avatar{width:50px;height:50px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.1rem}
+.testimonial-author .info h4{font-size:1rem;color:var(--navy)}
+.testimonial-author .info p{font-size:.8rem;color:var(--gray)}
+.slider-dots{display:flex;justify-content:center;gap:10px;margin-top:32px}
+.slider-dots button{width:12px;height:12px;border-radius:50%;border:none;background:#ccc;cursor:pointer;transition:all .3s}
+.slider-dots button.active{background:var(--red);transform:scale(1.3)}
+
+/* ============ CTA ============ */
+.cta{background:linear-gradient(135deg,var(--navy),#002244);padding:100px 0;text-align:center;color:#fff;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(204,0,0,.2),transparent);border-radius:50%;top:-100px;right:-100px}
+.cta h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:16px}
+.cta p{font-size:1.15rem;opacity:.8;max-width:600px;margin:0 auto 40px}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{padding:16px 36px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .3s;border:none;display:inline-flex;align-items:center;gap:8px}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:#a00;transform:translateY(-2px);box-shadow:0 8px 24px rgba(204,0,0,.4)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3)}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+/* ============ FOOTER ============ */
+.footer{background:#001a33;color:rgba(255,255,255,.7);padding:60px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-col h4{color:#fff;font-size:1.1rem;margin-bottom:16px}
+.footer-col p{font-size:.9rem;line-height:1.7}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:.9rem;transition:color .3s}
+.footer-col a:hover{color:var(--red)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.85rem}
+.footer-bottom .credit{color:var(--red);font-weight:600}
+
+/* ============ SCROLL REVEAL ============ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+  .globe-wrapper{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero-stats{gap:24px}
+  .hero-search{flex-direction:column}
+  .hero-search button{padding:16px}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .property-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  .stat-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-    <!-- ═══ NAVIGATION ═══ -->
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="#" class="nav-logo">
-                <div class="nav-logo-icon">R/M</div>
-                <div class="nav-logo-text">RE/MAX</div>
-            </a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#testimonials">Reviews</a>
-                <a href="#process">Process</a>
-                <a href="#contact" class="nav-cta">Contact Us</a>
-            </div>
-            <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
-                <span></span><span></span><span></span>
-            </div>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="balloon">🎈</span>
+      <span class="remax">RE</span><span>/</span><span class="remax">MAX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#dashboard">Stats</a></li>
+      <li><a href="#properties">Properties</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#agents">Agents</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#cta" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" onclick="toggleMobile()">&times;</span>
+  <a href="#dashboard" onclick="toggleMobile()">Stats</a>
+  <a href="#properties" onclick="toggleMobile()">Properties</a>
+  <a href="#services" onclick="toggleMobile()">Services</a>
+  <a href="#agents" onclick="toggleMobile()">Agents</a>
+  <a href="#testimonials" onclick="toggleMobile()">Reviews</a>
+  <a href="#cta" onclick="toggleMobile()">Contact Us</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/26757/26757-360.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="globe-wrapper">
+    <div class="globe">
+      <div class="globe-dot"></div>
+      <div class="globe-dot"></div>
+      <div class="globe-dot"></div>
+      <div class="globe-dot"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Find Your <span class="highlight">Dream Home</span> With RE/MAX</h1>
+    <p>Above the Crowd since 1973. The world's most recognized real estate brand, helping millions find their perfect home.</p>
+    <div class="hero-search">
+      <input type="text" placeholder="Search by city, zip, or neighborhood...">
+      <button>🔍 Search</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">140K+</div><div class="lbl">Agents Worldwide</div></div>
+      <div class="hero-stat"><div class="num">110+</div><div class="lbl">Countries</div></div>
+      <div class="hero-stat"><div class="num">4.5M+</div><div class="lbl">Homes Sold/Year</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DASHBOARD STATS ===== -->
+<section class="section dashboard" id="dashboard">
+  <div class="container">
+    <div class="section-title">
+      <span>Performance Dashboard</span>
+      <h2 style="color:#fff">Our Track Record Speaks</h2>
+      <p style="color:rgba(255,255,255,.7)">Decades of excellence in real estate, powered by passion and innovation.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card reveal">
+        <div class="icon">🏠</div>
+        <span class="number" data-target="4500">0</span>
+        <div class="label">Homes Sold This Year</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="icon">👥</div>
+        <span class="number" data-target="320">0</span>
+        <div class="label">Licensed Agents</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="icon">📅</div>
+        <span class="number" data-target="52">0</span>
+        <div class="label">Years in Business</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="icon">⭐</div>
+        <span class="number" data-target="98">0</span>
+        <div class="label">% Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROPERTIES ===== -->
+<section class="section properties" id="properties">
+  <div class="container">
+    <div class="section-title">
+      <span>Featured Listings</span>
+      <h2>Hot Properties On The Market</h2>
+      <p>Explore our handpicked selection of premium properties across prime locations.</p>
+    </div>
+    <div class="property-grid">
+      <!-- Card 1 -->
+      <div class="property-card reveal">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop" alt="Modern Villa" loading="lazy">
+          <span class="property-badge">Featured</span>
+          <span class="property-price">$1,250,000</span>
         </div>
-    </nav>
-
-    <!-- ═══ HERO ═══ -->
-    <section class="hero" id="hero">
-        <div class="hero-accent-bar"></div>
-        <div class="hero-grid-bg"></div>
-        <div class="hero-glow"></div>
-        <div class="hero-glow-2"></div>
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="hero-badge-dot"></span>
-                Est. 1973 — Denver, Colorado
-            </div>
-            <h1>The <span class="highlight">#1</span> Name in<br>Real Estate</h1>
-            <p class="hero-desc">Over 50 years of market leadership. Data-driven insights meet unmatched human expertise across every neighborhood.</p>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-num" data-count="140000">0<span class="plus">+</span></div>
-                    <div class="hero-stat-label">Agents Worldwide</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num" data-count="9000">0<span class="plus">+</span></div>
-                    <div class="hero-stat-label">Global Offices</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num" data-count="50">0<span class="plus">+</span></div>
-                    <div class="hero-stat-label">Years of Excellence</div>
-                </div>
-            </div>
-            <div class="hero-actions">
-                <a href="#contact" class="btn-primary">Get a Free Valuation →</a>
-                <a href="#properties" class="btn-outline">Browse Properties</a>
-            </div>
+        <div class="property-body">
+          <h3>Modern Luxury Villa</h3>
+          <div class="address">📍 142 Ocean Drive, Malibu, CA 90265</div>
+          <div class="property-features">
+            <span>🛏️ 5 Beds</span><span>🛁 4 Baths</span><span>📐 4,200 sqft</span>
+          </div>
         </div>
-    </section>
-
-    <!-- ═══ QUICK STATS ═══ -->
-    <section class="quick-stats">
-        <div class="quick-stats-grid">
-            <div class="metric-card fade-up">
-                <div class="metric-card-top">
-                    <div class="metric-icon blue">🏠</div>
-                    <span class="metric-trend up">↑ 12%</span>
-                </div>
-                <div class="metric-value" data-count="2847">0</div>
-                <div class="metric-label">Active Listings</div>
-                <div class="metric-bar"><div class="metric-bar-fill blue" style="width: 0%" data-width="78%"></div></div>
-            </div>
-            <div class="metric-card fade-up" style="transition-delay: 0.1s">
-                <div class="metric-card-top">
-                    <div class="metric-icon red">💰</div>
-                    <span class="metric-trend up">↑ 8%</span>
-                </div>
-                <div class="metric-value">$<span data-count="847">0</span>M</div>
-                <div class="metric-label">Total Sales Volume</div>
-                <div class="metric-bar"><div class="metric-bar-fill red" style="width: 0%" data-width="65%"></div></div>
-            </div>
-            <div class="metric-card fade-up" style="transition-delay: 0.2s">
-                <div class="metric-card-top">
-                    <div class="metric-icon green">📈</div>
-                    <span class="metric-trend up">↑ 5%</span>
-                </div>
-                <div class="metric-value" data-count="96">0<span style="font-size: 24px">%</span></div>
-                <div class="metric-label">Client Satisfaction</div>
-                <div class="metric-bar"><div class="metric-bar-fill green" style="width: 0%" data-width="96%"></div></div>
-            </div>
-            <div class="metric-card fade-up" style="transition-delay: 0.3s">
-                <div class="metric-card-top">
-                    <div class="metric-icon purple">⚡</div>
-                    <span class="metric-trend up">↑ 15%</span>
-                </div>
-                <div class="metric-value"><span data-count="21">0</span> Days</div>
-                <div class="metric-label">Avg. Time to Sell</div>
-                <div class="metric-bar"><div class="metric-bar-fill purple" style="width: 0%" data-width="42%"></div></div>
-            </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="property-card reveal">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Contemporary Home" loading="lazy">
+          <span class="property-badge">New</span>
+          <span class="property-price">$875,000</span>
         </div>
-    </section>
-
-    <!-- ═══ ABOUT ═══ -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">About RE/MAX</div>
-                <h2 class="section-title">Numbers That <span class="hl">Speak</span></h2>
-                <p class="section-desc">Founded in 1973 in Denver, Colorado, RE/MAX has grown into the most recognized name in real estate worldwide.</p>
-            </div>
-            <div class="about-card fade-up">
-                <div class="about-card-inner">
-                    <div class="about-visual">
-                        <div class="about-dashboard">
-                            <div class="about-dash-header">
-                                <div class="about-dash-dot"></div>
-                                <div class="about-dash-dot"></div>
-                                <div class="about-dash-dot"></div>
-                            </div>
-                            <div class="about-dash-bars">
-                                <div class="about-dash-bar" style="height: 45%; background: var(--secondary);"></div>
-                                <div class="about-dash-bar" style="height: 70%; background: rgba(255,255,255,0.3);"></div>
-                                <div class="about-dash-bar" style="height: 55%; background: var(--secondary);"></div>
-                                <div class="about-dash-bar" style="height: 85%; background: rgba(255,255,255,0.3);"></div>
-                                <div class="about-dash-bar" style="height: 65%; background: var(--secondary);"></div>
-                                <div class="about-dash-bar" style="height: 90%; background: rgba(255,255,255,0.3);"></div>
-                                <div class="about-dash-bar" style="height: 75%; background: var(--secondary);"></div>
-                                <div class="about-dash-bar" style="height: 95%; background: rgba(255,255,255,0.3);"></div>
-                                <div class="about-dash-bar" style="height: 80%; background: var(--secondary);"></div>
-                                <div class="about-dash-bar" style="height: 100%; background: rgba(255,255,255,0.3);"></div>
-                            </div>
-                            <div class="about-dash-stat">
-                                <div class="about-dash-stat-item">
-                                    <div class="about-dash-stat-num">140K+</div>
-                                    <div class="about-dash-stat-label">Agents</div>
-                                </div>
-                                <div class="about-dash-stat-item">
-                                    <div class="about-dash-stat-num">9K+</div>
-                                    <div class="about-dash-stat-label">Offices</div>
-                                </div>
-                                <div class="about-dash-stat-item">
-                                    <div class="about-dash-stat-num">110+</div>
-                                    <div class="about-dash-stat-label">Countries</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-content">
-                        <h2>Market <span class="hl">Leader</span> Since 1973</h2>
-                        <p>RE/MAX was founded with a revolutionary idea: give agents the freedom and support to run their own businesses. This model has created the most productive force in real estate.</p>
-                        <p>With more than 140,000 agents across 9,000+ offices in 110+ countries, RE/MAX consistently outsells the competition — transaction side by transaction side.</p>
-                        <div class="about-features">
-                            <div class="about-feature">
-                                <div class="about-feature-icon">✓</div>
-                                More homes sold than any other brand
-                            </div>
-                            <div class="about-feature">
-                                <div class="about-feature-icon">✓</div>
-                                #1 in brand awareness globally
-                            </div>
-                            <div class="about-feature">
-                                <div class="about-feature-icon">✓</div>
-                                Average agent productivity 3× industry
-                            </div>
-                            <div class="about-feature">
-                                <div class="about-feature-icon">✓</div>
-                                Presence in 110+ countries
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="property-body">
+          <h3>Contemporary Family Home</h3>
+          <div class="address">📍 88 Maple Ridge Ave, Austin, TX 78701</div>
+          <div class="property-features">
+            <span>🛏️ 4 Beds</span><span>🛁 3 Baths</span><span>📐 3,100 sqft</span>
+          </div>
         </div>
-    </section>
-
-    <!-- ═══ SERVICES ═══ -->
-    <section class="section services" id="services">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">Our Services</div>
-                <h2 class="section-title">Complete <span class="hl">Real Estate</span> Solutions</h2>
-                <p class="section-desc">From first-time buyers to portfolio investors, we deliver results that matter.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card fade-up">
-                    <div class="service-icon-wrap">🏡</div>
-                    <h3>Buyer Representation</h3>
-                    <p>Dedicated agents guide you through every step — from market analysis to closing day. We negotiate on your behalf to secure the best deal.</p>
-                    <a href="#contact" class="service-link">Learn More <span class="service-link-arrow">→</span></a>
-                </div>
-                <div class="service-card fade-up" style="transition-delay: 0.1s">
-                    <div class="service-icon-wrap">🏷️</div>
-                    <h3>Seller Advisory</h3>
-                    <p>Strategic pricing, professional staging, and aggressive marketing campaigns to maximize your property's value and minimize time on market.</p>
-                    <a href="#contact" class="service-link">Learn More <span class="service-link-arrow">→</span></a>
-                </div>
-                <div class="service-card fade-up" style="transition-delay: 0.2s">
-                    <div class="service-icon-wrap">📊</div>
-                    <h3>Market Analytics</h3>
-                    <p>Access proprietary data tools and real-time market insights that power smarter investment decisions and accurate property valuations.</p>
-                    <a href="#contact" class="service-link">Learn More <span class="service-link-arrow">→</span></a>
-                </div>
-                <div class="service-card fade-up" style="transition-delay: 0.3s">
-                    <div class="service-icon-wrap">🌐</div>
-                    <h3>Global Network</h3>
-                    <p>Connect with RE/MAX agents in 110+ countries for seamless international transactions, relocation support, and cross-border investments.</p>
-                    <a href="#contact" class="service-link">Learn More <span class="service-link-arrow">→</span></a>
-                </div>
-            </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="property-card reveal">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop" alt="Penthouse" loading="lazy">
+          <span class="property-badge">Luxury</span>
+          <span class="property-price">$2,400,000</span>
         </div>
-    </section>
-
-    <!-- ═══ PROPERTIES ═══ -->
-    <section class="section properties" id="properties">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">Featured Properties</div>
-                <h2 class="section-title">Premium <span class="hl">Listings</span></h2>
-                <p class="section-desc">Handpicked properties that represent the finest in Denver real estate.</p>
-            </div>
-            <div class="properties-grid">
-                <div class="property-card fade-up">
-                    <div class="property-img">
-                        <div class="property-img-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
-                        <span class="property-badge sale">For Sale</span>
-                        <span class="property-price-badge">$1,250,000</span>
-                    </div>
-                    <div class="property-info">
-                        <h4>Luxury Penthouse</h4>
-                        <div class="property-location">📍 Cherry Creek, Denver</div>
-                        <div class="property-meta">
-                            <div class="property-meta-item"><span>🛏</span> 4 Beds</div>
-                            <div class="property-meta-item"><span>🚿</span> 3 Baths</div>
-                            <div class="property-meta-item"><span>📐</span> 3,200 sqft</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card fade-up" style="transition-delay: 0.1s">
-                    <div class="property-img">
-                        <div class="property-img-bg" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-                        <span class="property-badge new">New</span>
-                        <span class="property-price-badge">$875,000</span>
-                    </div>
-                    <div class="property-info">
-                        <h4>Modern Townhome</h4>
-                        <div class="property-location">📍 LoDo, Denver</div>
-                        <div class="property-meta">
-                            <div class="property-meta-item"><span>🛏</span> 3 Beds</div>
-                            <div class="property-meta-item"><span>🚿</span> 2.5 Baths</div>
-                            <div class="property-meta-item"><span>📐</span> 2,100 sqft</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card fade-up" style="transition-delay: 0.2s">
-                    <div class="property-img">
-                        <div class="property-img-bg" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-                        <span class="property-badge rent">For Rent</span>
-                        <span class="property-price-badge">$3,500/mo</span>
-                    </div>
-                    <div class="property-info">
-                        <h4>Riverside Apartment</h4>
-                        <div class="property-location">📍 Riverfront Park, Denver</div>
-                        <div class="property-meta">
-                            <div class="property-meta-item"><span>🛏</span> 2 Beds</div>
-                            <div class="property-meta-item"><span>🚿</span> 2 Baths</div>
-                            <div class="property-meta-item"><span>📐</span> 1,400 sqft</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card fade-up" style="transition-delay: 0.3s">
-                    <div class="property-img">
-                        <div class="property-img-bg" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
-                        <span class="property-badge sale">For Sale</span>
-                        <span class="property-price-badge">$695,000</span>
-                    </div>
-                    <div class="property-info">
-                        <h4>Family Ranch Home</h4>
-                        <div class="property-location">📍 Highlands Ranch, Denver</div>
-                        <div class="property-meta">
-                            <div class="property-meta-item"><span>🛏</span> 5 Beds</div>
-                            <div class="property-meta-item"><span>🚿</span> 3 Baths</div>
-                            <div class="property-meta-item"><span>📐</span> 3,800 sqft</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card fade-up" style="transition-delay: 0.4s">
-                    <div class="property-img">
-                        <div class="property-img-bg" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
-                        <span class="property-badge new">New</span>
-                        <span class="property-price-badge">$2,100,000</span>
-                    </div>
-                    <div class="property-info">
-                        <h4>Mountain Estate</h4>
-                        <div class="property-location">📍 Evergreen, Denver</div>
-                        <div class="property-meta">
-                            <div class="property-meta-item"><span>🛏</span> 6 Beds</div>
-                            <div class="property-meta-item"><span>🚿</span> 5 Baths</div>
-                            <div class="property-meta-item"><span>📐</span> 5,400 sqft</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="property-card fade-up" style="transition-delay: 0.5s">
-                    <div class="property-img">
-                        <div class="property-img-bg" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"></div>
-                        <span class="property-badge rent">For Rent</span>
-                        <span class="property-price-badge">$2,800/mo</span>
-                    </div>
-                    <div class="property-info">
-                        <h4>Urban Loft Space</h4>
-                        <div class="property-location">📍 RiNo District, Denver</div>
-                        <div class="property-meta">
-                            <div class="property-meta-item"><span>🛏</span> 2 Beds</div>
-                            <div class="property-meta-item"><span>🚿</span> 2 Baths</div>
-                            <div class="property-meta-item"><span>📐</span> 1,600 sqft</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="property-body">
+          <h3>Skyline Penthouse Suite</h3>
+          <div class="address">📍 1 World Trade Center, New York, NY 10007</div>
+          <div class="property-features">
+            <span>🛏️ 3 Beds</span><span>🛁 3 Baths</span><span>📐 2,800 sqft</span>
+          </div>
         </div>
-    </section>
-
-    <!-- ═══ TESTIMONIALS ═══ -->
-    <section class="section testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">Client Reviews</div>
-                <h2 class="section-title">Trusted by <span class="hl">Thousands</span></h2>
-                <p class="section-desc">Real stories from real clients who found their dream home with RE/MAX.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card fade-up">
-                    <div class="testimonial-stars">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <p class="testimonial-text">"Our RE/MAX agent made the entire buying process seamless. From the first showing to closing day, the expertise and dedication was outstanding. We got our dream home in just 3 weeks!"</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">JM</div>
-                        <div>
-                            <div class="testimonial-name">Jennifer Martinez</div>
-                            <div class="testimonial-role">First-Time Homebuyer</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card fade-up" style="transition-delay: 0.1s">
-                    <div class="testimonial-stars">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <p class="testimonial-text">"Sold above asking price in under 20 days. The marketing strategy was data-driven and the staging recommendations were spot-on. RE/MAX delivers results that other agencies simply can't match."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">RK</div>
-                        <div>
-                            <div class="testimonial-name">Robert Kowalski</div>
-                            <div class="testimonial-role">Property Investor</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="property-card reveal">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop" alt="Beach House" loading="lazy">
+          <span class="property-badge">Hot</span>
+          <span class="property-price">$695,000</span>
         </div>
-    </section>
-
-    <!-- ═══ PROCESS ═══ -->
-    <section class="section process" id="process">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">How It Works</div>
-                <h2 class="section-title">3 Steps to <span class="hl">Your New Home</span></h2>
-                <p class="section-desc">A streamlined process designed to get you from search to keys in hand.</p>
-            </div>
-            <div class="stepper fade-up">
-                <div class="step">
-                    <div class="step-circle">01</div>
-                    <h3>Consultation</h3>
-                    <p>Share your goals, budget, and timeline. We'll create a customized strategy tailored to your needs.</p>
-                </div>
-                <div class="step">
-                    <div class="step-circle">02</div>
-                    <h3>Search & Analyze</h3>
-                    <p>Access exclusive listings and market data. We shortlist properties that match your criteria perfectly.</p>
-                </div>
-                <div class="step">
-                    <div class="step-circle">03</div>
-                    <h3>Negotiate & Close</h3>
-                    <p>We handle negotiations, paperwork, and inspections. You just pick up the keys to your new home.</p>
-                </div>
-            </div>
+        <div class="property-body">
+          <h3>Oceanfront Beach House</h3>
+          <div class="address">📍 221 Coastal Highway, Miami, FL 33139</div>
+          <div class="property-features">
+            <span>🛏️ 3 Beds</span><span>🛁 2 Baths</span><span>📐 2,400 sqft</span>
+          </div>
         </div>
-    </section>
-
-    <!-- ═══ AWARDS ═══ -->
-    <section class="section awards" id="awards">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">Recognition</div>
-                <h2 class="section-title">Awards & <span class="hl">Achievements</span></h2>
-                <p class="section-desc">Recognized by industry leaders for excellence in real estate services.</p>
-            </div>
-            <div class="awards-grid">
-                <div class="award-card fade-up">
-                    <div class="award-ribbon"></div>
-                    <div class="award-badge">🏆</div>
-                    <h4>#1 Real Estate Brand</h4>
-                    <p>Ranked by Transaction Sides globally for 10+ consecutive years.</p>
-                    <span class="award-year">2024</span>
-                </div>
-                <div class="award-card fade-up" style="transition-delay: 0.1s">
-                    <div class="award-ribbon"></div>
-                    <div class="award-badge">⭐</div>
-                    <h4>Top Workplace</h4>
-                    <p>Named among the best places to work in real estate by Inman News.</p>
-                    <span class="award-year">2024</span>
-                </div>
-                <div class="award-card fade-up" style="transition-delay: 0.2s">
-                    <div class="award-ribbon"></div>
-                    <div class="award-badge">🎖️</div>
-                    <h4>Brand Excellence</h4>
-                    <p>Highest brand recognition in real estate for the 15th year running.</p>
-                    <span class="award-year">2023</span>
-                </div>
-                <div class="award-card fade-up" style="transition-delay: 0.3s">
-                    <div class="award-ribbon"></div>
-                    <div class="award-badge">🌟</div>
-                    <h4>Global Reach</h4>
-                    <p>Fastest-growing international real estate network with 110+ countries.</p>
-                    <span class="award-year">2023</span>
-                </div>
-            </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="property-card reveal">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&h=400&fit=crop" alt="Mountain Retreat" loading="lazy">
+          <span class="property-badge">Exclusive</span>
+          <span class="property-price">$1,100,000</span>
         </div>
-    </section>
-
-    <!-- ═══ CONTACT ═══ -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-header fade-up">
-                <div class="section-tag">Get in Touch</div>
-                <h2 class="section-title">Ready to <span style="color: var(--secondary)">Get Started</span>?</h2>
-                <p class="section-desc">Connect with our team of experts and take the first step toward your real estate goals.</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-card fade-up">
-                    <div class="contact-card-icon">📞</div>
-                    <h4>Call Us</h4>
-                    <p><a href="tel:+13037705531">+1-303-770-5531</a></p>
-                    <p style="margin-top: 8px; font-size: 12px;">Mon–Sat, 8AM–8PM MST</p>
-                </div>
-                <div class="contact-card fade-up" style="transition-delay: 0.1s">
-                    <div class="contact-card-icon">✉️</div>
-                    <h4>Email Us</h4>
-                    <p><a href="mailto:info@remax.com">info@remax.com</a></p>
-                    <p style="margin-top: 8px; font-size: 12px;">We respond within 24 hours</p>
-                </div>
-                <div class="contact-card fade-up" style="transition-delay: 0.2s">
-                    <div class="contact-card-icon">📍</div>
-                    <h4>Visit Us</h4>
-                    <p>5075 S. Syracuse St.<br>Denver, CO 80237</p>
-                    <p style="margin-top: 8px; font-size: 12px;">Headquarters</p>
-                </div>
-            </div>
+        <div class="property-body">
+          <h3>Mountain View Retreat</h3>
+          <div class="address">📍 45 Aspen Trail, Denver, CO 80202</div>
+          <div class="property-features">
+            <span>🛏️ 4 Beds</span><span>🛁 3 Baths</span><span>📐 3,500 sqft</span>
+          </div>
         </div>
-    </section>
-
-    <!-- ═══ FOOTER ═══ -->
-    <footer class="footer">
-        <div class="footer-accent-line"></div>
-        <div class="footer-inner">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-brand">
-                        <h3>RE/MAX<span></span></h3>
-                        <p>Founded in 1973 in Denver, Colorado. Over 50 years of real estate excellence connecting people with homes worldwide.</p>
-                        <div class="footer-social">
-                            <a href="#">𝕏</a>
-                            <a href="#">in</a>
-                            <a href="#">f</a>
-                            <a href="#">📷</a>
-                        </div>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#services">Services</a></li>
-                            <li><a href="#properties">Properties</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Services</h4>
-                        <ul>
-                            <li><a href="#">Buyer Rep</a></li>
-                            <li><a href="#">Seller Advisory</a></li>
-                            <li><a href="#">Market Analytics</a></li>
-                            <li><a href="#">Global Network</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Contact Info</h4>
-                        <ul>
-                            <li><a href="tel:+13037705531">+1-303-770-5531</a></li>
-                            <li><a href="mailto:info@remax.com">info@remax.com</a></li>
-                            <li><a href="#">Denver, CO 80237</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <div class="footer-copy">© 2024 RE/MAX, LLC. All rights reserved.</div>
-                    <div class="footer-credit">Demo site built by <a href="#">Alok Web Services</a></div>
-                </div>
-            </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="property-card reveal">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&h=400&fit=crop" alt="Urban Loft" loading="lazy">
+          <span class="property-badge">Modern</span>
+          <span class="property-price">$520,000</span>
         </div>
-    </footer>
+        <div class="property-body">
+          <h3>Urban Loft Apartment</h3>
+          <div class="address">📍 500 Industrial Blvd, Chicago, IL 60611</div>
+          <div class="property-features">
+            <span>🛏️ 2 Beds</span><span>🛁 2 Baths</span><span>📐 1,800 sqft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ═══ SCROLL TO TOP ═══ -->
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<!-- ===== SERVICES ===== -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-title">
+      <span>What We Offer</span>
+      <h2>Comprehensive Real Estate Services</h2>
+      <p>From first-time buyers to seasoned investors, RE/MAX has you covered.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🏡</div>
+        <h3>Home Buying</h3>
+        <p>Expert guidance through every step of your home purchase, from mortgage pre-approval to closing day.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💰</div>
+        <h3>Home Selling</h3>
+        <p>Strategic marketing and pricing to sell your home faster and at the best possible price.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📊</div>
+        <h3>Market Analysis</h3>
+        <p>Data-driven insights on local and national market trends to inform your investment decisions.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🔑</div>
+        <h3>Property Management</h3>
+        <p>Full-service management for rental properties, maximizing your returns while minimizing hassle.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏦</div>
+        <h3>Mortgage Assistance</h3>
+        <p>Access to top lenders and financing options tailored to your unique financial situation.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📐</div>
+        <h3>Commercial Real Estate</h3>
+        <p>Specialized services for office, retail, and industrial properties with dedicated commercial agents.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ═══ JAVASCRIPT ═══ -->
-    <script>
-        // ── Mobile Nav Toggle ──
-        function toggleNav() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
+<!-- ===== AGENTS ===== -->
+<section class="section agents" id="agents">
+  <div class="container">
+    <div class="section-title">
+      <span>Meet The Team</span>
+      <h2>Top-Rated RE/MAX Agents</h2>
+      <p>Our award-winning agents bring unmatched expertise and dedication to every transaction.</p>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card reveal">
+        <div class="agent-avatar">SM</div>
+        <h3>Sarah Mitchell</h3>
+        <div class="role">Senior Agent</div>
+        <p>15+ years of experience specializing in luxury homes and waterfront properties.</p>
+        <div class="agent-social">
+          <a href="#">in</a><a href="#">𝕏</a><a href="#">✉</a>
+        </div>
+      </div>
+      <div class="agent-card reveal">
+        <div class="agent-avatar">JR</div>
+        <h3>James Rodriguez</h3>
+        <div class="role">Buyer's Specialist</div>
+        <p>Former financial analyst turned real estate expert, focusing on investment properties.</p>
+        <div class="agent-social">
+          <a href="#">in</a><a href="#">𝕏</a><a href="#">✉</a>
+        </div>
+      </div>
+      <div class="agent-card reveal">
+        <div class="agent-avatar">LP</div>
+        <h3>Linda Park</h3>
+        <div class="role">Relocation Expert</div>
+        <p>Certified relocation professional helping families transition smoothly to new communities.</p>
+        <div class="agent-social">
+          <a href="#">in</a><a href="#">𝕏</a><a href="#">✉</a>
+        </div>
+      </div>
+      <div class="agent-card reveal">
+        <div class="agent-avatar">DK</div>
+        <h3>David Kim</h3>
+        <div class="role">Commercial Specialist</div>
+        <p>Top-producing commercial agent with $200M+ in career sales volume.</p>
+        <div class="agent-social">
+          <a href="#">in</a><a href="#">𝕏</a><a href="#">✉</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // ── Scroll to Top Button ──
-        window.addEventListener('scroll', () => {
-            const btn = document.getElementById('scrollTop');
-            if (window.scrollY > 400) {
-                btn.classList.add('visible');
-            } else {
-                btn.classList.remove('visible');
-            }
-        });
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-title">
+      <span>Client Love</span>
+      <h2>What Our Clients Say</h2>
+      <p>Real stories from real homeowners who found their dream with RE/MAX.</p>
+    </div>
+    <div class="testimonials-slider">
+      <div class="testimonial-track" id="testimonialTrack">
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <blockquote>"RE/MAX made the entire home buying process seamless. Our agent Sarah went above and beyond to find us the perfect home in just 3 weeks!"</blockquote>
+            <div class="testimonial-author">
+              <div class="avatar">MC</div>
+              <div class="info"><h4>Maria Chen</h4><p>First-time Homebuyer, Austin TX</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <blockquote>"We sold our home for 12% above asking price thanks to RE/MAX's incredible marketing strategy. Their data-driven approach is unmatched."</blockquote>
+            <div class="testimonial-author">
+              <div class="avatar">RW</div>
+              <div class="info"><h4>Robert Williams</h4><p>Home Seller, Denver CO</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <blockquote>"As a real estate investor, I've worked with many agencies. RE/MAX agents consistently provide the best market insights and ROI projections."</blockquote>
+            <div class="testimonial-author">
+              <div class="avatar">AT</div>
+              <div class="info"><h4>Angela Torres</h4><p>Property Investor, Miami FL</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-dots" id="sliderDots">
+        <button class="active" onclick="goToSlide(0)"></button>
+        <button onclick="goToSlide(1)"></button>
+        <button onclick="goToSlide(2)"></button>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // ── Close mobile nav on link click ──
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
+<!-- ===== CTA ===== -->
+<section class="cta" id="cta">
+  <div class="container">
+    <h2>Ready to Find Your Dream Home?</h2>
+    <p>Connect with a top RE/MAX agent today and take the first step toward homeownership. No pressure, just expert guidance.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn btn-red">🏠 Find an Agent</a>
+      <a href="#" class="btn btn-outline">📞 Schedule a Consultation</a>
+    </div>
+  </div>
+</section>
 
-        // ── Intersection Observer for Fade-Up ──
-        const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>🎈 RE/MAX</h4>
+        <p>The #1 name in real estate. RE/MAX has been the most recognized real estate brand for over two decades, with more agents earning the Chairman's Award, President's Award, and Realtor of the Year than any other brand.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Buy a Home</a></li>
+          <li><a href="#">Sell a Home</a></li>
+          <li><a href="#">Find an Agent</a></li>
+          <li><a href="#">Mortgage Calculator</a></li>
+          <li><a href="#">Market Trends</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Home Valuation</a></li>
+          <li><a href="#">Buyer's Guide</a></li>
+          <li><a href="#">Seller's Guide</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>📍 5075 S Syracuse St, Denver, CO 80237</li>
+          <li>📞 1-800-RE-MAX-01</li>
+          <li>✉️ info@remax.com</li>
+          <li>🌐 remax.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 RE/MAX, LLC. Each RE/MAX office is independently owned and operated.</p>
+      <p class="credit">Demo site built by <span style="color:var(--red)">Alok Web Services</span></p>
+    </div>
+  </div>
+</footer>
 
-        document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+<script>
+// ===== NAVBAR SCROLL =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
 
-        // ── Animated Counter ──
-        function animateCounter(el, target, duration = 1500) {
-            const start = performance.now();
-            const suffix = el.querySelector('.plus') ? el.querySelector('.plus').outerHTML : '';
-            const isPrice = el.textContent.includes('$');
-            const isPercent = el.textContent.includes('%');
-            const isDays = el.textContent.includes('Days');
+// ===== MOBILE MENU =====
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('active');
+}
 
-            function update(now) {
-                const elapsed = now - start;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const current = Math.floor(eased * target);
+// ===== PARALLAX HERO =====
+window.addEventListener('scroll', () => {
+  const video = document.querySelector('.hero-video');
+  const content = document.querySelector('.hero-content');
+  const scrollY = window.scrollY;
+  if (video && scrollY < window.innerHeight) {
+    video.style.transform = `translateY(${scrollY * 0.3}px)`;
+    content.style.transform = `translateY(${scrollY * 0.15}px)`;
+    content.style.opacity = 1 - scrollY / 700;
+  }
+});
 
-                let html = current.toLocaleString();
-                if (isPercent) html += '<span style="font-size: 24px">%</span>';
-                if (isDays) html += ' Days';
+// ===== COUNT-UP ANIMATION =====
+function countUp(el, target, duration = 2000) {
+  let start = 0;
+  const increment = target / (duration / 16);
+  const suffix = el.dataset.suffix || '';
+  const timer = setInterval(() => {
+    start += increment;
+    if (start >= target) {
+      el.textContent = target.toLocaleString() + suffix;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(start).toLocaleString();
+    }
+  }, 16);
+}
 
-                el.innerHTML = html;
-                if (progress < 1) requestAnimationFrame(update);
-            }
-            requestAnimationFrame(update);
-        }
+// ===== SCROLL REVEAL =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Staggered delay based on sibling index
+      const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+      let index = Array.from(siblings).indexOf(entry.target);
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, index * 120);
 
-        // ── Metric Bar Animation ──
-        const barObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    const width = bar.getAttribute('data-width');
-                    if (width) {
-                        setTimeout(() => { bar.style.width = width; }, 300);
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
+      // Count-up for stat numbers
+      const numEl = entry.target.querySelector('.number[data-target]');
+      if (numEl && !numEl.dataset.done) {
+        numEl.dataset.done = '1';
+        const target = parseInt(numEl.dataset.target);
+        const suffix = entry.target.querySelector('.label').textContent.includes('%') ? '%' : '+';
+        numEl.dataset.suffix = suffix;
+        countUp(numEl, target);
+      }
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
 
-        document.querySelectorAll('.metric-bar-fill').forEach(el => barObserver.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // ── Hero Counter Animation ──
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('[data-count]').forEach(el => {
-                        const target = parseInt(el.getAttribute('data-count'));
-                        animateCounter(el, target);
-                    });
-                    heroObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+// ===== 3D TILT ON STAT CARDS =====
+document.querySelectorAll('.stat-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / centerY * -12;
+    const rotateY = (x - centerX) / centerX * 12;
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
+  });
+});
 
-        document.querySelectorAll('.hero-stat-num').forEach(el => {
-            const target = parseInt(el.getAttribute('data-count'));
-            if (target) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            animateCounter(el, target);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.5 });
-                observer.observe(el);
-            }
-        });
+// ===== TESTIMONIALS SLIDER =====
+let currentSlide = 0;
+const totalSlides = 3;
+const track = document.getElementById('testimonialTrack');
+const dots = document.querySelectorAll('#sliderDots button');
 
-        // ── Metric Cards Counter Animation ──
-        document.querySelectorAll('.metric-value [data-count]').forEach(el => {
-            const target = parseInt(el.getAttribute('data-count'));
-            if (target) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            animateCounter(el, target);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.5 });
-                observer.observe(el);
-            }
-        });
+function goToSlide(n) {
+  currentSlide = n;
+  track.style.transform = `translateX(-${n * 100}%)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === n));
+}
 
-        // ── Active Nav Link on Scroll ──
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.style.background = '';
-                if (link.getAttribute('href') === '#' + current) {
-                    link.style.background = 'rgba(255,255,255,0.12)';
-                }
-            });
-        });
-    </script>
+// Auto-advance
+setInterval(() => {
+  goToSlide((currentSlide + 1) % totalSlides);
+}, 5000);
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
 </body>
 </html>
