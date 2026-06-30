@@ -1,619 +1,664 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomeSmart | Fresh Tech Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #00A651;
-        --secondary: #1A1A1A;
-        --accent: #4CD964;
-        --bg: #F0FFF4;
-        --fg: #1A3A1A;
-        --card-bg: #FFFFFF;
-        --heading-font: 'Sora', sans-serif;
-        --body-font: 'Nunito Sans', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #00A651dd, #1A1A1Acc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeSmart — Technology-Driven Real Estate Brokerage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#00A651;--secondary:#1A1A1A;--accent:#4CD964;--light-green:#F0FFF4;--white:#fff;--gray:#f7f9f8;--text:#444}
+body{font-family:'Nunito Sans',sans-serif;color:var(--secondary);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Sora',sans-serif;color:var(--secondary)}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;background:var(--primary);color:#fff;padding:14px 32px;border-radius:50px;font-family:'Sora',sans-serif;font-weight:600;font-size:1rem;border:none;cursor:pointer;transition:all .3s ease}
+.btn:hover{background:#008c44;transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,166,81,.3)}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
+.btn-outline:hover{background:var(--primary);color:#fff}
+section{padding:80px 0}
+.section-tag{display:inline-block;background:rgba(0,166,81,.1);color:var(--primary);padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:12px}
+.section-title{font-size:2.4rem;font-weight:800;margin-bottom:16px;line-height:1.2}
+.section-sub{color:var(--text);font-size:1.05rem;max-width:560px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,166,81,.08);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1200px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem;color:var(--secondary)}
+.logo svg{width:36px;height:36px}
+.logo span{color:var(--primary)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-weight:600;font-size:.95rem;color:var(--secondary);transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{padding:10px 24px !important;font-size:.9rem !important}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.nav-toggle span{display:block;width:24px;height:3px;background:var(--secondary);margin:5px 0;border-radius:2px;transition:.3s}
+
+/* HERO */
+.hero{padding:160px 0 100px;background:var(--light-green);position:relative;overflow:hidden;min-height:90vh;display:flex;align-items:center}
+.hero-content{position:relative;z-index:2;max-width:600px}
+.hero h1{font-size:3.4rem;font-weight:800;line-height:1.12;margin-bottom:20px}
+.hero h1 .green{color:var(--primary)}
+.hero p{font-size:1.15rem;color:var(--text);margin-bottom:32px;line-height:1.7}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:40px;margin-top:48px}
+.hero-stat h3{font-size:2rem;color:var(--primary)}
+.hero-stat p{font-size:.9rem;color:var(--text);font-weight:600}
+.hero-visual{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:520px;height:520px;z-index:1}
+.leaf-deco{position:absolute;opacity:.12;fill:var(--primary)}
+.leaf1{top:10%;left:5%;width:120px;animation:float 6s ease-in-out infinite}
+.leaf2{top:60%;right:10%;width:90px;animation:float 8s ease-in-out infinite 1s}
+.leaf3{bottom:15%;left:20%;width:70px;animation:float 7s ease-in-out infinite 2s}
+.leaf4{top:30%;right:25%;width:60px;animation:float 5s ease-in-out infinite .5s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(5deg)}}
+
+/* ABOUT */
+.about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{border-radius:30px;overflow:hidden;position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--light-green),rgba(0,166,81,.15))}
+.about-img-inner{width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23E8F5E9' width='400' height='300'/%3E%3Cpath d='M100 200 Q200 80 300 200' fill='none' stroke='%2300A651' stroke-width='3' opacity='.3'/%3E%3Ccircle cx='200' cy='130' r='40' fill='%2300A651' opacity='.15'/%3E%3Cpath d='M180 130 Q200 60 220 130 Q200 100 180 130Z' fill='%2300A651' opacity='.25'/%3E%3Crect x='160' y='160' width='80' height='60' rx='6' fill='%2300A651' opacity='.2'/%3E%3Crect x='175' y='175' width='20' height='20' rx='3' fill='%2300A651' opacity='.3'/%3E%3Crect x='205' y='175' width='20' height='20' rx='3' fill='%2300A651' opacity='.3'/%3E%3Crect x='190' y='200' width='20' height='20' rx='3' fill='%2300A651' opacity='.3'/%3E%3Ccircle cx='100' cy='80' r='15' fill='%234CD964' opacity='.2'/%3E%3Ccircle cx='320' cy='100' r='10' fill='%234CD964' opacity='.2'/%3E%3Ctext x='200' y='280' text-anchor='middle' font-family='Sora' font-size='14' fill='%2300A651' opacity='.4'%3EHomeSmart%3C/text%3E%3C/svg%3E") center/cover}
+.about-text h2{margin-bottom:16px}
+.about-text p{color:var(--text);margin-bottom:20px}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.about-feat{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem}
+.about-feat svg{flex-shrink:0;color:var(--primary)}
+
+/* FEATURES */
+.features{background:var(--gray)}
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.feature-card{background:var(--white);border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.feature-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+.feature-top{padding:32px 28px 24px;background:linear-gradient(135deg,rgba(0,166,81,.1),rgba(76,217,100,.08));position:relative}
+.feature-top svg{width:48px;height:48px;color:var(--primary);margin-bottom:12px}
+.feature-top h3{font-size:1.2rem;font-weight:700}
+.feature-body{padding:20px 28px 28px}
+.feature-body p{color:var(--text);font-size:.95rem}
+
+/* PROPERTIES */
+.properties{background:var(--white)}
+.properties-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.prop-card{border:2px solid transparent;border-radius:20px;overflow:hidden;transition:all .3s;background:var(--white);box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.prop-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,166,81,.1)}
+.prop-img{height:200px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);position:relative;display:flex;align-items:center;justify-content:center}
+.prop-img svg{width:60px;height:60px;color:var(--primary);opacity:.3}
+.prop-badge{position:absolute;top:14px;left:14px;background:var(--primary);color:#fff;padding:4px 14px;border-radius:20px;font-size:.8rem;font-weight:700}
+.prop-info{padding:20px}
+.prop-info h3{font-size:1.1rem;margin-bottom:6px}
+.prop-info .price{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:800;color:var(--primary);margin-bottom:10px}
+.prop-info p{font-size:.9rem;color:var(--text)}
+.prop-meta{display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid #eee;font-size:.85rem;color:var(--text)}
+
+/* TECH */
+.tech{background:var(--light-green)}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:40px}
+.tech-list{list-style:none;display:flex;flex-direction:column;gap:20px}
+.tech-list li{display:flex;align-items:flex-start;gap:14px;font-size:1.05rem}
+.tech-list svg{flex-shrink:0;margin-top:2px;color:var(--primary)}
+.tech-visual{display:flex;justify-content:center;align-items:center}
+.tech-circle{width:280px;height:280px;border-radius:50%;background:linear-gradient(135deg,rgba(0,166,81,.1),rgba(76,217,100,.08));display:flex;align-items:center;justify-content:center;position:relative}
+.tech-circle svg{width:100px;height:100px;color:var(--primary);opacity:.5}
+.tech-dot{position:absolute;width:14px;height:14px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.tech-dot:nth-child(2){top:10px;left:50%;animation-delay:.3s}
+.tech-dot:nth-child(3){bottom:20px;right:10px;animation-delay:.7s}
+.tech-dot:nth-child(4){top:50%;left:5px;animation-delay:1s}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+/* PROCESS */
+.process{background:var(--white)}
+.process-steps{display:flex;justify-content:center;gap:0;margin-top:60px;position:relative;flex-wrap:wrap}
+.process-step{text-align:center;position:relative;flex:1;min-width:180px;max-width:220px;padding:0 20px}
+.process-circle{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#fff;font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;position:relative;z-index:2;box-shadow:0 8px 25px rgba(0,166,81,.25)}
+.process-step h3{font-size:1.05rem;margin-bottom:8px}
+.process-step p{font-size:.9rem;color:var(--text)}
+.process-connector{position:absolute;top:50px;left:calc(50% + 55px);width:calc(100% - 110px);border-top:3px dashed var(--accent);opacity:.4;z-index:1}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--gray)}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.test-card{background:var(--white);border-radius:20px;padding:32px 28px;position:relative;box-shadow:0 4px 16px rgba(0,0,0,.03)}
+.test-card:hover{box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.test-quote{font-size:3rem;color:var(--primary);opacity:.2;font-family:serif;line-height:1;margin-bottom:-10px}
+.test-card p{color:var(--text);font-style:italic;margin-bottom:20px;line-height:1.7}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem}
+.test-name{font-weight:700;font-size:.95rem}
+.test-role{font-size:.85rem;color:var(--text)}
+
+/* CONTACT */
+.contact{background:var(--light-green)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px}
+.contact-form{background:var(--white);border-radius:24px;padding:40px;box-shadow:0 8px 30px rgba(0,0,0,.04)}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-weight:600;margin-bottom:6px;font-size:.9rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:14px 18px;border:2px solid #e8ede9;border-radius:14px;font-family:'Nunito Sans',sans-serif;font-size:1rem;transition:border-color .2s;background:var(--gray)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--primary)}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.contact-card{background:var(--white);border-radius:20px;padding:28px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,.03)}
+.contact-card svg{flex-shrink:0;color:var(--primary);margin-top:2px}
+.contact-card h4{font-size:1rem;margin-bottom:4px}
+.contact-card p{color:var(--text);font-size:.95rem}
+
+/* FOOTER */
+footer{background:var(--secondary);color:rgba(255,255,255,.8);padding:60px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand h3{font-size:1.4rem;color:#fff;margin-bottom:12px}
+.footer-brand h3 span{color:var(--accent)}
+.footer-brand p{font-size:.95rem;line-height:1.7;margin-bottom:20px}
+.footer-col h4{color:#fff;font-size:1rem;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px;font-size:.95rem}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.85rem}
+.footer-credit{color:var(--accent);font-weight:600}
+
+/* RESPONSIVE */
+@media(max-width:968px){
+.hero h1{font-size:2.4rem}
+.hero-visual{display:none}
+.about-grid,.tech-grid,.contact-grid{grid-template-columns:1fr}
+.properties-grid,.test-grid{grid-template-columns:1fr 1fr}
+.features-grid{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr 1fr}
+.process-connector{display:none}
+.process-steps{gap:30px}
+}
+@media(max-width:600px){
+.hero{padding:130px 0 60px}
+.hero h1{font-size:2rem}
+.hero-stats{flex-direction:column;gap:20px}
+.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:20px;gap:16px;box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.nav-links.open{display:flex}
+.nav-toggle{display:block}
+.properties-grid,.test-grid{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr}
+.form-row{grid-template-columns:1fr}
+.about-features{grid-template-columns:1fr}
+section{padding:60px 0}
+.section-title{font-size:1.8rem}
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">HomeSmart</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-bg"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80" alt="HomeSmart"><div class="hero-overlay"></div></div>
-            <div class="hero-content">
-                <div class="hero-badge">Fresh Tech</div>
-                <h1 class="hero-title">HomeSmart</h1>
-                <p class="hero-tagline">The Future of Real Estate</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Get Started</a>
-                    <a href="#properties" class="btn btn-outline">View Listings</a>
-                </div>
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80" alt="HomeSmart" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 2000</h2>
-                    <p class="about-text">HomeSmart is a technology-driven real estate brokerage that offers a flat-fee commission structure and innovative tools for agents and clients.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>20,000+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.2★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>24+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00A651" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Residential Sales</h3>
-            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00A651" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Commercial Real Estate</h3>
-            <p>Expert commercial real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00A651" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Property Management</h3>
-            <p>Expert property management services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00A651" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Real Estate Training</h3>
-            <p>Expert real estate training services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
-        </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">Scottsdale, Arizona</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">Scottsdale, Arizona</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">Scottsdale, Arizona</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div></div>
-        </div>
-    </section>
-    
-    
-            <section class="tech-features">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Technology</div>
-                        <h2 class="section-title">Powered by Innovation</h2>
-                    </div>
-                    <div class="features-grid">
-                        <div class="feature-card"><div class="feature-icon">📱</div><h4>Mobile App</h4><p>Search homes on the go with our award-winning app.</p></div>
-                        <div class="feature-card"><div class="feature-icon">🤖</div><h4>AI Matching</h4><p>Smart algorithms find properties that match your lifestyle.</p></div>
-                        <div class="feature-card"><div class="feature-icon">📊</div><h4>Market Insights</h4><p>Real-time data and analytics to make informed decisions.</p></div>
-                        <div class="feature-card"><div class="feature-icon">🏠</div><h4>Virtual Tours</h4><p>Explore homes from anywhere with immersive 3D tours.</p></div>
-                    </div>
-                </div>
-            </section>
-    <section class="process">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">How It Works</div>
-                <h2 class="section-title">Our Process</h2>
-            </div>
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-number">01</div>
-                    <h3>Consultation</h3>
-                    <p>We understand your needs, budget, and timeline to find the perfect property match.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">02</div>
-                    <h3>Property Search</h3>
-                    <p>Access exclusive listings and curated properties tailored to your specific requirements.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">03</div>
-                    <h3>Negotiation</h3>
-                    <p>Our expert agents negotiate the best terms and price on your behalf.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <h3>Closing</h3>
-                    <p>Smooth, hassle-free closing with dedicated support from start to finish.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Testimonials</div>
-                <h2 class="section-title">What Our Clients Say</h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"HomeSmart made our home buying experience seamless. Their expertise and dedication are unmatched in the industry."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div><strong>John D.</strong><span>Home Buyer</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Professional, responsive, and truly caring. They found us the perfect home within our budget. Highly recommended!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div><strong>Sarah M.</strong><span>Home Seller</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"The best real estate experience we've ever had. Their market knowledge helped us make an informed decision."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RK</div>
-                        <div><strong>Robert K.</strong><span>Property Investor</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let HomeSmart's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
-        </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-602-553-5700">+1-602-553-5700</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:info@homesmart.com">info@homesmart.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>Scottsdale, Arizona</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.homesmart.com" target="_blank">www.homesmart.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>HomeSmart</h3><p>The Future of Real Estate</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-602-553-5700</p><p>info@homesmart.com</p><p>Scottsdale, Arizona</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 HomeSmart. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+<!-- NAV -->
+<nav id="navbar">
+<div class="nav-inner">
+<a href="#" class="logo">
+<svg viewBox="0 0 36 36" fill="none"><path d="M18 4L4 16h4v14h8v-8h4v8h8V16h4L18 4z" fill="#00A651"/><circle cx="18" cy="14" r="3" fill="#fff" opacity=".6"/><path d="M18 8 Q14 12 18 14 Q22 12 18 8Z" fill="#4CD964" opacity=".5"/></svg>
+Home<span>Smart</span>
+</a>
+<ul class="nav-links" id="navLinks">
+<li><a href="#about">About</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#process">Process</a></li>
+<li><a href="#testimonials">Reviews</a></li>
+<li><a href="#contact" class="btn nav-cta">Get in Touch</a></li>
+</ul>
+<button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="container">
+<div class="hero-content">
+<h1>The <span class="green">Fresh Way</span> to Buy &amp; Sell Homes</h1>
+<p>HomeSmart is a technology-driven real estate brokerage making homeownership simple, transparent, and affordable with our flat-fee commission model since 2000.</p>
+<div class="hero-btns">
+<a href="#contact" class="btn">Start Your Journey</a>
+<a href="#properties" class="btn btn-outline">Browse Properties</a>
+</div>
+<div class="hero-stats">
+<div class="hero-stat"><h3>20,000+</h3><p>Agents Nationwide</p></div>
+<div class="hero-stat"><h3>350+</h3><p>Office Locations</p></div>
+<div class="hero-stat"><h3>25+</h3><p>Years of Trust</p></div>
+</div>
+</div>
+</div>
+<!-- Decorative leaves -->
+<svg class="leaf-deco leaf1" viewBox="0 0 100 120"><path d="M50 0C20 20 0 60 10 100c20-10 40-30 40-70S70 10 50 0z"/><path d="M50 0c30 20 50 60 40 100-20-10-40-30-40-70S30 10 50 0z"/></svg>
+<svg class="leaf-deco leaf2" viewBox="0 0 100 120"><path d="M50 0C20 20 0 60 10 100c20-10 40-30 40-70S70 10 50 0z"/></svg>
+<svg class="leaf-deco leaf3" viewBox="0 0 100 120"><path d="M50 10C30 30 10 60 20 95c15-8 30-25 30-60S65 20 50 10z"/><path d="M50 10c20 20 30 50 25 85-15-8-30-25-30-60S35 20 50 10z"/></svg>
+<svg class="leaf-deco leaf4" viewBox="0 0 80 100"><circle cx="40" cy="50" r="30" opacity=".3"/><path d="M40 20c-15 15-25 35-15 60 15-8 25-25 25-55S55 25 40 20z"/></svg>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+<div class="container">
+<div class="about-grid">
+<div class="about-img"><div class="about-img-inner"></div></div>
+<div class="about-text">
+<span class="section-tag">🌿 About HomeSmart</span>
+<h2 class="section-title">Real Estate, Reimagined</h2>
+<p>Founded in 2000 in Scottsdale, Arizona, HomeSmart disrupted the traditional real estate model by introducing a flat-fee commission structure. We believe every agent deserves to keep more of what they earn, and every client deserves a transparent, modern experience.</p>
+<p>With over 20,000 agents and 350+ offices across the country, we combine cutting-edge technology with a human-first approach to make buying and selling homes effortless.</p>
+<div class="about-features">
+<div class="about-feat">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Flat-Fee Model
+</div>
+<div class="about-feat">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Tech-Powered Platform
+</div>
+<div class="about-feat">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+National Coverage
+</div>
+<div class="about-feat">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".15"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+25+ Years Trusted
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+<div class="container">
+<span class="section-tag">🌱 Why Choose Us</span>
+<h2 class="section-title">Built for the Modern Homeowner</h2>
+<p class="section-sub">We combine innovation with experience to deliver an unmatched real estate journey.</p>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-top">
+<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/><path d="M6 18h36" stroke="currentColor" stroke-width="2.5"/><circle cx="14" cy="30" r="4" stroke="currentColor" stroke-width="2"/><circle cx="34" cy="30" r="4" stroke="currentColor" stroke-width="2"/></svg>
+<h3>SmartMLS Listing</h3>
+</div>
+<div class="feature-body">
+<p>Get your property on the MLS instantly with our streamlined digital listing system. Reach millions of buyers with one click.</p>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-top">
+<svg viewBox="0 0 48 48" fill="none"><path d="M24 4L4 24l8 4 8 16 8-12 8 12 8-16 8-4L24 4z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
+<h3>Flat-Fee Commission</h3>
+</div>
+<div class="feature-body">
+<p>Pay a flat fee, not a percentage. Our revolutionary model saves agents and clients thousands on every transaction.</p>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-top">
+<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" stroke-width="2.5"/><path d="M16 16h16M16 22h12M16 28h8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="34" cy="34" r="8" stroke="currentColor" stroke-width="2.5"/><path d="M34 30v4l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+<h3>Digital Paperwork</h3>
+</div>
+<div class="feature-body">
+<p>Sign, submit, and manage all documents digitally. No more printing, scanning, or office visits required.</p>
+</div>
+</div>
+<div class="feature-card">
+<div class="feature-top">
+<svg viewBox="0 0 48 48" fill="none"><path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" stroke="currentColor" stroke-width="2.5"/><path d="M4 24h40M24 4c5.3 5.3 8.2 12.2 8.2 20s-2.9 14.7-8.2 20c-5.3-5.3-8.2-12.2-8.2-20S18.7 9.3 24 4z" stroke="currentColor" stroke-width="2"/></svg>
+<h3>National Network</h3>
+</div>
+<div class="feature-body">
+<p>Access 350+ offices and 20,000+ agents coast-to-coast. Wherever you're buying or selling, we've got you covered.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="properties" id="properties">
+<div class="container">
+<span class="section-tag">🏡 Featured Listings</span>
+<h2 class="section-title">Explore Our Properties</h2>
+<p class="section-sub">Handpicked homes across Arizona's most desirable neighborhoods.</p>
+<div class="properties-grid">
+<div class="prop-card">
+<div class="prop-img">
+<span class="prop-badge">New Listing</span>
+<svg viewBox="0 0 60 60" fill="none"><path d="M30 8L6 30l8 4 8 18 8-14 8 14 8-18 8-4L30 8z" fill="currentColor"/></svg>
+</div>
+<div class="prop-info">
+<h3>Desert Bloom Residence</h3>
+<div class="price">$485,000</div>
+<p>A stunning 3-bed, 2-bath home in North Scottsdale with mountain views and a modern open floor plan.</p>
+<div class="prop-meta"><span>🛏 3 Beds</span><span>🛁 2 Baths</span><span>📐 2,100 sqft</span></div>
+</div>
+</div>
+<div class="prop-card">
+<div class="prop-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)">
+<span class="prop-badge" style="background:#E67E22">Open House</span>
+<svg viewBox="0 0 60 60" fill="none"><path d="M30 8L6 30l8 4 8 18 8-14 8 14 8-18 8-4L30 8z" fill="currentColor" opacity=".4"/></svg>
+</div>
+<div class="prop-info">
+<h3>Sunrise Valley Villa</h3>
+<div class="price">$625,000</div>
+<p>Luxurious 4-bed estate with pool, spa, and gourmet kitchen in the heart of Paradise Valley.</p>
+<div class="prop-meta"><span>🛏 4 Beds</span><span>🛁 3 Baths</span><span>📐 3,200 sqft</span></div>
+</div>
+</div>
+<div class="prop-card">
+<div class="prop-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">
+<span class="prop-badge" style="background:#2196F3">Price Reduced</span>
+<svg viewBox="0 0 60 60" fill="none"><path d="M30 8L6 30l8 4 8 18 8-14 8 14 8-18 8-4L30 8z" fill="currentColor" opacity=".4"/></svg>
+</div>
+<div class="prop-info">
+<h3>Cactus Creek Cottage</h3>
+<div class="price">$349,000</div>
+<p>Charming 2-bed starter home with a landscaped backyard and updated interiors in Chandler.</p>
+<div class="prop-meta"><span>🛏 2 Beds</span><span>🛁 2 Baths</span><span>📐 1,450 sqft</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TECH -->
+<section class="tech" id="tech">
+<div class="container">
+<div class="tech-grid">
+<div>
+<span class="section-tag">💻 Technology</span>
+<h2 class="section-title">Innovation at Every Step</h2>
+<p class="section-sub" style="margin-bottom:32px">Our proprietary platform powers everything from listing to closing.</p>
+<ul class="tech-list">
+<li>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span><strong>Smart Agent Portal</strong> — Manage leads, track commissions, and access training from one dashboard.</span>
+</li>
+<li>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span><strong>Automated Marketing</strong> — AI-powered social posts, email campaigns, and ad management built in.</span>
+</li>
+<li>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span><strong>Secure E-Signatures</strong> — Legally binding digital signatures for contracts, disclosures, and addenda.</span>
+</li>
+<li>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00A651" opacity=".15"/><path d="M7 12l3 3 7-7" stroke="#00A651" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span><strong>24/7 Support Line</strong> — Our dedicated team is always available to help agents and clients alike.</span>
+</li>
+</ul>
+</div>
+<div class="tech-visual">
+<div class="tech-circle">
+<svg viewBox="0 0 100 100" fill="none"><rect x="15" y="25" width="70" height="50" rx="6" stroke="currentColor" stroke-width="3"/><path d="M35 75v10h30V75" stroke="currentColor" stroke-width="3"/><path d="M15 65h70" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="48" r="10" stroke="currentColor" stroke-width="2.5"/><path d="M42 48l6 4 10-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+<div class="tech-dot"></div>
+<div class="tech-dot"></div>
+<div class="tech-dot"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+<div class="container">
+<div style="text-align:center">
+<span class="section-tag">🔄 How It Works</span>
+<h2 class="section-title">Your Path to Homeownership</h2>
+<p class="section-sub" style="margin:0 auto">Four simple steps to close your deal with HomeSmart.</p>
+</div>
+<div class="process-steps">
+<div class="process-step">
+<div class="process-circle">1</div>
+<div class="process-connector"></div>
+<h3>Get Connected</h3>
+<p>Fill out our form and get matched with a top local agent in your area.</p>
+</div>
+<div class="process-step">
+<div class="process-circle">2</div>
+<div class="process-connector"></div>
+<h3>Explore Options</h3>
+<p>Browse listings, schedule tours, and explore financing with expert guidance.</p>
+</div>
+<div class="process-step">
+<div class="process-circle">3</div>
+<div class="process-connector"></div>
+<h3>Make Your Move</h3>
+<p>Negotiate, submit offers, and handle all paperwork digitally through our platform.</p>
+</div>
+<div class="process-step">
+<div class="process-circle">4</div>
+<h3>Close & Celebrate</h3>
+<p>Finalize the deal, get your keys, and celebrate your new beginning.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+<div class="container">
+<div style="text-align:center">
+<span class="section-tag">💬 Testimonials</span>
+<h2 class="section-title">What People Are Saying</h2>
+<p class="section-sub" style="margin:0 auto">Real stories from real homeowners who chose HomeSmart.</p>
+</div>
+<div class="test-grid">
+<div class="test-card">
+<div class="test-quote">"</div>
+<p>HomeSmart's flat-fee model saved us over $8,000 on our home sale. The technology made everything seamless from listing to closing.</p>
+<div class="test-author">
+<div class="test-avatar">JR</div>
+<div><div class="test-name">Jennifer Rodriguez</div><div class="test-role">Home Seller, Scottsdale</div></div>
+</div>
+</div>
+<div class="test-card">
+<div class="test-quote">"</div>
+<p>As an agent, keeping more of my commission while having access to best-in-class tools is a game changer. I've never been more productive.</p>
+<div class="test-author">
+<div class="test-avatar">MC</div>
+<div><div class="test-name">Marcus Chen</div><div class="test-role">HomeSmart Agent, Phoenix</div></div>
+</div>
+</div>
+<div class="test-card">
+<div class="test-quote">"</div>
+<p>The digital paperwork and e-signature system meant we never had to leave our living room. Closing day was stress-free and exciting!</p>
+<div class="test-author">
+<div class="test-avatar">SP</div>
+<div><div class="test-name">Sarah Patel</div><div class="test-role">First-Time Buyer, Mesa</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+<div class="container">
+<span class="section-tag">📬 Get in Touch</span>
+<h2 class="section-title">Ready to Start?</h2>
+<p class="section-sub">Connect with our team and take the first step toward your real estate goals.</p>
+<div class="contact-grid">
+<div class="contact-form">
+<form id="contactForm">
+<div class="form-row">
+<div class="form-group">
+<label>First Name</label>
+<input type="text" placeholder="John" required>
+</div>
+<div class="form-group">
+<label>Last Name</label>
+<input type="text" placeholder="Doe" required>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label>Email</label>
+<input type="email" placeholder="john@example.com" required>
+</div>
+<div class="form-group">
+<label>Phone</label>
+<input type="tel" placeholder="+1 (555) 000-0000">
+</div>
+</div>
+<div class="form-group">
+<label>I'm Interested In</label>
+<select required>
+<option value="">Select an option</option>
+<option>Buying a Home</option>
+<option>Selling a Home</option>
+<option>Becoming an Agent</option>
+<option>General Inquiry</option>
+</select>
+</div>
+<div class="form-group">
+<label>Message</label>
+<textarea placeholder="Tell us about your real estate goals..."></textarea>
+</div>
+<button type="submit" class="btn" style="width:100%;font-size:1.05rem">Send Message 🌿</button>
+</form>
+</div>
+<div class="contact-info">
+<div class="contact-card">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2"/></svg>
+<div><h4>Phone</h4><p>+1-602-553-5700</p></div>
+</div>
+<div class="contact-card">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M2 7l10 6 10-6" stroke="currentColor" stroke-width="2"/></svg>
+<div><h4>Email</h4><p>info@homesmart.com</p></div>
+</div>
+<div class="contact-card">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/></svg>
+<div><h4>Headquarters</h4><p>Scottsdale, Arizona</p></div>
+</div>
+<div class="contact-card">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+<div><h4>Office Hours</h4><p>Mon – Fri: 8 AM – 6 PM MST</p></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<h3>Home<span>Smart</span></h3>
+<p>A technology-driven real estate brokerage with a flat-fee commission model. Making homeownership accessible since 2000.</p>
+<div style="display:flex;gap:12px">
+<a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='#00A651'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+</a>
+<a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='#00A651'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+</a>
+<a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='#00A651'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="#about">About Us</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#process">How It Works</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Services</h4>
+<ul>
+<li><a href="#">Buy a Home</a></li>
+<li><a href="#">Sell a Home</a></li>
+<li><a href="#">Join as Agent</a></li>
+<li><a href="#">Relocation</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<ul>
+<li>+1-602-553-5700</li>
+<li>info@homesmart.com</li>
+<li>Scottsdale, AZ</li>
+<li>Mon-Fri 8AM-6PM</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2024 HomeSmart. All rights reserved.</p>
+<p class="footer-credit">Demo site built by Alok Web Services</p>
+</div>
+</div>
+</footer>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+navLinks.classList.remove('open');
+}
+});
+});
+
+// Contact form handling
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+e.preventDefault();
+const btn = this.querySelector('button[type="submit"]');
+const origText = btn.textContent;
+btn.textContent = '✓ Message Sent!';
+btn.style.background = '#00A651';
+setTimeout(() => { btn.textContent = origText; btn.style.background = ''; }, 3000);
+this.reset();
+});
+
+// Scroll reveal animation
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.opacity = '1';
+entry.target.style.transform = 'translateY(0)';
+}
+});
+}, observerOptions);
+
+document.querySelectorAll('.feature-card, .prop-card, .test-card, .contact-card, .process-step, .about-grid, .tech-grid').forEach(el => {
+el.style.opacity = '0';
+el.style.transform = 'translateY(30px)';
+el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+observer.observe(el);
+});
+
+// Active nav link highlight
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+const scrollPos = window.scrollY + 200;
+sections.forEach(section => {
+const id = section.getAttribute('id');
+const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+if (link) {
+if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+link.style.color = '#00A651';
+} else {
+link.style.color = '';
+}
+}
+});
+});
+</script>
 </body>
 </html>
