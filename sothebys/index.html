@@ -1,577 +1,614 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sotheby's International Realty | Ultra Luxury Gallery Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #000000;
-        --secondary: #8B7355;
-        --accent: #C9A96E;
-        --bg: #FAFAFA;
-        --fg: #1A1A1A;
-        --card-bg: #FFFFFF;
-        --heading-font: 'Cinzel', serif;
-        --body-font: 'Raleway', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #000000dd, #8B7355cc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sotheby's International Realty | Extraordinary Living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Raleway:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#000000;--secondary:#8B7355;--accent:#C9A96E;--white:#FFFFFF;--off-white:#FAFAFA;--light-gray:#F0EFED;--med-gray:#999}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Raleway',sans-serif;font-weight:200;color:var(--primary);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3,h4,h5,h6{font-family:'Cinzel',serif;font-weight:400;letter-spacing:0.15em}
+a{text-decoration:none;color:inherit;transition:color 0.4s ease}
+img{max-width:100%;display:block}
+
+/* ===== CURSOR ===== */
+.custom-cursor{width:20px;height:20px;border:1px solid var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s ease,opacity 0.15s ease;mix-blend-mode:difference}
+.custom-cursor.active{transform:scale(2.5);opacity:0.5}
+
+/* ===== PRELOADER ===== */
+.preloader{position:fixed;inset:0;background:var(--primary);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease}
+.preloader.hidden{opacity:0;visibility:hidden}
+.preloader-text{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4vw,3rem);color:var(--accent);letter-spacing:0.5em;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;transition:all 0.6s ease;background:transparent}
+nav.scrolled{background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:1.2rem 4rem;box-shadow:0 1px 0 rgba(0,0,0,0.05)}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.5em;font-weight:500;color:var(--white);transition:color 0.6s ease}
+nav.scrolled .nav-logo{color:var(--primary)}
+.nav-links{display:flex;gap:3rem;list-style:none}
+.nav-links a{font-family:'Raleway',sans-serif;font-weight:300;font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.7);transition:all 0.4s ease;position:relative}
+nav.scrolled .nav-links a{color:var(--primary)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.4s ease}
+.nav-links a:hover::after{width:100%}
+.nav-links a:hover{color:var(--accent)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.nav-hamburger span{width:24px;height:1px;background:var(--white);transition:all 0.4s ease}
+nav.scrolled .nav-hamburger span{background:var(--primary)}
+
+/* ===== HERO ===== */
+.hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--primary);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;opacity:0.15}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
+.hero-content{position:relative;z-index:2;text-align:center}
+.hero-title{font-family:'Cinzel',serif;font-weight:400;font-size:clamp(3rem,10vw,9rem);color:var(--white);letter-spacing:0.3em;line-height:1;opacity:0;transform:translateY(30px);animation:heroReveal 1.2s ease 0.5s forwards}
+.hero-subtitle{font-family:'Raleway',sans-serif;font-weight:100;font-size:clamp(0.65rem,1.2vw,0.9rem);color:var(--accent);letter-spacing:0.6em;text-transform:uppercase;margin-top:2rem;opacity:0;animation:heroReveal 1.2s ease 0.9s forwards}
+.hero-line{width:1px;height:80px;background:linear-gradient(to bottom,var(--accent),transparent);margin:3rem auto 0;opacity:0;animation:heroReveal 1.2s ease 1.2s forwards}
+.hero-scroll{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0;animation:heroReveal 1.2s ease 1.5s forwards}
+.hero-scroll span{font-size:0.55rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:300}
+.scroll-line{width:1px;height:40px;background:rgba(201,169,110,0.3);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--accent);animation:scrollDown 2s ease-in-out infinite}
+@keyframes scrollDown{0%{top:-100%}50%{top:100%}100%{top:100%}}
+@keyframes heroReveal{to{opacity:1;transform:translateY(0)}}
+
+/* ===== SECTION COMMONS ===== */
+.section{padding:10rem 4rem}
+.section-label{font-family:'Raleway',sans-serif;font-weight:300;font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--secondary);margin-bottom:1rem}
+.section-title{font-family:'Cinzel',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:400;letter-spacing:0.1em;line-height:1.3;margin-bottom:3rem}
+.section-divider{width:60px;height:1px;background:var(--accent);margin:3rem auto}
+
+/* ===== ABOUT ===== */
+.about{background:var(--white);text-align:center}
+.about-text{max-width:700px;margin:0 auto;font-weight:200;font-size:1.05rem;line-height:2.2;color:#444}
+.about-stats{display:flex;justify-content:center;gap:6rem;margin-top:6rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-number{font-family:'Cinzel',serif;font-size:2.5rem;color:var(--primary);letter-spacing:0.05em}
+.stat-label{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--secondary);margin-top:0.75rem;font-weight:300}
+
+/* ===== GALLERY ===== */
+.gallery{background:var(--off-white);padding-bottom:0}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:250px;gap:1rem;margin-top:4rem}
+.gallery-item{position:relative;overflow:hidden;cursor:pointer}
+.gallery-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery-item:nth-child(4){grid-row:span 2}
+.gallery-item:nth-child(7){grid-column:span 2}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);filter:grayscale(20%)}
+.gallery-item:hover img{transform:scale(1.08);filter:grayscale(0%)}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:2rem;background:linear-gradient(transparent,rgba(0,0,0,0.7));transform:translateY(100%);transition:transform 0.5s ease}
+.gallery-item:hover .gallery-caption{transform:translateY(0)}
+.gallery-caption h4{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--white);letter-spacing:0.15em;font-weight:400}
+.gallery-caption p{font-size:0.7rem;color:rgba(255,255,255,0.6);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.4rem;font-weight:300}
+
+/* ===== SERVICES ===== */
+.services{background:var(--white)}
+.services-list{max-width:800px;margin:0 auto}
+.service-item{padding:2.5rem 0;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.4s ease}
+.service-item:first-child{border-top:1px solid rgba(0,0,0,0.06)}
+.service-item:hover{padding-left:1rem}
+.service-item h3{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:0.12em;font-weight:400;transition:color 0.4s ease}
+.service-item:hover h3{color:var(--accent)}
+.service-item p{font-weight:200;font-size:0.85rem;color:var(--med-gray);max-width:400px;text-align:right;line-height:1.7}
+
+/* ===== PROPERTIES ===== */
+.properties{padding:0;background:var(--primary)}
+.property{height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.property-bg{position:absolute;inset:0}
+.property-bg img{width:100%;height:100%;object-fit:cover;opacity:0.7;transition:transform 1s ease,opacity 0.8s ease}
+.property:hover .property-bg img{transform:scale(1.03);opacity:0.85}
+.property-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%)}
+.property-content{position:relative;z-index:2;padding:4rem;width:100%}
+.property-location{font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;font-weight:300}
+.property-name{font-family:'Cinzel',serif;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);letter-spacing:0.1em;margin-bottom:0.5rem}
+.property-price{font-weight:200;font-size:1rem;color:rgba(255,255,255,0.6);letter-spacing:0.1em}
+.property-details{display:flex;gap:2rem;margin-top:1rem}
+.property-detail{font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:300}
+
+/* ===== TESTIMONIAL ===== */
+.testimonial{background:var(--off-white);text-align:center;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10rem 4rem}
+.testimonial-quote{font-family:'Cinzel',serif;font-size:clamp(1.5rem,3.5vw,3rem);font-weight:400;line-height:1.6;color:var(--primary);max-width:900px;letter-spacing:0.03em;font-style:italic;position:relative}
+.testimonial-quote::before{content:'"';font-family:'Cinzel',serif;font-size:8rem;color:var(--accent);position:absolute;top:-3rem;left:-2rem;opacity:0.3;line-height:1}
+.testimonial-author{margin-top:3rem;font-size:0.65rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--secondary);font-weight:300}
+
+/* ===== CONCIERGE ===== */
+.concierge{background:var(--primary);text-align:center;position:relative;overflow:hidden}
+.concierge::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,169,110,0.05) 0%,transparent 70%)}
+.concierge .section-label{color:var(--accent)}
+.concierge .section-title{color:var(--white);position:relative}
+.concierge-text{max-width:600px;margin:0 auto;font-weight:200;font-size:0.95rem;line-height:2;color:rgba(255,255,255,0.5);position:relative}
+.concierge-features{display:flex;justify-content:center;gap:4rem;margin-top:5rem;flex-wrap:wrap;position:relative}
+.concierge-feature{text-align:center;max-width:200px}
+.concierge-feature-icon{width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:0.8rem;color:var(--accent)}
+.concierge-feature h4{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.2em;color:var(--accent);margin-bottom:0.75rem}
+.concierge-feature p{font-size:0.75rem;font-weight:200;color:rgba(255,255,255,0.4);line-height:1.8}
+
+/* ===== CONTACT ===== */
+.contact{background:var(--white);text-align:center}
+.contact-grid{display:flex;justify-content:center;gap:6rem;margin-top:4rem;flex-wrap:wrap}
+.contact-block{text-align:center}
+.contact-block h4{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.25em;color:var(--primary);margin-bottom:1rem}
+.contact-block p{font-weight:200;font-size:0.85rem;color:var(--med-gray);line-height:2}
+.contact-block a{color:var(--secondary);border-bottom:1px solid transparent;transition:border-color 0.4s ease}
+.contact-block a:hover{border-bottom-color:var(--accent)}
+.contact-form{max-width:500px;margin:5rem auto 0}
+.contact-form input,.contact-form textarea{width:100%;border:none;border-bottom:1px solid rgba(0,0,0,0.08);padding:1.2rem 0;font-family:'Raleway',sans-serif;font-weight:200;font-size:0.85rem;background:transparent;outline:none;transition:border-color 0.4s ease;margin-bottom:1.5rem;color:var(--primary)}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--med-gray);font-weight:200;letter-spacing:0.1em}
+.contact-form input:focus,.contact-form textarea:focus{border-bottom-color:var(--accent)}
+.contact-form textarea{resize:none;height:80px}
+.contact-form button{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;background:var(--primary);color:var(--white);border:none;padding:1rem 3rem;cursor:pointer;transition:all 0.4s ease;margin-top:1rem}
+.contact-form button:hover{background:var(--accent)}
+
+/* ===== FOOTER ===== */
+footer{padding:3rem 4rem;text-align:center;border-top:1px solid rgba(0,0,0,0.05)}
+.footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.4em;color:var(--primary)}
+.footer-credit{font-size:0.6rem;font-weight:300;color:var(--med-gray);letter-spacing:0.15em}
+.footer-credit a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color 0.4s ease}
+.footer-credit a:hover{border-bottom-color:var(--accent)}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu{position:fixed;inset:0;background:var(--primary);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;visibility:hidden;transition:all 0.5s ease}
+.mobile-menu.active{opacity:1;visibility:hidden}
+.mobile-menu a{font-family:'Cinzel',serif;font-size:1.2rem;letter-spacing:0.3em;color:var(--white);transition:color 0.4s ease}
+.mobile-menu a:hover{color:var(--accent)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  nav{padding:1.5rem 2rem}
+  nav.scrolled{padding:1rem 2rem}
+  .section{padding:7rem 2rem}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+  .about-stats{gap:3rem}
+  .testimonial{padding:7rem 2rem}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .hero-title{letter-spacing:0.15em}
+  .gallery-grid{grid-template-columns:1fr;grid-auto-rows:250px}
+  .gallery-item:nth-child(1),.gallery-item:nth-child(4),.gallery-item:nth-child(7){grid-column:span 1;grid-row:span 1}
+  .property{height:70vh}
+  .property-content{padding:2rem}
+  .contact-grid{gap:3rem}
+  .service-item{flex-direction:column;align-items:flex-start;gap:0.5rem}
+  .service-item p{text-align:left}
+  .concierge-features{gap:2rem}
+  .footer-content{flex-direction:column}
+}
+@media(max-width:480px){
+  nav{padding:1rem}
+  .section{padding:5rem 1.5rem}
+  .about-stats{flex-direction:column;gap:2rem}
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Sotheby's</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-bg"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80" alt="Sotheby's International Realty"><div class="hero-overlay"></div></div>
-            <div class="hero-content">
-                <div class="hero-badge">Ultra Luxury Gallery</div>
-                <h1 class="hero-title">Sotheby's International Realty</h1>
-                <p class="hero-tagline">Extraordinary Living</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Inquire Now</a>
-                    <a href="#properties" class="btn btn-outline-white">View Collection</a>
-                </div>
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600566753151-384129cf4e3e?w=800&q=80" alt="Sotheby's International Realty" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 1976</h2>
-                    <p class="about-text">Sotheby's International Realty is a luxury real estate brand with a global network, specializing in high-end properties and extraordinary estates worldwide.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>25,000+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.7★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>48+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Luxury Real Estate</h3>
-            <p>Expert luxury real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Waterfront Properties</h3>
-            <p>Expert waterfront properties services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Estate Sales</h3>
-            <p>Expert estate sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>International Realty</h3>
-            <p>Expert international realty services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
-        </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">Madison, New Jersey</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">Madison, New Jersey</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">Madison, New Jersey</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div></div>
-        </div>
-    </section>
-    
-    
-            <section class="gallery-showcase">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Portfolio</div>
-                        <h2 class="section-title">Featured Properties</h2>
-                    </div>
-                    <div class="gallery-grid">
-                        <div class="gallery-item large"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Property" loading="lazy"><div class="gallery-overlay"><span>View Details</span></div></div>
-                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=80" alt="Property" loading="lazy"><div class="gallery-overlay"><span>View Details</span></div></div>
-                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Property" loading="lazy"><div class="gallery-overlay"><span>View Details</span></div></div>
-                    </div>
-                </div>
-            </section>
-            <section class="luxury-features">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Exclusive</div>
-                        <h2 class="section-title">Luxury Living</h2>
-                    </div>
-                    <div class="luxury-grid">
-                        <div class="luxury-item"><h4>Prime Locations</h4><p>Exclusive access to the most coveted addresses.</p></div>
-                        <div class="luxury-item"><h4>Bespoke Service</h4><p>Personalized concierge-level real estate experience.</p></div>
-                        <div class="luxury-item"><h4>Global Network</h4><p>Connections to luxury markets worldwide.</p></div>
-                        <div class="luxury-item"><h4>White Glove</h4><p>Meticulous attention to every detail of your transaction.</p></div>
-                    </div>
-                </div>
-            </section>
-            <section class="concierge">
-                <div class="container">
-                    <div class="concierge-content">
-                        <h2>Concierge Service</h2>
-                        <p>Experience the pinnacle of personalized real estate service. Our dedicated concierge team handles every aspect of your property journey.</p>
-                        <a href="#contact" class="btn btn-primary">Request Concierge</a>
-                    </div>
-                </div>
-            </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let Sotheby's International Realty's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
-        </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-800-395-6811">+1-800-395-6811</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:info@sothebysrealty.com">info@sothebysrealty.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>Madison, New Jersey</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.sothebysrealty.com" target="_blank">www.sothebysrealty.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>Sotheby's International Realty</h3><p>Extraordinary Living</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-800-395-6811</p><p>info@sothebysrealty.com</p><p>Madison, New Jersey</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Sotheby's International Realty. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+  <div class="preloader-text">SOTHEBY'S</div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="custom-cursor" id="cursor"></div>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <div class="nav-logo">SOTHEBY'S INTERNATIONAL REALTY</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#concierge">Concierge</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#properties" onclick="closeMobileMenu()">Properties</a>
+  <a href="#concierge" onclick="closeMobileMenu()">Concierge</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Luxury Estate">
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-title">SOTHEBY'S</h1>
+    <p class="hero-subtitle">International Realty</p>
+    <div class="hero-line"></div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+  <div class="reveal">
+    <p class="section-label">Since 1976</p>
+    <h2 class="section-title">The Art of<br>Extraordinary Living</h2>
+  </div>
+  <div class="section-divider reveal reveal-delay-1"></div>
+  <p class="about-text reveal reveal-delay-2">
+    For nearly five decades, Sotheby's International Realty has curated the world's most extraordinary properties. 
+    Born from the heritage of Sotheby's auction house, we connect discerning buyers with exceptional homes 
+    that transcend mere shelter — transforming them into expressions of art, culture, and refined taste.
+  </p>
+  <div class="about-stats reveal reveal-delay-3">
+    <div class="stat">
+      <div class="stat-number" data-count="25000">0</div>
+      <div class="stat-label">Affiliated Agents</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-count="1000">0</div>
+      <div class="stat-label">Offices Worldwide</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-count="72">0</div>
+      <div class="stat-label">Countries & Territories</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section gallery" id="gallery">
+  <div class="reveal" style="text-align:center">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-title">Curated Collection</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80" alt="Modern Villa">
+      <div class="gallery-caption">
+        <h4>The Meridian Estate</h4>
+        <p>Aspen, Colorado</p>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Coastal Home">
+      <div class="gallery-caption">
+        <h4>Oceanfront Atelier</h4>
+        <p>Miami Beach, Florida</p>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Chateau">
+      <div class="gallery-caption">
+        <h4>Château Lumière</h4>
+        <p>French Riviera</p>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-3">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Penthouse">
+      <div class="gallery-caption">
+        <h4>The Apex Penthouse</h4>
+        <p>Manhattan, New York</p>
+      </div>
+    </div>
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80" alt="Mountain Retreat">
+      <div class="gallery-caption">
+        <h4>Alpine Sanctuary</h4>
+        <p>Aspen, Colorado</p>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="Estate">
+      <div class="gallery-caption">
+        <h4>Villa Serenità</h4>
+        <p>Lake Como, Italy</p>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80" alt="Modern Architecture">
+      <div class="gallery-caption">
+        <h4>The Glass Pavilion</h4>
+        <p>Malibu, California</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services" id="services">
+  <div class="reveal" style="text-align:center">
+    <p class="section-label">Expertise</p>
+    <h2 class="section-title">Our Services</h2>
+  </div>
+  <div class="services-list">
+    <div class="service-item reveal">
+      <h3>Luxury Property Advisory</h3>
+      <p>Bespoke consultation for acquiring extraordinary residences worldwide</p>
+    </div>
+    <div class="service-item reveal reveal-delay-1">
+      <h3>Portfolio Curation</h3>
+      <p>Strategic marketing for distinguished properties requiring elevated presentation</p>
+    </div>
+    <div class="service-item reveal reveal-delay-2">
+      <h3>Global Network Access</h3>
+      <p>Connections to 25,000+ affiliated agents across 72 countries</p>
+    </div>
+    <div class="service-item reveal reveal-delay-3">
+      <h3>Market Intelligence</h3>
+      <p>Exclusive insights into luxury real estate trends and valuations</p>
+    </div>
+    <div class="service-item reveal">
+      <h3>Relocation Services</h3>
+      <p>Seamless transition support for international and domestic moves</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="properties" id="properties">
+  <div class="property">
+    <div class="property-bg">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80" alt="Estate">
+    </div>
+    <div class="property-overlay"></div>
+    <div class="property-content">
+      <p class="property-location">Madison, New Jersey</p>
+      <h3 class="property-name">The Heritage Estate</h3>
+      <p class="property-price">$12,500,000</p>
+      <div class="property-details">
+        <span class="property-detail">8 Bedrooms</span>
+        <span class="property-detail">12 Bathrooms</span>
+        <span class="property-detail">15,000 Sq Ft</span>
+        <span class="property-detail">12 Acres</span>
+      </div>
+    </div>
+  </div>
+  <div class="property">
+    <div class="property-bg">
+      <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=80" alt="Modern Villa">
+    </div>
+    <div class="property-overlay"></div>
+    <div class="property-content">
+      <p class="property-location">Beverly Hills, California</p>
+      <h3 class="property-name">Villa Celestine</h3>
+      <p class="property-price">$34,000,000</p>
+      <div class="property-details">
+        <span class="property-detail">10 Bedrooms</span>
+        <span class="property-detail">14 Bathrooms</span>
+        <span class="property-detail">22,000 Sq Ft</span>
+        <span class="property-detail">3.5 Acres</span>
+      </div>
+    </div>
+  </div>
+  <div class="property">
+    <div class="property-bg">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80" alt="Coastal">
+    </div>
+    <div class="property-overlay"></div>
+    <div class="property-content">
+      <p class="property-location">Palm Beach, Florida</p>
+      <h3 class="property-name">Ocean Meridian</h3>
+      <p class="property-price">$28,750,000</p>
+      <div class="property-details">
+        <span class="property-detail">7 Bedrooms</span>
+        <span class="property-detail">9 Bathrooms</span>
+        <span class="property-detail">18,500 Sq Ft</span>
+        <span class="property-detail">2.8 Acres</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="reveal">
+    <blockquote class="testimonial-quote">
+      The true luxury is not in possession, but in the pursuit of perfection — 
+      finding that one extraordinary space that speaks to who you are.
+    </blockquote>
+    <p class="testimonial-author">— Sotheby's International Realty, Est. 1976</p>
+  </div>
+</section>
+
+<!-- CONCIERGE -->
+<section class="section concierge" id="concierge">
+  <div class="reveal">
+    <p class="section-label">White Glove</p>
+    <h2 class="section-title">Private Concierge</h2>
+  </div>
+  <p class="concierge-text reveal reveal-delay-1">
+    Our dedicated concierge team provides an unparalleled level of personalized service, 
+    ensuring every detail of your real estate journey is handled with the utmost discretion and care.
+  </p>
+  <div class="concierge-features reveal reveal-delay-2">
+    <div class="concierge-feature">
+      <div class="concierge-feature-icon">✦</div>
+      <h4>Private Viewings</h4>
+      <p>Exclusive access to off-market properties worldwide</p>
+    </div>
+    <div class="concierge-feature">
+      <div class="concierge-feature-icon">◈</div>
+      <h4>Architecture Tours</h4>
+      <p>Curated journeys through exceptional design</p>
+    </div>
+    <div class="concierge-feature">
+      <div class="concierge-feature-icon">◇</div>
+      <h4>Investment Advisory</h4>
+      <p>Strategic guidance for luxury real estate portfolio</p>
+    </div>
+    <div class="concierge-feature">
+      <div class="concierge-feature-icon">✦</div>
+      <h4>Global Network</h4>
+      <p>Connections across 72 countries and territories</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Begin Your Journey</h2>
+  </div>
+  <div class="section-divider reveal reveal-delay-1"></div>
+  <div class="contact-grid reveal reveal-delay-2">
+    <div class="contact-block">
+      <h4>Headquarters</h4>
+      <p>119 West 56th Street<br>New York, NY 10195</p>
+    </div>
+    <div class="contact-block">
+      <h4>Telephone</h4>
+      <p><a href="tel:+18003956811">+1 (800) 395-6811</a></p>
+    </div>
+    <div class="contact-block">
+      <h4>Correspondence</h4>
+      <p><a href="mailto:info@sothebysrealty.com">info@sothebysrealty.com</a></p>
+    </div>
+  </div>
+  <form class="contact-form reveal reveal-delay-3" onsubmit="handleSubmit(event)">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Email Address" required>
+    <input type="tel" placeholder="Phone Number">
+    <textarea placeholder="How may we assist you?" rows="3"></textarea>
+    <button type="submit">Send Inquiry</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">SOTHEBY'S INTERNATIONAL REALTY — EST. 1976 — MADISON, NJ</div>
+    <div class="footer-credit">Demo site built by <a href="#">Alok Web Services</a></div>
+  </div>
+</footer>
+
+<script>
+// Preloader
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('hidden');
+  }, 1500);
+});
+
+// Custom cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX - 10 + 'px';
+  cursor.style.top = e.clientY - 10 + 'px';
+});
+document.querySelectorAll('a, button, .gallery-item, .service-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+});
+
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('active');
+});
+function closeMobileMenu() {
+  mobileMenu.classList.remove('active');
+}
+
+// Scroll reveal
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('.stat-number');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.getAttribute('data-count'));
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const updateCounter = () => {
+        current += step;
+        if (current < target) {
+          entry.target.textContent = Math.floor(current).toLocaleString() + '+';
+          requestAnimationFrame(updateCounter);
+        } else {
+          entry.target.textContent = target.toLocaleString() + '+';
+        }
+      };
+      updateCounter();
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+// Form submission
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = 'SENT ✓';
+  btn.style.background = 'var(--accent)';
+  setTimeout(() => {
+    btn.textContent = 'SEND INQUIRY';
+    btn.style.background = 'var(--primary)';
+    e.target.reset();
+  }, 3000);
+}
+
+// Parallax on hero
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-bg img');
+  if (hero) {
+    const scrolled = window.scrollY;
+    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+  }
+});
+
+// Smooth anchor offset for fixed nav
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      const offset = 80;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    }
+  });
+});
+</script>
 </body>
 </html>
