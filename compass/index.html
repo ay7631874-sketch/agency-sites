@@ -1,597 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compass | Tech Minimal Real Estate</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;700&family=Lato:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Raleway:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;500;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary: #000000;
-        --secondary: #4A4A4A;
-        --accent: #1A1A1A;
-        --bg: #FFFFFF;
-        --fg: #333333;
-        --card-bg: #F7F7F7;
-        --heading-font: 'Plus Jakarta Sans', sans-serif;
-        --body-font: 'Inter', sans-serif;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-        --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-        --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-        --radius: 12px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--body-font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    img { max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; }
-    
-    h1, h2, h3, h4 { font-family: var(--heading-font); line-height: 1.2; }
-    
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary); margin-bottom: 12px; }
-    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    
-    /* Nav */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
-    .navbar.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-md); padding: 14px 0; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: white; transition: var(--transition); }
-    .navbar.scrolled .nav-logo { color: var(--fg); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.9); transition: var(--transition); }
-    .navbar.scrolled .nav-links a { color: var(--fg); }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; transition: var(--transition); }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-    .nav-toggle span { width: 24px; height: 2px; background: white; transition: var(--transition); }
-    .navbar.scrolled .nav-toggle span { background: var(--fg); }
-    
-    /* Hero variants */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #000000dd, #4A4A4Acc); }
-    .hero-content { position: relative; z-index: 2; padding: 120px 40px; max-width: 800px; }
-    .hero-left { position: relative; z-index: 2; padding: 120px 60px; flex: 1; }
-    .hero-right { flex: 1; position: relative; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: white; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); }
-    .hero-overline { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; }
-    .hero-title { font-size: clamp(2.5rem, 8vw, 5rem); color: white; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .hero-tagline { font-size: clamp(1rem, 2vw, 1.3rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-    .hero-stats { display: flex; gap: 40px; margin-bottom: 40px; }
-    .stat { text-align: center; }
-    .stat-num { display: block; font-family: var(--heading-font); font-size: 2rem; font-weight: 700; color: white; }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-cta-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); }
-    .hero-cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; font-size: 1.1rem; }
-    .hero-image { position: relative; z-index: 2; padding: 120px 40px 40px; flex: 1; }
-    .hero-image img { border-radius: 20px; box-shadow: var(--shadow-xl); width: 100%; }
-    
-    /* Buttons */
-    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 600; transition: var(--transition); cursor: pointer; border: none; font-size: 0.95rem; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
-    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid white; }
-    .btn-outline-white:hover { background: white; color: var(--fg); }
-    .btn-glass { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
-    .btn-glass:hover { background: rgba(255,255,255,0.25); }
-    .btn-gold { background: var(--accent); color: var(--fg); }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline-gold { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline-gold:hover { background: var(--accent); color: var(--fg); }
-    .btn-large { padding: 18px 48px; font-size: 1.1rem; }
-    
-    /* About */
-    .about { padding: 120px 0; background: var(--bg); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .about-img img { width: 100%; height: 400px; object-fit: cover; }
-    .about-content .section-label { margin-bottom: 12px; }
-    .about-text { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .about-features { display: flex; flex-direction: column; gap: 16px; }
-    .feature { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-    .feature-icon { width: 40px; height: 40px; background: var(--card-bg); border: 1px solid var(--primary)22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    
-    /* Services */
-    .services { padding: 120px 0; background: var(--card-bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .service-card { background: var(--bg); padding: 36px 28px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary)33; }
-    .service-icon { width: 56px; height: 56px; background: var(--primary)0d; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
-    .service-card p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .service-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-    
-    /* Properties */
-    .properties { padding: 120px 0; background: var(--bg); }
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .property-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
-    .property-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .property-img { position: relative; height: 220px; overflow: hidden; }
-    .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .property-card:hover .property-img img { transform: scale(1.05); }
-    .property-badge { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-    .property-info { padding: 20px; }
-    .property-price { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .property-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-    .property-location { font-size: 0.85rem; opacity: 0.6; margin-bottom: 12px; }
-    .property-features { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Stats Bar */
-    .stats-bar { padding: 80px 0; background: var(--primary); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-    .stat-item .stat-number { display: block; font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; color: white; }
-    .stat-item .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
-    
-    /* Testimonials */
-    .testimonials { padding: 120px 0; background: var(--card-bg); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .testimonial-card { background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
-    .stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 16px; }
-    .testimonial-card p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .testimonial-author strong { display: block; font-size: 0.9rem; }
-    .testimonial-author span { font-size: 0.8rem; opacity: 0.6; }
-    
-    /* Process */
-    .process { padding: 120px 0; background: var(--bg); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .process-step { text-align: center; padding: 24px; }
-    .step-number { font-family: var(--heading-font); font-size: 3rem; font-weight: 700; color: var(--primary); opacity: 0.2; margin-bottom: 16px; }
-    .process-step h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .process-step p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Awards */
-    .awards { padding: 120px 0; background: var(--card-bg); }
-    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .award-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .award-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .award-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .award-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .award-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Team */
-    .team { padding: 120px 0; background: var(--bg); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .team-card { text-align: center; }
-    .team-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 4px solid var(--primary)22; }
-    .team-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .team-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Legacy */
-    .legacy { padding: 120px 0; background: var(--card-bg); }
-    .legacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .legacy-image { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .legacy-image img { width: 100%; height: 400px; object-fit: cover; }
-    .legacy-content .section-title { margin-bottom: 20px; }
-    .legacy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 32px; opacity: 0.85; }
-    .legacy-stats { display: flex; gap: 40px; }
-    .legacy-stats div strong { display: block; font-family: var(--heading-font); font-size: 2rem; color: var(--primary); }
-    .legacy-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Tech Features */
-    .tech-features { padding: 120px 0; background: var(--card-bg); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .feature-card { background: var(--bg); padding: 32px 24px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; opacity: 0.7; }
-    
-    /* Community */
-    .community { padding: 120px 0; background: var(--bg); }
-    .community-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .community-content p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; }
-    .community-stats { display: flex; justify-content: center; gap: 60px; }
-    .community-stats div strong { display: block; font-family: var(--heading-font); font-size: 2.2rem; color: var(--primary); }
-    .community-stats div span { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* Gallery */
-    .gallery-showcase { padding: 120px 0; background: var(--card-bg); }
-    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 500px; }
-    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; }
-    .gallery-item.large { grid-row: 1 / -1; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-weight: 600; font-size: 1.1rem; }
-    
-    /* Luxury Features */
-    .luxury-features { padding: 120px 0; background: var(--bg); }
-    .luxury-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .luxury-item { padding: 32px; border-left: 3px solid var(--primary); }
-    .luxury-item h4 { font-size: 1.1rem; margin-bottom: 10px; }
-    .luxury-item p { font-size: 0.9rem; opacity: 0.7; }
-    
-    /* Concierge */
-    .concierge { padding: 100px 0; background: var(--primary); text-align: center; }
-    .concierge-content { max-width: 600px; margin: 0 auto; }
-    .concierge h2 { color: white; font-size: 2.5rem; margin-bottom: 16px; }
-    .concierge p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .concierge .btn-primary { background: white; color: var(--primary); }
-    
-    /* Virtual Tour */
-    .virtual-tour { padding: 120px 0; background: var(--card-bg); text-align: center; }
-    .tour-desc { max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem; opacity: 0.8; }
-    
-    /* Savings */
-    .savings { padding: 120px 0; background: var(--bg); }
-    .savings-content { max-width: 500px; margin: 0 auto; }
-    .savings-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .savings-label { font-weight: 500; }
-    .savings-old { font-size: 1.2rem; text-decoration: line-through; opacity: 0.5; }
-    .savings-new { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-    .savings-total { display: flex; justify-content: space-between; padding: 20px 0; font-weight: 700; font-size: 1.1rem; }
-    .savings-amount { color: var(--primary); font-size: 1.5rem; }
-    
-    /* Agent Spotlight */
-    .agent-spotlight { padding: 120px 0; background: var(--card-bg); }
-    .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .agent-card { text-align: center; background: var(--bg); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: var(--transition); }
-    .agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .agent-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 3px solid var(--primary)22; }
-    .agent-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
-    .agent-card p { font-size: 0.85rem; opacity: 0.6; }
-    
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); text-align: center; }
-    .cta h2 { color: white; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
-    .cta p { color: rgba(255,255,255,0.9); margin-bottom: 32px; font-size: 1.1rem; }
-    .cta .btn-primary { background: white; color: var(--primary); }
-    
-    /* Contact */
-    .contact { padding: 120px 0; background: var(--bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
-    .contact-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
-    .contact-item a, .contact-item p { font-size: 0.9rem; opacity: 0.8; transition: var(--transition); }
-    .contact-item a:hover { color: var(--primary); opacity: 1; }
-    .contact-form { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
-    .form-group { margin-bottom: 16px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--body-font); font-size: 0.95rem; transition: var(--transition); background: var(--bg); }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary)11; }
-    
-    /* Footer */
-    .footer { background: var(--fg); color: white; padding: 80px 0 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-    .footer-brand h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .footer-brand p { opacity: 0.7; }
-    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-links a { display: block; color: rgba(255,255,255,0.7); margin-bottom: 10px; font-size: 0.9rem; transition: var(--transition); }
-    .footer-links a:hover { color: white; }
-    .footer-contact h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
-    .footer-contact p { color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 0.9rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; opacity: 0.6; }
-    .credit { color: var(--accent); }
-    
-    /* Animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 16px; box-shadow: var(--shadow-lg); }
-        .nav-links.active { display: flex; }
-        .nav-links a { color: var(--fg) !important; }
-        .nav-cta { display: none; }
-        .nav-toggle { display: flex; }
-        .hero { flex-direction: column; min-height: auto; }
-        .hero-left { padding: 120px 24px 60px; }
-        .hero-right { height: 300px; }
-        .hero-image { padding: 60px 24px; }
-        .about-grid, .contact-grid, .legacy-grid, .footer-grid { grid-template-columns: 1fr; }
-        .stats-grid, .process-grid, .awards-grid, .features-grid, .luxury-grid { grid-template-columns: 1fr 1fr; }
-        .hero-stats { flex-wrap: wrap; gap: 20px; }
-        .community-stats { flex-direction: column; gap: 24px; }
-        .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-        .gallery-item.large { grid-row: auto; }
-        .team-grid, .agents-grid, .testimonials-grid, .properties-grid { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .fade-in { opacity: 1; transform: none; transition: none; }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compass — Technology-Driven Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#000000;--gray:#666666;--light:#f5f5f7;--border:#e8e8e8;--white:#ffffff}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--black);background:var(--white);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-weight:700;line-height:1.15;letter-spacing:-0.02em}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:64px;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,80px)}
+.nav-logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.03em;color:var(--black)}
+.nav-cta{font-size:13px;font-weight:500;letter-spacing:0.02em;padding:10px 24px;border:1px solid var(--black);border-radius:100px;color:var(--black);background:transparent;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.nav-cta:hover{background:var(--black);color:var(--white)}
+
+/* SECTIONS */
+section{padding:clamp(80px,12vw,160px) clamp(24px,5vw,80px)}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);margin-bottom:16px}
+.section-title{font-size:clamp(32px,5vw,56px);color:var(--black);margin-bottom:20px;max-width:700px}
+.section-desc{font-size:17px;color:var(--gray);line-height:1.7;max-width:540px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:64px;position:relative;overflow:hidden}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,120px);align-items:center;width:100%;max-width:1280px;margin:0 auto}
+.hero-text{position:relative;z-index:2}
+.hero-text .section-label{margin-bottom:20px}
+.hero-text h1{font-size:clamp(40px,6vw,72px);line-height:1.05;margin-bottom:24px;letter-spacing:-0.03em}
+.hero-text p{font-size:clamp(16px,1.5vw,19px);color:var(--gray);line-height:1.7;max-width:480px;margin-bottom:40px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--black);color:var(--white);border:none;border-radius:100px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(0,0,0,0.15)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:transparent;color:var(--black);border:1px solid var(--border);border-radius:100px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.btn-secondary:hover{border-color:var(--black)}
+
+.hero-visual{position:relative;height:clamp(400px,50vw,560px);perspective:1200px}
+.float-card{position:absolute;background:var(--white);border-radius:20px;padding:28px 32px;box-shadow:0 4px 24px rgba(0,0,0,0.06),0 1px 4px rgba(0,0,0,0.04);border:1px solid var(--border);transition:transform 0.6s cubic-bezier(0.4,0,0.2,1),box-shadow 0.6s cubic-bezier(0.4,0,0.2,1);animation:float 6s ease-in-out infinite}
+.float-card:nth-child(1){top:8%;left:5%;width:280px;animation-delay:0s}
+.float-card:nth-child(2){top:38%;right:0;width:260px;animation-delay:1.5s}
+.float-card:nth-child(3){bottom:8%;left:15%;width:240px;animation-delay:3s}
+.float-card:hover{transform:translateY(-4px)!important;box-shadow:0 12px 40px rgba(0,0,0,0.1),0 2px 8px rgba(0,0,0,0.06)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.card-label{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);margin-bottom:10px}
+.card-value{font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
+.card-sub{font-size:13px;color:var(--gray)}
+.card-bar{height:4px;background:var(--border);border-radius:4px;margin-top:14px;overflow:hidden}
+.card-bar-fill{height:100%;background:var(--black);border-radius:4px;transition:width 1.5s cubic-bezier(0.4,0,0.2,1)}
+.card-mini{display:flex;align-items:center;gap:8px;margin-top:12px}
+.card-dot{width:8px;height:8px;border-radius:50%}
+.card-dot.green{background:#22c55e}
+.card-dot.amber{background:#f59e0b}
+.card-mini-text{font-size:12px;color:var(--gray)}
+
+/* ABOUT */
+.about{text-align:center;display:flex;flex-direction:column;align-items:center;background:var(--white)}
+.about .section-desc{margin:0 auto}
+.about-stats{display:flex;gap:clamp(40px,6vw,100px);margin-top:64px;flex-wrap:wrap;justify-content:center}
+.stat{text-align:center}
+.stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:700;letter-spacing:-0.03em;margin-bottom:4px}
+.stat-label{font-size:13px;color:var(--gray);letter-spacing:0.04em}
+
+/* FEATURES */
+.features{background:var(--white)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(40px,4vw,80px);margin-top:64px;max-width:1100px;margin-left:auto;margin-right:auto}
+.feature{text-align:left}
+.feature-icon{width:48px;height:48px;margin-bottom:20px;display:flex;align-items:center;justify-content:center}
+.feature-icon svg{width:36px;height:36px;stroke:var(--black);stroke-width:1.5;fill:none}
+.feature h3{font-size:19px;margin-bottom:12px;letter-spacing:-0.01em}
+.feature p{font-size:15px;color:var(--gray);line-height:1.7}
+
+/* PROPERTIES */
+.properties{background:var(--white)}
+.properties-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;max-width:1200px;margin-left:auto;margin-right:auto}
+.property-card{border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1),box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);cursor:pointer}
+.property-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.08)}
+.property-img{width:100%;aspect-ratio:16/10;background:var(--light);position:relative;overflow:hidden}
+.property-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--border)}
+.property-tag{position:absolute;top:16px;left:16px;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:6px 12px;background:var(--white);border-radius:100px;border:1px solid var(--border)}
+.property-body{padding:24px}
+.property-price{font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;letter-spacing:-0.02em}
+.property-address{font-size:14px;color:var(--gray);margin-bottom:16px}
+.property-meta{display:flex;gap:16px;font-size:13px;color:var(--gray)}
+.property-meta span{display:flex;align-items:center;gap:4px}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--white);text-align:center;overflow:hidden}
+.testimonial-carousel{position:relative;max-width:640px;margin:64px auto 0;height:200px}
+.testimonial-slide{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;opacity:0;transition:opacity 0.6s ease,transform 0.6s ease;pointer-events:none}
+.testimonial-slide.active{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.testimonial-slide.prev{transform:translateX(-50%) translateY(10px)}
+.quote-mark{font-size:48px;line-height:1;color:var(--border);margin-bottom:16px;font-family:Georgia,serif}
+.testimonial-text{font-size:18px;line-height:1.8;color:var(--black);font-style:italic;margin-bottom:24px}
+.testimonial-author{font-size:14px;font-weight:500;color:var(--black)}
+.testimonial-role{font-size:13px;color:var(--gray);margin-top:4px}
+.carousel-dots{display:flex;gap:8px;justify-content:center;margin-top:32px}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:all 0.3s ease;padding:0}
+.carousel-dot.active{background:var(--black);width:24px;border-radius:3px}
+
+/* PROCESS */
+.process{background:var(--white);text-align:center}
+.process-line{position:relative;max-width:800px;margin:80px auto 0;height:2px;background:var(--border)}
+.process-line::before,.process-line::after{content:'';position:absolute;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:var(--border)}
+.process-line::before{left:0}
+.process-line::after{right:0}
+.process-nodes{display:grid;grid-template-columns:repeat(4,1fr);max-width:800px;margin:-7px auto 0;position:relative}
+.process-node{display:flex;flex-direction:column;align-items:center}
+.process-dot{width:14px;height:14px;border-radius:50%;background:var(--white);border:2px solid var(--black);position:relative;z-index:2;margin-bottom:24px;transition:all 0.3s ease}
+.process-node:hover .process-dot{background:var(--black);transform:scale(1.2)}
+.process-step{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.process-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px}
+.process-desc{font-size:13px;color:var(--gray);max-width:160px;line-height:1.6}
+
+/* CONTACT */
+.contact{background:var(--white);display:flex;flex-direction:column;align-items:center;text-align:center}
+.contact-form{width:100%;max-width:460px;margin-top:48px}
+.form-row{margin-bottom:20px}
+.form-row input,.form-row textarea,.form-row select{width:100%;padding:14px 0;border:none;border-bottom:1px solid var(--border);font-size:15px;font-family:'Inter',sans-serif;background:transparent;color:var(--black);outline:none;transition:border-color 0.3s ease}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--black)}
+.form-row input::placeholder,.form-row textarea::placeholder{color:#bbb}
+.form-row textarea{resize:vertical;min-height:100px}
+.form-row select{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0 center}
+.form-row select option{font-family:'Inter',sans-serif}
+.form-submit{width:100%;margin-top:32px}
+
+/* FOOTER */
+footer{background:var(--light);border-top:1px solid var(--border);padding:64px clamp(24px,5vw,80px) 40px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:48px}
+.footer-brand .footer-logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;margin-bottom:12px;letter-spacing:-0.02em}
+.footer-brand p{font-size:13px;color:var(--gray);line-height:1.7;max-width:280px}
+.footer-col h4{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:13px;color:var(--black);transition:color 0.2s}
+.footer-col a:hover{color:var(--gray)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--gray)}
+.footer-credit{font-size:11px;color:#bbb}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-text p{margin-left:auto;margin-right:auto}
+  .hero-buttons{justify-content:center}
+  .hero-visual{display:none}
+  .features-grid{grid-template-columns:1fr;max-width:400px}
+  .properties-grid{grid-template-columns:1fr}
+  .process-nodes{grid-template-columns:repeat(2,1fr);gap:40px}
+  .process-line{display:none}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+}
+@media(max-width:600px){
+  section{padding:clamp(60px,10vw,100px) 20px}
+  .process-nodes{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Compass</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#properties">Properties</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">compass</div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="section-label">Technology-Driven Real Estate</div>
+      <h1>Redefining how you buy and sell homes</h1>
+      <p>Compass combines world-class technology with top-tier agents to deliver a seamless, data-driven real estate experience in New York and beyond.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="document.getElementById('properties').scrollIntoView({behavior:'smooth'})">Explore Properties <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        <button class="btn-secondary" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-card">
+        <div class="card-label">Market Activity</div>
+        <div class="card-value">2,847</div>
+        <div class="card-sub">Active listings this month</div>
+        <div class="card-bar"><div class="card-bar-fill" data-width="78%" style="width:0"></div></div>
+      </div>
+      <div class="float-card">
+        <div class="card-label">Avg. Sale Price</div>
+        <div class="card-value">$1.2M</div>
+        <div class="card-sub">Up 8.3% from last quarter</div>
+        <div class="card-mini">
+          <div class="card-dot green"></div>
+          <span class="card-mini-text">Strong growth</span>
         </div>
-    </nav>
-    
-    
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-badge">Tech Minimal</div>
-                <h1 class="hero-title">Compass</h1>
-                <p class="hero-tagline">The Future of Real Estate</p>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Start Searching</a>
-                    <a href="#properties" class="btn btn-outline">Browse Homes</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&q=80" alt="Compass">
-            </div>
-        </section>
-    
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-img"><img src="https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=800&q=80" alt="Compass" loading="lazy"></div>
-                <div class="about-content">
-                    <div class="section-label">About Us</div>
-                    <h2 class="section-title">Trusted Since 2012</h2>
-                    <p class="about-text">Compass is a technology-driven real estate brokerage that combines innovative tools with expert agents to deliver a seamless home buying and selling experience.</p>
-                    <div class="about-features">
-                        <div class="feature"><div class="feature-icon">✓</div><span>Licensed & Certified Professionals</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>30,000+ Experienced Agents Nationwide</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>4.4★ Customer Satisfaction Rating</span></div>
-                        <div class="feature"><div class="feature-icon">✓</div><span>12+ Years of Trusted Service</span></div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="float-card">
+        <div class="card-label">Agent Performance</div>
+        <div class="card-value">96%</div>
+        <div class="card-sub">Client satisfaction rate</div>
+        <div class="card-mini">
+          <div class="card-dot amber"></div>
+          <span class="card-mini-text">Top rated</span>
         </div>
-    </section>
-    
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">What We Offer</div>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-        <div class="service-card" style="animation-delay: 0.0s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Residential Sales</h3>
-            <p>Expert residential sales services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <div class="section-label" style="text-align:center">About Compass</div>
+    <div class="section-title" style="margin:0 auto 20px">Built for the modern era of real estate</div>
+    <div class="section-desc" style="margin:0 auto">Founded in 2012 in New York, Compass has grown to become the leading technology-driven real estate brokerage, empowering over 30,000 agents across 700+ offices with proprietary tools and deep market insights.</div>
+  </div>
+  <div class="about-stats reveal">
+    <div class="stat">
+      <div class="stat-num" data-count="30000">0</div>
+      <div class="stat-label">Agents</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-count="700">0</div>
+      <div class="stat-label">Offices</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-count="2012">0</div>
+      <div class="stat-label">Founded</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div style="text-align:center">
+    <div class="section-label reveal">What We Offer</div>
+    <div class="section-title reveal" style="margin:0 auto 20px">Everything you need to find your place</div>
+  </div>
+  <div class="features-grid">
+    <div class="feature reveal reveal-delay-1">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><path d="M16 24h16M24 16v16"/></svg>
+      </div>
+      <h3>Smart Search</h3>
+      <p>AI-powered property matching that learns your preferences and surfaces the perfect home before it even hits the market.</p>
+    </div>
+    <div class="feature reveal reveal-delay-2">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="4"/><path d="M16 28l6-8 5 5 6-9"/></svg>
+      </div>
+      <h3>Market Analytics</h3>
+      <p>Real-time pricing data, neighborhood trends, and predictive analytics give you an unfair advantage in any market.</p>
+    </div>
+    <div class="feature reveal reveal-delay-3">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48"><path d="M24 4L4 18v26h16V30h8v14h16V18z"/></svg>
+      </div>
+      <h3>Expert Agents</h3>
+      <p>Access to 30,000+ top-performing agents, each backed by Compass technology to deliver exceptional results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="properties" id="properties">
+  <div style="text-align:center">
+    <div class="section-label reveal">Featured Properties</div>
+    <div class="section-title reveal" style="margin:0 auto 20px">Curated listings, exceptional quality</div>
+  </div>
+  <div class="properties-grid">
+    <div class="property-card reveal reveal-delay-1">
+      <div class="property-img">
+        <div class="property-img-inner">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 21V7l9-5 9 5v14"/><path d="M9 21V11h6v10"/></svg>
         </div>
-        <div class="service-card" style="animation-delay: 0.1s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Commercial Real Estate</h3>
-            <p>Expert commercial real estate services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+        <span class="property-tag">For Sale</span>
+      </div>
+      <div class="property-body">
+        <div class="property-price">$2,450,000</div>
+        <div class="property-address">780 Park Avenue, Upper East Side</div>
+        <div class="property-meta">
+          <span>4 Bed</span>
+          <span>3 Bath</span>
+          <span>2,800 sqft</span>
         </div>
-        <div class="service-card" style="animation-delay: 0.2s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Luxury Properties</h3>
-            <p>Expert luxury properties services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
+      </div>
+    </div>
+    <div class="property-card reveal reveal-delay-2">
+      <div class="property-img">
+        <div class="property-img-inner">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 21V7l9-5 9 5v14"/><path d="M9 21V11h6v10"/></svg>
         </div>
-        <div class="service-card" style="animation-delay: 0.30000000000000004s">
-            <div class="service-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
-            <h3>Property Management</h3>
-            <p>Expert property management services backed by decades of experience and market knowledge.</p>
-            <a href="#contact" class="service-link">Learn More →</a>
-        </div></div>
+        <span class="property-tag">New Listing</span>
+      </div>
+      <div class="property-body">
+        <div class="property-price">$1,875,000</div>
+        <div class="property-address">456 West 25th Street, Chelsea</div>
+        <div class="property-meta">
+          <span>3 Bed</span>
+          <span>2 Bath</span>
+          <span>2,100 sqft</span>
         </div>
-    </section>
-    
-    <section class="properties" id="properties">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Featured Listings</div>
-                <h2 class="section-title">Premium Properties</h2>
-            </div>
-            <div class="properties-grid">
-        <div class="property-card" style="animation-delay: 0.0s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80" alt="Property 1" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$1.2M</div>
-                <h3>Luxury Property 1</h3>
-                <p class="property-location">New York, New York</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="property-card reveal reveal-delay-3">
+      <div class="property-img">
+        <div class="property-img-inner">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 21V7l9-5 9 5v14"/><path d="M9 21V11h6v10"/></svg>
         </div>
-        <div class="property-card" style="animation-delay: 0.15s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Property 2" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$895K</div>
-                <h3>Luxury Property 2</h3>
-                <p class="property-location">New York, New York</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
+        <span class="property-tag">Exclusive</span>
+      </div>
+      <div class="property-body">
+        <div class="property-price">$4,200,000</div>
+        <div class="property-address">15 Central Park West, Lincoln Square</div>
+        <div class="property-meta">
+          <span>5 Bed</span>
+          <span>4 Bath</span>
+          <span>3,600 sqft</span>
         </div>
-        <div class="property-card" style="animation-delay: 0.3s">
-            <div class="property-img">
-                <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600&q=80" alt="Property 3" loading="lazy">
-                <div class="property-badge">Featured</div>
-            </div>
-            <div class="property-info">
-                <div class="property-price">$2.1M</div>
-                <h3>Luxury Property 3</h3>
-                <p class="property-location">New York, New York</p>
-                <div class="property-features">
-                    <span>4 Bed</span><span>3 Bath</span><span>2,500 sqft</span>
-                </div>
-            </div>
-        </div></div>
-        </div>
-    </section>
-    
-    
-            <section class="tech-features">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-label">Technology</div>
-                        <h2 class="section-title">Powered by Innovation</h2>
-                    </div>
-                    <div class="features-grid">
-                        <div class="feature-card"><div class="feature-icon">📱</div><h4>Mobile App</h4><p>Search homes on the go with our award-winning app.</p></div>
-                        <div class="feature-card"><div class="feature-icon">🤖</div><h4>AI Matching</h4><p>Smart algorithms find properties that match your lifestyle.</p></div>
-                        <div class="feature-card"><div class="feature-icon">📊</div><h4>Market Insights</h4><p>Real-time data and analytics to make informed decisions.</p></div>
-                        <div class="feature-card"><div class="feature-icon">🏠</div><h4>Virtual Tours</h4><p>Explore homes from anywhere with immersive 3D tours.</p></div>
-                    </div>
-                </div>
-            </section>
-    <section class="stats-bar">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item"><span class="stat-number">30,000+</span><span class="stat-text">Expert Agents</span></div>
-                <div class="stat-item"><span class="stat-number">700+</span><span class="stat-text">Offices Nationwide</span></div>
-                <div class="stat-item"><span class="stat-number">4.4★</span><span class="stat-text">Average Rating</span></div>
-                <div class="stat-item"><span class="stat-number">12+</span><span class="stat-text">Years of Trust</span></div>
-            </div>
-        </div>
-    </section>
-    <section class="process">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">How It Works</div>
-                <h2 class="section-title">Our Process</h2>
-            </div>
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-number">01</div>
-                    <h3>Consultation</h3>
-                    <p>We understand your needs, budget, and timeline to find the perfect property match.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">02</div>
-                    <h3>Property Search</h3>
-                    <p>Access exclusive listings and curated properties tailored to your specific requirements.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">03</div>
-                    <h3>Negotiation</h3>
-                    <p>Our expert agents negotiate the best terms and price on your behalf.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <h3>Closing</h3>
-                    <p>Smooth, hassle-free closing with dedicated support from start to finish.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Find Your Dream Home?</h2>
-            <p>Let Compass's expert agents guide you every step of the way.</p>
-            <a href="#contact" class="btn btn-primary btn-large">Get Started Today</a>
-        </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Get In Touch</div>
-                <h2 class="section-title">Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item"><div>📞</div><div><h4>Phone</h4><a href="tel:+1-917-526-4760">+1-917-526-4760</a></div></div>
-                        <div class="contact-item"><div>✉️</div><div><h4>Email</h4><a href="mailto:support@compass.com">support@compass.com</a></div></div>
-                        <div class="contact-item"><div>📍</div><div><h4>Headquarters</h4><p>New York, New York</p></div></div>
-                        <div class="contact-item"><div>🌐</div><div><h4>Website</h4><a href="https://www.compass.com" target="_blank">www.compass.com</a></div></div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
-                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Your Phone"></div>
-                        <div class="form-group"><textarea placeholder="Your Message" rows="4" required></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand"><h3>Compass</h3><p>The Future of Real Estate</p></div>
-                <div class="footer-links"><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#properties">Properties</a><a href="#contact">Contact</a></div>
-                <div class="footer-contact"><h4>Contact</h4><p>+1-917-526-4760</p><p>support@compass.com</p><p>New York, New York</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Compass. All rights reserved.</p>
-                <p class="credit">Demo site built by <strong>Alok Web Services</strong></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle?.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) { t.scrollIntoView({ behavior: 'smooth' }); navLinks.classList.remove('active'); }
-            });
-        });
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault(); alert('Thank you! We will contact you soon.'); this.reset();
-        });
-    </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-label reveal">Testimonials</div>
+  <div class="section-title reveal" style="margin:0 auto 20px">Trusted by thousands of homeowners</div>
+  <div class="testimonial-carousel">
+    <div class="testimonial-slide active">
+      <div class="quote-mark">"</div>
+      <div class="testimonial-text">Compass's technology made selling our apartment effortless. The market insights were invaluable, and our agent was truly world-class.</div>
+      <div class="testimonial-author">Sarah Mitchell</div>
+      <div class="testimonial-role">Sold her Upper West Side home in 21 days</div>
+    </div>
+    <div class="testimonial-slide">
+      <div class="quote-mark">"</div>
+      <div class="testimonial-text">As a first-time buyer, I was overwhelmed. Compass connected me with an agent who understood exactly what I needed and guided me every step.</div>
+      <div class="testimonial-author">David Chen</div>
+      <div class="testimonial-role">First-time buyer, Brooklyn</div>
+    </div>
+    <div class="testimonial-slide">
+      <div class="quote-mark">"</div>
+      <div class="testimonial-text">The data-driven approach at Compass is unmatched. We found our dream home through their AI recommendations before it was publicly listed.</div>
+      <div class="testimonial-author">Elena Rodriguez</div>
+      <div class="testimonial-role">Bought in SoHo, 2024</div>
+    </div>
+    <div class="testimonial-slide">
+      <div class="quote-mark">"</div>
+      <div class="testimonial-text">From listing to closing in under 30 days. Compass's platform handled everything with incredible precision and transparency.</div>
+      <div class="testimonial-author">James Park</div>
+      <div class="testimonial-role">Sold a Tribeca penthouse</div>
+    </div>
+  </div>
+  <div class="carousel-dots">
+    <button class="carousel-dot active" data-index="0"></button>
+    <button class="carousel-dot" data-index="1"></button>
+    <button class="carousel-dot" data-index="2"></button>
+    <button class="carousel-dot" data-index="3"></button>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-label reveal">Our Process</div>
+  <div class="section-title reveal" style="margin:0 auto 20px">Simple, transparent, effective</div>
+  <div class="section-desc reveal" style="margin:0 auto">Four steps to your next move, guided by technology and powered by expertise.</div>
+  <div class="process-line reveal"></div>
+  <div class="process-nodes reveal">
+    <div class="process-node">
+      <div class="process-dot"></div>
+      <div class="process-step">Step 01</div>
+      <div class="process-name">Consultation</div>
+      <div class="process-desc">We learn your goals, timeline, and preferences through a personalized assessment.</div>
+    </div>
+    <div class="process-node">
+      <div class="process-dot"></div>
+      <div class="process-step">Step 02</div>
+      <div class="process-name">Strategy</div>
+      <div class="process-desc">Our agents craft a data-backed plan tailored to your unique situation.</div>
+    </div>
+    <div class="process-node">
+      <div class="process-dot"></div>
+      <div class="process-step">Step 03</div>
+      <div class="process-name">Execute</div>
+      <div class="process-desc">From staging to showings, we manage every detail with precision.</div>
+    </div>
+    <div class="process-node">
+      <div class="process-dot"></div>
+      <div class="process-step">Step 04</div>
+      <div class="process-name">Close</div>
+      <div class="process-desc">Seamless closing with full transparency and dedicated support.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label reveal">Contact</div>
+  <div class="section-title reveal" style="margin:0 auto 20px">Let's start a conversation</div>
+  <div class="section-desc reveal" style="margin:0 auto">Whether you're buying, selling, or just exploring — we'd love to hear from you.</div>
+  <form class="contact-form reveal" onsubmit="event.preventDefault();handleFormSubmit()">
+    <div class="form-row">
+      <input type="text" placeholder="Your name" required>
+    </div>
+    <div class="form-row">
+      <input type="email" placeholder="Email address" required>
+    </div>
+    <div class="form-row">
+      <input type="tel" placeholder="Phone number">
+    </div>
+    <div class="form-row">
+      <select>
+        <option value="" disabled selected>How can we help?</option>
+        <option>Buy a home</option>
+        <option>Sell a home</option>
+        <option>Find an agent</option>
+        <option>Market information</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <textarea placeholder="Tell us more..."></textarea>
+    </div>
+    <div class="form-submit">
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center">Send Message</button>
+    </div>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">compass</div>
+        <p>Technology-driven real estate brokerage. Empowering agents and clients since 2012.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+19175264760">+1-917-526-4760</a></li>
+          <li><a href="mailto:support@compass.com">support@compass.com</a></li>
+          <li><a href="#">New York, NY</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2012–2026 Compass. All rights reserved.</div>
+      <div class="footer-credit">Demo site built by Alok Web Services</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Testimonial Carousel
+(function(){
+  const slides=document.querySelectorAll('.testimonial-slide');
+  const dots=document.querySelectorAll('.carousel-dot');
+  let current=0;
+  function goTo(index){
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current=index;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  dots.forEach(d=>d.addEventListener('click',()=>goTo(parseInt(d.dataset.index))));
+  setInterval(()=>goTo((current+1)%slides.length),5000);
+})();
+
+// Scroll Reveal
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>obs.observe(el));
+})();
+
+// Counter Animation
+(function(){
+  const nums=document.querySelectorAll('.stat-num[data-count]');
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target;
+        const target=parseInt(el.dataset.count);
+        const suffix=target>=1000?'+':'';
+        const display=target>=1000?target/1000+'K+':target;
+        let start=0;const duration=1800;const startTime=performance.now();
+        function tick(now){
+          const progress=Math.min((now-startTime)/duration,1);
+          const ease=1-Math.pow(1-progress,4);
+          const val=Math.round(target*ease);
+          if(target>=1000)el.textContent=(val/1000).toFixed(val>=target?0:0)+'K+';
+          else el.textContent=val.toLocaleString();
+          if(progress<1)requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        obs.unobserve(el);
+      }
+    });
+  },{threshold:0.5});
+  nums.forEach(el=>obs.observe(el));
+})();
+
+// Card Bar Animation
+(function(){
+  const bars=document.querySelectorAll('.card-bar-fill[data-width]');
+  setTimeout(()=>bars.forEach(b=>b.style.width=b.dataset.width),800);
+})();
+
+// Form Submit
+function handleFormSubmit(){
+  const btn=document.querySelector('.form-submit .btn-primary');
+  const orig=btn.innerHTML;
+  btn.innerHTML='✓ Message Sent';
+  btn.style.background='#22c55e';
+  setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';},2500);
+}
+
+// Smooth nav background on scroll
+(function(){
+  const nav=document.querySelector('nav');
+  window.addEventListener('scroll',()=>{
+    nav.style.boxShadow=window.scrollY>20?'0 1px 12px rgba(0,0,0,0.04)':'none';
+  });
+})();
+</script>
 </body>
 </html>
