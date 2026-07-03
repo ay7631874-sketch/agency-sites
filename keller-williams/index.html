@@ -3,1153 +3,748 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keller Williams Realty | Where Vision Meets Real Estate</title>
+<title>Keller Williams Realty — Find Your Dream Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & BASE ===== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', sans-serif;
-  color: #1a1a1a;
-  background: #fff;
-  overflow-x: hidden;
-  line-height: 1.6;
+/* ========== RESET & BASE ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --kw-red:#C41E3A;
+  --kw-red-hover:#a81830;
+  --kw-dark:#061b31;
+  --kw-white:#ffffff;
+  --kw-light:#f8fafc;
+  --kw-gold:#b8860b;
+  --kw-body:#64748d;
+  --kw-border:#e5edf5;
+  --kw-shadow:rgba(50,50,93,0.25) 0px 30px 45px -30px, rgba(0,0,0,0.1) 0px 18px 36px -18px;
+  --kw-shadow-hover:rgba(50,50,93,0.35) 0px 40px 55px -30px, rgba(0,0,0,0.15) 0px 22px 42px -18px;
+  --font-heading:'Playfair Display',Georgia,serif;
+  --font-body:'Source Sans 3','Segoe UI',sans-serif;
+  --max-w:1240px;
+  --section-py:100px;
 }
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-img { max-width: 100%; display: block; }
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-body);font-weight:300;color:var(--kw-body);line-height:1.7;background:var(--kw-white);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit;transition:color .25s}
+ul{list-style:none}
+.container{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 24px}
 
-/* ===== CSS VARIABLES ===== */
-:root {
-  --red: #C41E3A;
-  --dark: #1a1a1a;
-  --white: #fff;
-  --light-gray: #f5f5f5;
-  --gold: #d4a843;
-  --shadow-3d: 4px 4px 0 rgba(0,0,0,0.3);
-  --shadow-3d-lg: 6px 6px 0 rgba(0,0,0,0.25);
-}
+/* ========== ANIMATIONS (scroll reveal) ========== */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
 
-/* ===== 3D FLOATING CUBE ===== */
-.cube-scene {
-  position: absolute;
-  top: 20%;
-  right: 8%;
-  width: 80px;
-  height: 80px;
-  perspective: 300px;
-  z-index: 2;
-  pointer-events: none;
-}
-.cube {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: rotateCube 8s infinite linear;
-}
-.cube__face {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: rgba(196, 30, 58, 0.15);
-  border: 2px solid rgba(255,255,255,0.3);
-  backdrop-filter: blur(4px);
-}
-.cube__face--front  { transform: translateZ(40px); }
-.cube__face--back   { transform: rotateY(180deg) translateZ(40px); }
-.cube__face--right  { transform: rotateY(90deg) translateZ(40px); }
-.cube__face--left   { transform: rotateY(-90deg) translateZ(40px); }
-.cube__face--top    { transform: rotateX(90deg) translateZ(40px); }
-.cube__face--bottom { transform: rotateX(-90deg) translateZ(40px); }
-
-@keyframes rotateCube {
-  0%   { transform: rotateX(0deg) rotateY(0deg); }
-  100% { transform: rotateX(360deg) rotateY(360deg); }
+@media(prefers-reduced-motion:reduce){
+  .reveal{transition:none!important;opacity:1!important;transform:none!important}
+  @keyframes float-shape{0%,100%{transform:rotate(0deg)}}
+  @keyframes spin-cube{0%{transform:rotateX(0) rotateY(0)}}
 }
 
-/* Second smaller cube */
-.cube-scene-2 {
-  position: absolute;
-  bottom: 15%;
-  left: 5%;
-  width: 50px;
-  height: 50px;
-  perspective: 200px;
-  z-index: 2;
-  pointer-events: none;
-}
-.cube-2 {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: rotateCube2 12s infinite linear reverse;
-}
-.cube-2 .cube__face {
-  width: 50px;
-  height: 50px;
-  background: rgba(212, 168, 67, 0.12);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-.cube-2 .cube__face--front  { transform: translateZ(25px); }
-.cube-2 .cube__face--back   { transform: rotateY(180deg) translateZ(25px); }
-.cube-2 .cube__face--right  { transform: rotateY(90deg) translateZ(25px); }
-.cube-2 .cube__face--left   { transform: rotateY(-90deg) translateZ(25px); }
-.cube-2 .cube__face--top    { transform: rotateX(90deg) translateZ(25px); }
-.cube-2 .cube__face--bottom { transform: rotateX(-90deg) translateZ(25px); }
+/* ========== NAVIGATION ========== */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:20px 0;transition:background .35s,padding .35s,box-shadow .35s}
+.nav.scrolled{background:var(--kw-dark);padding:12px 0;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;color:var(--kw-white);font-family:var(--font-heading);font-weight:700;font-size:1.35rem;letter-spacing:-.02em}
+.nav-logo svg{width:36px;height:36px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{color:rgba(255,255,255,.82);font-size:.9rem;font-weight:400;letter-spacing:.02em;transition:color .25s}
+.nav-links a:hover{color:var(--kw-white)}
+.nav-cta{background:var(--kw-red);color:var(--kw-white)!important;padding:10px 24px;border-radius:6px;font-weight:500;font-size:.85rem;transition:background .25s,transform .25s}
+.nav-cta:hover{background:var(--kw-red-hover);transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--kw-white);border-radius:2px;transition:transform .3s,opacity .3s}
+.nav-burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-burger.active span:nth-child(2){opacity:0}
+.nav-burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
-@keyframes rotateCube2 {
-  0%   { transform: rotateX(0deg) rotateZ(0deg); }
-  100% { transform: rotateX(360deg) rotateZ(360deg); }
-}
+/* ========== HERO ========== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--kw-dark)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,27,49,.82) 0%,rgba(6,27,49,.55) 50%,rgba(6,27,49,.75) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;max-width:680px;padding:0 24px}
+.hero-label{display:inline-flex;align-items:center;gap:8px;color:var(--kw-gold);font-size:.8rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeSlideUp .8s .3s forwards}
+.hero-label::before{content:'';display:block;width:32px;height:1px;background:var(--kw-gold)}
+.hero-title{font-family:var(--font-heading);font-weight:700;font-size:clamp(2.6rem,5.5vw,4.2rem);color:var(--kw-white);line-height:1.12;letter-spacing:-.03em;margin-bottom:20px;opacity:0;animation:fadeSlideUp .9s .5s forwards}
+.hero-title em{font-style:normal;color:var(--kw-gold)}
+.hero-subtitle{font-size:1.12rem;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:36px;max-width:520px;opacity:0;animation:fadeSlideUp .9s .7s forwards}
+.hero-search{display:flex;gap:0;background:var(--kw-white);border-radius:8px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.3);margin-bottom:28px;opacity:0;animation:fadeSlideUp .9s .9s forwards}
+.hero-search input{flex:1;border:none;padding:16px 22px;font-family:var(--font-body);font-size:.95rem;color:var(--kw-dark);outline:none;background:transparent}
+.hero-search input::placeholder{color:#94a3b8}
+.hero-search select{border:none;border-left:1px solid var(--kw-border);padding:16px 18px;font-family:var(--font-body);font-size:.9rem;color:var(--kw-body);background:transparent;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748d' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.hero-search button{border:none;background:var(--kw-red);color:var(--kw-white);padding:16px 28px;font-family:var(--font-body);font-weight:500;font-size:.9rem;cursor:pointer;transition:background .25s;white-space:nowrap}
+.hero-search button:hover{background:var(--kw-red-hover)}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeSlideUp .9s 1.1s forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--kw-red);color:var(--kw-white);padding:14px 32px;border-radius:7px;font-weight:500;font-size:.9rem;transition:background .25s,transform .25s,box-shadow .25s}
+.btn-primary:hover{background:var(--kw-red-hover);transform:translateY(-2px);box-shadow:0 8px 25px rgba(196,30,58,.35)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.35);color:var(--kw-white);padding:14px 32px;border-radius:7px;font-weight:400;font-size:.9rem;transition:border-color .25s,background .25s,transform .25s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.08);transform:translateY(-2px)}
 
-/* ===== NAVIGATION ===== */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  padding: 20px 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
-}
-nav.scrolled {
-  background: rgba(26, 26, 26, 0.95);
-  padding: 12px 60px;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-  backdrop-filter: blur(12px);
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -0.5px;
-}
-.nav-logo span { color: var(--red); }
-.nav-links { display: flex; gap: 36px; align-items: center; }
-.nav-links a {
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  transition: color 0.3s;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gold);
-  transition: width 0.3s;
-}
-.nav-links a:hover { color: var(--gold); }
-.nav-links a:hover::after { width: 100%; }
+/* Hero 3D cube */
+.hero-cube{position:absolute;right:8%;top:50%;transform:translateY(-50%);z-index:2;perspective:600px;opacity:0;animation:fadeSlideUp 1s 1.3s forwards}
+.cube{width:100px;height:100px;position:relative;transform-style:preserve-3d;animation:spinCube 18s linear infinite}
+.cube-face{position:absolute;width:100px;height:100px;border:1.5px solid rgba(184,134,11,.25);background:rgba(184,134,11,.04);backface-visibility:visible}
+.cube-face:nth-child(1){transform:translateZ(50px)}
+.cube-face:nth-child(2){transform:rotateY(90deg) translateZ(50px)}
+.cube-face:nth-child(3){transform:rotateY(180deg) translateZ(50px)}
+.cube-face:nth-child(4){transform:rotateY(270deg) translateZ(50px)}
+.cube-face:nth-child(5){transform:rotateX(90deg) translateZ(50px)}
+.cube-face:nth-child(6){transform:rotateX(-90deg) translateZ(50px)}
+@keyframes spinCube{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(360deg) rotateY(360deg)}}
 
-/* ===== HERO ===== */
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 700px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(196, 30, 58, 0.85) 0%,
-    rgba(26, 26, 26, 0.8) 60%,
-    rgba(26, 26, 26, 0.9) 100%
-  );
-  z-index: 1;
-}
-.hero-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  color: #fff;
-  max-width: 900px;
-  padding: 0 20px;
-}
-.hero-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: var(--gold);
-  border: 1px solid var(--gold);
-  padding: 8px 24px;
-  margin-bottom: 30px;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 24px;
-  text-shadow: 4px 4px 0 rgba(0,0,0,0.4), 8px 8px 0 rgba(0,0,0,0.2);
-}
-.hero h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
-.hero-subtitle {
-  font-size: 1.15rem;
-  font-weight: 300;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.85);
-  max-width: 600px;
-  margin: 0 auto 40px;
-}
-.hero-btns {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.btn {
-  display: inline-block;
-  padding: 16px 40px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.btn-primary {
-  background: var(--red);
-  color: #fff;
-}
-.btn-primary:hover {
-  background: #a31830;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 12px 40px rgba(196, 30, 58, 0.5);
-}
-.btn-outline {
-  background: transparent;
-  color: #fff;
-  border: 2px solid rgba(255,255,255,0.4);
-}
-.btn-outline:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(212, 168, 67, 0.3);
-}
+/* Floating gold shapes */
+.hero-shapes{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.float-shape{position:absolute;border:1.5px solid rgba(184,134,11,.18);animation:floatShape 20s ease-in-out infinite}
+.float-shape-1{width:60px;height:60px;top:15%;right:18%;transform:rotate(25deg);animation-delay:0s}
+.float-shape-2{width:40px;height:40px;bottom:22%;right:30%;border-radius:50%;animation-delay:-7s}
+.float-shape-3{width:50px;height:50px;top:60%;right:10%;transform:rotate(-15deg);animation-delay:-13s}
+@keyframes floatShape{0%,100%{transform:rotate(25deg) translateY(0)}50%{transform:rotate(30deg) translateY(-18px)}}
 
-/* ===== STATS MARQUEE ===== */
-.stats-marquee {
-  background: var(--dark);
-  padding: 24px 0;
-  overflow: hidden;
-  position: relative;
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-.marquee-track:hover { animation-play-state: paused; }
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 48px;
-  white-space: nowrap;
-  color: #fff;
-}
-.stat-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--gold);
-}
-.stat-label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.3;
-}
-.stat-divider {
-  width: 2px;
-  height: 40px;
-  background: rgba(255,255,255,0.1);
-}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+/* ========== STATS ========== */
+.stats{padding:var(--section-py) 0;background:var(--kw-white);position:relative}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.stat-card{text-align:left;padding:36px 28px;border-radius:10px;background:var(--kw-light);border:1px solid var(--kw-border);transition:transform .3s,box-shadow .3s}
+.stat-card:hover{transform:translateY(-4px);box-shadow:var(--kw-shadow)}
+.stat-number{font-family:var(--font-heading);font-size:2.6rem;font-weight:700;color:var(--kw-dark);line-height:1;margin-bottom:8px;letter-spacing:-.02em}
+.stat-number .stat-suffix{font-size:1.6rem;color:var(--kw-red)}
+.stat-label{font-size:.92rem;color:var(--kw-body);font-weight:400}
+.stat-line{width:32px;height:3px;background:var(--kw-red);border-radius:2px;margin-bottom:18px}
 
-/* ===== SECTION COMMON ===== */
-.section { padding: 100px 60px; }
-.section-header {
-  text-align: center;
-  margin-bottom: 64px;
-}
-.section-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: var(--red);
-  margin-bottom: 16px;
-  display: block;
-}
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 900;
-  color: var(--dark);
-  text-shadow: 3px 3px 0 rgba(196,30,58,0.1);
-  line-height: 1.15;
-}
-.section-title span { color: var(--red); }
-.section-desc {
-  font-size: 1rem;
-  color: #666;
-  max-width: 560px;
-  margin: 16px auto 0;
-  line-height: 1.7;
-}
-.bg-dark { background: var(--dark); color: #fff; }
-.bg-dark .section-title { color: #fff; text-shadow: 3px 3px 0 rgba(196,30,58,0.3); }
-.bg-dark .section-label { color: var(--gold); }
-.bg-dark .section-desc { color: rgba(255,255,255,0.6); }
-.bg-light { background: var(--light-gray); }
+/* ========== SECTION HEADERS ========== */
+.section-tag{display:inline-flex;align-items:center;gap:8px;color:var(--kw-gold);font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
+.section-tag::before{content:'';display:block;width:24px;height:1px;background:var(--kw-gold)}
+.section-title{font-family:var(--font-heading);font-weight:700;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--kw-dark);line-height:1.15;letter-spacing:-.025em;margin-bottom:14px}
+.section-desc{font-size:1.05rem;color:var(--kw-body);max-width:520px;line-height:1.7}
+.section-header{margin-bottom:52px}
 
-/* ===== FEATURED LISTINGS ===== */
-.listings-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 32px;
-  max-width: 1400px;
-  margin: 0 auto;
-  perspective: 1000px;
-}
-.listing-card {
-  background: #fff;
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              box-shadow 0.5s;
-  transform-style: preserve-3d;
-  will-change: transform;
-  cursor: pointer;
-}
-.listing-card:hover {
-  transform: scale(1.05) rotateY(-3deg) rotateX(2deg);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 30px rgba(196,30,58,0.15);
-}
-.listing-img-wrap {
-  position: relative;
-  height: 280px;
-  overflow: hidden;
-}
-.listing-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s;
-}
-.listing-card:hover .listing-img-wrap img {
-  transform: scale(1.1);
-}
-.listing-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: var(--red);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 6px 14px;
-}
-.listing-price {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  background: var(--dark);
-  color: #fff;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding: 8px 20px;
-}
-.listing-info { padding: 24px; }
-.listing-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.listing-address {
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 16px;
-}
-.listing-features {
-  display: flex;
-  gap: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #eee;
-}
-.listing-feature {
-  font-size: 0.8rem;
-  color: #555;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.listing-feature svg {
-  width: 16px;
-  height: 16px;
-  fill: var(--red);
-}
+/* ========== FEATURED LISTINGS ========== */
+.listings{padding:var(--section-py) 0;background:var(--kw-white)}
+.listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;perspective:1200px}
+.property-card{border-radius:10px;overflow:hidden;background:var(--kw-white);border:1px solid var(--kw-border);box-shadow:var(--kw-shadow);transition:transform .4s cubic-bezier(.25,.46,.45,.94),box-shadow .4s;transform-style:preserve-3d;will-change:transform}
+.property-card:hover{box-shadow:var(--kw-shadow-hover)}
+.property-img{position:relative;overflow:hidden;aspect-ratio:16/10}
+.property-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.property-card:hover .property-img img{transform:scale(1.05)}
+.property-badge{position:absolute;top:14px;left:14px;background:var(--kw-red);color:var(--kw-white);padding:5px 12px;border-radius:4px;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.property-price{position:absolute;bottom:14px;right:14px;background:var(--kw-dark);color:var(--kw-white);padding:6px 14px;border-radius:5px;font-family:var(--font-heading);font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+.property-body{padding:20px 22px 24px}
+.property-address{font-size:.88rem;color:var(--kw-body);margin-bottom:12px;font-weight:400}
+.property-meta{display:flex;gap:16px;margin-bottom:14px;font-size:.82rem;color:var(--kw-body);font-weight:400}
+.property-meta span{display:flex;align-items:center;gap:5px}
+.property-meta span svg{width:14px;height:14px;opacity:.5}
+.property-agent{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--kw-border)}
+.property-agent-avatar{width:32px;height:32px;border-radius:50%;background:var(--kw-border);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:600;color:var(--kw-dark)}
+.property-agent-name{font-size:.82rem;color:var(--kw-body);font-weight:400}
 
-/* ===== AGENT PROFILES ===== */
-.agents-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.agent-card {
-  text-align: center;
-  padding: 40px 30px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px;
-  transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
-}
-.agent-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(196,30,58,0.2);
-  border-color: var(--red);
-}
-.agent-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-  object-fit: cover;
-  border: 3px solid var(--gold);
-  transition: border-color 0.3s;
-}
-.agent-card:hover .agent-avatar { border-color: var(--red); }
-.agent-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 4px;
-}
-.agent-role {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-.agent-bio {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-.agent-contact {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--red);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  border-bottom: 2px solid var(--red);
-  padding-bottom: 2px;
-  transition: color 0.3s;
-}
-.agent-contact:hover { color: var(--gold); border-color: var(--gold); }
+/* ========== SERVICES ========== */
+.services{padding:var(--section-py) 0;background:var(--kw-light)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.service-card{padding:44px 34px;border-radius:10px;background:var(--kw-white);border:1px solid var(--kw-border);box-shadow:var(--kw-shadow);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--kw-red);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.service-card:hover::before{transform:scaleX(1)}
+.service-card:hover{transform:translateY(-4px);box-shadow:var(--kw-shadow-hover)}
+.service-icon{width:52px;height:52px;border-radius:10px;background:var(--kw-light);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.service-icon svg{width:24px;height:24px;stroke:var(--kw-red);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.service-title{font-family:var(--font-heading);font-weight:700;font-size:1.25rem;color:var(--kw-dark);margin-bottom:12px;letter-spacing:-.02em}
+.service-text{font-size:.92rem;color:var(--kw-body);line-height:1.7}
+.service-link{display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:var(--kw-red);font-size:.85rem;font-weight:500;transition:gap .25s}
+.service-link:hover{gap:10px}
+.service-link svg{width:16px;height:16px}
 
-/* ===== TESTIMONIALS ===== */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.testimonial-card {
-  background: #fff;
-  padding: 40px;
-  border-radius: 2px;
-  position: relative;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  transition: transform 0.4s, box-shadow 0.4s;
-}
-.testimonial-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-}
-.testimonial-card::before {
-  content: '\201C';
-  font-family: 'Playfair Display', serif;
-  font-size: 5rem;
-  color: var(--red);
-  opacity: 0.15;
-  position: absolute;
-  top: 10px;
-  left: 24px;
-  line-height: 1;
-}
-.testimonial-text {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #444;
-  font-style: italic;
-  margin-bottom: 24px;
-}
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.testimonial-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.testimonial-name {
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-.testimonial-role {
-  font-size: 0.8rem;
-  color: #999;
-}
-.testimonial-stars {
-  color: var(--gold);
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-}
+/* ========== TESTIMONIALS ========== */
+.testimonials{padding:var(--section-py) 0;background:var(--kw-white);overflow:hidden}
+.testimonials-track{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:20px;scrollbar-width:none}
+.testimonials-track::-webkit-scrollbar{display:none}
+.testimonial-card{min-width:380px;max-width:420px;flex-shrink:0;scroll-snap-align:start;padding:38px 32px;border-radius:10px;background:var(--kw-light);border:1px solid var(--kw-border);box-shadow:var(--kw-shadow);position:relative;transition:transform .3s,box-shadow .3s}
+.testimonial-card:hover{transform:translateY(-3px);box-shadow:var(--kw-shadow-hover)}
+.testimonial-quote{font-family:var(--font-heading);font-size:3rem;color:var(--kw-gold);line-height:1;margin-bottom:-8px;opacity:.5}
+.testimonial-text{font-size:.95rem;color:var(--kw-body);line-height:1.8;margin-bottom:22px;font-style:italic;font-weight:300}
+.testimonial-author{display:flex;align-items:center;gap:14px}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--kw-border)}
+.testimonial-avatar-placeholder{width:44px;height:44px;border-radius:50%;background:var(--kw-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:700;font-size:.9rem;color:var(--kw-dark);border:2px solid var(--kw-border)}
+.testimonial-name{font-weight:500;color:var(--kw-dark);font-size:.9rem}
+.testimonial-role{font-size:.78rem;color:var(--kw-body);margin-top:2px}
 
-/* ===== CTA ===== */
-.cta-section {
-  position: relative;
-  padding: 120px 60px;
-  text-align: center;
-  background: var(--red);
-  overflow: hidden;
-}
-.cta-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.cta-content {
-  position: relative;
-  z-index: 1;
-}
-.cta-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  font-weight: 900;
-  color: #fff;
-  margin-bottom: 20px;
-  text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
-}
-.cta-desc {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.85);
-  max-width: 500px;
-  margin: 0 auto 40px;
-  line-height: 1.7;
-}
-.cta-btn {
-  display: inline-block;
-  padding: 18px 50px;
-  background: #fff;
-  color: var(--red);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.4s;
-}
-.cta-btn:hover {
-  background: var(--dark);
-  color: #fff;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 16px 50px rgba(0,0,0,0.3);
-}
+/* ========== AGENTS ========== */
+.agents{padding:var(--section-py) 0;background:var(--kw-light)}
+.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.agent-card{border-radius:10px;overflow:hidden;background:var(--kw-white);border:1px solid var(--kw-border);box-shadow:var(--kw-shadow);transition:transform .3s,box-shadow .3s;text-align:center}
+.agent-card:hover{transform:translateY(-4px);box-shadow:var(--kw-shadow-hover)}
+.agent-photo{width:100%;aspect-ratio:3/2.5;object-fit:cover}
+.agent-info{padding:26px 22px 30px}
+.agent-name{font-family:var(--font-heading);font-weight:700;font-size:1.15rem;color:var(--kw-dark);margin-bottom:4px;letter-spacing:-.02em}
+.agent-title{font-size:.82rem;color:var(--kw-body);margin-bottom:14px;font-weight:400}
+.agent-contact{display:inline-flex;align-items:center;gap:6px;color:var(--kw-red);font-size:.82rem;font-weight:500;transition:color .25s}
+.agent-contact:hover{color:var(--kw-red-hover)}
+.agent-contact svg{width:14px;height:14px}
 
-/* ===== FOOTER ===== */
-footer {
-  background: var(--dark);
-  color: #fff;
-  padding: 60px 60px 30px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.footer-brand .nav-logo { margin-bottom: 16px; font-size: 1.4rem; }
-.footer-desc {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-  max-width: 320px;
-}
-.footer-col h4 {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
-.footer-col a {
-  display: block;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 10px;
-  transition: color 0.3s;
-}
-.footer-col a:hover { color: var(--red); }
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 30px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-.footer-bottom p {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.35);
-}
-.footer-bottom a {
-  color: var(--gold);
-  font-weight: 600;
-}
+/* ========== CTA SECTION ========== */
+.cta-section{padding:var(--section-py) 0;background:var(--kw-dark);position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,30,58,.12) 0%,transparent 70%)}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:40px}
+.cta-content{max-width:540px}
+.cta-title{font-family:var(--font-heading);font-weight:700;font-size:clamp(1.8rem,3vw,2.5rem);color:var(--kw-white);line-height:1.15;letter-spacing:-.025em;margin-bottom:16px}
+.cta-desc{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:32px;max-width:440px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--kw-red);color:var(--kw-white);padding:16px 36px;border-radius:7px;font-weight:500;font-size:.95rem;transition:background .25s,transform .25s,box-shadow .25s;border:none;cursor:pointer}
+.cta-btn:hover{background:var(--kw-red-hover);transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,30,58,.4)}
 
-/* ===== ANIMATIONS ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-.reveal-delay-5 { transition-delay: 0.5s; }
-.reveal-delay-6 { transition-delay: 0.6s; }
+/* ========== FOOTER ========== */
+.footer{padding:70px 0 30px;background:var(--kw-dark);border-top:1px solid rgba(255,255,255,.06)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px}
+.footer-brand .nav-logo{margin-bottom:16px}
+.footer-brand p{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.7;max-width:280px}
+.footer-col h4{color:var(--kw-white);font-family:var(--font-body);font-weight:500;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.footer-col a{display:block;color:rgba(255,255,255,.5);font-size:.88rem;padding:4px 0;transition:color .25s}
+.footer-col a:hover{color:var(--kw-white)}
+.footer-bottom{padding-top:28px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:.8rem;color:rgba(255,255,255,.35)}
+.footer-credit{font-size:.8rem;color:var(--kw-gold);font-weight:500}
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  nav { padding: 16px 24px; }
-  .nav-links { gap: 20px; }
-  .nav-links a { font-size: 0.75rem; }
-  .section { padding: 60px 24px; }
-  .listings-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .cta-section { padding: 80px 24px; }
-  .cube-scene, .cube-scene-2 { display: none; }
+/* ========== MOBILE RESPONSIVE ========== */
+@media(max-width:1024px){
+  .hero-cube{display:none}
+  .listings-grid,.services-grid,.agents-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .cta-inner{flex-direction:column;text-align:left}
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media (max-width: 600px) {
-  .nav-links { display: none; }
-  .hero h1 { font-size: 2.6rem; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .agents-grid { grid-template-columns: 1fr; }
-  .testimonials-grid { grid-template-columns: 1fr; }
+@media(max-width:680px){
+  :root{--section-py:70px}
+  .nav-links{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--kw-dark);flex-direction:column;justify-content:center;gap:28px;padding:40px}
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:1.2rem}
+  .nav-burger{display:flex}
+  .hero-search{flex-direction:column}
+  .hero-search select{border-left:none;border-top:1px solid var(--kw-border)}
+  .hero-buttons{flex-direction:column}
+  .hero-buttons a,.hero-buttons .btn-primary,.hero-buttons .btn-ghost{text-align:center;justify-content:center}
+  .listings-grid,.services-grid,.agents-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .stat-card{padding:24px 20px}
+  .stat-number{font-size:2rem}
+  .footer-grid{grid-template-columns:1fr}
+  .testimonial-card{min-width:300px}
+  .cta-inner{text-align:center}
+  .cta-desc{margin-left:auto;margin-right:auto}
 }
 </style>
 </head>
 <body>
 
 <!-- ===== NAVIGATION ===== -->
-<nav id="navbar">
-  <div class="nav-logo">KW <span>REALTY</span></div>
-  <div class="nav-links">
-    <a href="#listings">Properties</a>
-    <a href="#agents">Agents</a>
-    <a href="#testimonials">Reviews</a>
-    <a href="#cta" class="btn btn-primary" style="padding:10px 24px; font-size:0.7rem;">Contact Us</a>
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="6" fill="#C41E3A"/><text x="18" y="24" text-anchor="middle" fill="#fff" font-family="Playfair Display,serif" font-weight="700" font-size="20">kw</text></svg>
+      Keller Williams
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#listings">Listings</a>
+      <a href="#services">Services</a>
+      <a href="#agents">Agents</a>
+      <a href="#testimonials">Stories</a>
+      <a href="#cta" class="nav-cta">Get Started</a>
+    </div>
+    <div class="nav-burger" id="navBurger">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80">
+  <video class="hero-video" autoplay muted loop playsinline>
     <source src="https://assets.mixkit.co/videos/43607/43607-360.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
-
-  <!-- 3D Floating Cubes -->
-  <div class="cube-scene">
-    <div class="cube">
-      <div class="cube__face cube__face--front"></div>
-      <div class="cube__face cube__face--back"></div>
-      <div class="cube__face cube__face--right"></div>
-      <div class="cube__face cube__face--left"></div>
-      <div class="cube__face cube__face--top"></div>
-      <div class="cube__face cube__face--bottom"></div>
-    </div>
+  <div class="hero-shapes">
+    <div class="float-shape float-shape-1"></div>
+    <div class="float-shape float-shape-2"></div>
+    <div class="float-shape float-shape-3"></div>
   </div>
-  <div class="cube-scene-2">
-    <div class="cube-2">
-      <div class="cube__face cube__face--front"></div>
-      <div class="cube__face cube__face--back"></div>
-      <div class="cube__face cube__face--right"></div>
-      <div class="cube__face cube__face--left"></div>
-      <div class="cube__face cube__face--top"></div>
-      <div class="cube__face cube__face--bottom"></div>
+  <div class="container" style="display:flex;align-items:center;position:relative">
+    <div class="hero-content">
+      <div class="hero-label">Keller Williams Realty</div>
+      <h1 class="hero-title">Find Your <em>Dream Home</em></h1>
+      <p class="hero-subtitle">With over 180,000 agents across 1,000+ offices, Keller Williams is the world's largest real estate franchise by agent count. Let us help you find the perfect property.</p>
+      <div class="hero-search">
+        <input type="text" placeholder="Enter a city, neighborhood, or ZIP code...">
+        <select>
+          <option>All Types</option>
+          <option>Single Family</option>
+          <option>Condo</option>
+          <option>Townhouse</option>
+          <option>Land</option>
+        </select>
+        <button>Search</button>
+      </div>
+      <div class="hero-buttons">
+        <a href="#listings" class="btn-primary">Browse Listings
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a href="#cta" class="btn-ghost">Schedule a Tour</a>
+      </div>
     </div>
-  </div>
-
-  <div class="hero-content">
-    <span class="hero-badge">Est. 1983 · Austin, Texas</span>
-    <h1>Where <em>Vision</em> Meets<br>Real Estate</h1>
-    <p class="hero-subtitle">Keller Williams Realty is the world's largest real estate franchise by agent count, with over 1,000 offices and 180,000 associates worldwide.</p>
-    <div class="hero-btns">
-      <a href="#listings" class="btn btn-primary">Explore Listings</a>
-      <a href="#cta" class="btn btn-outline">Find an Agent</a>
+    <div class="hero-cube">
+      <div class="cube">
+        <div class="cube-face"></div>
+        <div class="cube-face"></div>
+        <div class="cube-face"></div>
+        <div class="cube-face"></div>
+        <div class="cube-face"></div>
+        <div class="cube-face"></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== STATS MARQUEE ===== -->
-<div class="stats-marquee">
-  <div class="marquee-track">
-    <div class="stat-item"><span class="stat-number">180K+</span><span class="stat-label">Associates<br>Worldwide</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">1,000+</span><span class="stat-label">Offices<br>Globally</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">$300B+</span><span class="stat-label">Annual<br>Closed Volume</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">#1</span><span class="stat-label">Real Estate<br>Franchise</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">40+</span><span class="stat-label">Countries<br>Worldwide</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">2M+</span><span class="stat-label">Transactions<br>Annually</span></div>
-    <div class="stat-divider"></div>
-    <!-- Duplicate for seamless loop -->
-    <div class="stat-item"><span class="stat-number">180K+</span><span class="stat-label">Associates<br>Worldwide</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">1,000+</span><span class="stat-label">Offices<br>Globally</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">$300B+</span><span class="stat-label">Annual<br>Closed Volume</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">#1</span><span class="stat-label">Real Estate<br>Franchise</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">40+</span><span class="stat-label">Countries<br>Worldwide</span></div>
-    <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number">2M+</span><span class="stat-label">Transactions<br>Annually</span></div>
-    <div class="stat-divider"></div>
+<!-- ===== STATS ===== -->
+<section class="stats" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-line"></div>
+        <div class="stat-number"><span data-target="150000" data-suffix="+">0</span></div>
+        <div class="stat-label">Homes Sold Annually</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-line"></div>
+        <div class="stat-number"><span data-target="180000" data-suffix="+">0</span></div>
+        <div class="stat-label">Licensed Agents</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-line"></div>
+        <div class="stat-number"><span data-target="1100" data-suffix="+">0</span></div>
+        <div class="stat-label">Offices Worldwide</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-line"></div>
+        <div class="stat-number"><span data-target="40" data-suffix="+">0</span></div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- ===== FEATURED LISTINGS ===== -->
-<section class="section bg-light" id="listings">
-  <div class="section-header reveal">
-    <span class="section-label">Featured Properties</span>
-    <h2 class="section-title">Curated <span>Homes</span> of Distinction</h2>
-    <p class="section-desc">Discover exceptional properties handpicked by our expert agents — from luxury estates to urban retreats.</p>
-  </div>
-  <div class="listings-grid">
+<section class="listings" id="listings">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Featured Properties</div>
+      <h2 class="section-title">Curated Homes Worth Exploring</h2>
+      <p class="section-desc">Handpicked properties across premier neighborhoods — from urban estates to countryside retreats.</p>
+    </div>
+    <div class="listings-grid">
 
-    <div class="listing-card reveal reveal-delay-1">
-      <div class="listing-img-wrap">
-        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80" alt="Modern luxury home with pool" loading="lazy">
-        <span class="listing-badge">Featured</span>
-        <span class="listing-price">$2,450,000</span>
-      </div>
-      <div class="listing-info">
-        <h3 class="listing-title">The Meridian Estate</h3>
-        <p class="listing-address">4821 Lakeshore Blvd, Austin, TX 78731</p>
-        <div class="listing-features">
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM19 7h-8v7H3V5H1v15h2v-3h18v3h2V11c0-2.21-1.79-4-4-4zm2 8h-8V9h6c1.1 0 2 .9 2 2v4z"/></svg>
-            5 Bed
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.59 0L12 3.41 5.41 10H1v10h6v-6h4v6h6V10h2.59L12 0l6.59 7z"/></svg>
-            4 Bath
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-            5,200 sq ft
-          </span>
+      <div class="property-card reveal">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop" alt="Modern estate in Beverly Hills" loading="lazy">
+          <div class="property-badge">Featured</div>
+          <div class="property-price">$2,450,000</div>
+        </div>
+        <div class="property-body">
+          <div class="property-address">1247 Ridgecrest Dr, Beverly Hills, CA 90210</div>
+          <div class="property-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>5 Beds</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 4v16"/></svg>4 Baths</span>
+            <span>4,200 sqft</span>
+          </div>
+          <div class="property-agent">
+            <div class="property-agent-avatar">SM</div>
+            <div class="property-agent-name">Sarah Mitchell, KW Beverly Hills</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="listing-card reveal reveal-delay-2">
-      <div class="listing-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Contemporary hillside residence" loading="lazy">
-        <span class="listing-badge">New Listing</span>
-        <span class="listing-price">$1,875,000</span>
-      </div>
-      <div class="listing-info">
-        <h3 class="listing-title">Hillcrest Modern Retreat</h3>
-        <p class="listing-address">1205 Barton Creek Blvd, Austin, TX 78735</p>
-        <div class="listing-features">
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM19 7h-8v7H3V5H1v15h2v-3h18v3h2V11c0-2.21-1.79-4-4-4zm2 8h-8V9h6c1.1 0 2 .9 2 2v4z"/></svg>
-            4 Bed
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.59 0L12 3.41 5.41 10H1v10h6v-6h4v6h6V10h2.59L12 0l6.59 7z"/></svg>
-            3 Bath
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-            4,100 sq ft
-          </span>
+      <div class="property-card reveal reveal-delay-1">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Waterfront property in Miami" loading="lazy">
+          <div class="property-badge">New</div>
+          <div class="property-price">$1,875,000</div>
+        </div>
+        <div class="property-body">
+          <div class="property-address">842 Ocean Blvd, Miami Beach, FL 33139</div>
+          <div class="property-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>4 Beds</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 4v16"/></svg>3 Baths</span>
+            <span>3,100 sqft</span>
+          </div>
+          <div class="property-agent">
+            <div class="property-agent-avatar">JR</div>
+            <div class="property-agent-name">James Rivera, KW Miami Beach</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="listing-card reveal reveal-delay-3">
-      <div class="listing-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" alt="Elegant downtown penthouse" loading="lazy">
-        <span class="listing-badge">Exclusive</span>
-        <span class="listing-price">$3,200,000</span>
-      </div>
-      <div class="listing-info">
-        <h3 class="listing-title">Downtown Skyline Penthouse</h3>
-        <p class="listing-address">200 Congress Ave, Unit PH1, Austin, TX 78701</p>
-        <div class="listing-features">
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM19 7h-8v7H3V5H1v15h2v-3h18v3h2V11c0-2.21-1.79-4-4-4zm2 8h-8V9h6c1.1 0 2 .9 2 2v4z"/></svg>
-            3 Bed
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.59 0L12 3.41 5.41 10H1v10h6v-6h4v6h6V10h2.59L12 0l6.59 7z"/></svg>
-            3 Bath
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-            3,800 sq ft
-          </span>
+      <div class="property-card reveal reveal-delay-2">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop" alt="Luxury home in Scottsdale" loading="lazy">
+          <div class="property-badge">Price Reduced</div>
+          <div class="property-price">$3,200,000</div>
+        </div>
+        <div class="property-body">
+          <div class="property-address">5510 Desert Bloom Trail, Scottsdale, AZ 85251</div>
+          <div class="property-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>6 Beds</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 4v16"/></svg>5 Baths</span>
+            <span>5,800 sqft</span>
+          </div>
+          <div class="property-agent">
+            <div class="property-agent-avatar">LC</div>
+            <div class="property-agent-name">Laura Chen, KW Scottsdale</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="listing-card reveal reveal-delay-4">
-      <div class="listing-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80" alt="Mediterranean style villa" loading="lazy">
-        <span class="listing-badge">Price Reduced</span>
-        <span class="listing-price">$1,590,000</span>
-      </div>
-      <div class="listing-info">
-        <h3 class="listing-title">Villa Serene at Lake Travis</h3>
-        <p class="listing-address">6740 Pace Bend Rd, Spicewood, TX 78669</p>
-        <div class="listing-features">
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM19 7h-8v7H3V5H1v15h2v-3h18v3h2V11c0-2.21-1.79-4-4-4zm2 8h-8V9h6c1.1 0 2 .9 2 2v4z"/></svg>
-            4 Bed
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.59 0L12 3.41 5.41 10H1v10h6v-6h4v6h6V10h2.59L12 0l6.59 7z"/></svg>
-            3 Bath
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-            4,500 sq ft
-          </span>
+      <div class="property-card reveal reveal-delay-3">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop" alt="Contemporary home in Austin" loading="lazy">
+          <div class="property-badge">Open House</div>
+          <div class="property-price">$925,000</div>
+        </div>
+        <div class="property-body">
+          <div class="property-address">2801 Barton Springs Rd, Austin, TX 78704</div>
+          <div class="property-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>3 Beds</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 4v16"/></svg>2 Baths</span>
+            <span>2,400 sqft</span>
+          </div>
+          <div class="property-agent">
+            <div class="property-agent-avatar">DW</div>
+            <div class="property-agent-name">David Walsh, KW Austin</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="listing-card reveal reveal-delay-5">
-      <div class="listing-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80" alt="Sleek urban townhouse" loading="lazy">
-        <span class="listing-badge">Just Listed</span>
-        <span class="listing-price">$895,000</span>
-      </div>
-      <div class="listing-info">
-        <h3 class="listing-title">Mueller Modern Townhome</h3>
-        <p class="listing-address">4516 Mueller Blvd, Austin, TX 78723</p>
-        <div class="listing-features">
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM19 7h-8v7H3V5H1v15h2v-3h18v3h2V11c0-2.21-1.79-4-4-4zm2 8h-8V9h6c1.1 0 2 .9 2 2v4z"/></svg>
-            3 Bed
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.59 0L12 3.41 5.41 10H1v10h6v-6h4v6h6V10h2.59L12 0l6.59 7z"/></svg>
-            2 Bath
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-            2,400 sq ft
-          </span>
+      <div class="property-card reveal reveal-delay-4">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&h=400&fit=crop" alt="Colonial home in Greenwich" loading="lazy">
+          <div class="property-badge">Exclusive</div>
+          <div class="property-price">$4,100,000</div>
+        </div>
+        <div class="property-body">
+          <div class="property-address">47 Havemeyer Pl, Greenwich, CT 06830</div>
+          <div class="property-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>7 Beds</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 4v16"/></svg>6 Baths</span>
+            <span>8,200 sqft</span>
+          </div>
+          <div class="property-agent">
+            <div class="property-agent-avatar">EP</div>
+            <div class="property-agent-name">Elena Petrova, KW Greenwich</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="listing-card reveal reveal-delay-6">
-      <div class="listing-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=800&q=80" alt="Ranch-style home with land" loading="lazy">
-        <span class="listing-badge">Rare Find</span>
-        <span class="listing-price">$4,100,000</span>
-      </div>
-      <div class="listing-info">
-        <h3 class="listing-title">Cedar Creek Ranch Estate</h3>
-        <p class="listing-address">12800 FM 973, Del Valle, TX 78617</p>
-        <div class="listing-features">
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM19 7h-8v7H3V5H1v15h2v-3h18v3h2V11c0-2.21-1.79-4-4-4zm2 8h-8V9h6c1.1 0 2 .9 2 2v4z"/></svg>
-            6 Bed
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm11.59 0L12 3.41 5.41 10H1v10h6v-6h4v6h6V10h2.59L12 0l6.59 7z"/></svg>
-            5 Bath
-          </span>
-          <span class="listing-feature">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-            8,000 sq ft
-          </span>
+      <div class="property-card reveal reveal-delay-5">
+        <div class="property-img">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop" alt="Hillside villa in Malibu" loading="lazy">
+          <div class="property-badge">Just Listed</div>
+          <div class="property-price">$5,750,000</div>
+        </div>
+        <div class="property-body">
+          <div class="property-address">21854 Pacific Coast Hwy, Malibu, CA 90265</div>
+          <div class="property-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>5 Beds</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 4v16"/></svg>4 Baths</span>
+            <span>4,600 sqft</span>
+          </div>
+          <div class="property-agent">
+            <div class="property-agent-avatar">AK</div>
+            <div class="property-agent-name">Amir Khan, KW Malibu</div>
+          </div>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
-<!-- ===== AGENT PROFILES ===== -->
-<section class="section bg-dark" id="agents">
-  <div class="section-header reveal">
-    <span class="section-label">Our Experts</span>
-    <h2 class="section-title">Meet Our <span>Top Agents</span></h2>
-    <p class="section-desc">Our associates are among the most experienced and knowledgeable professionals in the Austin real estate market.</p>
-  </div>
-  <div class="agents-grid">
-
-    <div class="agent-card reveal reveal-delay-1">
-      <img class="agent-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80" alt="Michael Torres" loading="lazy">
-      <h3 class="agent-name">Michael Torres</h3>
-      <p class="agent-role">Team Lead · Luxury Division</p>
-      <p class="agent-bio">20+ years of experience in Austin luxury market. $500M+ in career sales. Certified Luxury Home Marketing Specialist.</p>
-      <a href="#" class="agent-contact">View Profile →</a>
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">How We Help</div>
+      <h2 class="section-title">Full-Service Real Estate</h2>
+      <p class="section-desc">Whether you're buying your first home, selling an estate, or building an investment portfolio — we're with you at every step.</p>
     </div>
-
-    <div class="agent-card reveal reveal-delay-2">
-      <img class="agent-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80" alt="Sarah Chen" loading="lazy">
-      <h3 class="agent-name">Sarah Chen</h3>
-      <p class="agent-role">Senior Agent · Relocation</p>
-      <p class="agent-bio">Specializes in corporate relocations and investment properties. MBA from UT Austin. Multi-year President's Elite award winner.</p>
-      <a href="#" class="agent-contact">View Profile →</a>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10"/></svg>
+        </div>
+        <h3 class="service-title">Buy a Home</h3>
+        <p class="service-text">From the first showing to closing day, our agents guide you through every detail — neighborhood insights, market analysis, and expert negotiation.</p>
+        <a href="#" class="service-link">Start your search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="service-title">Sell Your Property</h3>
+        <p class="service-text">Strategic pricing, professional staging, and KW's global marketing reach ensure your property commands the attention — and price — it deserves.</p>
+        <a href="#" class="service-link">Get a home valuation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3 class="service-title">Invest & Grow</h3>
+        <p class="service-text">From rental portfolios to commercial acquisitions, we connect investors with data-driven opportunities across markets and asset classes.</p>
+        <a href="#" class="service-link">Explore opportunities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
     </div>
-
-    <div class="agent-card reveal reveal-delay-3">
-      <img class="agent-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" alt="James Whitfield" loading="lazy">
-      <h3 class="agent-name">James Whitfield</h3>
-      <p class="agent-role">Commercial & Residential</p>
-      <p class="agent-bio">Dual-licensed agent with expertise in both commercial and residential. Known for his deep market analysis and negotiation skills.</p>
-      <a href="#" class="agent-contact">View Profile →</a>
-    </div>
-
-    <div class="agent-card reveal reveal-delay-4">
-      <img class="agent-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80" alt="Priya Patel" loading="lazy">
-      <h3 class="agent-name">Priya Patel</h3>
-      <p class="agent-role">First-Time Buyers Specialist</p>
-      <p class="agent-bio">Passionate about helping first-time buyers navigate the market. Awarded "Rising Star" by KW Austin for three consecutive years.</p>
-      <a href="#" class="agent-contact">View Profile →</a>
-    </div>
-
   </div>
 </section>
 
 <!-- ===== TESTIMONIALS ===== -->
-<section class="section" id="testimonials">
-  <div class="section-header reveal">
-    <span class="section-label">Client Stories</span>
-    <h2 class="section-title">What Our <span>Clients Say</span></h2>
-    <p class="section-desc">Real stories from real people who found their dream home with Keller Williams.</p>
-  </div>
-  <div class="testimonials-grid">
-
-    <div class="testimonial-card reveal reveal-delay-1">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Michael and his team made buying our dream home in Barton Creek an absolute pleasure. Their market knowledge is unmatched, and they negotiated a price $40K below asking."</p>
-      <div class="testimonial-author">
-        <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="David & Laura Mitchell" loading="lazy">
-        <div>
-          <p class="testimonial-name">David & Laura Mitchell</p>
-          <p class="testimonial-role">Homeowners, Barton Creek</p>
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Client Stories</div>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-desc">Real experiences from families and investors who found their way home with Keller Williams.</p>
+    </div>
+    <div class="testimonials-track" id="testimonialsTrack">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">Our KW agent didn't just find us a house — she found us a neighborhood, a community, and a future. The entire process from search to close took under 45 days.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar-placeholder">RM</div>
+          <div>
+            <div class="testimonial-name">Rachel & Marcus Thompson</div>
+            <div class="testimonial-role">First-time buyers, Austin TX</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">As a real estate investor, I've worked with many brokerages. Keller Williams' market intelligence and agent network gave me an edge I couldn't find elsewhere.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar-placeholder">DH</div>
+          <div>
+            <div class="testimonial-name">Daniel Hernandez</div>
+            <div class="testimonial-role">Investor, 23 properties</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">Selling our family estate was emotional, but our agent handled everything with discretion and professionalism. We received multiple offers above asking price.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar-placeholder">EW</div>
+          <div>
+            <div class="testimonial-name">Eleanor Whitfield</div>
+            <div class="testimonial-role">Seller, Greenwich CT</div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="testimonial-card reveal reveal-delay-2">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Relocating from San Francisco to Austin was stressful, but Sarah made it seamless. She found us the perfect home before we even landed, video-toured it, and handled every detail."</p>
-      <div class="testimonial-author">
-        <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Amanda Richardson" loading="lazy">
-        <div>
-          <p class="testimonial-name">Amanda Richardson</p>
-          <p class="testimonial-role">Relocated from SF to Austin</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="testimonial-card reveal reveal-delay-3">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"As a first-time buyer, I was terrified of the process. Priya walked me through every step with patience and clarity. I closed on my Mueller townhome in just 30 days."</p>
-      <div class="testimonial-author">
-        <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Chris Nguyen" loading="lazy">
-        <div>
-          <p class="testimonial-name">Chris Nguyen</p>
-          <p class="testimonial-role">First-Time Homebuyer, Mueller</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ===== CTA ===== -->
+<!-- ===== AGENTS ===== -->
+<section class="agents" id="agents">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Our People</div>
+      <h2 class="section-title">Meet Our Top Agents</h2>
+      <p class="section-desc">Experienced professionals with deep local expertise and a passion for helping clients achieve their real estate goals.</p>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card reveal">
+        <img class="agent-photo" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=350&fit=crop&crop=face" alt="Robert Keller" loading="lazy">
+        <div class="agent-info">
+          <div class="agent-name">Robert Keller</div>
+          <div class="agent-title">Regional Director, West Division</div>
+          <a href="mailto:r.keller@kw.com" class="agent-contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            r.keller@kw.com
+          </a>
+        </div>
+      </div>
+      <div class="agent-card reveal reveal-delay-1">
+        <img class="agent-photo" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=350&fit=crop&crop=face" alt="Patricia Dawson" loading="lazy">
+        <div class="agent-info">
+          <div class="agent-name">Patricia Dawson</div>
+          <div class="agent-title">Luxury Property Specialist</div>
+          <a href="mailto:p.dawson@kw.com" class="agent-contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            p.dawson@kw.com
+          </a>
+        </div>
+      </div>
+      <div class="agent-card reveal reveal-delay-2">
+        <img class="agent-photo" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=350&fit=crop&crop=face" alt="Michael Torres" loading="lazy">
+        <div class="agent-info">
+          <div class="agent-name">Michael Torres</div>
+          <div class="agent-title">Investment & Commercial Lead</div>
+          <a href="mailto:m.torres@kw.com" class="agent-contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            m.torres@kw.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
 <section class="cta-section" id="cta">
-  <div class="cta-content reveal">
-    <h2 class="cta-title">Ready to Find Your<br>Dream Home?</h2>
-    <p class="cta-desc">Whether you're buying, selling, or investing, our expert agents are ready to guide you every step of the way.</p>
-    <a href="#" class="cta-btn">Schedule a Consultation</a>
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Make Your Move?</h2>
+        <p class="cta-desc">Connect with a Keller Williams agent today. Whether you're buying, selling, or investing — we'll craft a strategy that fits your goals.</p>
+        <button class="cta-btn">Schedule a Free Consultation
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9h12M10 4l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ===== FOOTER ===== -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">KW <span>REALTY</span></div>
-      <p class="footer-desc">Keller Williams Realty is the world's largest real estate franchise by agent count. Founded in 1983, headquartered in Austin, Texas.</p>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <svg viewBox="0 0 36 36" fill="none" width="32" height="32"><rect width="36" height="36" rx="6" fill="#C41E3A"/><text x="18" y="24" text-anchor="middle" fill="#fff" font-family="Playfair Display,serif" font-weight="700" font-size="20">kw</text></svg>
+          Keller Williams
+        </a>
+        <p>The world's largest real estate franchise by agent count. Founded in 1983 and built on the principle that agents and associates should be partners in every sense.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About KW</a>
+        <a href="#">Leadership</a>
+        <a href="#">Careers</a>
+        <a href="#">Newsroom</a>
+        <a href="#">Investors</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Market Reports</a>
+        <a href="#">Home Valuation</a>
+        <a href="#">Mortgage Calculator</a>
+        <a href="#">Blog</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#">Find an Agent</a>
+        <a href="#">Find an Office</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <a href="#hero">Home</a>
-      <a href="#listings">Properties</a>
-      <a href="#agents">Our Agents</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#cta">Contact</a>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Keller Williams Realty, Inc. All rights reserved.</span>
+      <span class="footer-credit">Demo site built by Alok Web Services</span>
     </div>
-    <div class="footer-col">
-      <h4>Services</h4>
-      <a href="#">Buy a Home</a>
-      <a href="#">Sell a Home</a>
-      <a href="#">Property Management</a>
-      <a href="#">Mortgage Services</a>
-      <a href="#">Commercial</a>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <a href="#">1221 S. MoPac Expy #210</a>
-      <a href="#">Austin, TX 78746</a>
-      <a href="#">(512) 555-KWRE</a>
-      <a href="#">info@kwrealty.com</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 Keller Williams Realty. All rights reserved. This is a demo website.</p>
-    <p>Demo site built by <a href="#">Alok Web Services</a></p>
   </div>
 </footer>
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
-// ===== Navbar Scroll Effect =====
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 80);
-});
-
-// ===== IntersectionObserver for Fade-In Reveal =====
-const revealElements = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
+(function(){
+  /* ---- Nav scroll ---- */
+  const nav=document.getElementById('nav');
+  const burger=document.getElementById('navBurger');
+  const navLinks=document.getElementById('navLinks');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+  burger.addEventListener('click',()=>{
+    burger.classList.toggle('active');
+    navLinks.classList.toggle('open');
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    burger.classList.remove('active');navLinks.classList.remove('open');
+  }));
 
-revealElements.forEach(el => revealObserver.observe(el));
+  /* ---- IntersectionObserver reveal ---- */
+  const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!prefersReduced){
+    const revealEls=document.querySelectorAll('.reveal');
+    const obs=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+    },{threshold:0.12});
+    revealEls.forEach(el=>obs.observe(el));
+  }else{
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+  }
 
-// ===== 3D Card Tilt on Mouse Move =====
-document.querySelectorAll('.listing-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / centerY * -5;
-    const rotateY = (x - centerX) / centerX * 5;
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-  });
-});
+  /* ---- Count-up animation ---- */
+  function formatNum(n){return n>=1000?(n/1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,','):n.toString()}
+  const statObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const span=e.target;if(span._counted)return;span._counted=true;
+      const target=parseInt(span.dataset.target);
+      const suffix=span.dataset.suffix||'';
+      const duration=1800;
+      const start=performance.now();
+      function tick(now){
+        const elapsed=now-start;
+        const progress=Math.min(elapsed/duration,1);
+        const eased=1-Math.pow(1-progress,3);
+        const current=Math.round(eased*target);
+        span.textContent=formatNum(current)+suffix;
+        if(progress<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      statObs.unobserve(span);
+    });
+  },{threshold:0.4});
+  document.querySelectorAll('[data-target]').forEach(s=>statObs.observe(s));
 
-// ===== Smooth Scroll for Nav Links =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+  /* ---- Parallax hero video ---- */
+  const heroVideo=document.querySelector('.hero-video');
+  if(!prefersReduced&&heroVideo){
+    window.addEventListener('scroll',()=>{
+      const y=window.scrollY;
+      if(y<window.innerHeight){
+        heroVideo.style.transform='translateY('+(y*0.25)+'px) scale(1.05)';
+      }
+    },{passive:true});
+  }
+
+  /* ---- 3D card tilt ---- */
+  if(!prefersReduced){
+    document.querySelectorAll('.property-card').forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const rect=card.getBoundingClientRect();
+        const x=(e.clientX-rect.left)/rect.width;
+        const y=(e.clientY-rect.top)/rect.height;
+        const tiltX=(y-0.5)*-6;
+        const tiltY=(x-0.5)*6;
+        card.style.transform='perspective(800px) rotateX('+tiltX+'deg) rotateY('+tiltY+'deg) scale(1.02)';
+      });
+      card.addEventListener('mouseleave',()=>{
+        card.style.transform='perspective(800px) rotateX(0) rotateY(0) scale(1)';
+      });
+    });
+  }
+
+  /* ---- Testimonials drag scroll ---- */
+  const track=document.getElementById('testimonialsTrack');
+  let isDragging=false,startX,scrollLeft;
+  track.addEventListener('mousedown',e=>{isDragging=true;track.style.cursor='grabbing';startX=e.pageX-track.offsetLeft;scrollLeft=track.scrollLeft});
+  track.addEventListener('mouseleave',()=>{isDragging=false;track.style.cursor='grab'});
+  track.addEventListener('mouseup',()=>{isDragging=false;track.style.cursor='grab'});
+  track.addEventListener('mousemove',e=>{if(!isDragging)return;e.preventDefault();const x=e.pageX-track.offsetLeft;track.scrollLeft=scrollLeft-(x-startX)*1.5});
+  track.style.cursor='grab';
+})();
 </script>
 </body>
 </html>
