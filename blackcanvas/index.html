@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Canvas — Premium Web Design Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0a0a0a;
+  --charcoal: #1a1a1a;
+  --dark-gray: #2a2a2a;
+  --mid-gray: #555;
+  --light-gray: #999;
+  --off-white: #f5f0eb;
+  --gold: #d4a853;
+  --gold-dark: #c9963a;
+  --gold-light: #e8c97a;
+  --white: #fff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--black);
+  color: var(--off-white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+nav.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 1rem 4rem;
+  border-bottom: 1px solid rgba(212, 168, 83, 0.15);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.logo span { color: var(--off-white); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--light-gray);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  filter: saturate(0.3);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.4) 0%,
+    rgba(10, 10, 10, 0.7) 60%,
+    rgba(10, 10, 10, 1) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 2rem;
+}
+
+.hero-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s 0.3s forwards;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--light-gray);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s 0.7s forwards;
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s 0.9s forwards;
+}
+
+.btn-primary {
+  padding: 1rem 2.5rem;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 168, 83, 0.3);
+}
+
+.btn-outline {
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--off-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ===== FLOATING 3D SHAPES ===== */
+.floating-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  perspective: 1000px;
+}
+
+.shape {
+  position: absolute;
+  border: 1px solid rgba(212, 168, 83, 0.15);
+  animation: float 20s infinite ease-in-out;
+}
+
+.shape-1 {
+  width: 80px;
+  height: 80px;
+  top: 15%;
+  left: 8%;
+  transform-style: preserve-3d;
+  animation: rotate3d 15s infinite linear;
+}
+
+.shape-2 {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  right: 10%;
+  border-radius: 50%;
+  animation: rotate3d 20s infinite linear reverse;
+}
+
+.shape-3 {
+  width: 60px;
+  height: 60px;
+  bottom: 20%;
+  left: 15%;
+  transform-style: preserve-3d;
+  animation: rotate3d 12s infinite linear;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 8rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--light-gray);
+  max-width: 600px;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* ===== WHAT WE DO ===== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.service-card {
+  background: var(--charcoal);
+  padding: 3rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.service-card:hover::before { opacity: 1; }
+
+.service-card:hover {
+  transform: translateY(-8px) rotateX(2deg);
+  border-color: rgba(212, 168, 83, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.service-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(212, 168, 83, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.service-card p {
+  color: var(--light-gray);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ===== PORTFOLIO ===== */
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+}
+
+.portfolio-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.portfolio-tab {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--light-gray);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.portfolio-tab.active,
+.portfolio-tab:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  background: var(--charcoal);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.portfolio-item:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 168, 83, 0.3);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+.portfolio-item-inner {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-gray) 100%);
+  position: relative;
+}
+
+.portfolio-item::after {
+  content: '→';
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s;
+}
+
+.portfolio-item:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.portfolio-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-item h3 {
+  font-size: 1.2rem;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+
+.portfolio-item p {
+  font-size: 0.85rem;
+  color: var(--light-gray);
+  font-weight: 300;
+}
+
+/* ===== PROCESS ===== */
+.process-section {
+  background: var(--charcoal);
+  padding: 8rem 0;
+  max-width: 100%;
+}
+
+.process-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.process-step {
+  text-align: center;
+  padding: 3rem 2rem;
+  position: relative;
+}
+
+.process-step::after {
+  content: '→';
+  position: absolute;
+  right: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: rgba(212, 168, 83, 0.3);
+}
+
+.process-step:last-child::after { display: none; }
+
+.step-icon {
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--gold);
+  transform-style: preserve-3d;
+  transition: transform 0.4s;
+}
+
+.process-step:hover .step-icon {
+  transform: rotateY(15deg) rotateX(5deg);
+}
+
+.process-step h3 {
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.process-step p {
+  color: var(--light-gray);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ===== STATS ===== */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 5rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-item { text-align: center; }
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--light-gray);
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.testimonial-card {
+  background: var(--charcoal);
+  padding: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: all 0.4s;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(212, 168, 83, 0.2);
+  transform: translateY(-3px);
+}
+
+.testimonial-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: rgba(212, 168, 83, 0.2);
+  line-height: 1;
+  margin-bottom: -1rem;
+}
+
+.testimonial-card p {
+  font-size: 1rem;
+  color: var(--off-white);
+  line-height: 1.8;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--black);
+  font-size: 1.1rem;
+}
+
+.author-info h4 {
+  font-size: 0.95rem;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.author-info span {
+  font-size: 0.8rem;
+  color: var(--light-gray);
+}
+
+/* ===== CTA ===== */
+.cta-section {
+  text-align: center;
+  padding: 10rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 168, 83, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cta-section h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.cta-section h2 em { color: var(--gold); font-style: italic; }
+
+.cta-section p {
+  font-size: 1.15rem;
+  color: var(--light-gray);
+  max-width: 550px;
+  margin: 0 auto 3rem;
+  font-weight: 300;
+  position: relative;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.footer-brand span { color: var(--off-white); }
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--light-gray);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--mid-gray);
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes rotate3d {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  section { padding: 5rem 2rem; }
+  nav { padding: 1.2rem 2rem; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 3rem 2rem; }
+  .process-step::after { display: none; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .services-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .hero-cta { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#" class="logo">Black <span>Canvas</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://assets.mixkit.co/videos/43607/43607-360.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-tag">Premium Web Design Agency</p>
+    <h1>We Build Sites That <em>Win Clients</em></h1>
+    <p>We create stunning demo websites for local businesses — free of charge — to prove our value before you pay a single rupee.</p>
+    <div class="hero-cta">
+      <a href="#cta" class="btn-primary">Get Your Free Demo</a>
+      <a href="#portfolio" class="btn-outline">View Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section id="services">
+  <div class="reveal">
+    <p class="section-tag">What We Do</p>
+    <h2 class="section-title">Premium Web Design,<br>Zero Risk</h2>
+    <p class="section-desc">We don't pitch with slides. We build your site, deploy it live, and let the work speak for itself.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-number">01</div>
+      <h3>Lead Research</h3>
+      <p>We find local businesses that need a web presence — restaurants, salons, resorts, real estate firms. We study their brand, their competitors, and their market.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-number">02</div>
+      <h3>Premium Design</h3>
+      <p>Every site gets a completely unique design — custom color palette, 3D animations, video heroes, scroll-triggered reveals. No templates, no shortcuts.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-number">03</div>
+      <h3>Live Deployment</h3>
+      <p>We deploy your site to a live URL immediately. You see it, your customers see it, and you decide if you want to make it permanent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div class="reveal">
+      <p class="section-tag">Our Work</p>
+      <h2 class="section-title">Sites That Convert</h2>
+    </div>
+    <div class="portfolio-tabs reveal">
+      <button class="portfolio-tab active" data-filter="all">All</button>
+      <button class="portfolio-tab" data-filter="local">Local</button>
+      <button class="portfolio-tab" data-filter="realestate">Real Estate</button>
+    </div>
+  </div>
+  <div class="portfolio-grid">
+    <a href="https://ay7631874-sketch.github.io/agency-sites/chulhewala/" target="_blank" class="portfolio-item reveal reveal-delay-1" data-category="local">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Local Business</p>
+        <h3>Chulhewala</h3>
+        <p>Airbnb-style luxury stay experience</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/eshas-salon/" target="_blank" class="portfolio-item reveal reveal-delay-2" data-category="local">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Salon & Beauty</p>
+        <h3>Esha's Salon</h3>
+        <p>Stripe-inspired modern salon design</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/prema-kunj/" target="_blank" class="portfolio-item reveal reveal-delay-3" data-category="local">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Resort & Hospitality</p>
+        <h3>Prema Kunj</h3>
+        <p>Dark premium cinematic experience</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/kanak-beauty/" target="_blank" class="portfolio-item reveal reveal-delay-1" data-category="local">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Beauty & Wellness</p>
+        <h3>Kanak Beauty</h3>
+        <p>Modern beauty brand identity</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/keller-williams/" target="_blank" class="portfolio-item reveal reveal-delay-2" data-category="realestate">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Real Estate</p>
+        <h3>Keller Williams</h3>
+        <p>Magazine editorial design</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/sothebys/" target="_blank" class="portfolio-item reveal reveal-delay-3" data-category="realestate">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Real Estate</p>
+        <h3>Sotheby's</h3>
+        <p>Art gallery luxury experience</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/compass/" target="_blank" class="portfolio-item reveal reveal-delay-1" data-category="realestate">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Real Estate</p>
+        <h3>Compass</h3>
+        <p>Tech startup minimal design</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/redfin/" target="_blank" class="portfolio-item reveal reveal-delay-2" data-category="realestate">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Real Estate</p>
+        <h3>Redfin</h3>
+        <p>Bold disruptor brand energy</p>
+      </div>
+    </a>
+    <a href="https://ay7631874-sketch.github.io/agency-sites/corcoran/" target="_blank" class="portfolio-item reveal reveal-delay-3" data-category="realestate">
+      <div class="portfolio-item-inner">
+        <p class="portfolio-category">Real Estate</p>
+        <h3>Corcoran</h3>
+        <p>Vogue editorial sophistication</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-number" data-count="24">0</div>
+    <div class="stat-label">Sites Built</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-number" data-count="20">0</div>
+    <div class="stat-label">Unique Designs</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-number" data-count="2">0</div>
+    <div class="stat-label">Markets Served</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-number" data-count="100">0</div>
+    <div class="stat-label">% Free Demo</div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div class="process-section">
+  <div class="process-inner">
+    <div class="reveal">
+      <p class="section-tag">How It Works</p>
+      <h2 class="section-title">Three Steps to Your Site</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-icon">01</div>
+        <h3>We Research</h3>
+        <p>We find your business, study your brand, analyze your competition, and understand your customers.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-icon">02</div>
+        <h3>We Build</h3>
+        <p>A custom-designed, premium website with 3D animations, video heroes, and scroll-triggered reveals.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-icon">03</div>
+        <h3>We Deploy</h3>
+        <p>Your site goes live on a professional URL. You see it, your customers see it. Zero risk.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal">
+    <p class="section-tag">What People Say</p>
+    <h2 class="section-title">Client Feedback</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="testimonial-quote">"</div>
+      <p>They built a complete website for my salon without asking for a single rupee. The design was better than what agencies quoted ₹50,000 for.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">E</div>
+        <div class="author-info">
+          <h4>Esha</h4>
+          <span>Esha's Salon, Jhansi</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="testimonial-quote">"</div>
+      <p>My resort now has a website that looks like a 5-star property. The video hero and animations impressed every guest who visited the page.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">P</div>
+        <div class="author-info">
+          <h4>Prema Kunj Team</h4>
+          <span>Prema Kunj Resort, Jhansi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="reveal">
+    <h2>Ready for Your <em>Free Demo?</em></h2>
+    <p>We'll build a premium website for your business — completely free. See it live before you decide.</p>
+    <a href="mailto:hello@blackcanvas.io" class="btn-primary">Get Started →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Black <span>Canvas</span></div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="mailto:hello@blackcanvas.io">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Black Canvas. All rights reserved.</p>
+</footer>
+
+<script>
+// ===== NAV SCROLL =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// ===== SCROLL REVEAL =====
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ===== COUNTER ANIMATION =====
+const counters = document.querySelectorAll('.stat-number[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.getAttribute('data-count'));
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          entry.target.textContent = target + (target === 100 ? '%' : '+');
+          clearInterval(timer);
+        } else {
+          entry.target.textContent = Math.floor(current);
+        }
+      }, 16);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(c => counterObserver.observe(c));
+
+// ===== PORTFOLIO FILTER =====
+const tabs = document.querySelectorAll('.portfolio-tab');
+const items = document.querySelectorAll('.portfolio-item');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.getAttribute('data-filter');
+    items.forEach(item => {
+      if (filter === 'all' || item.getAttribute('data-category') === filter) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+// ===== 3D CARD TILT =====
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+  });
+});
+</script>
+</body>
+</html>
