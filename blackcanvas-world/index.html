@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Black Canvas — Scroll the Agency</title>
+  <meta name="description" content="Scroll to fly through the world of Black Canvas agency." />
+  <meta property="og:title" content="Black Canvas — Scroll the Agency" />
+  <meta property="og:description" content="A scroll-scrubbed journey through strategy, design, development, launch, and growth." />
+  <meta property="og:image" content="assets/scene0.webp" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23000'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23fff'>◆</text></svg>" />
+  <style>
+    :root, .sw-root {
+      --sw-bg: #0c0c0e;
+      --sw-ink: #f0ece4;
+      --sw-ink-soft: #8a8480;
+      --sw-accent: #c9a96e;
+    }
+    html, body { margin: 0; background: #0c0c0e; }
+  </style>
+  <!-- Preload first scene still for instant landing -->
+  <link rel="preload" as="image" href="assets/scene0.webp" />
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world"></div>
+
+  <script src="assets/scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      brand: { name: 'Black Canvas', href: '#top' },
+      cta: { label: 'Start a project', href: '#' },
+      hint: 'scroll to explore',
+      diveScroll: 1.5,
+      connScroll: 0.8,
+      crossfade: 0.1,
+      nav: true,
+      atmosphere: true,
+      sections: [
+        {
+          id: 'strategy',
+          label: 'Strategy',
+          still: 'assets/scene0.webp',
+          clip: 'assets/vid/dive0.mp4',
+          accent: '#c9a96e',
+          scroll: 1.8,
+          linger: 0.35,
+          eyebrow: '01 — Discovery & Blueprint',
+          title: 'We start with why.',
+          body: 'Every great digital experience begins with understanding your business, your audience, and your goals. We map the terrain before we take a single step.',
+          tags: ['Market Research', 'User Personas', 'Roadmapping']
+        },
+        {
+          id: 'design',
+          label: 'Design',
+          still: 'assets/scene1.webp',
+          clip: 'assets/vid/dive1.mp4',
+          accent: '#7c9eb2',
+          scroll: 1.6,
+          linger: 0.3,
+          eyebrow: '02 — Creative Direction',
+          title: 'Form meets function.',
+          body: 'Our designers craft interfaces that balance beauty with usability. Every pixel, every micro-interaction serves a purpose — to delight and convert.',
+          tags: ['UI/UX Design', 'Brand Identity', 'Prototyping']
+        },
+        {
+          id: 'develop',
+          label: 'Develop',
+          still: 'assets/scene2.webp',
+          clip: 'assets/vid/dive2.mp4',
+          accent: '#6bbf8a',
+          scroll: 1.6,
+          linger: 0.3,
+          eyebrow: '03 — Engineering & Build',
+          title: 'Clean code. Real results.',
+          body: 'We ship fast, scalable web experiences using modern tooling. From lightning-fast static sites to data-rich dashboards — if it runs on the web, we build it.',
+          tags: ['React / Next.js', 'Tailwind CSS', 'API Integration']
+        },
+        {
+          id: 'launch',
+          label: 'Launch',
+          still: 'assets/scene3.webp',
+          clip: 'assets/vid/dive3.mp4',
+          accent: '#e8845c',
+          scroll: 1.5,
+          linger: 0.25,
+          eyebrow: '04 — Deploy & Deliver',
+          title: 'Ship with confidence.',
+          body: 'We handle deployment, CI/CD, domain setup, and performance tuning so your launch is smooth. Your site goes live, your users arrive — we monitor every metric.',
+          tags: ['CI/CD Pipeline', 'Cloud Hosting', 'Performance Optimization']
+        },
+        {
+          id: 'growth',
+          label: 'Growth',
+          still: 'assets/scene4.webp',
+          clip: 'assets/vid/dive4.mp4',
+          accent: '#b98fd4',
+          scroll: 2.0,
+          linger: 0.4,
+          eyebrow: '05 — Iterate & Scale',
+          title: 'Your success is our business.',
+          body: 'Launch is just the beginning. We analyse, optimise, and evolve your digital presence so it keeps driving results — long after the ribbon is cut.',
+          tags: ['Analytics', 'A/B Testing', 'Conversion Optimisation'],
+          cta: {
+            primary: { label: 'Work with us', href: '#' },
+            secondary: { label: 'View portfolio', href: '#' }
+          }
+        }
+      ],
+      connectors: [
+        'assets/vid/conn0.mp4',
+        'assets/vid/conn1.mp4',
+        'assets/vid/conn2.mp4',
+        'assets/vid/conn3.mp4'
+      ]
+    });
+  </script>
+</body>
+</html>
