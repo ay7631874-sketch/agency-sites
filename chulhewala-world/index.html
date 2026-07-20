@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Chulhewala — Scroll the World</title>
+  <meta name="description" content="Scroll to fly through Chulhewala, Jhansi — from strategy to menu design, kitchen prep, dining service, and guest experience." />
+  <meta property="og:title" content="Chulhewala — Scroll the World" />
+  <meta property="og:description" content="A scroll-scrubbed journey through Jhansi's top-rated restaurant experience." />
+  <meta property="og:image" content="assets/scene0.webp" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232c1810'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23c9a96e'>◆</text></svg>" />
+  <style>
+    :root, .sw-root {
+      --sw-bg: #1a120d;
+      --sw-ink: #f5efe0;
+      --sw-ink-soft: #a89984;
+      --sw-accent: #c9a96e;
+      --sw-font-display: "Cormorant Infant", "Great Vibes", Georgia, serif;
+      --sw-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    }
+    html, body { margin: 0; background: var(--sw-bg, #1a120d); }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/scene0.webp" />
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world"></div>
+
+  <script src="assets/scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      brand: { name: 'Chulhewala', href: '#top' },
+      cta: { label: 'Reserve a Table', href: 'tel:+917****5203' },
+      hint: 'scroll to explore',
+      diveScroll: 1.4,
+      connScroll: 0.85,
+      crossfade: 0.1,
+      nav: true,
+      atmosphere: true,
+      sections: [
+        {
+          id: 'strategy',
+          label: 'Strategy & Branding',
+          still: 'assets/scene0.webp',
+          clip: 'assets/vid/dive0.mp4',
+          clipMobile: 'assets/vid/dive0-m.mp4',
+          stillMobile: 'assets/scene0.webp',
+          accent: '#c9a96e',
+          scroll: 1.7,
+          linger: 0.35,
+          eyebrow: '01 — Discovery & Blueprint',
+          title: 'We start with why',
+          body: 'Every great dining experience begins with understanding your story. We map the flavors, the audience, and the soul of Chulhewala before we design a single plate.',
+          tags: ['Market Research', 'Guest Personas', 'Brand Story']
+        },
+        {
+          id: 'menu',
+          label: 'Menu Design',
+          still: 'assets/scene1.webp',
+          clip: 'assets/vid/dive1.mp4',
+          clipMobile: 'assets/vid/dive1-m.mp4',
+          stillMobile: 'assets/scene1.webp',
+          accent: '#b8945a',
+          scroll: 1.6,
+          linger: 0.3,
+          eyebrow: '02 — Culinary Curation',
+          title: 'Form meets flavor',
+          body: 'Our chefs craft menus that balance tradition with innovation. Every dish tells a story — locally sourced, seasonally driven, plated for the eye and the palate.',
+          tags: ['Seasonal Ingredients', 'Signature Dishes', 'Dietary Options']
+        },
+        {
+          id: 'kitchen',
+          label: 'Kitchen Prep',
+          still: 'assets/scene2.webp',
+          clip: 'assets/vid/dive2.mp4',
+          clipMobile: 'assets/vid/dive2-m.mp4',
+          stillMobile: 'assets/scene2.webp',
+          accent: '#a8844a',
+          scroll: 1.6,
+          linger: 0.3,
+          eyebrow: '03 — Kitchen Orchestration',
+          title: 'Clean code. Real results.',
+          body: 'Behind every perfect plate is a choreographed kitchen. Mise en place, timed tickets, quality checks — we engineer consistency so every guest gets the same excellence.',
+          tags: ['Mise en Place', 'Ticket System', 'Quality Checks']
+        },
+        {
+          id: 'service',
+          label: 'Dining Service',
+          still: 'assets/scene3.webp',
+          clip: 'assets/vid/dive3.mp4',
+          clipMobile: 'assets/vid/dive3-m.mp4',
+          stillMobile: 'assets/scene3.webp',
+          accent: '#d4a843',
+          scroll: 1.5,
+          linger: 0.25,
+          eyebrow: '04 — Guest Journey',
+          title: 'Ship with confidence.',
+          body: 'From greeting to goodbye, we design the full guest arc. Attentive pacing, knowledgeable staff, ambient lighting, acoustic comfort — every detail serves the experience.',
+          tags: ['Paced Service', 'Wine Pairing', 'Ambient Design']
+        },
+        {
+          id: 'experience',
+          label: 'Guest Experience',
+          still: 'assets/scene4.webp',
+          clip: 'assets/vid/dive4.mp4',
+          clipMobile: 'assets/vid/dive4-m.mp4',
+          stillMobile: 'assets/scene4.webp',
+          accent: '#e8b85e',
+          scroll: 1.8,
+          linger: 0.4,
+          eyebrow: '05 — Loyalty & Growth',
+          title: 'Your success is our business.',
+          body: 'Launch is just the beginning. We analyze feedback, optimize flow, and evolve the concept so Chulhewala keeps delighting guests — and driving revenue — for years.',
+          tags: ['Feedback Loops', 'Menu Evolution', 'Revenue Optimization'],
+          cta: {
+            primary: { label: 'Book Your Table', href: 'tel:+917****5203' },
+            secondary: { label: 'View Menu', href: '#' }
+          }
+        }
+      ],
+      connectors: [
+        'assets/vid/conn0.mp4',
+        'assets/vid/conn1.mp4',
+        'assets/vid/conn2.mp4',
+        'assets/vid/conn3.mp4'
+      ],
+      connectorsMobile: [
+        'assets/vid/conn0-m.mp4',
+        'assets/vid/conn1-m.mp4',
+        'assets/vid/conn2-m.mp4',
+        'assets/vid/conn3-m.mp4'
+      ]
+    });
+  </script>
+</body>
+</html>
