@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Esha's Salon — Scroll the World</title>
+  <meta name="description" content="Scroll to fly through Esha's Salon, Jhansi — from consultation to design, treatment, styling, and final reveal." />
+  <meta property="og:title" content="Esha's Salon — Scroll the World" />
+  <meta property="og:description" content="A scroll-scrubbed journey through Jhansi's premier salon & makeup studio experience." />
+  <meta property="og:image" content="assets/scene0.webp" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d1b2e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23e8b4d4'>◆</text></svg>" />
+  <style>
+    :root, .sw-root {
+      --sw-bg: #fdf6fa;
+      --sw-ink: #2d1b2e;
+      --sw-ink-soft: #6a4d6b;
+      --sw-accent: #e8b4d4;
+      --sw-font-display: "Cormorant Infant", "Great Vibes", Georgia, serif;
+      --sw-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    }
+    html, body { margin: 0; background: var(--sw-bg, #fdf6fa); }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/scene0.webp" />
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world"></div>
+
+  <script src="assets/scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      brand: { name: "Esha's Salon", href: '#top' },
+      cta: { label: 'Book Appointment', href: 'tel:+917****5203' },
+      hint: 'scroll to explore',
+      diveScroll: 1.4,
+      connScroll: 0.85,
+      crossfade: 0.1,
+      nav: true,
+      atmosphere: true,
+      sections: [
+        {
+          id: 'consultation',
+          label: 'Consultation',
+          still: 'assets/scene0.webp',
+          clip: 'assets/vid/dive0.mp4',
+          clipMobile: 'assets/vid/dive0-m.mp4',
+          stillMobile: 'assets/scene0.webp',
+          accent: '#e8b4d4',
+          scroll: 1.7,
+          linger: 0.35,
+          eyebrow: '01 — Personal Consultation',
+          title: 'We listen first',
+          body: 'Every transformation begins with understanding you. Your lifestyle, your preferences, your vision — we map it all before a single brush touches skin.',
+          tags: ['Face Analysis', 'Color Matching', 'Style Goals']
+        },
+        {
+          id: 'design',
+          label: 'Design & Moodboard',
+          still: 'assets/scene1.webp',
+          clip: 'assets/vid/dive1.mp4',
+          clipMobile: 'assets/vid/dive1-m.mp4',
+          stillMobile: 'assets/scene1.webp',
+          accent: '#d4a0c4',
+          scroll: 1.6,
+          linger: 0.3,
+          eyebrow: '02 — Bespoke Design',
+          title: 'Form meets beauty',
+          body: 'Our artists craft a personalized look — blending trends with your unique features. Moodboards, swatches, and trial runs ensure the result feels unmistakably you.',
+          tags: ['Custom Moodboard', 'Trial Session', 'Product Curation']
+        },
+        {
+          id: 'treatment',
+          label: 'Treatment Process',
+          still: 'assets/scene2.webp',
+          clip: 'assets/vid/dive2.mp4',
+          clipMobile: 'assets/vid/dive2-m.mp4',
+          stillMobile: 'assets/scene2.webp',
+          accent: '#c48cb4',
+          scroll: 1.6,
+          linger: 0.3,
+          eyebrow: '03 — Expert Application',
+          title: 'Precision in every stroke',
+          body: 'Premium products, clinical-grade tools, and years of expertise converge. From skin prep to final set, every step is calibrated for flawless, long-lasting results.',
+          tags: ['Premium Products', 'Hygiene Protocol', 'Time-Tested Technique']
+        },
+        {
+          id: 'styling',
+          label: 'Styling & Finish',
+          still: 'assets/scene3.webp',
+          clip: 'assets/vid/dive3.mp4',
+          clipMobile: 'assets/vid/dive3-m.mp4',
+          stillMobile: 'assets/scene3.webp',
+          accent: '#f0c0e0',
+          scroll: 1.5,
+          linger: 0.25,
+          eyebrow: '04 — The Final Touch',
+          title: 'Details make the look',
+          body: 'Hair, accessories, draping, lighting — we orchestrate the complete picture. The result isn\'t just makeup; it\'s a moment captured, a memory made.',
+          tags: ['Hair Styling', 'Accessory Curation', 'Photo-Ready Finish']
+        },
+        {
+          id: 'reveal',
+          label: 'Final Reveal',
+          still: 'assets/scene4.webp',
+          clip: 'assets/vid/dive4.mp4',
+          clipMobile: 'assets/vid/dive4-m.mp4',
+          stillMobile: 'assets/scene4.webp',
+          accent: '#f8d0f0',
+          scroll: 1.8,
+          linger: 0.4,
+          eyebrow: '05 — The Moment',
+          title: 'You, elevated.',
+          body: 'The mirror shows more than a reflection — it shows confidence radiant. Walk out ready for every spotlight, every glance, every celebration.',
+          tags: ['Confidence Guaranteed', 'Touch-Up Kit', 'Aftercare Guide'],
+          cta: {
+            primary: { label: 'Book Your Session', href: 'tel:+917****5203' },
+            secondary: { label: 'View Portfolio', href: '#' }
+          }
+        }
+      ],
+      connectors: [
+        'assets/vid/conn0.mp4',
+        'assets/vid/conn1.mp4',
+        'assets/vid/conn2.mp4',
+        'assets/vid/conn3.mp4'
+      ],
+      connectorsMobile: [
+        'assets/vid/conn0-m.mp4',
+        'assets/vid/conn1-m.mp4',
+        'assets/vid/conn2-m.mp4',
+        'assets/vid/conn3-m.mp4'
+      ]
+    });
+  </script>
+</body>
+</html>
